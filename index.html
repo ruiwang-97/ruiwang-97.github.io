@@ -186,7 +186,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">1</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -264,7 +264,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-10-26 20:40:21 / 修改时间：22:00:03" itemprop="dateCreated datePublished" datetime="2020-10-26T20:40:21+08:00">2020-10-26</time>
+      <time title="创建时间：2020-10-26 20:40:21 / 修改时间：22:05:19" itemprop="dateCreated datePublished" datetime="2020-10-26T20:40:21+08:00">2020-10-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,153 +287,17 @@
     
     <div class="post-body" itemprop="articleBody">
           <h4 id="Map实现类之一：HashMap"><a href="#Map实现类之一：HashMap" class="headerlink" title="Map实现类之一：HashMap"></a>Map实现类之一：HashMap</h4><ul>
-<li><p>所有的key构成的集合是Set:无序的、不可重复的。所以，key所在的类要重写：equals()和hashCode()</p>
-</li>
-<li><p>所有的value构成的集合是Collection:无序的、可以重复的。所以，value所在的类要重写：equals()</p>
-</li>
-<li><p>一个key-value构成一个entry</p>
-</li>
-<li><p>所有的entry构成的集合是Set:无序的、不可重复的</p>
-</li>
-<li><p>HashMap 判断两个 key 相等的标准是：两个 key 通过 equals() 方法返回 true，hashCode 值也相等。</p>
-</li>
-<li><p>HashMap 判断两个 value相等的标准是：两个 value 通过 equals() 方法返回 true。</p>
-</li>
+<li>所有的key构成的集合是Set:无序的、不可重复的。所以，key所在的类要重写：equals()和hashCode()</li>
+<li>所有的value构成的集合是Collection:无序的、可以重复的。所以，value所在的类要重写：equals()</li>
 </ul>
-<h5 id="HashMap的存储结构"><a href="#HashMap的存储结构" class="headerlink" title="HashMap的存储结构"></a>HashMap的存储结构</h5><p><strong>数组+链表  （jdk7及之前）</strong></p>
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20201020141432168.png" alt="image-20201020141432168" style="zoom:67%;" />
-
-<p><strong>数组+链表+红黑树 （jdk 8）</strong></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20201020141524389.png" alt="image-20201020141524389"></p>
-<h5 id="HashMap添加元素的过程"><a href="#HashMap添加元素的过程" class="headerlink" title="HashMap添加元素的过程"></a>HashMap添加元素的过程</h5><p>HashMap map=new HashMap();</p>
-<p>实例化后底层创建了长度是<strong>16</strong>的一维数组Entry[] table。这个长度在哈希表中被称为容量(Capacity)，在这个数组中可以存放元素的位置我们称之为“桶”(bucket)，每个bucket都有自己的索引，系统可以根据索引快速的查找bucket中的元素。 </p>
-<p> 每个bucket中存储一个元素，即一个Entry对象，但每一个Entry对象可以带一个引用变量，用于指向下一个元素，因此，在一个桶中，就有可能生成一个Entry链。而且新添加的元素作为链表的head。</p>
-<p>…可能已经多次put…</p>
-<p>map.put(key1,value1):</p>
-<ol>
-<li><p>调用key1所在类的HashCode()方法计算key1的哈希值</p>
-</li>
-<li><p>此哈希值经过某种算法计算以后，得到在Entry数组中的存放位置</p>
-<p>1).如果此位置上的数据为空，此时的key1-value1（即entyr1）添加成功。 —-&gt;情况1</p>
-<p>2).如果此位置已存在一个或多个数据（以链表形式存在），比较key1和已存在数据的哈希值</p>
-<ul>
-<li>key1的哈希值与已存在数据的哈希值都不相同，添加成功。 —-&gt;情况2</li>
-<li>key1的哈希值与key2的哈希值相同，调用key1所在类的equals()方法<ul>
-<li>equals()返回false：此时key1-value1添加成功。   —&gt;情况3</li>
-<li>equals()返回true：value1替换value2</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><p>对于情况2、3添加成功的元素a与已存在的元素以链表形式存储—7上8下</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/12/21/167cf3bc3724604a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
-</li>
-</ul>
-<h5 id="HashMap的扩容"><a href="#HashMap的扩容" class="headerlink" title="HashMap的扩容"></a>HashMap的扩容</h5><h6 id="jdk7及以前"><a href="#jdk7及以前" class="headerlink" title="jdk7及以前"></a>jdk7及以前</h6><ul>
-<li><pre><code> DEFAULT_INITIAL_CAPACITY : HashMap的默认容量，16</code></pre>
-</li>
-<li><pre><code> DEFAULT_LOAD_FACTOR：HashMap的默认加载因子：0.75</code></pre>
-</li>
-<li><pre><code> threshold：扩容的临界值，=容量*填充因子：16 * 0.75 =&gt; 12</code></pre>
-</li>
-<li><pre><code> TREEIFY_THRESHOLD：Bucket中链表长度大于该默认值，转化为红黑树:8</code></pre>
-</li>
-<li><pre><code> MIN_TREEIFY_CAPACITY：桶中的Node被树化时最小的hash表容量:64</code></pre>
-</li>
-</ul>
-<p>​       当HashMap中的元素个数超过数组大小(数组总大小length,不是数组中个数size)loadFactor 时 ， 就 会 进 行 数 组 扩 容 ， loadFactor 的默认值 (DEFAULT_LOAD_FACTOR)为0.75，这是一个折中的取值。也就是说，默认情况下，数组大小(DEFAULT_INITIAL_CAPACITY)为16，那么<strong>当HashMap中元素个数超过$16<em>0.75 = 12$（这个值就是代码中的threshold值，也叫做临界值）的时候，就把数组的大小扩展为 $2</em>16=32$，即扩大一倍</strong>，然后重新计算每个元素在数组中的位置，而这是一个非常消耗性能的操作，所以如果我们已经预知HashMap中元素的个数，那么预设元素的个数能够有效的提高HashMap的性能。</p>
-<h6 id="jdk8"><a href="#jdk8" class="headerlink" title="jdk8"></a>jdk8</h6><p> 相较于jdk7在底层实现方面的不同：</p>
-<ol>
-<li><p>new HashMap():底层没有创建一个长度为16的数组</p>
-</li>
-<li><p>jdk 8底层的数组是：<strong>Node[]</strong>,而非Entry[]</p>
-</li>
-<li><p>首次调用put()方法时，底层创建长度为16的数组</p>
-</li>
-<li><p>jdk7底层结构只有：数组+链表。jdk8中底层结构：数组+链表+红黑树。</p>
-<p>4.1 形成链表时，七上八下（jdk7:新的元素指向旧的元素。jdk8：旧的元素指向新的元素）<br>4.2 当数组的某一个索引位置上的元素以链表形式存在的数据个数 &gt; 8 且当前数组的长度 &gt; 64时，此时此索引位置上的所数据改为使用红黑树存储。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Rui Wang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rui">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/26/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-10-26 19:36:36" itemprop="dateCreated datePublished" datetime="2020-10-26T19:36:36+08:00">2020-10-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/26/HashMap/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
