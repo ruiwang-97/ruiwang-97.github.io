@@ -24,20 +24,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="1&lt;div class&#x3D;&quot;ds-recent-visitors&quot; data-num-items&#x3D;&quot;28&quot; data-avatar-size&#x3D;&quot;42&quot; id&#x3D;&quot;ds-recent-visitors&quot;&gt;&lt;&#x2F;div&gt;">
-<meta property="og:type" content="website">
-<meta property="og:title" content="留言板">
-<meta property="og:url" content="http://example.com/guestbook/index.html">
+  <meta name="description" content="Hexo攻略-添加分类1.创建“分类”选项在命令窗口输入下方命令   hexo new page categories">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo攻略-添加分类">
+<meta property="og:url" content="http://example.com/2020/10/27/Hexo%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="1&lt;div class&#x3D;&quot;ds-recent-visitors&quot; data-num-items&#x3D;&quot;28&quot; data-avatar-size&#x3D;&quot;42&quot; id&#x3D;&quot;ds-recent-visitors&quot;&gt;&lt;&#x2F;div&gt;">
+<meta property="og:description" content="Hexo攻略-添加分类1.创建“分类”选项在命令窗口输入下方命令   hexo new page categories">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-26T14:42:13.000Z">
-<meta property="article:modified_time" content="2020-10-26T14:57:38.935Z">
+<meta property="og:image" content="http://example.com/images/cate.jpg">
+<meta property="article:published_time" content="2020-10-27T07:22:42.000Z">
+<meta property="article:modified_time" content="2020-10-27T08:16:05.402Z">
 <meta property="article:author" content="Rui Wang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/cate.jpg">
 
 
-<link rel="canonical" href="http://example.com/guestbook/">
+<link rel="canonical" href="http://example.com/2020/10/27/Hexo%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">
 
 
 <script class="page-configurations">
@@ -45,13 +47,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>留言板 | Rui
-</title>
+  <title>Hexo攻略-添加分类 | Rui</title>
   
 
 
@@ -169,7 +170,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -181,6 +182,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">Hexo攻略-添加分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E2%80%9C%E5%88%86%E7%B1%BB%E2%80%9D%E9%80%89%E9%A1%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.创建“分类”选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0%E5%B9%B6%E6%B7%BB%E5%8A%A0%E2%80%9Ccategories%E2%80%9D%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">2.新建文章并添加“categories”属性</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -236,46 +238,124 @@
 </noscript>
 
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
       
-  
-  
 
       
 
-    
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/27/Hexo%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo攻略-添加分类
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">留言板
-</h1>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
 
-<div class="post-meta-container">
+      <time title="创建时间：2020-10-27 15:22:42 / 修改时间：16:16:05" itemprop="dateCreated datePublished" datetime="2020-10-27T15:22:42+08:00">2020-10-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo%E6%94%BB%E7%95%A5/" itemprop="url" rel="index"><span itemprop="name">Hexo攻略</span></a>
+        </span>
+    </span>
+
   
-
 </div>
 
-</header>
+        </div>
+      </header>
 
-      
-      
-      
-      <div class="post-body">
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;ds-recent-visitors&quot; data-num-items&#x3D;&quot;28&quot; data-avatar-size&#x3D;&quot;42&quot; id&#x3D;&quot;ds-recent-visitors&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Hexo攻略-添加分类"><a href="#Hexo攻略-添加分类" class="headerlink" title="Hexo攻略-添加分类"></a>Hexo攻略-添加分类</h2><h3 id="1-创建“分类”选项"><a href="#1-创建“分类”选项" class="headerlink" title="1.创建“分类”选项"></a>1.创建“分类”选项</h3><p>在命令窗口输入下方命令</p>
+<blockquote>
+<p> hexo new page categories</p>
+</blockquote>
+<a id="more"></a>
 
+<p>/source/categories文件夹下会有index.md文件，打开后内容默认为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2020-10-26 19:47:40</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
-      </div>
-      
-      
-      
+<p>添加type: categories到内容中，添加后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: 2019-04-24 15:30:30</span><br><span class="line">type: categories</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>保存并关闭文件。</p>
+<h3 id="2-新建文章并添加“categories”属性"><a href="#2-新建文章并添加“categories”属性" class="headerlink" title="2.新建文章并添加“categories”属性"></a>2.新建文章并添加“categories”属性</h3><p>在命令行输入下方命令创建新文章</p>
+<blockquote>
+<p>hexo n “新文章名称”  </p>
+</blockquote>
+<p>在/source/_posts下自动生成.md文件，打开为其添加categories属性。下方的categories:Hexo攻略，表示这篇文章添加到到“Hexo攻略”这个分类。注意：一篇文章只会添加到一个分类中，如果是多个默认放到第一个分类中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: Hexo攻略-添加分类及标签</span><br><span class="line">date: 2020-10-27 15:22:42</span><br><span class="line">categories: Hexo攻略</span><br></pre></td></tr></table></figure>
+
+<p>至此，成功给文章添加分类，点击首页的“分类”即可看到该分类下的所有文章。效果如图。</p>
+<p><img src="/images/cate.jpg"></p>
+
     </div>
-    
 
     
     
     
+	
+	
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
+      </div>
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/27/Java%E7%9A%84%E5%80%BC%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/" rel="prev" title="Java的值传递机制">
+                  <i class="fa fa-chevron-left"></i> Java的值传递机制
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 
       
