@@ -2747,7 +2747,7 @@ ul.breadcrumb li:last-child {
 }
 body {
   background: url("/images/background.jpg");
-  background-position: 30% 30%;
+  background-position: 10% 10%;
   background-size: cover;
 }
 .content-wrap {
