@@ -198,20 +198,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -305,10 +305,10 @@
 <a id="more"></a>
 
 <p>/source/categories文件夹下会有index.md文件，打开后内容默认为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2020-10-26 19:47:40</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2020-10-26 19:47:40</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <p>添加type: categories到内容中，添加后：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: 2019-04-24 15:30:30</span><br><span class="line">type: categories</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: 2019-04-24 15:30:30</span><br><span class="line">type: categories</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <p>保存并关闭文件。</p>
 <h3 id="2-新建文章并添加“categories”属性"><a href="#2-新建文章并添加“categories”属性" class="headerlink" title="2.新建文章并添加“categories”属性"></a>2.新建文章并添加“categories”属性</h3><p>在命令行输入下方命令创建新文章</p>
@@ -316,7 +316,7 @@
 <p>hexo n “新文章名称”  </p>
 </blockquote>
 <p>在/source/_posts下自动生成.md文件，打开为其添加categories属性。下方的categories:Hexo攻略，表示这篇文章添加到到“Hexo攻略”这个分类。注意：一篇文章只会添加到一个分类中，如果是多个默认放到第一个分类中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: Hexo攻略-添加分类及标签</span><br><span class="line">date: 2020-10-27 15:22:42</span><br><span class="line">categories: Hexo攻略</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: Hexo攻略-添加分类及标签</span><br><span class="line">date: 2020-10-27 15:22:42</span><br><span class="line">categories: Hexo攻略</span><br></pre></td></tr></table></figure>
 
 <p>至此，成功给文章添加分类，点击首页的“分类”即可看到该分类下的所有文章。效果如图。</p>
 <p><img src="/images/cate.jpg"></p>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="Java+MySQL学生管理系统源码：https:&#x2F;&#x2F;github.com&#x2F;ruiwang-97&#x2F;StudentManagement.git 需求分析 设计思路 具体实现 测试效果 需求分析这是一个学生管理系统，以管理员身份登录，实现对学员以及年级信息的增删改查操作。 具体需要实现的功能有：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-MySQL学生管理系统">
+<meta property="og:url" content="http://example.com/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Rui">
+<meta property="og:description" content="Java+MySQL学生管理系统源码：https:&#x2F;&#x2F;github.com&#x2F;ruiwang-97&#x2F;StudentManagement.git 需求分析 设计思路 具体实现 测试效果 需求分析这是一个学生管理系统，以管理员身份登录，实现对学员以及年级信息的增删改查操作。 具体需要实现的功能有：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/SM/1.PNG">
+<meta property="og:image" content="http://example.com/images/SM/2.PNG">
+<meta property="og:image" content="http://example.com/images/SM/3.PNG">
+<meta property="og:image" content="http://example.com/images/SM/4.PNG">
+<meta property="og:image" content="http://example.com/images/SM/5.PNG">
+<meta property="og:image" content="http://example.com/images/SM/6.PNG">
+<meta property="og:image" content="http://example.com/images/SM/7.PNG">
+<meta property="og:image" content="http://example.com/images/SM/8.PNG">
+<meta property="og:image" content="http://example.com/images/SM/9.PNG">
+<meta property="og:image" content="http://example.com/images/SM/10.PNG">
+<meta property="og:image" content="http://example.com/images/SM/11.PNG">
+<meta property="og:image" content="http://example.com/images/SM/12.PNG">
+<meta property="og:image" content="http://example.com/images/SM/15.PNG">
+<meta property="og:image" content="http://example.com/images/SM/13.PNG">
+<meta property="og:image" content="http://example.com/images/SM/14.PNG">
+<meta property="og:image" content="http://example.com/images/SM/16.PNG">
+<meta property="article:published_time" content="2020-11-19T05:55:37.000Z">
+<meta property="article:modified_time" content="2020-11-19T08:25:40.076Z">
+<meta property="article:author" content="Rui Wang">
+<meta property="article:tag" content="项目">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/SM/1.PNG">
+
+
+<link rel="canonical" href="http://example.com/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java-MySQL学生管理系统 | Rui</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+  
+  <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
+<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Rui</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">Java+MySQL学生管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E9%83%A8%E5%88%86"><span class="nav-number">1.3.1.</span> <span class="nav-text">MySQL部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E9%83%A8%E5%88%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">Java部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%95%88%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">测试效果</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rui Wang"
+      src="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+  <p class="site-author-name" itemprop="name">Rui Wang</p>
+  <div class="site-description" itemprop="description">去摘遥不可及的星星</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java-MySQL学生管理系统
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-19 13:55:37 / 修改时间：16:25:40" itemprop="dateCreated datePublished" datetime="2020-11-19T13:55:37+08:00">2020-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Mysql/" itemprop="url" rel="index"><span itemprop="name">Java Mysql</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Java-MySQL学生管理系统"><a href="#Java-MySQL学生管理系统" class="headerlink" title="Java+MySQL学生管理系统"></a>Java+MySQL学生管理系统</h1><p>源码：<a target="_blank" rel="noopener" href="https://github.com/ruiwang-97/StudentManagement.git">https://github.com/ruiwang-97/StudentManagement.git</a></p>
+<p><a href="%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90">需求分析</a></p>
+<p><a href="%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF">设计思路</a></p>
+<p><a href="%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0">具体实现</a></p>
+<p><a href="%E6%B5%8B%E8%AF%95%E6%95%88%E6%9E%9C">测试效果</a></p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>这是一个学生管理系统，以管理员身份登录，实现对学员以及年级信息的增删改查操作。</p>
+<p>具体需要实现的功能有：</p>
+<a id="more"></a>
+
+<p>1、统计学生人数。</p>
+<p>2、查看学生名单。</p>
+<p>3、按学号查询学生姓名。</p>
+<p>4、按姓名查询学生信息。</p>
+<p>5、删除学生记录。</p>
+<p>6、修改学生年级。</p>
+<p>7、添加学生。</p>
+<p>8、退出。</p>
+<p>分析：</p>
+<p>其中1，2，3，4为查询操作，1、3返回单个值，调用dao包中BasicDao中的<code>scalar()</code>方法，2返回多个对象，调用BasicDao中的<code>queryMulti()</code>方法，3返回单个对象，调用BasicDao中的<code>querySingle()</code>方法。5，6，7为增删改，调用<code>update()</code>方法。</p>
+<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><p>分为五个模块：dao、domain、service、view、utils。其中</p>
+<ul>
+<li><p>dao包访问数据类，包括BasicDao，StuDao，ManagerDao。提供对数据的增删改查的通用方法。</p>
+</li>
+<li><p>domain包实体类，包括Manager，Student。</p>
+</li>
+<li><p>service包业务类，包括managerService提供登录验证方法，stdentService提供增删改查方法。</p>
+</li>
+<li><p>view包界面类，stuView提供主界面，TSUtility封装控制台操作。</p>
+</li>
+<li><p>utils包数据库连接类，通过德鲁伊数据库连接池获取连接对象。</p>
+</li>
+</ul>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="MySQL部分"><a href="#MySQL部分" class="headerlink" title="MySQL部分"></a>MySQL部分</h3><ol>
+<li><p>建库<code>studentm</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE studentm;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建表</p>
+<ul>
+<li><p>manager表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE TABLE manager(</span><br><span class="line">id INT(11)PRIMARY KEY ,</span><br><span class="line">username VARCHAR(20) NOT NULL,</span><br><span class="line">pword VARCHAR(20) NOT NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>stu表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE TABLE stu(</span><br><span class="line">id INT(11)PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">stunumber VARCHAR(20) NOT NULL,</span><br><span class="line">stuname VARCHAR(20) NOT NULL,</span><br><span class="line">gender VARCHAR(20) NOT NULL,</span><br><span class="line">grade VARCHAR(20) NOT NULL,</span><br><span class="line">tel INT(20) NOT NULL,</span><br><span class="line">email VARCHAR(20) NOT NULL,</span><br><span class="line">birth VARCHAR(20) NOT NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>设置管理员用户名、密码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">INSERT INTO &#96;manager&#96; VALUES(1,&#39;john&#39;,8888);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以先加入一些学生用于测试</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">INSERT INTO &#96;stu&#96; VALUES(1,&#39;S0018&#39;,&#39;梅小凤&#39;,&#39;女&#39;,&#39;B2&#39;,158111876544,&#39;xiaofeng@qq.com&#39;,&#39;1998-3-3&#39;),(2,&#39;S0035&#39;,&#39;晓梅&#39;,&#39;女&#39;,&#39;B3&#39;,156091875566,&#39;xiaomei@qq.com&#39;,&#39;1996-2-16&#39;),(</span><br><span class="line">3,&#39;S0025&#39;,&#39;王小锐&#39;,&#39;女&#39;,&#39;B5&#39;,18345278844,&#39;rui97@qq.com&#39;,&#39;1997-9-16&#39;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="Java部分"><a href="#Java部分" class="headerlink" title="Java部分"></a>Java部分</h3><ol>
+<li><p>导入jar包和druid.properties(注意修改库名)，utils包下的JDBCUtilsByDruid类与数据库建立连接和关闭连接。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.druid.pool.DruidDataSourceFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.security.spec.ECField;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 此类是通过德鲁伊数据库连接池获取连接对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Wang Rui</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2020/11/17$</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCUtilsByDruid</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> DataSource ds;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">            properties.load(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;src\\druid.properties&quot;</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">//1.创建一个指定参数的数据流连接池</span></span><br><span class="line">            ds = DruidDataSourceFactory.createDataSource(properties);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.从数据库连接池中获取可用的连接对象</span></span><br><span class="line">        <span class="keyword">return</span> ds.getConnection();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：释放资源</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> set</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> statement</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> connection</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(ResultSet set, Statement statement, Connection connection)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (set != <span class="keyword">null</span>) &#123;</span><br><span class="line">                set.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (statement != <span class="keyword">null</span>) &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (connection != <span class="keyword">null</span>) &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立dao包，定义一个用来被继承的对数据库进行基本操作的BasicDao，提供通用的增删改查方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.DbUtils;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.QueryRunner;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.BeanHandler;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.BeanListHandler;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.ScalarHandler;</span><br><span class="line"><span class="keyword">import</span> sm.utils.JDBCUtilsByDruid;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 提供通用的增删改查方法</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Wang Rui</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2020/11/18$</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能：通用的增删改方法，针对于任何表</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//泛型类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BasicDao</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    QueryRunner qr = <span class="keyword">new</span> QueryRunner();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(String sql, Object... params)</span> </span>&#123;</span><br><span class="line">        Connection connection = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connection = JDBCUtilsByDruid.getConnection();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> update = qr.update(connection, sql, params);</span><br><span class="line">            <span class="keyword">return</span> update;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            JDBCUtilsByDruid.close(<span class="keyword">null</span>, <span class="keyword">null</span>, connection);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：返回单个对象，针对于任何表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">querySingle</span><span class="params">(String sql, Class&lt;T&gt; clazz, Object... params)</span> </span>&#123;</span><br><span class="line">        Connection connection = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connection = JDBCUtilsByDruid.getConnection();</span><br><span class="line"><span class="comment">//        QueryRunner qr = new QueryRunner();</span></span><br><span class="line">            <span class="keyword">return</span> qr.query(connection, sql, <span class="keyword">new</span> BeanHandler&lt;T&gt;(clazz), params);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            JDBCUtilsByDruid.close(<span class="keyword">null</span>, <span class="keyword">null</span>, connection);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：返回多个对象，针对于任何表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">queryMulti</span><span class="params">(String sql, Class&lt;T&gt; clazz, Object... params)</span> </span>&#123;</span><br><span class="line">        Connection connection = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connection = JDBCUtilsByDruid.getConnection();</span><br><span class="line"><span class="comment">//            QueryRunner qr = new QueryRunner();</span></span><br><span class="line">            <span class="keyword">return</span> qr.query(connection, sql, <span class="keyword">new</span> BeanListHandler&lt;T&gt;(clazz), params);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            JDBCUtilsByDruid.close(<span class="keyword">null</span>, <span class="keyword">null</span>, connection);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：返回单个值，针对于任何表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">scalar</span><span class="params">(String sql, Object... params)</span> </span>&#123;</span><br><span class="line">        Connection connection = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connection = JDBCUtilsByDruid.getConnection();</span><br><span class="line"><span class="comment">//            QueryRunner qr = new QueryRunner();</span></span><br><span class="line">            <span class="keyword">return</span> qr.query(connection, sql, <span class="keyword">new</span> ScalarHandler(), params);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            JDBCUtilsByDruid.close(<span class="keyword">null</span>, <span class="keyword">null</span>, connection);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>StuDao和ManagerDao继承于BasicDao。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sm.domain.Student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StuDao</span> <span class="keyword">extends</span> <span class="title">BasicDao</span>&lt;<span class="title">Student</span>&gt;</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sm.domain.Manager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ManagerDao</span> <span class="keyword">extends</span> <span class="title">BasicDao</span>&lt;<span class="title">Manager</span>&gt;</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立domain包，Manager类和Student对应MySQL中的表定义属性及其类型。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.domain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 管理员类 id,username,pword</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Wang Rui</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2020/11/18$</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Manager</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String pword;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Manager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Manager</span><span class="params">(<span class="keyword">int</span> id, String username, String pword)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">        <span class="keyword">this</span>.pword = pword;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pword;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPword</span><span class="params">(String pword)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pword = pword;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Manager&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;id=&quot;</span> + id +</span><br><span class="line">                <span class="string">&quot;, username=&#x27;&quot;</span> + username + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, pword=&#x27;&quot;</span> + pword + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.domain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 学生类  id,stunumber,stuname,gender,grade,tel,email,birth</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Wang Rui</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2020/11/18$</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String stunumber;<span class="comment">//学号</span></span><br><span class="line">    <span class="keyword">private</span> String stuname;</span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> String grade;<span class="comment">//年级</span></span><br><span class="line">    <span class="keyword">private</span> String tel;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">    <span class="keyword">private</span> String birth;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id, String stunumber, String stuname, String gender, String grade, String tel, String email, String birth)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.stunumber = stunumber;</span><br><span class="line">        <span class="keyword">this</span>.stuname = stuname;</span><br><span class="line">        <span class="keyword">this</span>.gender = gender;</span><br><span class="line">        <span class="keyword">this</span>.grade = grade;</span><br><span class="line">        <span class="keyword">this</span>.tel = tel;</span><br><span class="line">        <span class="keyword">this</span>.email = email;</span><br><span class="line">        <span class="keyword">this</span>.birth = birth;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getStunumber</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> stunumber;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStunumber</span><span class="params">(String stunumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stunumber = stunumber;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getStuname</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> stuname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStuname</span><span class="params">(String stuname)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stuname = stuname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getGender</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> gender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGender</span><span class="params">(String gender)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.gender = gender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getGrade</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> grade;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGrade</span><span class="params">(String grade)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.grade = grade;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTel</span><span class="params">(String tel)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.tel = tel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEmail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmail</span><span class="params">(String email)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.email = email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBirth</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> birth;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirth</span><span class="params">(String birth)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birth = birth;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> stunumber + <span class="string">&quot;\t&quot;</span> +</span><br><span class="line">                 stuname + <span class="string">&quot;\t&quot;</span> +</span><br><span class="line">                 gender + <span class="string">&quot;\t&quot;</span> +</span><br><span class="line">                 grade + <span class="string">&quot;\t&quot;</span> +</span><br><span class="line">                 tel + <span class="string">&quot;\t&quot;</span>+</span><br><span class="line">                 email + <span class="string">&quot;\t&quot;</span> +</span><br><span class="line">                 birth;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立service包，其中managerService类提供管理员登录验证的方法，studentService类用于提供学生增删改查的方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sm.dao.ManagerDao;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 提供管理员登录验证的方法</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Wang Rui</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2020/11/18$</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">managerService</span> </span>&#123;</span><br><span class="line">    ManagerDao dao = <span class="keyword">new</span> ManagerDao();</span><br><span class="line"><span class="comment">//登录验证</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">login</span><span class="params">(String username,String password)</span></span>&#123;</span><br><span class="line"><span class="comment">//此处易出现java.lang.ClassCastException异常，Long型不可强转为Boolean型</span></span><br><span class="line">        Long count =  (Long)dao.scalar(<span class="string">&quot;select count(*) from manager where username=? and pword=?&quot;</span>, username,password);</span><br><span class="line">        <span class="keyword">return</span> count &gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sm.dao.StuDao;</span><br><span class="line"><span class="keyword">import</span> sm.domain.Student;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 此类用于提供学生增删改查的方法</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Wang Rui</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2020/11/18$</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">studentService</span> </span>&#123;</span><br><span class="line">    StuDao dao = <span class="keyword">new</span> StuDao();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1、统计学生人数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">nums</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Long longnums = (Long) dao.scalar(<span class="string">&quot;select count(*) from stu&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> nums = longnums.intValue();</span><br><span class="line">        <span class="keyword">return</span> nums ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2、查看学生名单-返回学生列表</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Student&gt; <span class="title">getAllStudents</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;Student&gt; students = dao.queryMulti(<span class="string">&quot;select * from stu&quot;</span>,Student.class);</span><br><span class="line">        <span class="keyword">return</span> students;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3、按学号查询学生姓名</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">queryByStuNumber</span><span class="params">(String stunumber)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (String) dao.scalar(<span class="string">&quot;select stuname from stu where stunumber = ?&quot;</span>, stunumber);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//4、按姓名查询学生信息</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Student <span class="title">queryByStuName</span><span class="params">(String stuName)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dao.querySingle(<span class="string">&quot;select * from stu where stuname like ?&quot;</span>, Student.class, <span class="string">&quot;%&quot;</span>+stuName+<span class="string">&quot;%&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//5.删除学生记录</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteStu</span><span class="params">(String stunumber)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dao.update(<span class="string">&quot;delete from stu where stunumber = ?&quot;</span>, stunumber);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//6.修改学生年级</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">changeStu</span><span class="params">(String stunumber,String newGrade)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> dao.update(<span class="string">&quot;update stu set grade = ? where stunumber = ?&quot;</span>,newGrade,stunumber);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//7.添加学生</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">addStu</span><span class="params">(<span class="keyword">int</span> id, String stunumber, String stuname, String gender, String grade, String tel, String email, String birth)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> dao.update(<span class="string">&quot;insert into stu values(?,?,?,?,?,?,?,?)&quot;</span>,id,stunumber,stuname,gender,grade,tel,email,birth);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立view包，其中TSUtility工具类用于读取控制台操作，stuView用于主界面的显示。首先是登陆界面，输入正确的用户名和密码后进入主菜单，控制台输入相应功能序号调取相应方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sm.view;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sm.domain.Student;</span><br><span class="line"><span class="keyword">import</span> sm.service.managerService;</span><br><span class="line"><span class="keyword">import</span> sm.service.studentService;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 主界面显示</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Wang Rui</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2020/11/18$</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">stuView</span> </span>&#123;</span><br><span class="line">    managerService ms = <span class="keyword">new</span> managerService();</span><br><span class="line">    studentService ss = <span class="keyword">new</span> studentService();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> stuView().login();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 登录界面显示</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入用户名：&quot;</span>);</span><br><span class="line">        String username = input.next();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入密码：&quot;</span>);</span><br><span class="line">        String password = input.next();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(ms.login(username, password))&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;登录成功！&quot;</span>);</span><br><span class="line">            System.out.println();</span><br><span class="line">            showMainMenu();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;登录失败！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：显示主菜单</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showMainMenu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> loopFlag = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">char</span> key = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            init();</span><br><span class="line">            key = TSUtility.readMenuSelection();</span><br><span class="line">            System.out.println();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">switch</span> (key) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    System.out.println(<span class="string">&quot;当前学生人数为：&quot;</span> + ss.nums());</span><br><span class="line">                    System.out.println();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;2&#x27;</span>:</span><br><span class="line">                    listStudents();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;3&#x27;</span>:</span><br><span class="line">                    queryByStuNumber();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;4&#x27;</span>:</span><br><span class="line">                    queryByStuName();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;5&#x27;</span>:</span><br><span class="line">                    deleteByStuName();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;6&#x27;</span>:</span><br><span class="line">                    changeGrade();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;7&#x27;</span>:</span><br><span class="line">                    addStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;8&#x27;</span>:</span><br><span class="line">                    System.out.print(<span class="string">&quot;确认是否退出(Y/N)：&quot;</span>);</span><br><span class="line">                    <span class="keyword">char</span> yn = TSUtility.readConfirmSelection();</span><br><span class="line">                    <span class="keyword">if</span> (yn == <span class="string">&#x27;Y&#x27;</span>)</span><br><span class="line">                        loopFlag = <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">while</span> (loopFlag);</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 初始显示主菜单</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;===================请选择操作键================&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;1、统计学生人数&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;2、查看学生名单&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;3、按学号查询学生姓名&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;4、按姓名查询学生信息&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;5、删除学生记录&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;6、修改学生年级&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;7、添加学生&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;8、退出&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 显示当前学生列表方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listStudents</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;-------------------------------学生列表-----------------------------&quot;</span>);</span><br><span class="line">        List&lt;Student&gt; allStudents = ss.getAllStudents();</span><br><span class="line">        <span class="keyword">if</span> (allStudents.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;没有客户记录！&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;学号\t姓名\t性别\t年级\t电话\t邮箱\t出生日期&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Student e : allStudents) &#123;</span><br><span class="line">            System.out.println(e.getStunumber() + <span class="string">&quot;\t&quot;</span> + e.getStuname()  + <span class="string">&quot;\t&quot;</span> + e.getGender() + <span class="string">&quot;\t&quot;</span></span><br><span class="line">                    + e.getGrade() + <span class="string">&quot;\t&quot;</span> + e.getTel() + <span class="string">&quot;\t&quot;</span> + e.getEmail() + <span class="string">&quot;\t&quot;</span> + e.getBirth());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 按学号查询学生姓名方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">queryByStuNumber</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;===================查询操作================&quot;</span>);</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生学号：&quot;</span>);</span><br><span class="line">        String s = TSUtility.readString();</span><br><span class="line">        String s1 = ss.queryByStuNumber(s);</span><br><span class="line">        <span class="keyword">if</span> (s1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(s1);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;查询失败,请重新操作&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 按姓名查询学生信息方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">queryByStuName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;===================查询操作================&quot;</span>);</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生姓名：&quot;</span>);</span><br><span class="line">        String s = TSUtility.readString();</span><br><span class="line">        Student s1 = ss.queryByStuName(s);</span><br><span class="line">        <span class="keyword">if</span> (s1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;学号\t姓名\t性别\t年级\t电话\t邮箱\t出生日期&quot;</span>);</span><br><span class="line">            System.out.println(s1);</span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">            System.out.println(<span class="string">&quot;查询失败，请重新操作&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除学生记录方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">deleteByStuName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;===================删除操作================&quot;</span>);</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生学号：&quot;</span>);</span><br><span class="line">        String s = TSUtility.readString();</span><br><span class="line">        System.out.print(<span class="string">&quot;确认是否删除(Y/N)：&quot;</span>);</span><br><span class="line">        <span class="keyword">char</span> yn = TSUtility.readConfirmSelection();</span><br><span class="line">        <span class="keyword">if</span> (yn == <span class="string">&#x27;N&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(yn == <span class="string">&#x27;Y&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ss.deleteStu(s) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;删除成功&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                System.out.println(<span class="string">&quot;输入信息错误，请重新操作！&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">            System.out.println(<span class="string">&quot;删除失败，请重新操作！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改学生年级方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeGrade</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;===================修改操作================&quot;</span>);</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生学号：&quot;</span>);</span><br><span class="line">        String s = TSUtility.readString();</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入修改后的年级：&quot;</span>);</span><br><span class="line">        String newGrade = TSUtility.readString();</span><br><span class="line">        <span class="keyword">if</span> (ss.changeStu(s,newGrade) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;确认是否修改(Y/N)：&quot;</span>);</span><br><span class="line">            <span class="keyword">char</span> yn = TSUtility.readConfirmSelection();</span><br><span class="line">            <span class="keyword">if</span> (yn == <span class="string">&#x27;N&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            System.out.println(<span class="string">&quot;修改成功&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">            System.out.println(<span class="string">&quot;修改失败，请重新操作！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加学生方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;===================添加操作================&quot;</span>);</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生序号：&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> id = TSUtility.readInt();</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生学号：&quot;</span>);</span><br><span class="line">        String stuNumber = TSUtility.readString();</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生姓名：&quot;</span>);</span><br><span class="line">        String stuName = TSUtility.readString();</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生性别：&quot;</span>);</span><br><span class="line">        String gender = TSUtility.readString();</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生年级：&quot;</span>);</span><br><span class="line">        String grade = TSUtility.readString();</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生电话：&quot;</span>);</span><br><span class="line">        String tel = TSUtility.readString();</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生邮箱：&quot;</span>);</span><br><span class="line">        String email = TSUtility.readString();</span><br><span class="line">        System.out.print(<span class="string">&quot;请输入学生出生日期:&quot;</span>);</span><br><span class="line">        String birth = TSUtility.readString();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ss.addStu(id,stuNumber, stuName, gender, grade, tel, email, birth) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;确认是否添加(Y/N)：&quot;</span>);</span><br><span class="line">            <span class="keyword">char</span> yn = TSUtility.readConfirmSelection();</span><br><span class="line">            <span class="keyword">if</span> (yn == <span class="string">&#x27;N&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            System.out.println(<span class="string">&quot;添加成功&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">            System.out.println(<span class="string">&quot;添加失败，请重新操作！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="测试效果"><a href="#测试效果" class="headerlink" title="测试效果"></a>测试效果</h2><ol>
+<li><p>登陆界面</p>
+<ul>
+<li><p>如果用户名密码输入正确，显示“登陆成功！”</p>
+<p><img src="/images/SM/1.PNG"></p>
+</li>
+<li><p>如果用户名密码输入不正确，显示“登陆失败！”</p>
+<p><img src="/images/SM/2.PNG"></p>
+</li>
+</ul>
+</li>
+<li><p>功能1、统计学生人数</p>
+<p><img src="/images/SM/3.PNG"></p>
+</li>
+<li><p>功能2、查看学生名单</p>
+<p><img src="/images/SM/4.PNG"></p>
+</li>
+<li><p>功能3、按学号查询学生姓名</p>
+<ul>
+<li><p>如果输入学号正确</p>
+<p><img src="/images/SM/5.PNG"></p>
+</li>
+<li><p>如果输入学号不正确</p>
+<p><img src="/images/SM/6.PNG"></p>
+</li>
+</ul>
+</li>
+<li><p>功能4、按姓名查询学生信息</p>
+<ul>
+<li><p>如果输入名字正确（可以模糊查询）</p>
+<p><img src="/images/SM/7.PNG"></p>
+</li>
+<li><p>如果输入名字不正确</p>
+<p><img src="/images/SM/8.PNG"></p>
+</li>
+</ul>
+</li>
+<li><p>功能5、删除学生记录</p>
+<ul>
+<li><p>如果输入学号正确</p>
+<ul>
+<li><p>确认删除(Y)</p>
+<p><img src="/images/SM/9.PNG"></p>
+<p>删除后查看学生列表，确定已删除</p>
+<p><img src="/images/SM/10.PNG"></p>
+</li>
+<li><p>不确认(N)</p>
+<p>自动退出，重新回到主菜单</p>
+</li>
+</ul>
+</li>
+<li><p>如果输入学号不正确</p>
+<p><img src="/images/SM/11.PNG"></p>
+</li>
+</ul>
+</li>
+<li><p>功能6、修改学生年级</p>
+<p>例如将学号为S0018的学生年级改为B1</p>
+<ul>
+<li><p>确认修改(Y)</p>
+<p><img src="/images/SM/12.PNG"></p>
+<p>修改后查看学生列表，确定已修改</p>
+<p><img src="/images/SM/15.PNG"></p>
+</li>
+<li><p>不确认(N)</p>
+<p>自动退出，重新回到主菜单</p>
+</li>
+</ul>
+</li>
+<li><p>功能7、添加学生</p>
+<p>输入学生序号、学号、姓名、性别、年级、电话、邮箱、出生日期</p>
+<ul>
+<li><p>确认添加(Y)</p>
+<p><img src="/images/SM/13.PNG"></p>
+<p>添加后查看学生列表，确定已添加</p>
+<p><img src="/images/SM/14.PNG"></p>
+</li>
+<li><p>不确认(N)</p>
+<p>自动退出，重新回到主菜单</p>
+</li>
+</ul>
+</li>
+<li><p>功能8、退出</p>
+<ul>
+<li><p>确认退出(Y)</p>
+<p><img src="/images/SM/16.PNG"></p>
+</li>
+<li><p>不确认(N)</p>
+<p>自动退出，重新回到主菜单</p>
+</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+	
+	
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
+      </div>
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag"># 项目</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/11/16/Hexo%E6%94%BB%E7%95%A5-%E5%8E%BB%E9%99%A4%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8F%B7/" rel="prev" title="Hexo攻略-去除代码块的行序列号">
+                  <i class="fa fa-chevron-left"></i> Hexo攻略-去除代码块的行序列号
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rui Wang</span>
+</div>
+
+<!---->
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i>
+  <span id="busuanzi_container_site_uv">
+    本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+  </span>
+  <span id="busuanzi_container_site_pv">
+      &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  </div>
+  </div>
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
