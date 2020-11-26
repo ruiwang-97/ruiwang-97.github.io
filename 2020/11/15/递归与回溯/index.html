@@ -53,7 +53,7 @@
 <meta property="og:image" content="http://example.com/images/Offer68/17.PNG">
 <meta property="og:image" content="http://example.com/images/Offer68/18.PNG">
 <meta property="article:published_time" content="2020-11-15T03:19:11.000Z">
-<meta property="article:modified_time" content="2020-11-24T13:04:52.835Z">
+<meta property="article:modified_time" content="2020-11-26T09:14:18.074Z">
 <meta property="article:author" content="Rui Wang">
 <meta property="article:tag" content="递归与回溯">
 <meta name="twitter:card" content="summary">
@@ -303,7 +303,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-11-24 21:04:52" itemprop="dateModified" datetime="2020-11-24T21:04:52+08:00">2020-11-24</time>
+        <time title="修改时间：2020-11-26 17:14:18" itemprop="dateModified" datetime="2020-11-26T17:14:18+08:00">2020-11-26</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -417,7 +417,7 @@
 </ul>
 <!--2020/11/24更新-->
 
-<p>与上一题相似的机器人运动范围问题</p>
+<p>与上一题相似的<strong>机器人运动范围</strong>问题</p>
 <p>地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？</p>
 <p>示例 1：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：m &#x3D; 2, n &#x3D; 3, k &#x3D; 1</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
@@ -435,6 +435,25 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span>[][] visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];        </span><br><span class="line">        <span class="keyword">return</span> dfs(<span class="number">0</span>,<span class="number">0</span>,m,n,k,visited);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//计算两个数的位数和</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> si = <span class="number">0</span>, sj = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i != <span class="number">0</span>)&#123;</span><br><span class="line">          si += i % <span class="number">10</span>;</span><br><span class="line">          i/=<span class="number">10</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">while</span>(j != <span class="number">0</span>)&#123;</span><br><span class="line">            sj += j % <span class="number">10</span>;</span><br><span class="line">            j /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> si + sj;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//DFS+回溯</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="keyword">boolean</span>[][] visited)</span></span>&#123;</span><br><span class="line">        <span class="comment">//递归出口： ① 行列索引越界 或 ② 数位和超出目标值 k 或 ③ 当前元素已访问过 </span></span><br><span class="line">        <span class="keyword">if</span>(i &gt;= m || j &gt;= n || sum(i,j) &gt; k || visited[i][j]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//将【i,j】状态设为true，代表已走过，在回溯之后继续走的时候需要避开已走过的方格</span></span><br><span class="line">        visited[i][j] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//回溯返回值： 返回 1 + 右方搜索的可达解总数 + 下方搜索的可达解总数</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + dfs(i + <span class="number">1</span>, j, m, n, k, visited) + dfs(i, j + <span class="number">1</span>, m, n, k, visited);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<!--2020/11/26更新-->
+
+<p><strong>礼物的最大价值</strong></p>
+<p>在一个 m*n 的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于 0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格、直到到达棋盘的右下角。给定一个棋盘及其上面的礼物的价值，请计算你最多能拿到多少价值的礼物？</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">[</span><br><span class="line">  [1,3,1],</span><br><span class="line">  [1,5,1],</span><br><span class="line">  [4,2,1]</span><br><span class="line">]</span><br><span class="line">输出: 12</span><br><span class="line">解释: 路径 1→3→5→2→1 可以拿到最多价值的礼物</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>方法一：递归回溯。每次只能向右或向下，对每一格的来源只有向左或向上。从右下角开始递归，定义helper方法找到当前位置的礼物最大值。</p>
+<ul>
+<li>递归出口： ① 行列索引越界 ，返回 0（礼物最小为1） ② 当前元素已访问过 ，返回当前结果</li>
+<li>递归体：比较左边格子与上边格子的返回结果，取最大值，与当前位置的价值加和。将visited[i,j]状态设为true，代表已走过，在回溯之后继续走的时候需要避开已走过的方格。</li>
+<li>回溯返回值： 返回 当前位置加和后的结果。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;<span class="comment">//行数</span></span><br><span class="line">    <span class="keyword">int</span> n ;<span class="comment">//列数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxValue</span><span class="params">(<span class="keyword">int</span>[][] grid)</span> </span>&#123;</span><br><span class="line">        m = grid.length;</span><br><span class="line">        n = grid[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">if</span>(grid.length == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">boolean</span>[][] visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];</span><br><span class="line">        <span class="keyword">return</span> helper(grid, m - <span class="number">1</span>, n - <span class="number">1</span>, visited);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[][] grid, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">boolean</span>[][] visited)</span></span>&#123;</span><br><span class="line">        <span class="comment">//递归出口：边界条件</span></span><br><span class="line">        <span class="keyword">if</span>(i &lt; <span class="number">0</span> || i &gt;= m || j &gt;= n || j &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;         </span><br><span class="line">        <span class="comment">//如果已访问过，直接返回</span></span><br><span class="line">        <span class="keyword">if</span>(visited[i][j] == <span class="keyword">true</span>) <span class="keyword">return</span> grid[i][j];</span><br><span class="line">        <span class="comment">//递归比较当前位置的左边格子与上边格子的返回结果，取最大值</span></span><br><span class="line">        grid[i][j] += Math.max(helper(grid, i - <span class="number">1</span>, j, visited),helper(grid, i, j - <span class="number">1</span>, visited));</span><br><span class="line">        <span class="comment">//并把当前元素状态设为true</span></span><br><span class="line">        visited[i][j] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> grid[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：动态规划。</p>
 </li>
 </ul>
 <h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>算法小白对递归和回溯的理解只到这里，希望随着刷的题越来越多，理解也越来越清晰透彻，到时再来分享！</p>
