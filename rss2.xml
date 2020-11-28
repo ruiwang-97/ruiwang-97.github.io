@@ -9,8 +9,37 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Thu, 26 Nov 2020 07:47:27 GMT</pubDate>
+    <pubDate>Sat, 28 Nov 2020 13:07:42 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Java-Scanner类</title>
+      <link>http://example.com/2020/11/28/Java-Scanner%E7%B1%BB/</link>
+      <guid>http://example.com/2020/11/28/Java-Scanner%E7%B1%BB/</guid>
+      <pubDate>Sat, 28 Nov 2020 13:00:06 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;Java-Scanner类&quot;&gt;&lt;a href=&quot;#Java-Scanner类&quot; class=&quot;headerlink&quot; title=&quot;Java Scanner类&quot;&gt;&lt;/a&gt;Java Scanner类&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;用于获取用户输入&lt;br&gt;语法：&lt;/p&gt;
+  &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Scanner s = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Scanner(System.in);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可通过调用下列函数&lt;code&gt;nextDouble()&lt;/code&gt;，&lt;code&gt;nextFloat&lt;/code&gt;，&lt;code&gt;nextInt()&lt;/code&gt;，&lt;code&gt;nextLine()&lt;/code&gt;，&lt;code&gt;nextLong()&lt;/code&gt;，&lt;code&gt;nextShot()&lt;/code&gt;读取用户在命令行输入的各种数据类型　&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;next()与nextLine()区别：&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="Java-Scanner类"><a href="#Java-Scanner类" class="headerlink" title="Java Scanner类"></a>Java Scanner类</h2><ul><li><p>用于获取用户输入<br>语法：</p>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure></li><li><p>可通过调用下列函数<code>nextDouble()</code>，<code>nextFloat</code>，<code>nextInt()</code>，<code>nextLine()</code>，<code>nextLong()</code>，<code>nextShot()</code>读取用户在命令行输入的各种数据类型　</p></li><li><p>next()与nextLine()区别：</p>  <a id="more"></a><ul><li>next() : </li></ul><ol><li>一定要读到有效字符结束输入</li><li>对输入有效字符之前遇到的空白，next() 方法会自动将其去掉。<ol start="3"><li>只有输入有效字符后才将其后面输入的空白作为分隔符或者结束符。</li><li>next() 不能得到带有空格的字符串。<br>总之就是<strong>遇到空格停止扫描</strong></li></ol><ul><li>nextLine()：</li></ul><ol><li>以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符。</li><li>可以获得空白。<br>总之就是<strong>以回车为停止扫描</strong></li></ol></li></ol></li></ul><p>举例：</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">System.out.println(<span class="string">&quot;输入：&quot;</span>);</span><br><span class="line">String s = sc.next();<span class="comment">//Hello World!</span></span><br><span class="line">System.out.println(s);</span><br></pre></td></tr></table></figure><p>  测试效果：<br><img src="https://img-blog.csdnimg.cn/20201127160744149.png" alt="在这里插入图片描述"></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">System.out.println(<span class="string">&quot;输入：&quot;</span>);</span><br><span class="line">String s = sc.nextLine();<span class="comment">//Hello World!</span></span><br><span class="line">System.out.println(s);</span><br></pre></td></tr></table></figure><p>  测试效果：<br><img src="https://img-blog.csdnimg.cn/20201127160901915.png" alt="在这里插入图片描述"></p><ul><li><p>控制台输入一个可变长度数组</p> <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">String[] strArray = <span class="keyword">null</span>;</span><br><span class="line">strArray = sc.nextLine().split(<span class="string">&quot;\\s*,\\s*&quot;</span>);  <span class="comment">// &#x27;,&#x27;分割，前后可以有空格</span></span><br><span class="line"><span class="keyword">int</span>[] intArray = <span class="keyword">new</span> <span class="keyword">int</span>[strArray.length];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; strArray.length; i++) &#123;</span><br><span class="line">    intArray[i] = Integer.parseInt(strArray[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>控制台输入一个二维数组</p> <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"> System.out.print(<span class="string">&quot;二维数组的行数：&quot;</span>);</span><br><span class="line"> <span class="keyword">int</span> r = sc.nextInt();</span><br><span class="line"> System.out.println(<span class="string">&quot;二维数组的列数：&quot;</span>);</span><br><span class="line"> <span class="keyword">int</span> c = sc.nextInt();</span><br><span class="line"> <span class="keyword">int</span>[][]matrix = <span class="keyword">new</span> <span class="keyword">int</span>[r][c];</span><br><span class="line"> sc.nextLine();<span class="comment">//用来跳过行列后的回车符</span></span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r; i++)&#123;</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; c; j++)&#123;</span><br><span class="line">         matrix[i][j] = sc.nextInt();</span><br><span class="line">         System.out.print(matrix[i][j] + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">     &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;&quot;</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><p> 测试效果：<br><img src="https://img-blog.csdnimg.cn/20201128205414284.PNG" alt="在这里插入图片描述"></p></li></ul>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/Java-SE/">Java SE</category>
+      
+      
+      <category domain="http://example.com/tags/Scanner%E7%B1%BB/">Scanner类</category>
+      
+      
+      <comments>http://example.com/2020/11/28/Java-Scanner%E7%B1%BB/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Java动态代理</title>
@@ -234,27 +263,6 @@
       
       
       <comments>http://example.com/2020/10/31/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Hexo攻略-设置分页与显示文章数</title>
-      <link>http://example.com/2020/10/29/Hexo%E6%94%BB%E7%95%A5-%E8%AE%BE%E7%BD%AE%E5%88%86%E9%A1%B5%E4%B8%8E%E6%98%BE%E7%A4%BA%E6%96%87%E7%AB%A0%E6%95%B0/</link>
-      <guid>http://example.com/2020/10/29/Hexo%E6%94%BB%E7%95%A5-%E8%AE%BE%E7%BD%AE%E5%88%86%E9%A1%B5%E4%B8%8E%E6%98%BE%E7%A4%BA%E6%96%87%E7%AB%A0%E6%95%B0/</guid>
-      <pubDate>Thu, 29 Oct 2020 07:38:25 GMT</pubDate>
-      
-      <description>&lt;h2 id=&quot;Hexo攻略-设置分页与显示文章数&quot;&gt;&lt;a href=&quot;#Hexo攻略-设置分页与显示文章数&quot; class=&quot;headerlink&quot; title=&quot;Hexo攻略-设置分页与显示文章数&quot;&gt;&lt;/a&gt;Hexo攻略-设置分页与显示文章数&lt;/h2&gt;&lt;p&gt;使用next主题下，默认首页、分类、标签页都是显示10个文章，想进行分页和设置显示文章数。按照以下步骤操作~&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="Hexo攻略-设置分页与显示文章数"><a href="#Hexo攻略-设置分页与显示文章数" class="headerlink" title="Hexo攻略-设置分页与显示文章数"></a>Hexo攻略-设置分页与显示文章数</h2><p>使用next主题下，默认首页、分类、标签页都是显示10个文章，想进行分页和设置显示文章数。按照以下步骤操作~</p><a id="more"></a><ul><li><p>在Git Bash下安装插件</p><blockquote><p>$ npm  install hexo-generator-index –save</p></blockquote><blockquote><p>$ npm install hexo-generator-archive – save</p></blockquote><blockquote><p>$ npm install hexo-generator-tag –save</p></blockquote></li><li><p>在主题配置文件<code>_config.yml</code>中修改</p></li></ul><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Algolia Search</span><br><span class="line"># For more information: https:&#x2F;&#x2F;www.algolia.com</span><br><span class="line">algolia_search:</span><br><span class="line">  enable: false</span><br><span class="line">  hits:</span><br><span class="line">    per_page: 5</span><br><span class="line"></span><br><span class="line">#主页每页显示文章数</span><br><span class="line">index_generator:</span><br><span class="line">    per_page: 5</span><br><span class="line">#archive分页每页显示文章数</span><br><span class="line">archive_generator:</span><br><span class="line">    per_page: 5</span><br><span class="line">#tag分页每页显示文章数</span><br><span class="line">tag_generator:</span><br><span class="line">    per_page: 10</span><br><span class="line">#category分页每页显示文章数</span><br><span class="line">category_generator: </span><br><span class="line">    per_page: 10</span><br></pre></td></tr></table></figure><p>按照以上步骤操作，保证一次就能修改好啦！</p><p>实现分页效果如图</p><p><img src="/images/%E5%88%86%E9%A1%B5.PNG"></p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Hexo%E6%94%BB%E7%95%A5/">Hexo攻略</category>
-      
-      
-      
-      <comments>http://example.com/2020/10/29/Hexo%E6%94%BB%E7%95%A5-%E8%AE%BE%E7%BD%AE%E5%88%86%E9%A1%B5%E4%B8%8E%E6%98%BE%E7%A4%BA%E6%96%87%E7%AB%A0%E6%95%B0/#disqus_thread</comments>
       
     </item>
     
