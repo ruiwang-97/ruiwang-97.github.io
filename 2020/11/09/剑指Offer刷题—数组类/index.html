@@ -24,15 +24,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="剑指Offer刷题——数组类持续更新…好好总结，早日刷完！ 找出数组中重复的数字 二维数组中的查找 旋转数组的最小数字 矩阵中的路径 调整数组顺序使奇数位于偶数前面">
+  <meta name="description" content="剑指Offer刷题——数组类持续更新…好好总结，早日刷完！ 找出数组中重复的数字 二维数组中的查找 旋转数组的最小数字 矩阵中的路径 调整数组顺序使奇数位于偶数前面 数组中出现次数超过一半的数字 和为s的两个数字">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指Offer刷题—数组类">
 <meta property="og:url" content="http://example.com/2020/11/09/%E5%89%91%E6%8C%87Offer%E5%88%B7%E9%A2%98%E2%80%94%E6%95%B0%E7%BB%84%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="剑指Offer刷题——数组类持续更新…好好总结，早日刷完！ 找出数组中重复的数字 二维数组中的查找 旋转数组的最小数字 矩阵中的路径 调整数组顺序使奇数位于偶数前面">
+<meta property="og:description" content="剑指Offer刷题——数组类持续更新…好好总结，早日刷完！ 找出数组中重复的数字 二维数组中的查找 旋转数组的最小数字 矩阵中的路径 调整数组顺序使奇数位于偶数前面 数组中出现次数超过一半的数字 和为s的两个数字">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-11-09T14:40:40.000Z">
-<meta property="article:modified_time" content="2020-11-25T12:03:53.617Z">
+<meta property="article:modified_time" content="2020-12-02T12:47:57.771Z">
 <meta property="article:author" content="Rui Wang">
 <meta property="article:tag" content="刷题数组类">
 <meta name="twitter:card" content="summary">
@@ -181,7 +181,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%91%E6%8C%87Offer%E5%88%B7%E9%A2%98%E2%80%94%E2%80%94%E6%95%B0%E7%BB%84%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">剑指Offer刷题——数组类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#03%EF%BC%8Ceasy"><span class="nav-number">1.1.</span> <span class="nav-text">03，easy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%87%BA%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">1.1.1.</span> <span class="nav-text">找出数组中重复的数字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04%EF%BC%8Cmiddle"><span class="nav-number">1.2.</span> <span class="nav-text">04，middle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE"><span class="nav-number">1.2.1.</span> <span class="nav-text">二维数组中的查找</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%EF%BC%8Ceasy"><span class="nav-number">1.3.</span> <span class="nav-text">11，easy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97"><span class="nav-number">1.3.1.</span> <span class="nav-text">旋转数组的最小数字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%EF%BC%8Cmiddle"><span class="nav-number">1.4.</span> <span class="nav-text">12，middle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">矩阵中的路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21%EF%BC%8Ceasy"><span class="nav-number">1.5.</span> <span class="nav-text">21，easy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E6%95%B0%E7%BB%84%E9%A1%BA%E5%BA%8F%E4%BD%BF%E5%A5%87%E6%95%B0%E4%BD%8D%E4%BA%8E%E5%81%B6%E6%95%B0%E5%89%8D%E9%9D%A2"><span class="nav-number">1.5.1.</span> <span class="nav-text">调整数组顺序使奇数位于偶数前面</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%91%E6%8C%87Offer%E5%88%B7%E9%A2%98%E2%80%94%E2%80%94%E6%95%B0%E7%BB%84%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">剑指Offer刷题——数组类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#03%EF%BC%8Ceasy"><span class="nav-number">1.1.</span> <span class="nav-text">03，easy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%87%BA%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">1.1.1.</span> <span class="nav-text">找出数组中重复的数字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04%EF%BC%8Cmiddle"><span class="nav-number">1.2.</span> <span class="nav-text">04，middle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE"><span class="nav-number">1.2.1.</span> <span class="nav-text">二维数组中的查找</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%EF%BC%8Ceasy"><span class="nav-number">1.3.</span> <span class="nav-text">11，easy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97"><span class="nav-number">1.3.1.</span> <span class="nav-text">旋转数组的最小数字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%EF%BC%8Cmiddle"><span class="nav-number">1.4.</span> <span class="nav-text">12，middle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">矩阵中的路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21%EF%BC%8Ceasy"><span class="nav-number">1.5.</span> <span class="nav-text">21，easy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E6%95%B0%E7%BB%84%E9%A1%BA%E5%BA%8F%E4%BD%BF%E5%A5%87%E6%95%B0%E4%BD%8D%E4%BA%8E%E5%81%B6%E6%95%B0%E5%89%8D%E9%9D%A2"><span class="nav-number">1.5.1.</span> <span class="nav-text">调整数组顺序使奇数位于偶数前面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#39%EF%BC%8Ceasy"><span class="nav-number">1.6.</span> <span class="nav-text">39，easy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E4%B8%AD%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0%E8%B6%85%E8%BF%87%E4%B8%80%E5%8D%8A%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">1.6.1.</span> <span class="nav-text">数组中出现次数超过一半的数字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#57%EF%BC%8Ceasy"><span class="nav-number">1.7.</span> <span class="nav-text">57，easy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8C%E4%B8%BAs%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97"><span class="nav-number">1.7.1.</span> <span class="nav-text">和为s的两个数字</span></a></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -197,20 +197,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -281,7 +281,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-11-25 20:03:53" itemprop="dateModified" datetime="2020-11-25T20:03:53+08:00">2020-11-25</time>
+        <time title="修改时间：2020-12-02 20:47:57" itemprop="dateModified" datetime="2020-12-02T20:47:57+08:00">2020-12-02</time>
       </span>
 
   
@@ -295,11 +295,13 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="剑指Offer刷题——数组类"><a href="#剑指Offer刷题——数组类" class="headerlink" title="剑指Offer刷题——数组类"></a>剑指Offer刷题——数组类</h1><p>持续更新…好好总结，早日刷完！</p>
-<p><a href="03%EF%BC%8Ceasy">找出数组中重复的数字</a></p>
-<p><a href="04%EF%BC%8Cmiddle">二维数组中的查找</a></p>
-<p><a href="11%EF%BC%8Ceasy">旋转数组的最小数字</a></p>
-<p><a href="12%EF%BC%8Cmiddle">矩阵中的路径</a></p>
-<p><a href="21%EF%BC%8Ceasy">调整数组顺序使奇数位于偶数前面</a></p>
+<p><a href="#03%EF%BC%8Ceasy">找出数组中重复的数字</a></p>
+<p><a href="#04%EF%BC%8Cmiddle">二维数组中的查找</a></p>
+<p><a href="#11%EF%BC%8Ceasy">旋转数组的最小数字</a></p>
+<p><a href="#12%EF%BC%8Cmiddle">矩阵中的路径</a></p>
+<p><a href="#21%EF%BC%8Ceasy">调整数组顺序使奇数位于偶数前面</a></p>
+<p><a href="#39%EF%BC%8Ceasy">数组中出现次数超过一半的数字</a></p>
+<p><a href="#57%EF%BC%8Ceasy">和为s的两个数字</a></p>
 <a id="more"></a>
 
 <h2 id="03，easy"><a href="#03，easy" class="headerlink" title="03，easy"></a>03，easy</h2><h3 id="找出数组中重复的数字"><a href="#找出数组中重复的数字" class="headerlink" title="找出数组中重复的数字"></a>找出数组中重复的数字</h3><p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
@@ -387,6 +389,48 @@
 <ul>
 <li><p>方法二：双指针left，right。若为奇数，left++;若为偶数,right–。否则nums[left]和nums[right]交换。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] exchange(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>; <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[left] % <span class="number">2</span> != <span class="number">0</span>)&#123;</span><br><span class="line">             left++;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">if</span>(nums[right] % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">             right--;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">else</span>&#123;</span><br><span class="line">             <span class="keyword">int</span> temp = nums[left];</span><br><span class="line">             nums[left] = nums[right];</span><br><span class="line">             nums[right] = temp;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="39，easy"><a href="#39，easy" class="headerlink" title="39，easy"></a>39，easy</h2><h3 id="数组中出现次数超过一半的数字"><a href="#数组中出现次数超过一半的数字" class="headerlink" title="数组中出现次数超过一半的数字"></a>数组中出现次数超过一半的数字</h3><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>方法一：先进行排序，若存在这样的数字，排序后一定位于数组中间位置。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        //数组先排序再找出现次数超过数组长度一半的数字</span></span><br><span class="line">       Arrays.sort(nums);<span class="comment">//1, 2, 2, 2, 2, 2, 3 ,4 , 5</span></span><br><span class="line">    <span class="comment">//    for(int i = 0; i &lt; nums.length; i++)&#123;</span></span><br><span class="line">    <span class="comment">//        if(nums[i] == nums[i + nums.length / 2] )&#123;</span></span><br><span class="line">    <span class="comment">//            return nums[i];</span></span><br><span class="line">    <span class="comment">//        &#125;</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">    <span class="comment">//    return -1;</span></span><br><span class="line">        <span class="keyword">int</span> l = nums.length;</span><br><span class="line">        <span class="keyword">return</span> nums[l/<span class="number">2</span>];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：借助map，key保存数组元素，value保存出现次数。遍历数组元素，如果keySet中包含此元素，用map.get(key)得到此时的value，并更新(+1)，判断若此时value &gt;= 数组长度的一半，返回此时的key；如果keySet中不包含此元素，加入map且使value为1。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">//用hashMap实现，key保存数组元素，value保存出现次数</span></span><br><span class="line">    Map&lt;Integer,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> value = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123; </span><br><span class="line">        <span class="keyword">if</span>(!map.containsKey(nums[i]))&#123;</span><br><span class="line">             map.put(nums[i], <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            value = map.get(nums[i]);</span><br><span class="line">            map.put(nums[i], value + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(value + <span class="number">1</span> &gt; nums.length / <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="57，easy"><a href="#57，easy" class="headerlink" title="57，easy"></a>57，easy</h2><h3 id="和为s的两个数字"><a href="#和为s的两个数字" class="headerlink" title="和为s的两个数字"></a>和为s的两个数字</h3><p>输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [2,7,11,15], target &#x3D; 9</span><br><span class="line">输出：[2,7] 或者 [7,2]</span><br></pre></td></tr></table></figure>
+
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [10,26,30,31,47,60], target &#x3D; 40</span><br><span class="line">输出：[10,30] 或者 [30,10]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>方法一：左右双指针。</p>
+<ul>
+<li>如果两指针指向数字和 = target，返回这个数字构成的数组。</li>
+<li>​         …                            &lt;     ….  ，left 向右移。</li>
+<li>​         …                            &gt;     ….  ，right 向左移。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>; <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(nums[left] &gt;= target) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">while</span>(nums[right] &gt; target)&#123;</span><br><span class="line">         right--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[left] + nums[right] == target) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;nums[left], nums[right]&#125;;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(nums[left] + nums[right] &gt; target) right--;</span><br><span class="line">        <span class="keyword">else</span> left++;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>注意：</strong> 数组遍历都可以用双指针想一想</p>
+<p>​            双指针固定套路：<code>while(left &lt; right)</code></p>
+<p>​            if判断中先判断 == 再判断 &lt; , &gt;，有助于减少运行时间</p>
+<ul>
+<li><p>方法二：利用set的不可重复性，遍历数组将数组元素添加到set，如果set包含target - i，则返回两个元素构成的数组。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">	Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i : nums) &#123;</span><br><span class="line">         set.add(i);</span><br><span class="line">         <span class="keyword">if</span> (set.contains(target - i)) &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, target - i&#125;;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>

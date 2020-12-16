@@ -193,20 +193,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -245,7 +245,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/28/Java-Scanner%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94BST%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%A5%97%E8%B7%AF%E6%A8%A1%E6%9D%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
@@ -259,7 +259,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/28/Java-Scanner%E7%B1%BB/" class="post-title-link" itemprop="url">Java-Scanner类</a>
+            <a href="/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94BST%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%A5%97%E8%B7%AF%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">LeetCode刷题—BST树的基础操作及套路模板</a>
         </h2>
 
         <div class="post-meta-container">
@@ -271,7 +271,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-11-28 21:00:06 / 修改时间：21:07:42" itemprop="dateCreated datePublished" datetime="2020-11-28T21:00:06+08:00">2020-11-28</time>
+      <time title="创建时间：2020-12-16 19:42:21 / 修改时间：19:43:14" itemprop="dateCreated datePublished" datetime="2020-12-16T19:42:21+08:00">2020-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,7 +279,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java-SE/" itemprop="url" rel="index"><span itemprop="name">Java SE</span></a>
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
         </span>
     </span>
 
@@ -293,16 +293,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Java-Scanner类"><a href="#Java-Scanner类" class="headerlink" title="Java Scanner类"></a>Java Scanner类</h2><ul>
-<li><p>用于获取用户输入<br>语法：</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可通过调用下列函数<code>nextDouble()</code>，<code>nextFloat</code>，<code>nextInt()</code>，<code>nextLine()</code>，<code>nextLong()</code>，<code>nextShot()</code>读取用户在命令行输入的各种数据类型　</p>
-</li>
-<li><p>next()与nextLine()区别：</p>
+          <p>本文针对BST 的基础操作：判断 BST 的合法性（<em>98</em>）、增（<em>701</em>）、删（<em>450</em>）、查（<em>700</em>）。以几道题来总结出套路模板，以一敌十！<br><a href="#98%EF%BC%8C%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%8Cmedium">98，验证二叉搜索树，medium</a><br><a href="#700%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2%EF%BC%8Ceasy">700，二叉搜索树中的搜索，easy</a><br><a href="#701%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C%EF%BC%8Cmedium">701，二叉搜索树中的插入操作，medium</a><br><a href="#450%EF%BC%8C%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Cmedium">450，删除二叉搜索树中的节点，medium</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/28/Java-Scanner%E7%B1%BB/#more" rel="contents">
+              <a class="btn" href="/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94BST%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%A5%97%E8%B7%AF%E6%A8%A1%E6%9D%BF/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -335,7 +329,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/26/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%80%92%E5%BD%92%E8%A7%A3%E5%86%B3%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
@@ -349,7 +343,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/26/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">Java动态代理</a>
+            <a href="/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%80%92%E5%BD%92%E8%A7%A3%E5%86%B3%E6%A0%91/" class="post-title-link" itemprop="url">LeetCode刷题—递归解决树</a>
         </h2>
 
         <div class="post-meta-container">
@@ -361,7 +355,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-11-26 15:40:03 / 修改时间：15:47:27" itemprop="dateCreated datePublished" datetime="2020-11-26T15:40:03+08:00">2020-11-26</time>
+      <time title="创建时间：2020-12-16 19:34:12 / 修改时间：19:34:43" itemprop="dateCreated datePublished" datetime="2020-12-16T19:34:12+08:00">2020-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -369,7 +363,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
         </span>
     </span>
 
@@ -383,13 +377,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Java动态代理"><a href="#Java动态代理" class="headerlink" title="Java动态代理"></a>Java动态代理</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>因为在学习Spring AOP，其中用到了Java动态代理机制，所以好好把动态代理模式梳理了一遍。</p>
-<h2 id="代理设计模式"><a href="#代理设计模式" class="headerlink" title="代理设计模式"></a>代理设计模式</h2><ul>
-<li>原理：给某一个对象提供一个代理，并由代理对象控制对原对象的引用。</li>
-</ul>
+          <p>对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题：<br><a href="#104%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6%EF%BC%8Ceasy">104，二叉树的最大深度，easy</a></p>
+<p><a href="#110%EF%BC%8C%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">110，平衡二叉树，easy</a></p>
+<p><a href="#543%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%EF%BC%8Ceasy">543，二叉树的直径，easy</a></p>
+<p><a href="#226%EF%BC%8C%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">226，翻转二叉树，easy</a></p>
+<p><a href="#617%EF%BC%8C%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">617，合并二叉树，easy</a></p>
+<p><a href="#112%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%EF%BC%8Ceasy">112，路径总和，easy</a></p>
+<p><a href="#113%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%E2%85%A1%EF%BC%8Cmidium">113，路径总和Ⅱ，midium</a></p>
+<p><a href="#572%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91%EF%BC%8Ceasy">572，另一个树的子树，easy</a></p>
+<p><a href="#101%EF%BC%8C%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">101，对称二叉树，easy</a></p>
+<p><a href="#111%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6%EF%BC%8Ceasy">111，二叉树的最小深度，easy</a></p>
+<p><a href="#404%EF%BC%8C%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C%EF%BC%8Ceasy">404，左叶子之和，easy</a></p>
+<p><a href="#687%EF%BC%8C%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84%EF%BC%8Cmedium">687，最长同值路径，medium</a></p>
+<p><a href="#671%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Ceasy">671，二叉树中第二小的节点，easy</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/26/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/#more" rel="contents">
+              <a class="btn" href="/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%80%92%E5%BD%92%E8%A7%A3%E5%86%B3%E6%A0%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -422,7 +425,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/16/BST%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%A5%97%E8%B7%AF%E6%A8%A1%E6%9D%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
@@ -436,7 +439,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">Java-MySQL学生管理系统</a>
+            <a href="/2020/12/16/BST%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%A5%97%E8%B7%AF%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">BST树的基础操作及套路模板</a>
         </h2>
 
         <div class="post-meta-container">
@@ -448,7 +451,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-11-19 13:55:37 / 修改时间：16:25:40" itemprop="dateCreated datePublished" datetime="2020-11-19T13:55:37+08:00">2020-11-19</time>
+      <time title="创建时间：2020-12-16 19:23:17 / 修改时间：19:26:58" itemprop="dateCreated datePublished" datetime="2020-12-16T19:23:17+08:00">2020-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -456,7 +459,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java-Mysql/" itemprop="url" rel="index"><span itemprop="name">Java Mysql</span></a>
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
         </span>
     </span>
 
@@ -470,16 +473,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Java-MySQL学生管理系统"><a href="#Java-MySQL学生管理系统" class="headerlink" title="Java+MySQL学生管理系统"></a>Java+MySQL学生管理系统</h1><p>源码：<a target="_blank" rel="noopener" href="https://github.com/ruiwang-97/StudentManagement.git">https://github.com/ruiwang-97/StudentManagement.git</a></p>
-<p><a href="%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90">需求分析</a></p>
-<p><a href="%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF">设计思路</a></p>
-<p><a href="%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0">具体实现</a></p>
-<p><a href="%E6%B5%8B%E8%AF%95%E6%95%88%E6%9E%9C">测试效果</a></p>
-<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>这是一个学生管理系统，以管理员身份登录，实现对学员以及年级信息的增删改查操作。</p>
-<p>具体需要实现的功能有：</p>
+          <p>本文针对BST 的基础操作：判断 BST 的合法性（98）、增（701）、删（450）、查（700）。以几道题来总结出套路模板，以一敌十！<br><a href="#98%EF%BC%8C%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%8Cmedium">98，验证二叉搜索树，medium</a><br><a href="#700%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2%EF%BC%8Ceasy">700，二叉搜索树中的搜索，easy</a><br><a href="#701%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C%EF%BC%8Cmedium">701，二叉搜索树中的插入操作，medium</a><br><a href="#450%EF%BC%8C%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Cmedium">450，删除二叉搜索树中的节点，medium</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#more" rel="contents">
+              <a class="btn" href="/2020/12/16/BST%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%A5%97%E8%B7%AF%E6%A8%A1%E6%9D%BF/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -512,7 +509,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/16/Hexo%E6%94%BB%E7%95%A5-%E5%8E%BB%E9%99%A4%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8F%B7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
@@ -526,7 +523,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/16/Hexo%E6%94%BB%E7%95%A5-%E5%8E%BB%E9%99%A4%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8F%B7/" class="post-title-link" itemprop="url">Hexo攻略-去除代码块的行序列号</a>
+            <a href="/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">LeetCode刷题—链表</a>
         </h2>
 
         <div class="post-meta-container">
@@ -538,7 +535,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-11-16 19:39:24 / 修改时间：19:41:44" itemprop="dateCreated datePublished" datetime="2020-11-16T19:39:24+08:00">2020-11-16</time>
+      <time title="创建时间：2020-12-08 17:12:00 / 修改时间：17:15:05" itemprop="dateCreated datePublished" datetime="2020-12-08T17:12:00+08:00">2020-12-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -546,7 +543,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Hexo%E6%94%BB%E7%95%A5/" itemprop="url" rel="index"><span itemprop="name">Hexo攻略</span></a>
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
         </span>
     </span>
 
@@ -560,10 +557,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Hexo攻略—去除代码块的行序列号"><a href="#Hexo攻略—去除代码块的行序列号" class="headerlink" title="Hexo攻略—去除代码块的行序列号"></a>Hexo攻略—去除代码块的行序列号</h1><p>Hexo博客Next主题默认的代码块是标有行序列号的，看代码时会有些干扰，怎么将它去除呢？</p>
+          <h1 id="LeetCode刷题"><a href="#LeetCode刷题" class="headerlink" title="LeetCode刷题"></a>LeetCode刷题</h1><h2 id="数据结构："><a href="#数据结构：" class="headerlink" title="数据结构："></a>数据结构：</h2><h3 id="一、链表"><a href="#一、链表" class="headerlink" title="一、链表"></a>一、链表</h3><p><a href="#160%EF%BC%8C%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8%EF%BC%8Ceasy">160，相交链表，easy</a></p>
+<p><a href="#206%EF%BC%8C%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%EF%BC%8Ceasy">206，反转链表，easy</a></p>
+<p><a href="#21%EF%BC%8C%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%EF%BC%8Ceasy">21，合并两个有序链表，easy</a></p>
+<p><a href="#83%EF%BC%8C%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%EF%BC%8Ceasy">83，删除排序链表中的重复元素，easy</a></p>
+<p><a href="#83-%E2%85%A1.%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%EF%BC%8Cmiddle">83-Ⅱ.删除排序链表中的重复元素，middle</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/16/Hexo%E6%94%BB%E7%95%A5-%E5%8E%BB%E9%99%A4%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8F%B7/#more" rel="contents">
+              <a class="btn" href="/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -596,7 +597,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/16/%E4%BB%8EJDBCUtils%E7%9C%8B%E4%BB%A3%E7%A0%81%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/typora%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
@@ -610,7 +611,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/16/%E4%BB%8EJDBCUtils%E7%9C%8B%E4%BB%A3%E7%A0%81%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/" class="post-title-link" itemprop="url">从JDBCUtils看代码简洁之道</a>
+            <a href="/2020/12/01/typora%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5/" class="post-title-link" itemprop="url">typora使用攻略</a>
         </h2>
 
         <div class="post-meta-container">
@@ -622,16 +623,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-11-16 15:05:27 / 修改时间：15:09:34" itemprop="dateCreated datePublished" datetime="2020-11-16T15:05:27+08:00">2020-11-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-        </span>
+      <time title="创建时间：2020-12-01 19:43:41 / 修改时间：19:50:42" itemprop="dateCreated datePublished" datetime="2020-12-01T19:43:41+08:00">2020-12-01</time>
     </span>
 
   
@@ -644,15 +636,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="从JDBCUtils看代码简介之道"><a href="#从JDBCUtils看代码简介之道" class="headerlink" title="从JDBCUtils看代码简介之道"></a>从JDBCUtils看代码简介之道</h1><h3 id="使用PreparedStatement实现增删改查"><a href="#使用PreparedStatement实现增删改查" class="headerlink" title="使用PreparedStatement实现增删改查"></a>使用PreparedStatement实现增删改查</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/16/%E4%BB%8EJDBCUtils%E7%9C%8B%E4%BB%A3%E7%A0%81%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>一、内部跳转</p>
+<p>想在文章开头使用链接直接跳转到指定标题，可以使用快捷键 <code>Ctrl + K</code> 创建内部链接，并在<code>[]</code>中填写链接内容，<code>()</code>中的格式为 <code>#要跳转到的标题</code> 。</p>
+<p>效果如图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201201194926993.png" alt="img"></p>
+<p>然后按住Ctrl，点击链接，即跳转到想看的标题了。</p>
+
       
     </div>
 
@@ -675,7 +664,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
