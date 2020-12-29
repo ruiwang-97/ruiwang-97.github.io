@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="跟着 labuladong 和 CS-Notes 对动态规划做题、总结，形成自己的模板。 引入动态规划动态规划问题的一般形式就是求最值。求解动态规划的核心问题是穷举。 首先，动态规划的穷举有点特别，因为这类问题存在「重叠子问题」，如果暴力穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。 而且，动态规划问题一定会具备「最优子结构」，才能通过子问题的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode刷题—动态规划（一）">
+<meta property="og:url" content="http://example.com/2020/12/29/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Rui">
+<meta property="og:description" content="跟着 labuladong 和 CS-Notes 对动态规划做题、总结，形成自己的模板。 引入动态规划动态规划问题的一般形式就是求最值。求解动态规划的核心问题是穷举。 首先，动态规划的穷举有点特别，因为这类问题存在「重叠子问题」，如果暴力穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。 而且，动态规划问题一定会具备「最优子结构」，才能通过子问题的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223113149629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a627c1fa67c57265d1588257c847dbc5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223130552783.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223131417241.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223131424947.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020122313191830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223131928987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2020-12-29T12:45:03.000Z">
+<meta property="article:modified_time" content="2020-12-29T12:48:13.383Z">
+<meta property="article:author" content="Rui Wang">
+<meta property="article:tag" content="LeetCode刷题">
+<meta property="article:tag" content="动态规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201223113149629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+
+
+<link rel="canonical" href="http://example.com/2020/12/29/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LeetCode刷题—动态规划（一） | Rui</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+  
+  <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
+<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Rui</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text">引入动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">解题步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%B1%BB%E9%A2%98%E5%9E%8B%EF%BC%9A%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">第一类题型：斐波那契数列。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#509%EF%BC%8C%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%EF%BC%8Ceasy"><span class="nav-number">2.0.1.</span> <span class="nav-text">509，斐波那契数列，easy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#70%EF%BC%8C%E7%88%AC%E6%A5%BC%E6%A2%AF%EF%BC%8Ceasy"><span class="nav-number">2.0.2.</span> <span class="nav-text">70，爬楼梯，easy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#198%EF%BC%8C%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8Ceasy"><span class="nav-number">2.0.3.</span> <span class="nav-text">198，打家劫舍，easy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#213%EF%BC%8C%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E2%85%A1%EF%BC%8Cmedium"><span class="nav-number">2.0.4.</span> <span class="nav-text">213，打家劫舍Ⅱ，medium</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E4%BB%B6%E9%94%99%E6%8E%92%E9%97%AE%E9%A2%98"><span class="nav-number">2.0.5.</span> <span class="nav-text">信件错排问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%8D%E7%89%9B%E7%94%9F%E4%BA%A7"><span class="nav-number">2.0.6.</span> <span class="nav-text">母牛生产</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rui Wang"
+      src="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+  <p class="site-author-name" itemprop="name">Rui Wang</p>
+  <div class="site-description" itemprop="description">去摘遥不可及的星星</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/29/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode刷题—动态规划（一）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-29 20:45:03 / 修改时间：20:48:13" itemprop="dateCreated datePublished" datetime="2020-12-29T20:45:03+08:00">2020-12-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>跟着 labuladong 和 CS-Notes 对动态规划做题、总结，形成自己的模板。</p>
+<h2 id="引入动态规划"><a href="#引入动态规划" class="headerlink" title="引入动态规划"></a>引入动态规划</h2><p>动态规划问题的一般形式就是求最值。求解动态规划的核心问题是穷举。</p>
+<p>首先，动态规划的穷举有点特别，因为这类问题<strong>存在「重叠子问题」</strong>，如果暴力穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。</p>
+<p>而且，动态规划问题一定会<strong>具备「最优子结构」</strong>，才能通过子问题的最值得到原问题的最值。</p>
+<p>另外，虽然动态规划的核心思想就是穷举求最值，但是问题可以千变万化，穷举所有可行解其实并不是一件容易的事，只有列出<strong>正确的「状态转移方程」</strong>才能正确地穷举。</p>
+<h3 id="解题步骤："><a href="#解题步骤：" class="headerlink" title="解题步骤："></a>解题步骤：</h3><a id="more"></a>
+
+<ol>
+<li> 定义子问题<ol start="2">
+<li>写出子问题的递推关系</li>
+<li>确定 DP 数组的计算顺序（一般采用<strong>自底向上</strong>）</li>
+<li>空间优化（可选）<h2 id="第一类题型：斐波那契数列。"><a href="#第一类题型：斐波那契数列。" class="headerlink" title="第一类题型：斐波那契数列。"></a>第一类题型：斐波那契数列。</h2><a href="#509%EF%BC%8C%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%EF%BC%8Ceasy">509，斐波那契数列，easy</a></li>
+</ol>
+</li>
+</ol>
+<p><a href="#70%EF%BC%8C%E7%88%AC%E6%A5%BC%E6%A2%AF%EF%BC%8Ceasy">70，爬楼梯，easy</a></p>
+<p><a href="#198%EF%BC%8C%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8Ceasy">198，打家劫舍，easy</a></p>
+<p><a href="#213%EF%BC%8C%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E2%85%A1%EF%BC%8Cmedium">213，打家劫舍Ⅱ，medium</a></p>
+<p><a href="#%E4%BF%A1%E4%BB%B6%E9%94%99%E6%8E%92%E9%97%AE%E9%A2%98">信件错排问题</a></p>
+<p><a href="#%E6%AF%8D%E7%89%9B%E7%94%9F%E4%BA%A7">母牛生产</a><br>通过「斐波那契数列问题」明白什么是<strong>重叠子问题</strong>（斐波那契数列没有求最值，所以严格来说不是动态规划问题）。</p>
+<h4 id="509，斐波那契数列，easy"><a href="#509，斐波那契数列，easy" class="headerlink" title="509，斐波那契数列，easy"></a>509，斐波那契数列，easy</h4><p>斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">F(0) &#x3D; 0,   F(1) &#x3D; 1</span><br><span class="line">F(N) &#x3D; F(N - 1) + F(N - 2), 其中 N &gt; 1.</span><br></pre></td></tr></table></figure>
+
+
+<p>给定 N，计算 F(N)。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：2</span><br><span class="line">输出：1</span><br><span class="line">解释：F(2) &#x3D; F(1) + F(0) &#x3D; 1 + 0 &#x3D; 1.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>方法一：暴力递归。</p>
+<p>此解法最好理解，但效率不高，这是因为效率低，由下面的递归树不难发现<strong>存在大量重复计算</strong>，这就是动态规划问题的第一个性质：<strong>重叠子问题</strong>。<br><img src="https://img-blog.csdnimg.cn/20201223113149629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123; </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面，我们想办法解决这个问题。</p>
+</li>
+<li><p>方法二：带备忘录的自顶向下</p>
+<p>先<strong>计算存储子问题的答案，</strong>然后利用子问题的答案计算当前斐波那契数的答案。我们将递归计算，但是通过记忆化<strong>不重复计算</strong>已计算的值。</p>
+<p>可以用数组 或 HashMap 存储已计算过的值。</p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] memo = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n + <span class="number">1</span>; i++)&#123;</span><br><span class="line">            memo[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> helper(memo, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[] memo, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n &lt; <span class="number">2</span>) <span class="keyword">return</span> n;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//已经计算过则直接取出</span></span><br><span class="line">        <span class="keyword">if</span>(memo[n] != <span class="number">0</span>) <span class="keyword">return</span> memo[n];</span><br><span class="line">		<span class="comment">//没有计算过</span></span><br><span class="line">        memo[n] = helper(memo, n - <span class="number">1</span>) + helper(memo, n - <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> memo[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再次画出递归树。<br><img src="https://img-blog.csdnimg.cn/img_convert/a627c1fa67c57265d1588257c847dbc5.png" alt="img"><br>通过剪枝，极大减少了子问题（即递归图中节点）的个数。<br><img src="https://img-blog.csdnimg.cn/20201223130552783.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>方法三：迭代（自底向上）</p>
+<p>可以把这个「备忘录」独立出来成为一张表，发现计算index = n 的值只与前两个有关，则<strong>自底</strong> 建立前两个元素。</p>
+</li>
+<li><p>代码：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">       	<span class="keyword">int</span> first = <span class="number">0</span>;</span><br><span class="line">       	<span class="keyword">int</span> second = <span class="number">1</span>;</span><br><span class="line">       	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">       	<span class="keyword">while</span>(n-- &gt; <span class="number">0</span>)&#123;</span><br><span class="line">           	sum = first + second;</span><br><span class="line">           	first = second;</span><br><span class="line">           	second = sum;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> first;</span><br><span class="line">   	&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>  另一种：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123; </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">      	<span class="keyword">if</span>(n &lt; <span class="number">2</span>) <span class="keyword">return</span> n;</span><br><span class="line">      	<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">      	dp[<span class="number">0</span>] = <span class="number">0</span>; dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">      	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i++)&#123;</span><br><span class="line">         		dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>]; </span><br><span class="line">      	&#125;</span><br><span class="line">      <span class="keyword">return</span> dp[n];</span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="70，爬楼梯，easy"><a href="#70，爬楼梯，easy" class="headerlink" title="70，爬楼梯，easy"></a>70，爬楼梯，easy</h4></li>
+</ul>
+<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入： 2</span><br><span class="line">输出： 2</span><br><span class="line">解释： 有两种方法可以爬到楼顶。</span><br><span class="line">   1. 1 阶 + 1 阶</span><br><span class="line">   2. 2 阶</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入： 3</span><br><span class="line">输出： 3</span><br><span class="line">解释： 有三种方法可以爬到楼顶。</span><br><span class="line">   1.  1 阶 + 1 阶 + 1 阶</span><br><span class="line">   2.  1 阶 + 2 阶</span><br><span class="line">   3.  2 阶 + 1 阶</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>思路：</p>
+<ul>
+<li><p>我们用 f(x) 表示<strong>爬到第 xx 级台阶的方案数</strong>，考虑<strong>最后一步</strong>可能跨了<strong>一级</strong>台阶，也可能跨了两级台阶，所以我们可以列出如下式子：</p>
+<p>f(x) = f(x - 1) + f(x - 2)</p>
+<p>它意味着爬到第 x 级台阶的方案数是爬到<strong>第 x−1 级台阶的方案数</strong>和爬到<strong>第 x−2 级台阶的方案数</strong>的<strong>和</strong>。</p>
+</li>
+<li><p>与斐波那契数列的递推式相同，区别在于 f(0) = 1。</p>
+</li>
+<li><p>爬楼梯的过程自底向上。</p>
+</li>
+</ul>
+</li>
+<li><p>代码：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"><span class="comment">//f(n) = f(n - 1) + f(n - 2)</span></span><br><span class="line"><span class="comment">//1 1 2 3 5 8 ...</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">     	<span class="keyword">if</span>(n &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">     	<span class="keyword">int</span> first = <span class="number">1</span>;</span><br><span class="line">     	<span class="keyword">int</span> second = <span class="number">1</span>;</span><br><span class="line">    	 	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">     	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">         	sum = first + second;</span><br><span class="line">         	first = second;</span><br><span class="line">         	second = sum;</span><br><span class="line">    	 	&#125;</span><br><span class="line">     <span class="keyword">return</span> sum;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>  另一种：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(n &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    	<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">    	dp[<span class="number">0</span>] = <span class="number">1</span>;dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i++)&#123;</span><br><span class="line">        	dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">    	&#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面两道题可以很好的理解动态规划的重叠子问题，递推关系也很简单，下面通过具体例子理解解题步骤：</p>
+</li>
+<li><p>定义子问题</p>
+</li>
+<li><p>写出子问题的递推关系</p>
+</li>
+<li><p>确定 DP 数组的计算顺序</p>
+</li>
+<li><p>空间优化（可选）</p>
+<h4 id="198，打家劫舍，easy"><a href="#198，打家劫舍，easy" class="headerlink" title="198，打家劫舍，easy"></a>198，打家劫舍，easy</h4></li>
+</ul>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果<strong>两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</strong></p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：[1,2,3,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：偷窃 1 号房屋 (金额 &#x3D; 1) ，然后偷窃 3 号房屋 (金额 &#x3D; 3)。</span><br><span class="line">     偷窃到的最高金额 &#x3D; 1 + 3 &#x3D; 4 。</span><br></pre></td></tr></table></figure>
+
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：[2,7,9,3,1]</span><br><span class="line">输出：12</span><br><span class="line">解释：偷窃 1 号房屋 (金额 &#x3D; 2), 偷窃 3 号房屋 (金额 &#x3D; 9)，接着偷窃 5 号房屋 (金额 &#x3D; 1)。</span><br><span class="line">     偷窃到的最高金额 &#x3D; 2 + 9 + 1 &#x3D; 12 。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>解题步骤：</p>
+<ol>
+<li><p>定义子问题</p>
+<p>原问题是【全部房子偷到的最大金额】，子问题是【小偷到第 k 间房屋时偷到的最大金额】</p>
+<p>理解：</p>
+<p>子问题是<strong>参数化</strong>的，我们定义的子问题中有参数 k。假设一共有 n 个房子的话，就一共有 n 个子问题。动态规划实际上就是通过求这一堆子问题的解，来求出原问题的解。这要求子问题需要具备两个性质：</p>
+<ul>
+<li>原问题要能由子问题表示。例如这道小偷问题中，k=n 时实际上就是原问题。否则，解了半天子问题还是解不出原问题，那子问题岂不是白解了。</li>
+<li>一个子问题的解要能通过其他子问题的解求出。例如这道小偷问题中，f(k) 可以由 f(k−1) 和 f(k−2) 求出，具体原理后面会解释。这个性质就是教科书中所说的“最优子结构”。如果定义不出这样的子问题，那么这道题实际上没法用动态规划解。</li>
+</ul>
+</li>
+<li><p>子问题递推关系</p>
+<ul>
+<li><p>base case</p>
+<p>首先考虑最简单的情况。</p>
+<p>1). 只有一间房屋，则偷窃的最高金额为此房屋的金额</p>
+<p>2). 只有两间房屋，不能挨着偷，选择金额较高的房屋偷。</p>
+<p>用 $dp[k]$ 表示前 k 间房屋能偷窃到的最高总金额</p>
+<p>$dp[0] = nums[0]$</p>
+<p>$dp[1] = max(nums[0],nums[1])$</p>
+</li>
+<li><p>状态转移方程</p>
+<p>房屋数量大于两间，对第 k (k &gt; 2) 间房屋，有两个选择</p>
+<p>1). 偷第 k 间，那么就不能偷第 k - 1 间，偷窃总金额为 前 k - 2 间房屋的最高金额 与 第 k 间房屋金额 之和。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201223131417241.png#pic_center" alt="在这里插入图片描述"></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>​                     2). 不偷第 k 间，偷窃总金额为 前 k - 1 间房屋的最高金额。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201223131424947.png#pic_center" alt="在这里插入图片描述"></p>
+<p>​                  在两个选项中选择最大的一项即为答案。</p>
+<p>​                   那么就有如下的状态转移方程：</p>
+<p>​                   $dp[k] = max(dp[k - 1],dp[k - 2] + nums[k])$</p>
+<p>​          3.   确定 DP 数组的计算顺序</p>
+<p> 动态规划有两种计算顺序，一种是自顶向下的、使用备忘录的递归方法，一种是自底向上的、使用 dp 数组的循环方法。不过在普通的动态规划题目中，99% 的情况我们都不需要用到备忘录方法，所以我们最好坚持用<strong>自底向上的 dp 数组</strong>。</p>
+<p>此题中 $dp[k]$ 依赖 $dp[k-1]$  和 $dp[k-2]$，采用自底向上。</p>
+<ul>
+<li>代码：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">       	<span class="keyword">int</span> n = nums.length;</span><br><span class="line">       	<span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       	<span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">       	<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n]; </span><br><span class="line">       	<span class="comment">//base case</span></span><br><span class="line">       	dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">       	dp[<span class="number">1</span>] = Math.max(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">       	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i++)&#123;</span><br><span class="line">          		dp[i] = Math.max(dp[i - <span class="number">1</span>], nums[i] + dp[i - <span class="number">2</span>]); </span><br><span class="line">       	&#125;</span><br><span class="line">       <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">   	&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="213，打家劫舍Ⅱ，medium"><a href="#213，打家劫舍Ⅱ，medium" class="headerlink" title="213，打家劫舍Ⅱ，medium"></a>213，打家劫舍Ⅱ，medium</h4><p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 <strong>围成一圈</strong> ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，<strong>如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。</strong></p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下 ，能够<strong>偷窃到的最高金额。</strong></p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [2,3,2]</span><br><span class="line">输出：3</span><br><span class="line">解释：你不能先偷窃 1 号房屋（金额 &#x3D; 2），然后偷窃 3 号房屋（金额 &#x3D; 2）, 因为他们是相邻的。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>思路：</p>
+<ul>
+<li><p>与上一题的区别在于所有房屋相连，即 第一间房屋 和 最后一间房屋 不能同时偷窃。</p>
+<p>可简化为两个单排列问题：</p>
+<ol>
+<li><p>不偷第一间房屋，偷窃金额的最大值由从 第二间房（nums[1]）到 最后一间房（nums[n - 1]）的数组来确定。</p>
+</li>
+<li><p>不偷最后一间房屋，偷窃金额的最大值由从 第一间房（nums[0]）到 倒数第二间房（nums[n - 2]）的数组来确定。</p>
+<p> 再由上面两种情况得到的结果取最大值。</p>
+</li>
+</ol>
+</li>
+<li><p>由上题思路，只需在主函数 构造两个新的数组 进行 动态规划，再取最大值即为最后结果。</p>
+</li>
+<li><p>主函数的边界条件：</p>
+<p><code>nums.length = 0 </code> 返回 0</p>
+<p><code>nums.length = 1 </code> 返回 nums[0]</p>
+</li>
+</ul>
+</li>
+<li><p>代码：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">   	<span class="keyword">int</span> n;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">       	n = nums.length;</span><br><span class="line">       	<span class="keyword">if</span>(n &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       	<span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">       </span><br><span class="line">       	<span class="comment">//不偷 第一间</span></span><br><span class="line">       	<span class="keyword">int</span>[] nums1 = <span class="keyword">new</span> <span class="keyword">int</span>[n - <span class="number">1</span>];</span><br><span class="line">       	<span class="comment">//不偷 最后一间</span></span><br><span class="line">       	<span class="keyword">int</span>[] nums2 = <span class="keyword">new</span> <span class="keyword">int</span>[n - <span class="number">1</span>];</span><br><span class="line">       	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)&#123;</span><br><span class="line">           	nums1[i] = nums[i + <span class="number">1</span>];</span><br><span class="line">           	nums2[i] = nums[i];</span><br><span class="line">       	&#125;</span><br><span class="line">       <span class="keyword">return</span> Math.max(rob_init(nums1), rob_init(nums2));</span><br><span class="line">   	&#125;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob_init</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">       	n = nums.length;</span><br><span class="line">       	<span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       	<span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">       	<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n]; </span><br><span class="line">       	<span class="comment">//base case</span></span><br><span class="line">      	 	dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">       	dp[<span class="number">1</span>] = Math.max(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">       	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i++)&#123;</span><br><span class="line">          		dp[i] = Math.max(dp[i - <span class="number">1</span>], nums[i] + dp[i - <span class="number">2</span>]); </span><br><span class="line">       	&#125;</span><br><span class="line">       <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">   	&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="信件错排问题"><a href="#信件错排问题" class="headerlink" title="信件错排问题"></a>信件错排问题</h4></li>
+</ul>
+<p>有 N 个 信 和 信封，它们被打乱，求错误装信方式的数量。</p>
+<p>示例1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：N &#x3D; 2</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p>示例2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：N &#x3D; 3</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
+<p>示例3：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：N &#x3D; 4</span><br><span class="line">输出：9</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>思路：</p>
+<ol>
+<li><p>定义子问题</p>
+<p>原问题是【N 个信和信封的错装方式数量】，子问题是【第 i 个信和信封的错装方式数量】</p>
+</li>
+<li><p>子问题递推关系</p>
+<ul>
+<li><p>base case</p>
+<p>首先考虑最简单的情况。用 $dp[k]$ 表示前 i 个信和信封的错装方式数量。</p>
+<p>1). N = 0，数量为 0 =&gt;  $dp[0] = 0$</p>
+<p>2). N = 1，数量为 0 =&gt;  $dp[1] = 0$</p>
+<p>3). N = 2，数量为 1 =&gt;  $dp[2] = 1$</p>
+</li>
+<li><p>状态转移方程</p>
+<p>i &gt; 2 时，信封错装方式有两种可能。</p>
+<p>1). 对信件 i 和 信件 j，如果 信件 i 装入信封 j，信件 j 装入信封 i，i 、j 互换后正确。其余 i - 2 个信件装错的数量为 $dp[i - 2]$，j 的选择有$ (i - 1)$ 种。此情况的错装方式数量为 $(i - 1) * dp[i - 2]$<br> <img src="https://img-blog.csdnimg.cn/2020122313191830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>2). 对信件 i 和 信件 j，如果 信件 i 装入信封 j，信件 j 装入信封 k，i 、j 互换后只有 j 正确。其余 i - 1 个信件装错的数量为 $dp[i - 1]$，j 的选择有$ (i - 1)$ 种。此情况的错装方式数量为 $(i - 1) * dp[i - 1]$<br><img src="https://img-blog.csdnimg.cn/20201223131928987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code>   那么就有如下的状态转移方程：
+
+   $dp[i] = (i - 1) * (dp[i - 1] + dp[i - 2])$</code></pre>
+<ul>
+<li>代码：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">MailerrorNums</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">       	<span class="keyword">if</span>(n == <span class="number">0</span> || n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       </span><br><span class="line">       	<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">       	dp[<span class="number">0</span>] = <span class="number">0</span>; dp[<span class="number">1</span>] = <span class="number">0</span>; dp[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">       	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt; n + <span class="number">1</span>; i++)&#123;</span><br><span class="line">           	dp[i] = (i - <span class="number">1</span>) * dp[i - <span class="number">2</span>] + (i - <span class="number">1</span>) * dp[i - <span class="number">1</span>];</span><br><span class="line">       	&#125;</span><br><span class="line">       <span class="keyword">return</span> dp[n];</span><br><span class="line">   	&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="母牛生产"><a href="#母牛生产" class="headerlink" title="母牛生产"></a>母牛生产</h4></li>
+</ul>
+<p> 假设农场中成熟的母牛每年都会生 1 头小母牛，并且永远不会死。第一年有 1 只小母牛，从第二年开始，母牛开始生小母牛。每只小母牛 3 年之后成熟又可以生小母牛。给定整数 N，求 N 年后牛的数量。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：N &#x3D; 1</span><br><span class="line">输出：1 </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：N &#x3D; 2</span><br><span class="line">输出：2 </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：N &#x3D; 3</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：N &#x3D; 4</span><br><span class="line">输出：4 </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>思路：</p>
+<ol>
+<li><p>定义子问题</p>
+<p>原问题为【N 年后牛的数量】，子问题是【第 i 年的牛数量】</p>
+</li>
+<li><p>子问题递推关系</p>
+<ul>
+<li><p>base case</p>
+<p>i &lt;= 4 时，只有 第一头母牛 和 它生的小母牛。设 $dp[i]$ 为 第 i 年的牛数量。</p>
+<p>$dp[0] = 0$、$dp[1] = 1$、$dp[2] = 2$、$dp[3] = 3$</p>
+</li>
+<li><p>状态转移方程</p>
+<p>i &gt; 4 时，第一头母牛 生产的小母牛 也开始生产。此时 牛的数量为 上一年牛的数量 $dp[i - 1]$ 加上 三年前牛的数量（即 第 i 年有生产能力的牛 的数量）$dp[i - 3]$，即</p>
+<p>$dp[i] = dp[i - 1] + dp[i - 3]$</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>代码：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cowNums</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">       	<span class="keyword">if</span>(n &lt; = <span class="number">4</span>) <span class="keyword">return</span> n;</span><br><span class="line">       	<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">       	dp[<span class="number">0</span>] = <span class="number">0</span>; dp[<span class="number">1</span>] = <span class="number">1</span>; dp[<span class="number">2</span>] = <span class="number">2</span>; dp[<span class="number">3</span>] = <span class="number">3</span>; dp[<span class="number">4</span>] = <span class="number">4</span></span><br><span class="line">       	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">5</span>; i &lt; n + <span class="number">1</span>; i++)&#123;</span><br><span class="line">           	dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">3</span>];</span><br><span class="line">       	&#125;</span><br><span class="line">       <span class="keyword">return</span> dp[n];</span><br><span class="line">   	&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+	
+	
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
+      </div>
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LeetCode%E5%88%B7%E9%A2%98/" rel="tag"># LeetCode刷题</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/12/29/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="LeetCode刷题—动态规划（二）">
+                  <i class="fa fa-chevron-left"></i> LeetCode刷题—动态规划（二）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rui Wang</span>
+</div>
+
+<!---->
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i>
+  <span id="busuanzi_container_site_uv">
+    本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+  </span>
+  <span id="busuanzi_container_site_pv">
+      &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  </div>
+  </div>
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
