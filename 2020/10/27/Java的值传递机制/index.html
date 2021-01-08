@@ -99,7 +99,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -199,7 +203,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -301,23 +305,20 @@
     <div class="post-body" itemprop="articleBody">
         <p><strong>Java中方法的值传递方式只有一种：值传递。</strong></p>
 <a id="more"></a>
-
 <p>值传递机制：</p>
 <ul>
 <li>如果参数是基本数据类型，此时实参赋给形参的是<strong>实参真实存储的数据值</strong>。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> a=<span class="number">10</span>,b=<span class="number">20</span>;</span><br><span class="line">     System.out.println(<span class="string">&quot;排序前：&quot;</span>+<span class="string">&quot;a=&quot;</span>+a+<span class="string">&quot;,b=&quot;</span>+b);</span><br><span class="line">     valueTransferTest t=<span class="keyword">new</span> valueTransferTest();</span><br><span class="line">     t.swap(a,b);</span><br><span class="line">     System.out.println(<span class="string">&quot;排序后：&quot;</span>+<span class="string">&quot;a=&quot;</span>+a+<span class="string">&quot;,b=&quot;</span>+b);<span class="comment">//a = 10,b = 20</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> m,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> temp=m;</span><br><span class="line">     m=n;</span><br><span class="line">     n=temp;</span><br><span class="line">     <span class="comment">// System.out.println(&quot;m=&quot;+m+&quot;,n=&quot;+n);//m = 20, n = 10</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>实参a,b将值传给形参，排序后a,b的值未发生改变，对实参值没有影响。</p>
 <p>内存中</p>
-<p><img src="/images/image_1.jpg"></p>
+<p><img src="/images/image_1.jpg" /></p>
 <ul>
 <li>如果参数是引用数据类型，此时实参赋给形参的是<strong>实参存储数据的地址值</strong>。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> m;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	 Data data = <span class="keyword">new</span> Data();</span><br><span class="line">		</span><br><span class="line">	 data.m = <span class="number">10</span>; data.n = <span class="number">20</span>;</span><br><span class="line">		</span><br><span class="line">	 System.out.println(<span class="string">&quot;m = &quot;</span> + data.m + <span class="string">&quot;, n = &quot;</span> + data.n);<span class="comment">//m = 10, n = 20</span></span><br><span class="line">	 swap(data);</span><br><span class="line">     System.out.println(<span class="string">&quot;m = &quot;</span> + data.m + <span class="string">&quot;, n = &quot;</span> + data.n);<span class="comment">//m = 20, n = 10</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Data data)</span></span>&#123;</span><br><span class="line">	 <span class="keyword">int</span> temp = data.m;</span><br><span class="line">	 data.m = data.n;</span><br><span class="line">	 data.n = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>内存中显示</p>
-<p><img src="/images/image_2.jpg"></p>
+<p><img src="/images/image_2.jpg" /></p>
 <p>参数保存的是实际对象的地址值，改变的只是地址值指向的堆内存中的实际对象，<strong>并没有真正改变参数</strong>，<strong>参数的地址值没有变</strong>。</p>
 
     </div>
@@ -454,6 +455,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

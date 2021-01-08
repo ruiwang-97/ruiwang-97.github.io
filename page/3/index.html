@@ -93,7 +93,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -193,7 +197,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -245,6 +249,97 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">LeetCode刷题—链表</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-08 17:12:00 / 修改时间：17:15:05" itemprop="dateCreated datePublished" datetime="2020-12-08T17:12:00+08:00">2020-12-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="leetcode刷题">LeetCode刷题</h1>
+<h2 id="数据结构">数据结构：</h2>
+<h3 id="一链表">一、链表</h3>
+<p><a href="#160，相交链表，easy">160，相交链表，easy</a></p>
+<p><a href="#206，反转链表，easy">206，反转链表，easy</a></p>
+<p><a href="#21，合并两个有序链表，easy">21，合并两个有序链表，easy</a></p>
+<p><a href="#83，删除排序链表中的重复元素，easy">83，删除排序链表中的重复元素，easy</a></p>
+<p><a href="#83-Ⅱ.删除排序链表中的重复元素，middle">83-Ⅱ.删除排序链表中的重复元素，middle</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/typora%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,7 +382,9 @@
           <p>一、内部跳转</p>
 <p>想在文章开头使用链接直接跳转到指定标题，可以使用快捷键 <code>Ctrl + K</code> 创建内部链接，并在<code>[]</code>中填写链接内容，<code>()</code>中的格式为 <code>#要跳转到的标题</code> 。</p>
 <p>效果如图：</p>
-<p><img src="https://img-blog.csdnimg.cn/20201201194926993.png" alt="img"></p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20201201194926993.png" alt="img" /><figcaption>img</figcaption>
+</figure>
 <p>然后按住Ctrl，点击链接，即跳转到想看的标题了。</p>
 
       
@@ -365,7 +462,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="2020真题"><a href="#2020真题" class="headerlink" title="2020真题"></a>2020真题</h2><h4 id="16题：1-N整数中所有立方值的平方根为整数的数的个数"><a href="#16题：1-N整数中所有立方值的平方根为整数的数的个数" class="headerlink" title="16题：1-N整数中所有立方值的平方根为整数的数的个数"></a>16题：1-N整数中所有立方值的平方根为整数的数的个数</h4>
+          <h2 id="真题">2020真题</h2>
+<h4 id="题1-n整数中所有立方值的平方根为整数的数的个数">16题：1-N整数中所有立方值的平方根为整数的数的个数</h4>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/11/30/%E5%85%A8%E5%9B%BD%E9%AB%98%E6%A0%A1%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%BD%E5%8A%9B%E6%8C%91%E6%88%98%E8%B5%9B/#more" rel="contents">
@@ -449,13 +547,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Java-Scanner类"><a href="#Java-Scanner类" class="headerlink" title="Java Scanner类"></a>Java Scanner类</h2><ul>
-<li><p>用于获取用户输入<br>语法：</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可通过调用下列函数<code>nextDouble()</code>，<code>nextFloat</code>，<code>nextInt()</code>，<code>nextLine()</code>，<code>nextLong()</code>，<code>nextShot()</code>读取用户在命令行输入的各种数据类型　</p>
-</li>
+          <h2 id="java-scanner类">Java Scanner类</h2>
+<ul>
+<li><p>用于获取用户输入 语法：</p>
+<p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure></p></li>
+<li><p>可通过调用下列函数<code>nextDouble()</code>，<code>nextFloat</code>，<code>nextInt()</code>，<code>nextLine()</code>，<code>nextLong()</code>，<code>nextShot()</code>读取用户在命令行输入的各种数据类型　</p></li>
 <li><p>next()与nextLine()区别：</p>
+<p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/11/28/Java-Scanner%E7%B1%BB/#more" rel="contents">
@@ -539,103 +637,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Java动态代理"><a href="#Java动态代理" class="headerlink" title="Java动态代理"></a>Java动态代理</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>因为在学习Spring AOP，其中用到了Java动态代理机制，所以好好把动态代理模式梳理了一遍。</p>
-<h2 id="代理设计模式"><a href="#代理设计模式" class="headerlink" title="代理设计模式"></a>代理设计模式</h2><ul>
+          <h1 id="java动态代理">Java动态代理</h1>
+<h2 id="引言">引言</h2>
+<p>因为在学习Spring AOP，其中用到了Java动态代理机制，所以好好把动态代理模式梳理了一遍。</p>
+<h2 id="代理设计模式">代理设计模式</h2>
+<ul>
 <li>原理：给某一个对象提供一个代理，并由代理对象控制对原对象的引用。</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/11/26/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
-      <meta itemprop="name" content="Rui Wang">
-      <meta itemprop="description" content="去摘遥不可及的星星">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rui">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">Java-MySQL学生管理系统</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-19 13:55:37 / 修改时间：16:25:40" itemprop="dateCreated datePublished" datetime="2020-11-19T13:55:37+08:00">2020-11-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java-Mysql/" itemprop="url" rel="index"><span itemprop="name">Java Mysql</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Java-MySQL学生管理系统"><a href="#Java-MySQL学生管理系统" class="headerlink" title="Java+MySQL学生管理系统"></a>Java+MySQL学生管理系统</h1><p>源码：<a target="_blank" rel="noopener" href="https://github.com/ruiwang-97/StudentManagement.git">https://github.com/ruiwang-97/StudentManagement.git</a></p>
-<p><a href="%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90">需求分析</a></p>
-<p><a href="%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF">设计思路</a></p>
-<p><a href="%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0">具体实现</a></p>
-<p><a href="%E6%B5%8B%E8%AF%95%E6%95%88%E6%9E%9C">测试效果</a></p>
-<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>这是一个学生管理系统，以管理员身份登录，实现对学员以及年级信息的增删改查操作。</p>
-<p>具体需要实现的功能有：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/19/Java-MySQL%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -759,6 +770,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

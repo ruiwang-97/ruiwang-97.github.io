@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="从JDBCUtils看代码简介之道使用PreparedStatement实现增删改查">
+  <meta name="description" content="从JDBCUtils看代码简介之道 使用PreparedStatement实现增删改查">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从JDBCUtils看代码简洁之道">
 <meta property="og:url" content="http://example.com/2020/11/16/%E4%BB%8EJDBCUtils%E7%9C%8B%E4%BB%A3%E7%A0%81%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="从JDBCUtils看代码简介之道使用PreparedStatement实现增删改查">
+<meta property="og:description" content="从JDBCUtils看代码简介之道 使用PreparedStatement实现增删改查">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/2020.11.16/1.png">
 <meta property="og:image" content="http://example.com/images/2020.11.16/2.png">
@@ -99,7 +99,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -184,7 +188,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8EJDBCUtils%E7%9C%8B%E4%BB%A3%E7%A0%81%E7%AE%80%E4%BB%8B%E4%B9%8B%E9%81%93"><span class="nav-number">1.</span> <span class="nav-text">从JDBCUtils看代码简介之道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8PreparedStatement%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="nav-number">1.0.1.</span> <span class="nav-text">使用PreparedStatement实现增删改查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E7%B1%BBJDBCUtils"><span class="nav-number">1.0.2.</span> <span class="nav-text">工具类JDBCUtils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E4%B9%8B%E5%90%8E"><span class="nav-number">1.0.3.</span> <span class="nav-text">改进之后</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8Ejdbcutils%E7%9C%8B%E4%BB%A3%E7%A0%81%E7%AE%80%E4%BB%8B%E4%B9%8B%E9%81%93"><span class="nav-text">从JDBCUtils看代码简介之道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8preparedstatement%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="nav-text">使用PreparedStatement实现增删改查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E7%B1%BBjdbcutils"><span class="nav-text">工具类JDBCUtils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E4%B9%8B%E5%90%8E"><span class="nav-text">改进之后</span></a></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -200,7 +204,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -300,38 +304,34 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="从JDBCUtils看代码简介之道"><a href="#从JDBCUtils看代码简介之道" class="headerlink" title="从JDBCUtils看代码简介之道"></a>从JDBCUtils看代码简介之道</h1><h3 id="使用PreparedStatement实现增删改查"><a href="#使用PreparedStatement实现增删改查" class="headerlink" title="使用PreparedStatement实现增删改查"></a>使用PreparedStatement实现增删改查</h3><a id="more"></a>
-
+        <h1 id="从jdbcutils看代码简介之道">从JDBCUtils看代码简介之道</h1>
+<h3 id="使用preparedstatement实现增删改查">使用PreparedStatement实现增删改查</h3>
+<a id="more"></a>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPreparedStatement1</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">             Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">             System.out.println(<span class="string">&quot;请输入待修改的客户编号：&quot;</span>);</span><br><span class="line">             <span class="keyword">int</span> id = input.nextInt();</span><br><span class="line">             System.out.println(<span class="string">&quot;请输入新的客户姓名：&quot;</span>);</span><br><span class="line">             String name = input.next();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//------------------------连接数据库的步骤------------------------</span></span><br><span class="line"></span><br><span class="line">             Properties info = <span class="keyword">new</span> Properties();</span><br><span class="line">             info.load(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;src\\jdbc1.properties&quot;</span>));</span><br><span class="line"></span><br><span class="line">             String user = info.getProperty(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">             String password = info.getProperty(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">             String url = info.getProperty(<span class="string">&quot;url&quot;</span>);</span><br><span class="line">             String driver = info.getProperty(<span class="string">&quot;driver&quot;</span>);</span><br><span class="line"></span><br><span class="line">             <span class="comment">//1.注册驱动</span></span><br><span class="line">             Class.forName(driver);</span><br><span class="line">             <span class="comment">//2.获取连接</span></span><br><span class="line">             Connection connection = DriverManager.getConnection(url, user, password);</span><br><span class="line"></span><br><span class="line">             <span class="comment">//3.执行修改</span></span><br><span class="line">             String sql = <span class="string">&quot;UPDATE customers SET name = ? WHERE id = ?&quot;</span>;</span><br><span class="line">             PreparedStatement statement = connection.prepareStatement(sql);</span><br><span class="line">             statement.setString(<span class="number">1</span>, name);</span><br><span class="line">             statement.setInt(<span class="number">2</span>, id);</span><br><span class="line">             <span class="keyword">int</span> i = statement.executeUpdate();<span class="comment">//执行增删改，返回受影响的行数</span></span><br><span class="line">             System.out.println(i &gt; <span class="number">0</span> ? <span class="string">&quot;修改成功！&quot;</span> : <span class="string">&quot;修改失败！&quot;</span>);</span><br><span class="line"></span><br><span class="line">             <span class="comment">//4.关闭</span></span><br><span class="line">             statement.close();</span><br><span class="line">             connection.close();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="工具类JDBCUtils"><a href="#工具类JDBCUtils" class="headerlink" title="工具类JDBCUtils"></a>工具类JDBCUtils</h3><p>由于每次都要加载配置文件，读取配置信息，注册驱动，获取连接，想到封装成工具类JDBCUtils。功能：</p>
+<h3 id="工具类jdbcutils">工具类JDBCUtils</h3>
+<p>由于每次都要加载配置文件，读取配置信息，注册驱动，获取连接，想到封装成工具类JDBCUtils。功能：</p>
 <ul>
-<li> 1、获取连接</li>
-<li> 2、释放资源</li>
+<li>1、获取连接</li>
+<li>2、释放资源</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCUtils</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：获取可用的连接对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        Properties info = <span class="keyword">new</span> Properties();</span><br><span class="line">        info.load(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;src\\jdbc1.properties&quot;</span>));</span><br><span class="line"></span><br><span class="line">        String user = info.getProperty(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        String password = info.getProperty(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        String url = info.getProperty(<span class="string">&quot;url&quot;</span>);</span><br><span class="line">        String driver = info.getProperty(<span class="string">&quot;driver&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.注册驱动</span></span><br><span class="line">        Class.forName(driver);</span><br><span class="line">        <span class="comment">//2.获取连接</span></span><br><span class="line">        Connection connection = DriverManager.getConnection(url, user, password);</span><br><span class="line">        <span class="keyword">return</span> connection;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 功能：释放资源</span></span><br><span class="line"><span class="comment">      *</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(ResultSet set, Statement statement,Connection connection)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(set != <span class="keyword">null</span>) set.close();</span><br><span class="line">        <span class="keyword">if</span>(statement != <span class="keyword">null</span>) statement.close();</span><br><span class="line">        <span class="keyword">if</span>(connection != <span class="keyword">null</span>) connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在getConnection()方法中仍有可以提出的部分，使用静态代码块只执行一次加载配置文件，读取配置信息，注册驱动的步骤，使代码更加简洁，效率更高。注意：提出的步骤需要处理异常。将user\password\url\driver提出静态代码块可以在获取连接时调用。</p>
+<p>在getConnection()方法中仍有可以提出的部分，使用静态代码块只执行一次加载配置文件，读取配置信息，注册驱动的步骤，使代码更加简洁，效率更高。注意：提出的步骤需要处理异常。将user\url。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCUtils</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> String user;</span><br><span class="line">    <span class="keyword">static</span> String password;</span><br><span class="line">    <span class="keyword">static</span> String url ;</span><br><span class="line">    <span class="keyword">static</span> String driver;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">        Properties info = <span class="keyword">new</span> Properties();</span><br><span class="line">        info.load(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;src\\jdbc1.properties&quot;</span>));</span><br><span class="line"></span><br><span class="line">        user = info.getProperty(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        password = info.getProperty(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        url = info.getProperty(<span class="string">&quot;url&quot;</span>);</span><br><span class="line">        driver = info.getProperty(<span class="string">&quot;driver&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.注册驱动</span></span><br><span class="line"></span><br><span class="line">            Class.forName(driver);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);<span class="comment">//编译时异常转为运行时异常</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：获取可用的连接对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//2.获取连接</span></span><br><span class="line">        <span class="keyword">return</span> DriverManager.getConnection(url, user, password);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 功能：释放资源</span></span><br><span class="line"><span class="comment">      *</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(ResultSet set, Statement statement,Connection connection)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(set != <span class="keyword">null</span>) set.close();</span><br><span class="line">        <span class="keyword">if</span>(statement != <span class="keyword">null</span>) statement.close();</span><br><span class="line">        <span class="keyword">if</span>(connection != <span class="keyword">null</span>) connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="改进之后"><a href="#改进之后" class="headerlink" title="改进之后"></a>改进之后</h3><p>有了JDBCUtils工具类，再看改进后的代码</p>
+<h3 id="改进之后">改进之后</h3>
+<p>有了JDBCUtils工具类，再看改进后的代码</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPrepasredStatementByUtils</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入待修改的客户编号：&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> id = input.nextInt();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入新的客户姓名：&quot;</span>);</span><br><span class="line">        String name = input.next();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//----------------------连接数据库的步骤----------------</span></span><br><span class="line">        <span class="comment">//1.获取连接</span></span><br><span class="line">        Connection connection = JDBCUtils.getConnection();</span><br><span class="line">        <span class="comment">//2.执行修改</span></span><br><span class="line">        String sql = <span class="string">&quot;UPDATE customers SET name = ? WHERE id = ?&quot;</span>;</span><br><span class="line">        PreparedStatement statement = connection.prepareStatement(sql);</span><br><span class="line">        statement.setString(<span class="number">1</span>, name);</span><br><span class="line">        statement.setInt(<span class="number">2</span>, id);</span><br><span class="line">        <span class="keyword">int</span> i = statement.executeUpdate();<span class="comment">//执行增删改，返回受影响的行数</span></span><br><span class="line">        System.out.println(i &gt; <span class="number">0</span> ? <span class="string">&quot;修改成功！&quot;</span> : <span class="string">&quot;修改失败！&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.关闭</span></span><br><span class="line">        JDBCUtils.close(<span class="keyword">null</span>,statement,connection);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>直接调用工具类中的方法就简洁多啦！</p>
 <p>再体会一下编译时异常变为运行时异常：</p>
 <p>如果不抛异常，会报错</p>
-<p><img src="/images/2020.11.16/1.png"></p>
+<p><img src="/images/2020.11.16/1.png" /></p>
 <p>对JDBCUtils工具类中的getConnection()方法进行try-catch处理，将编译时异常转为运行时异常</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.获取连接</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> DriverManager.getConnection(url, user, password);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <p>此时将不会报编译时错误</p>
-<p><img src="/images/2020.11.16/2.png"></p>
+<p><img src="/images/2020.11.16/2.png" /></p>
 <p>对另一个close方法的处理也一样</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(ResultSet set, Statement statement,Connection connection)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (set != <span class="keyword">null</span>) set.close();</span><br><span class="line">            <span class="keyword">if</span> (statement != <span class="keyword">null</span>) statement.close();</span><br><span class="line">            <span class="keyword">if</span> (connection != <span class="keyword">null</span>) connection.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (SQLException e)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <p>最终代码为：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPrepasredStatementByUtils</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入待修改的客户编号：&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> id = input.nextInt();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入新的客户姓名：&quot;</span>);</span><br><span class="line">        String name = input.next();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//----------------------连接数据库的步骤----------------</span></span><br><span class="line">        Connection connection = <span class="keyword">null</span>;</span><br><span class="line">        PreparedStatement statement = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.获取连接</span></span><br><span class="line">            connection = JDBCUtils.getConnection();</span><br><span class="line">            <span class="comment">//2.执行修改</span></span><br><span class="line">            String sql = <span class="string">&quot;UPDATE customers SET name = ? WHERE id = ?&quot;</span>;</span><br><span class="line">            statement = connection.prepareStatement(sql);</span><br><span class="line">            statement.setString(<span class="number">1</span>, name);</span><br><span class="line">            statement.setInt(<span class="number">2</span>, id);</span><br><span class="line">            <span class="keyword">int</span> i = statement.executeUpdate();<span class="comment">//执行增删改，返回受影响的行数</span></span><br><span class="line">            System.out.println(i &gt; <span class="number">0</span> ? <span class="string">&quot;修改成功！&quot;</span> : <span class="string">&quot;修改失败！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//3.关闭</span></span><br><span class="line">            JDBCUtils.close(<span class="keyword">null</span>, statement, connection);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -467,6 +467,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

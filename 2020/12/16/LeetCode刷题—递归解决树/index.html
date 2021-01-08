@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题：104，二叉树的最大深度，easy 110，平衡二叉树，easy 543，二叉树的直径，easy 226，翻转二叉树，easy 617，合并二叉树，easy 112，路径总和，easy 113，路径总和Ⅱ，midium 572，另一个树的子树，easy 101，对称二叉树，easy 111，二叉树的最小深度，easy">
+  <meta name="description" content="对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题： 104，二叉树的最大深度，easy 110，平衡二叉树，easy 543，二叉树的直径，easy 226，翻转二叉树，easy 617，合并二叉树，easy 112，路径总和，easy 113，路径总和Ⅱ，midium 572，另一个树的子树，easy 101，对称二叉树，easy 111，二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode刷题—递归解决树">
 <meta property="og:url" content="http://example.com/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%80%92%E5%BD%92%E8%A7%A3%E5%86%B3%E6%A0%91/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题：104，二叉树的最大深度，easy 110，平衡二叉树，easy 543，二叉树的直径，easy 226，翻转二叉树，easy 617，合并二叉树，easy 112，路径总和，easy 113，路径总和Ⅱ，midium 572，另一个树的子树，easy 101，对称二叉树，easy 111，二叉树的最小深度，easy">
+<meta property="og:description" content="对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题： 104，二叉树的最大深度，easy 110，平衡二叉树，easy 543，二叉树的直径，easy 226，翻转二叉树，easy 617，合并二叉树，easy 112，路径总和，easy 113，路径总和Ⅱ，midium 572，另一个树的子树，easy 101，对称二叉树，easy 111，二叉树">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/341009251c7788edc838975732064bf1.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/bce64ca4c0e80b345a5a286122112851.png">
@@ -40,8 +40,8 @@
 <meta property="article:published_time" content="2020-12-16T11:34:12.000Z">
 <meta property="article:modified_time" content="2020-12-16T11:34:43.973Z">
 <meta property="article:author" content="Rui Wang">
-<meta property="article:tag" content="LeetCode">
 <meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/341009251c7788edc838975732064bf1.png">
 
@@ -104,7 +104,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -189,7 +193,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#104%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6%EF%BC%8Ceasy"><span class="nav-number">1.</span> <span class="nav-text">104，二叉树的最大深度，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#110%EF%BC%8C%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy"><span class="nav-number">2.</span> <span class="nav-text">110，平衡二叉树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#543%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%EF%BC%8Ceasy"><span class="nav-number">3.</span> <span class="nav-text">543，二叉树的直径，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#226%EF%BC%8C%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy"><span class="nav-number">4.</span> <span class="nav-text">226，翻转二叉树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#617%EF%BC%8C%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy"><span class="nav-number">5.</span> <span class="nav-text">617，合并二叉树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#112%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%EF%BC%8Ceasy"><span class="nav-number">6.</span> <span class="nav-text">112，路径总和，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#113%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%E2%85%A1%EF%BC%8Cmidium"><span class="nav-number">7.</span> <span class="nav-text">113，路径总和Ⅱ，midium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#572%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91%EF%BC%8Ceasy"><span class="nav-number">8.</span> <span class="nav-text">572，另一个树的子树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#101%EF%BC%8C%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy"><span class="nav-number">9.</span> <span class="nav-text">101，对称二叉树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#111%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6%EF%BC%8Ceasy"><span class="nav-number">10.</span> <span class="nav-text">111，二叉树的最小深度，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#404%EF%BC%8C%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C%EF%BC%8Ceasy"><span class="nav-number">11.</span> <span class="nav-text">404，左叶子之和，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#687%EF%BC%8C%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84%EF%BC%8Cmedium"><span class="nav-number">12.</span> <span class="nav-text">687，最长同值路径，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#671%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Ceasy"><span class="nav-number">13.</span> <span class="nav-text">671，二叉树中第二小的节点，easy</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6easy"><span class="nav-text">104，二叉树的最大深度，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91easy"><span class="nav-text">110，平衡二叉树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84easy"><span class="nav-text">543，二叉树的直径，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91easy"><span class="nav-text">226，翻转二叉树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91easy"><span class="nav-text">617，合并二叉树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Ceasy"><span class="nav-text">112，路径总和，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Cmidium"><span class="nav-text">113，路径总和Ⅱ，midium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91easy"><span class="nav-text">572，另一个树的子树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91easy"><span class="nav-text">101，对称二叉树，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6easy"><span class="nav-text">111，二叉树的最小深度，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8Ceasy"><span class="nav-text">404，左叶子之和，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84medium"><span class="nav-text">687，最长同值路径，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9easy"><span class="nav-text">671，二叉树中第二小的节点，easy</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -205,7 +209,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -305,25 +309,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题：<br><a href="#104%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6%EF%BC%8Ceasy">104，二叉树的最大深度，easy</a></p>
-<p><a href="#110%EF%BC%8C%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">110，平衡二叉树，easy</a></p>
-<p><a href="#543%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%EF%BC%8Ceasy">543，二叉树的直径，easy</a></p>
-<p><a href="#226%EF%BC%8C%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">226，翻转二叉树，easy</a></p>
-<p><a href="#617%EF%BC%8C%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">617，合并二叉树，easy</a></p>
-<p><a href="#112%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%EF%BC%8Ceasy">112，路径总和，easy</a></p>
-<p><a href="#113%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%E2%85%A1%EF%BC%8Cmidium">113，路径总和Ⅱ，midium</a></p>
-<p><a href="#572%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91%EF%BC%8Ceasy">572，另一个树的子树，easy</a></p>
-<p><a href="#101%EF%BC%8C%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">101，对称二叉树，easy</a></p>
-<p><a href="#111%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6%EF%BC%8Ceasy">111，二叉树的最小深度，easy</a></p>
-<p><a href="#404%EF%BC%8C%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C%EF%BC%8Ceasy">404，左叶子之和，easy</a></p>
-<p><a href="#687%EF%BC%8C%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84%EF%BC%8Cmedium">687，最长同值路径，medium</a></p>
-<p><a href="#671%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Ceasy">671，二叉树中第二小的节点，easy</a></p>
+        <p>对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题： <a href="#104，二叉树的最大深度，easy">104，二叉树的最大深度，easy</a></p>
+<p><a href="#110，平衡二叉树，easy">110，平衡二叉树，easy</a></p>
+<p><a href="#543，二叉树的直径，easy">543，二叉树的直径，easy</a></p>
+<p><a href="#226，翻转二叉树，easy">226，翻转二叉树，easy</a></p>
+<p><a href="#617，合并二叉树，easy">617，合并二叉树，easy</a></p>
+<p><a href="#112，路径总和，easy">112，路径总和，easy</a></p>
+<p><a href="#113，路径总和Ⅱ，midium">113，路径总和Ⅱ，midium</a></p>
+<p><a href="#572，另一个树的子树，easy">572，另一个树的子树，easy</a></p>
+<p><a href="#101，对称二叉树，easy">101，对称二叉树，easy</a></p>
+<p><a href="#111，二叉树的最小深度，easy">111，二叉树的最小深度，easy</a></p>
+<p><a href="#404，左叶子之和，easy">404，左叶子之和，easy</a></p>
+<p><a href="#687，最长同值路径，medium">687，最长同值路径，medium</a></p>
+<p><a href="#671，二叉树中第二小的节点，easy">671，二叉树中第二小的节点，easy</a></p>
 <a id="more"></a>
-
-<h5 id="104，二叉树的最大深度，easy"><a href="#104，二叉树的最大深度，easy" class="headerlink" title="104，二叉树的最大深度，easy"></a>104，二叉树的最大深度，easy</h5><p>给定一个二叉树，找出其最大深度。</p>
+<h5 id="二叉树的最大深度easy">104，二叉树的最大深度，easy</h5>
+<p>给定一个二叉树，找出其最大深度。</p>
 <p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
 <p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例：<br>给定二叉树 [3,9,20,null,null,15,7]，</p>
+<p>示例： 给定二叉树 [3,9,20,null,null,15,7]，</p>
 <pre><code>    3
    / \
   9  20
@@ -332,34 +336,32 @@
 <p>返回它的最大深度 3 。</p>
 <ul>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> leftDepth = maxDepth(root.left);</span><br><span class="line">        <span class="keyword">int</span> rightDepth = maxDepth(root.right);</span><br><span class="line">        <span class="keyword">return</span> leftDepth &gt;= rightDepth ? leftDepth + <span class="number">1</span> : rightDepth + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> leftDepth = maxDepth(root.left);</span><br><span class="line">        <span class="keyword">int</span> rightDepth = maxDepth(root.right);</span><br><span class="line">        <span class="keyword">return</span> leftDepth &gt;= rightDepth ? leftDepth + <span class="number">1</span> : rightDepth + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="110，平衡二叉树，easy"><a href="#110，平衡二叉树，easy" class="headerlink" title="110，平衡二叉树，easy"></a>110，平衡二叉树，easy</h5><p>给定一个二叉树，判断它是否是高度平衡的二叉树。</p>
+<h5 id="平衡二叉树easy">110，平衡二叉树，easy</h5>
+<p>给定一个二叉树，判断它是否是高度平衡的二叉树。</p>
 <p>本题中，一棵高度平衡二叉树定义为：</p>
 <p>一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。</p>
 <p>示例 1：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/341009251c7788edc838975732064bf1.png" alt="img"></p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/341009251c7788edc838975732064bf1.png" alt="img" /><figcaption>img</figcaption>
+</figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; [3,9,20,null,null,15,7]</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
-
 <p>示例 2：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/bce64ca4c0e80b345a5a286122112851.png" alt="img"></p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/bce64ca4c0e80b345a5a286122112851.png" alt="img" /><figcaption>img</figcaption>
+</figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; [1,2,2,3,3,null,null,4,4]</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
-
 <p><strong>示例 3：</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; []</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>思想：先判断root 为根节点的树是不是平衡二叉树，（即比较左右子树的高度差是否不超过1），再判断以root.left 和 root.right 为根节点的树是不是平衡二叉树。</p>
-</li>
+<li><p>思想：先判断root 为根节点的树是不是平衡二叉树，（即比较左右子树的高度差是否不超过1），再判断以root.left 和 root.right 为根节点的树是不是平衡二叉树。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBalanced</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">         <span class="keyword">int</span> l = depth(root.left);</span><br><span class="line">         <span class="keyword">int</span> r = depth(root.right);</span><br><span class="line">    	 <span class="comment">//判断当前根节点的树是否为平衡二叉树</span></span><br><span class="line"> 	    <span class="keyword">if</span>(Math.abs(l - r) &gt; <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    	<span class="keyword">else</span> </span><br><span class="line">            <span class="keyword">return</span> (isBalanced(root.left) &amp;&amp; isBalanced(root.right));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取整棵树的高度</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;            </span><br><span class="line">        <span class="keyword">return</span> Math.max(depth(root.left),depth(root.right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBalanced</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">         <span class="keyword">int</span> l = depth(root.left);</span><br><span class="line">         <span class="keyword">int</span> r = depth(root.right);</span><br><span class="line">    	 <span class="comment">//判断当前根节点的树是否为平衡二叉树</span></span><br><span class="line"> 	    <span class="keyword">if</span>(Math.abs(l - r) &gt; <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    	<span class="keyword">else</span> </span><br><span class="line">            <span class="keyword">return</span> (isBalanced(root.left) &amp;&amp; isBalanced(root.right));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取整棵树的高度</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;            </span><br><span class="line">        <span class="keyword">return</span> Math.max(depth(root.left),depth(root.right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="543，二叉树的直径，easy"><a href="#543，二叉树的直径，easy" class="headerlink" title="543，二叉树的直径，easy"></a>543，二叉树的直径，easy</h5><p>给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。</p>
-<p>示例 :<br>给定二叉树</p>
+<h5 id="二叉树的直径easy">543，二叉树的直径，easy</h5>
+<p>给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。</p>
+<p>示例 : 给定二叉树</p>
 <pre><code>      1
      / \
     2   3
@@ -368,16 +370,13 @@
 <p>返回 3, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。</p>
 <p>注意：两结点之间的路径长度是以它们之间边的数目表示。</p>
 <ul>
-<li><p>方法：DFS递归。</p>
-</li>
-<li><p>思路：直径 = 任意两个结点路径长度中的最大值，可以看做树内的某一节点的左子树节点数l + 右子树节点数r - 1，所有节点的l + r - 1中的最大值即为直径。定义一个递归函数计算经过的左右子树的节点数l + r，函数返回给定节点为根的子树的深度。递归搜索每个节点并设一个全局变量 ans 记录 l + r 的最大值，最后返回 ans 即为树的直径。</p>
-</li>
+<li><p>方法：DFS递归。</p></li>
+<li><p>思路：直径 = 任意两个结点路径长度中的最大值，可以看做树内的某一节点的左子树节点数l + 右子树节点数r - 1，所有节点的l + r - 1中的最大值即为直径。定义一个递归函数计算经过的左右子树的节点数l + r，函数返回给定节点为根的子树的深度。递归搜索每个节点并设一个全局变量 ans 记录 l + r 的最大值，最后返回 ans 即为树的直径。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">diameterOfBinaryTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        depth(root);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回最大的 L+R</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> l = depth(root.left);</span><br><span class="line">        <span class="keyword">int</span> r = depth(root.right);</span><br><span class="line">        ans = Math.max(ans, l + r);<span class="comment">//找到最大直径</span></span><br><span class="line">        <span class="keyword">return</span> Math.max(l, r) + <span class="number">1</span>;<span class="comment">//树的深度</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">diameterOfBinaryTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        depth(root);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回最大的 L+R</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> l = depth(root.left);</span><br><span class="line">        <span class="keyword">int</span> r = depth(root.right);</span><br><span class="line">        ans = Math.max(ans, l + r);<span class="comment">//找到最大直径</span></span><br><span class="line">        <span class="keyword">return</span> Math.max(l, r) + <span class="number">1</span>;<span class="comment">//树的深度</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="226，翻转二叉树，easy"><a href="#226，翻转二叉树，easy" class="headerlink" title="226，翻转二叉树，easy"></a>226，翻转二叉树，easy</h5><p>翻转一棵二叉树。</p>
+<h5 id="翻转二叉树easy">226，翻转二叉树，easy</h5>
+<p>翻转一棵二叉树。</p>
 <p>示例：</p>
 <p>输入：</p>
 <pre><code>     4
@@ -392,42 +391,31 @@
  / \   / \
 9   6 3   1</code></pre>
 <ul>
-<li><p>方法一：递归。</p>
-</li>
-<li><p>思路：分别对左右子树都进行翻转，再交换。</p>
-</li>
+<li><p>方法一：递归。</p></li>
+<li><p>思路：分别对左右子树都进行翻转，再交换。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">invertTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//递归</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        TreeNode leftTree = root.left;<span class="comment">//保存原来的左子树</span></span><br><span class="line">        root.left = invertTree(root.right);</span><br><span class="line">        root.right = invertTree(leftTree);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方法二：借助栈（DFS）。</p>
-</li>
-<li><p>思路：先将根节点压入栈。栈非空时，弹出栈顶节点，如果弹出节点的左右子节点有非空，将其压入栈，并进行交换，重复此过程直到栈空。</p>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">invertTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//递归</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        TreeNode leftTree = root.left;<span class="comment">//保存原来的左子树</span></span><br><span class="line">        root.left = invertTree(root.right);</span><br><span class="line">        root.right = invertTree(leftTree);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>方法二：借助栈（DFS）。</p></li>
+<li><p>思路：先将根节点压入栈。栈非空时，弹出栈顶节点，如果弹出节点的左右子节点有非空，将其压入栈，并进行交换，重复此过程直到栈空。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">invertTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack.push(root);</span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty())&#123;</span><br><span class="line">            TreeNode node = stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(node.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(node.left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(node.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(node.right);</span><br><span class="line">            &#125;</span><br><span class="line">            TreeNode temp = node.right;</span><br><span class="line">            node.right = node.left;</span><br><span class="line">            node.left = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">invertTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack.push(root);</span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty())&#123;</span><br><span class="line">            TreeNode node = stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(node.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(node.left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(node.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(node.right);</span><br><span class="line">            &#125;</span><br><span class="line">            TreeNode temp = node.right;</span><br><span class="line">            node.right = node.left;</span><br><span class="line">            node.left = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="617，合并二叉树，easy"><a href="#617，合并二叉树，easy" class="headerlink" title="617，合并二叉树，easy"></a>617，合并二叉树，easy</h5><p>给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。</p>
+<h5 id="合并二叉树easy">617，合并二叉树，easy</h5>
+<p>给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。</p>
 <p>你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，否则不为 NULL 的节点将直接作为新二叉树的节点。</p>
 <p>示例 1:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">	Tree 1                     Tree 2                  </span><br><span class="line">     1                           2 </span><br><span class="line">   &#x2F;   \                       &#x2F;   \</span><br><span class="line">  3     2                     1     3</span><br><span class="line"> &#x2F;                             \     \</span><br><span class="line">5                               4     7                               </span><br><span class="line">输出: </span><br><span class="line">合并后的树:</span><br><span class="line">	     3</span><br><span class="line">	    &#x2F; \</span><br><span class="line">	   4   5</span><br><span class="line">	  &#x2F; \   \ </span><br><span class="line">	 5   4   7</span><br></pre></td></tr></table></figure>
-
-
 <p>注意: 合并必须从两个树的根节点开始。</p>
 <ul>
-<li><p>方法一：递归。(dfs)</p>
-</li>
-<li><p>思路：新建一棵树，如果原来两棵树的节点都存在，直接相加；如果有一个不存在，返回另一个节点。递归节点的左右子节点，作为新树的左右子树。</p>
-</li>
+<li><p>方法一：递归。(dfs)</p></li>
+<li><p>思路：新建一棵树，如果原来两棵树的节点都存在，直接相加；如果有一个不存在，返回另一个节点。递归节点的左右子节点，作为新树的左右子树。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mergeTrees</span><span class="params">(TreeNode t1, TreeNode t2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (t1 == <span class="keyword">null</span> &amp;&amp; t2 == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(t1 == <span class="keyword">null</span> || t2 == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> t1 == <span class="keyword">null</span> ? t2 : t1;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode newTree = <span class="keyword">new</span> TreeNode(t1.val + t2.val);</span><br><span class="line">        newTree.left = mergeTrees(t1.left,t2.left);</span><br><span class="line">        newTree.right = mergeTrees(t1.right,t2.right);</span><br><span class="line">        <span class="keyword">return</span> newTree;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mergeTrees</span><span class="params">(TreeNode t1, TreeNode t2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (t1 == <span class="keyword">null</span> &amp;&amp; t2 == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(t1 == <span class="keyword">null</span> || t2 == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> t1 == <span class="keyword">null</span> ? t2 : t1;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode newTree = <span class="keyword">new</span> TreeNode(t1.val + t2.val);</span><br><span class="line">        newTree.left = mergeTrees(t1.left,t2.left);</span><br><span class="line">        newTree.right = mergeTrees(t1.right,t2.right);</span><br><span class="line">        <span class="keyword">return</span> newTree;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="112，路径总和，easy"><a href="#112，路径总和，easy" class="headerlink" title="112，路径总和，easy"></a>112，路径总和，easy</h5><p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。</p>
+<h5 id="路径总和easy">112，路径总和，easy</h5>
+<p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。</p>
 <p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
+<p>示例: 给定如下二叉树，以及目标和 sum = 22，</p>
 <pre><code>          5
          / \
         4   8
@@ -437,16 +425,14 @@
     7    2      1</code></pre>
 <p>返回 true, 因为存在目标和为 22 的根节点到叶子- 方法一：递归（dfs）</p>
 <ul>
-<li><p>思路：以当前根节点为例，如果为null，返回false；如果为叶子节点，判断当前节点值是否与sum相等并返回；如果不是叶子节点，递归搜索左右子节点。</p>
-</li>
+<li><p>思路：以当前根节点为例，如果为null，返回false；如果为叶子节点，判断当前节点值是否与sum相等并返回；如果不是叶子节点，递归搜索左右子节点。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasPathSum</span><span class="params">(TreeNode root, <span class="keyword">int</span> sum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) <span class="keyword">return</span> root.val == sum;</span><br><span class="line">        <span class="keyword">return</span> hasPathSum(root.left,sum - root.val) || hasPathSum(root.right, sum - root.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasPathSum</span><span class="params">(TreeNode root, <span class="keyword">int</span> sum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) <span class="keyword">return</span> root.val == sum;</span><br><span class="line">        <span class="keyword">return</span> hasPathSum(root.left,sum - root.val) || hasPathSum(root.right, sum - root.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="113，路径总和Ⅱ，midium"><a href="#113，路径总和Ⅱ，midium" class="headerlink" title="113，路径总和Ⅱ，midium"></a>113，路径总和Ⅱ，midium</h5><p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。</p>
+<h5 id="路径总和midium">113，路径总和Ⅱ，midium</h5>
+<p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。</p>
 <p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
+<p>示例: 给定如下二叉树，以及目标和 sum = 22，</p>
 <pre><code>          5
          / \
         4   8
@@ -456,27 +442,23 @@
     7    2  5   1</code></pre>
 <p>返回:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">   [5,4,11,2],</span><br><span class="line">   [5,8,4,5]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>方法：递归回溯（dfs）。</p>
-</li>
+<li><p>方法：递归回溯（dfs）。</p></li>
 <li><p>思路：</p>
 <ul>
-<li>回溯条件：<ol>
+<li>回溯条件：
+<ol type="1">
 <li>节点为空— 如果当前节点为空，说明节点没有孩子，循着这条路径，已经找不到符合条件的路径。</li>
 <li>节点为叶子节点— 如果当前节点是叶子节点并且它的值满足题目要求，则它所在的路径就是满足要求的。</li>
-</ol>
-</li>
-</ul>
-</li>
+</ol></li>
+</ul></li>
 <li><p>代码：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; pathSum(TreeNode root, <span class="keyword">int</span> sum) &#123;</span><br><span class="line">        dfs(root, sum, res, <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode root, <span class="keyword">int</span> sum, List&lt;List&lt;Integer&gt;&gt; res, List&lt;Integer&gt; list)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//把当前节点值加入到list中</span></span><br><span class="line">         list.add(root.val);</span><br><span class="line">        <span class="comment">//叶子节点且此节点值=sum</span></span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span> &amp;&amp; root.val == sum) res.add(<span class="keyword">new</span> ArrayList(list));</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//还没到叶子节点，继续从左右节点向下找</span></span><br><span class="line">        dfs(root.left, sum - root.val, res, list);</span><br><span class="line">        dfs(root.right, sum - root.val, res, list);</span><br><span class="line">        <span class="comment">//防止分支污染，遍历完当前节点的左子树、右子树，说明经过这个节点的路径已经被遍历完，因此要回溯到当前节点的父节点</span></span><br><span class="line">        list.remove(list.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU0ODMyNDk0Mw==&mid=2247487910&idx=1&sn=2670aec7139c6b98e83ff66114ac1cf7&chksm=fb418286cc360b90741ed54fecd62fd45571b2caba3e41473a7ea0934f918d4b31537689c664&scene=21#wechat_redirect">关于递归与回溯的详解</a></p>
-</li>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU0ODMyNDk0Mw==&amp;mid=2247487910&amp;idx=1&amp;sn=2670aec7139c6b98e83ff66114ac1cf7&amp;chksm=fb418286cc360b90741ed54fecd62fd45571b2caba3e41473a7ea0934f918d4b31537689c664&amp;scene=21#wechat_redirect">关于递归与回溯的详解</a></p></li>
 </ul>
-<h5 id="572，另一个树的子树，easy"><a href="#572，另一个树的子树，easy" class="headerlink" title="572，另一个树的子树，easy"></a>572，另一个树的子树，easy</h5><p>给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。</p>
-<p>示例 1:<br>给定的树 s:</p>
+<h5 id="另一个树的子树easy">572，另一个树的子树，easy</h5>
+<p>给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。</p>
+<p>示例 1: 给定的树 s:</p>
 <pre><code>         3
         / \
        4   5
@@ -484,26 +466,19 @@
      1   2   </code></pre>
 <p>给定的树 t：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  4 </span><br><span class="line"> &#x2F; \</span><br><span class="line">1   2</span><br></pre></td></tr></table></figure>
-
-
 <p>返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。</p>
-<p>示例 2:<br>给定的树 s：</p>
+<p>示例 2: 给定的树 s：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">       3</span><br><span class="line">   &#x2F; \</span><br><span class="line">  4   5</span><br><span class="line"> &#x2F; \    </span><br><span class="line">1   2 </span><br></pre></td></tr></table></figure>
-
 <p>给定的树 t：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  4</span><br><span class="line"> &#x2F; \</span><br><span class="line">1   2</span><br></pre></td></tr></table></figure>
-
-
 <p>返回 false。</p>
 <ul>
-<li><p>方法：建立一个递归函数，判断两棵树是否相等。</p>
-</li>
+<li><p>方法：建立一个递归函数，判断两棵树是否相等。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubtree</span><span class="params">(TreeNode s, TreeNode t)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//第二棵树为空，一定是子树</span></span><br><span class="line">        <span class="keyword">if</span>(t == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//第一棵树为空，没有子树</span></span><br><span class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">//递归比较t是否是s的左子树和右子树的一部分，或s与t是两棵相同的树</span></span><br><span class="line">        <span class="keyword">return</span> isSubtree(s.left, t) || isSubtree(s.right, t) || isSameTree(s, t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断两棵树是否相同</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameTree</span><span class="params">(TreeNode s, TreeNode t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span> &amp;&amp; t == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//如果其中有一个节点为空或两节点值不相等时，返回false</span></span><br><span class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span> || t == <span class="keyword">null</span> || s.val != t.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">//递归比较左子树和右子树是否相同</span></span><br><span class="line">        <span class="keyword">return</span> isSameTree(s.left, t.left) &amp;&amp; isSameTree(s.right, t.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubtree</span><span class="params">(TreeNode s, TreeNode t)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//第二棵树为空，一定是子树</span></span><br><span class="line">        <span class="keyword">if</span>(t == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//第一棵树为空，没有子树</span></span><br><span class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">//递归比较t是否是s的左子树和右子树的一部分，或s与t是两棵相同的树</span></span><br><span class="line">        <span class="keyword">return</span> isSubtree(s.left, t) || isSubtree(s.right, t) || isSameTree(s, t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断两棵树是否相同</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameTree</span><span class="params">(TreeNode s, TreeNode t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span> &amp;&amp; t == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//如果其中有一个节点为空或两节点值不相等时，返回false</span></span><br><span class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span> || t == <span class="keyword">null</span> || s.val != t.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">//递归比较左子树和右子树是否相同</span></span><br><span class="line">        <span class="keyword">return</span> isSameTree(s.left, t.left) &amp;&amp; isSameTree(s.right, t.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="101，对称二叉树，easy"><a href="#101，对称二叉树，easy" class="headerlink" title="101，对称二叉树，easy"></a>101，对称二叉树，easy</h5><p>给定一个二叉树，检查它是否是镜像对称的。</p>
+<h5 id="对称二叉树easy">101，对称二叉树，easy</h5>
+<p>给定一个二叉树，检查它是否是镜像对称的。</p>
 <p>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。</p>
 <pre><code>    1
    / \
@@ -517,40 +492,34 @@
    \   \
    3    3</code></pre>
 <ul>
-<li><p>方法一：递归。</p>
-</li>
-<li><p>思路：建立一个递归函数，移动两个指针遍历这棵树，判断根节点的左右子树是否对称。在主函数调用此递归函数，参数为根的左子节点和右子节点。</p>
-</li>
+<li><p>方法一：递归。</p></li>
+<li><p>思路：建立一个递归函数，移动两个指针遍历这棵树，判断根节点的左右子树是否对称。在主函数调用此递归函数，参数为根的左子节点和右子节点。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> check(root.left, root.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//用两个指针检查树是否对称</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(TreeNode p, TreeNode q)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p == <span class="keyword">null</span> &amp;&amp; q == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(p == <span class="keyword">null</span> || q == <span class="keyword">null</span> || p.val != q.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> check(p.left, q.right) &amp;&amp; check(p.right, q.left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> check(root.left, root.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//用两个指针检查树是否对称</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(TreeNode p, TreeNode q)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p == <span class="keyword">null</span> &amp;&amp; q == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(p == <span class="keyword">null</span> || q == <span class="keyword">null</span> || p.val != q.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> check(p.left, q.right) &amp;&amp; check(p.right, q.left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="111，二叉树的最小深度，easy"><a href="#111，二叉树的最小深度，easy" class="headerlink" title="111，二叉树的最小深度，easy"></a>111，二叉树的最小深度，easy</h5><p>给定一个二叉树，找出其最小深度。</p>
+<h5 id="二叉树的最小深度easy">111，二叉树的最小深度，easy</h5>
+<p>给定一个二叉树，找出其最小深度。</p>
 <p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
 <p>说明：叶子节点是指没有子节点的节点。</p>
-<p> <img src="https://img-blog.csdnimg.cn/img_convert/6d8500c55fe3ebe98dc781d7b62a3bbf.png" alt="img"></p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/6d8500c55fe3ebe98dc781d7b62a3bbf.png" alt="img" /><figcaption>img</figcaption>
+</figure>
 <p>示例 1：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; [3,9,20,null,null,15,7]</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
-
-
 <p>示例 2：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; [2,null,3,null,4,null,5,null,6]</span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>方法一：递归。</p>
 <ul>
 <li>结束条件：当root为空，返回0</li>
 <li>递归体：若左右子树皆空，返回1；若左子树和右子树有非空的，记录其最小路径，最后返回结果为最小路径 ➕ 1</li>
-</ul>
-</li>
+</ul></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//1.当root的左右子树都为空</span></span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mindep = Integer.MAX_VALUE;</span><br><span class="line">        <span class="comment">//2.root的左子树或右子树有不为空，计算其最小路径</span></span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">            mindep = Math.min(minDepth(root.left), mindep);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(root.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">            mindep = Math.min(minDepth(root.right), mindep);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//返回最小路径+1</span></span><br><span class="line">        <span class="keyword">return</span> mindep + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>错误原因：想法是dfs 来递归左右子树找它们的最小路径，然后取最小。但这样可能在 [2,null,3,null,4,null,5,null,6] 结构中不成立，因为root的左子树为空，所以要加一个判断。</p>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//1.当root的左右子树都为空</span></span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mindep = Integer.MAX_VALUE;</span><br><span class="line">        <span class="comment">//2.root的左子树或右子树有不为空，计算其最小路径</span></span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">            mindep = Math.min(minDepth(root.left), mindep);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(root.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">            mindep = Math.min(minDepth(root.right), mindep);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//返回最小路径+1</span></span><br><span class="line">        <span class="keyword">return</span> mindep + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>错误原因：想法是dfs 来递归左右子树找它们的最小路径，然后取最小。但这样可能在 [2,null,3,null,4,null,5,null,6] 结构中不成立，因为root的左子树为空，所以要加一个判断。</p></li>
 </ul>
-<h5 id="404，左叶子之和，easy"><a href="#404，左叶子之和，easy" class="headerlink" title="404，左叶子之和，easy"></a>404，左叶子之和，easy</h5><p>计算给定二叉树的所有<strong>左叶子</strong>之和。</p>
+<h5 id="左叶子之和easy">404，左叶子之和，easy</h5>
+<p>计算给定二叉树的所有<strong>左叶子</strong>之和。</p>
 <p>示例：</p>
 <pre><code>    3
    / \
@@ -559,39 +528,29 @@
    15   7</code></pre>
 <p>在这个二叉树中，有两个左叶子，分别是 9 和 15，所以返回 24</p>
 <ul>
-<li><p>方法一：递归dfs</p>
-</li>
+<li><p>方法一：递归dfs</p></li>
 <li><p>思路：所有左叶子节点之和，需要遍历整棵树，采用dfs。</p>
 <ul>
-<li><p>递归出口：节点为空或为叶子节点</p>
-</li>
+<li><p>递归出口：节点为空或为叶子节点</p></li>
 <li><p>递归条件：</p>
 <ul>
-<li><p>如果左子树不为空，判断左子节点是否为叶子节点：若不是，递归调用左子节点</p>
+<li>如果左子树不为空，判断左子节点是否为叶子节点：若不是，递归调用左子节点
 <ul>
 <li>如果右子树为空，结果不变；若不为空，上面的结果＋ 递归调用右子节点</li>
-</ul>
-</li>
-<li><p>否则左子树为空，右子树一定不为空，只需判断右子节点是不是叶子节点，若不是，递归调用右子节点</p>
-</li>
-<li><p>最后返回结果</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+<li>否则左子树为空，右子树一定不为空，只需判断右子节点是不是叶子节点，若不是，递归调用右子节点</li>
+<li>最后返回结果</li>
+</ul></li>
+</ul></li>
 <li><p>代码：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span> || isLeaf(root)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dfs(root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span> || isLeaf(root)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">            res = isLeaf(root.left) ? root.left.val : dfs(root.left);</span><br><span class="line">            <span class="keyword">if</span>(root.right != <span class="keyword">null</span>)</span><br><span class="line">            res += isLeaf(root.right) ? <span class="number">0</span> : dfs(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            res = isLeaf(root.right) ? <span class="number">0</span> : dfs(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLeaf</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> node.left == <span class="keyword">null</span> &amp;&amp; node.right == <span class="keyword">null</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>更简洁的版本：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (isLeaf(root.left)) <span class="keyword">return</span> root.left.val + sumOfLeftLeaves(root.right);</span><br><span class="line">    <span class="keyword">return</span> sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isLeaf</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> node.left == <span class="keyword">null</span> &amp;&amp; node.right == <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (isLeaf(root.left)) <span class="keyword">return</span> root.left.val + sumOfLeftLeaves(root.right);</span><br><span class="line">    <span class="keyword">return</span> sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isLeaf</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> node.left == <span class="keyword">null</span> &amp;&amp; node.right == <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>另一题：一棵树所有左子节点的值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>)&#123;</span><br><span class="line">           res = sumOfLeftLeaves(root.left) + root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">            res = sumOfLeftLeaves(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span> &amp;&amp; root.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">            res = sumOfLeftLeaves(root.left) + root.left.val + sumOfLeftLeaves(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>)&#123;</span><br><span class="line">           res = sumOfLeftLeaves(root.left) + root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">            res = sumOfLeftLeaves(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span> &amp;&amp; root.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">            res = sumOfLeftLeaves(root.left) + root.left.val + sumOfLeftLeaves(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="687，最长同值路径，medium"><a href="#687，最长同值路径，medium" class="headerlink" title="687，最长同值路径，medium"></a>687，最长同值路径，medium</h5><p>给定一个二叉树，找到最长的路径，这个路径中的每个节点具有相同值。 这条路径可以经过也可以不经过根节点。</p>
+<h5 id="最长同值路径medium">687，最长同值路径，medium</h5>
+<p>给定一个二叉树，找到最长的路径，这个路径中的每个节点具有相同值。 这条路径可以经过也可以不经过根节点。</p>
 <p>注意：两个节点之间的路径长度由它们之间的边数表示。</p>
 <p>示例 1:</p>
 <p>输入:</p>
@@ -602,8 +561,6 @@
       1   1   5</code></pre>
 <p>输出:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-
-
 <p>示例 2:</p>
 <p>输入:</p>
 <pre><code>          1
@@ -613,66 +570,57 @@
       4   4   5</code></pre>
 <p>输出:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>方法一：递归。（dfs）</p>
-</li>
-<li><p>思路：</p>
-</li>
+<li><p>方法一：递归。（dfs）</p></li>
+<li><p>思路：</p></li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20201214162048997.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20201214162048997.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
 <ul>
 <li><p>最长路径分为2种情况：</p>
-<ol>
+<ol type="1">
 <li>以root为起点，经过左子树或右子树，如(2)</li>
 <li>不以root为起点，root为中间点，如(1)</li>
-</ol>
-</li>
-<li><p>辅助函数helper，计算以每一个节点为起点的最长同值路径maxLength，在过程中可以得到以root为根节点的树的最长同值路径ans。</p>
-</li>
-</ul>
-<ul>
+</ol></li>
+<li><p>辅助函数helper，计算以每一个节点为起点的最长同值路径maxLength，在过程中可以得到以root为根节点的树的最长同值路径ans。</p></li>
 <li><p>代码：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans;</span><br><span class="line">    <span class="comment">//以root为根节点的树的最长同值路径</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestUnivaluePath</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        helper(root);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//以root为起点的最长同值路径</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//以左、右子节点为起点的最长同值路径</span></span><br><span class="line">        <span class="keyword">int</span> leftLength = helper(root.left);</span><br><span class="line">        <span class="keyword">int</span> rightLength = helper(root.right);</span><br><span class="line">        <span class="comment">//如果左、右子树都非空 且 root.val == root.left.val == root.right.val，更新ans</span></span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span> &amp;&amp; root.right != <span class="keyword">null</span> &amp;&amp; root.val == root.left.val  &amp;&amp; root.val == root.right.val)&#123;</span><br><span class="line">            ans = Math.max(ans, leftLength + rightLength + <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> leftPath = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> rightPath = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//如果左右子树有非空且子节点的值与root的值相等，以根节点为起点的最长同值路径为leftPath,rightPath中的最大值</span></span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span> &amp;&amp; root.left.val == root.val)&#123;</span><br><span class="line">            leftPath  = leftLength + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.right != <span class="keyword">null</span> &amp;&amp; root.right.val == root.val)&#123;</span><br><span class="line">            rightPath = rightLength + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//取左右子树的最长同值路径的最大值</span></span><br><span class="line">        maxLength = Math.max(leftPath,rightPath);</span><br><span class="line">        <span class="comment">//更新ans</span></span><br><span class="line">        ans = Math.max(ans, maxLength);</span><br><span class="line">        <span class="keyword">return</span> maxLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>简洁版：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> path = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestUnivaluePath</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    dfs(root);</span><br><span class="line">    <span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = dfs(root.left);</span><br><span class="line">    <span class="keyword">int</span> right = dfs(root.right);</span><br><span class="line">    <span class="keyword">int</span> leftPath = root.left != <span class="keyword">null</span> &amp;&amp; root.left.val == root.val ? left + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> rightPath = root.right != <span class="keyword">null</span> &amp;&amp; root.right.val == root.val ? right + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    path = Math.max(path, leftPath + rightPath);</span><br><span class="line">    <span class="keyword">return</span> Math.max(leftPath, rightPath);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> path = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestUnivaluePath</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    dfs(root);</span><br><span class="line">    <span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = dfs(root.left);</span><br><span class="line">    <span class="keyword">int</span> right = dfs(root.right);</span><br><span class="line">    <span class="keyword">int</span> leftPath = root.left != <span class="keyword">null</span> &amp;&amp; root.left.val == root.val ? left + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> rightPath = root.right != <span class="keyword">null</span> &amp;&amp; root.right.val == root.val ? right + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    path = Math.max(path, leftPath + rightPath);</span><br><span class="line">    <span class="keyword">return</span> Math.max(leftPath, rightPath);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="671，二叉树中第二小的节点，easy"><a href="#671，二叉树中第二小的节点，easy" class="headerlink" title="671，二叉树中第二小的节点，easy"></a>671，二叉树中第二小的节点，easy</h5><p>给定一个非空特殊的二叉树，每个节点都是正数，并且每个节点的子节点数量只能为 2 或 0。如果一个节点有两个子节点的话，那么该节点的值等于两个子节点中较小的一个。</p>
+<h5 id="二叉树中第二小的节点easy">671，二叉树中第二小的节点，easy</h5>
+<p>给定一个非空特殊的二叉树，每个节点都是正数，并且每个节点的子节点数量只能为 2 或 0。如果一个节点有两个子节点的话，那么该节点的值等于两个子节点中较小的一个。</p>
 <p>更正式地说，<code>root.val = min(root.left.val, root.right.val)</code> 总成立。</p>
 <p>给出这样的一个二叉树，你需要输出所有节点中的第二小的值。如果第二小的值不存在的话，输出 -1 。</p>
 <p>示例 1：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/0bcc8d1bfd49276663468ef8e4c20907.png" alt="img"></p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/0bcc8d1bfd49276663468ef8e4c20907.png" alt="img" /><figcaption>img</figcaption>
+</figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; [2,2,5,null,null,5,7]</span><br><span class="line">输出：5</span><br><span class="line">解释：最小的值是 2 ，第二小的值是 5 。</span><br></pre></td></tr></table></figure>
-
 <p>示例 2：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/ac58c17f14a23e31dd1aa6a7c40abcc6.png" alt="img"></p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/ac58c17f14a23e31dd1aa6a7c40abcc6.png" alt="img" /><figcaption>img</figcaption>
+</figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; [2,2,2]</span><br><span class="line">输出：-1</span><br><span class="line">解释：最小的值是 2, 但是不存在第二小的值。</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>题意解析：每个树的根节点的值都为这棵树所有节点最小的值，所有节点中第二小的值即只比根节点大的值。</p>
-</li>
+<li><p>题意解析：每个树的根节点的值都为这棵树所有节点最小的值，所有节点中第二小的值即只比根节点大的值。</p></li>
 <li><p>方法一：递归。</p>
 <ul>
 <li>递归出口：节点为空，返回 -1。</li>
-<li>递归体：<ul>
+<li>递归体：
+<ul>
 <li>左右子节点都为空，返回 -1。</li>
 <li>根节点取的是左子节点的值，递归左子节点得到只比这个值大的值（或 -1，即此节点为叶子节点）</li>
 <li>根节点取的是右子节点的值，递归右子节点得到只比这个值大的值（或 -1，即此节点为叶子节点）</li>
-</ul>
-</li>
-<li>结果：<ul>
+</ul></li>
+<li>结果：
+<ul>
 <li>left 、right 如果都不为 -1，取最小值并返回</li>
 <li>left 不为 -1(right 为 -1)，返回left</li>
 <li>否则（left为 -1），返回right(-1 或 root.right.val或递归结果)</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li><p>代码：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findSecondMinimumValue</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> left = root.left.val;</span><br><span class="line">        <span class="comment">//如果左子节点是最小值，递归左子节点，得到以左子节点为根的树的第二小的值 或 -1</span></span><br><span class="line">        <span class="keyword">if</span>(left == root.val)&#123;</span><br><span class="line">            left = findSecondMinimumValue(root.left);<span class="comment">//-1 或 以root.left为根的树的第二小的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> right = root.right.val;</span><br><span class="line">        <span class="comment">//如果右子节点是最小值，递归右子节点，得到以右子节点为根的树的第二小的值 或 -1</span></span><br><span class="line">        <span class="keyword">if</span>(right == root.val)&#123;</span><br><span class="line">            right = findSecondMinimumValue(root.right);<span class="comment">//-1 或 以root.right为根的树的第二小的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果两边的树递归结果都不为-1（都正常），返回它们的最小值，即在root为根的树中只比root.val大</span></span><br><span class="line">        <span class="keyword">if</span>(left != -<span class="number">1</span> &amp;&amp; right != -<span class="number">1</span>) <span class="keyword">return</span> Math.min(left,right);</span><br><span class="line">        <span class="comment">//如果左子树正常，返回左子树</span></span><br><span class="line">        <span class="keyword">if</span>(left != -<span class="number">1</span>) <span class="keyword">return</span> left; </span><br><span class="line">        <span class="comment">//否则返回右子树递归值（-1 或 以root.right为根的树的第二小的值）</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> right;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -694,8 +642,8 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
               <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           </div>
 
         
@@ -812,6 +760,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="Java Scanner类 用于获取用户输入语法：   Scanner s &#x3D; new Scanner(System.in);  可通过调用下列函数nextDouble()，nextFloat，nextInt()，nextLine()，nextLong()，nextShot()读取用户在命令行输入的各种数据类型　  next()与nextLine()区别：">
+  <meta name="description" content="Java Scanner类  用于获取用户输入 语法： Scanner s &#x3D; new Scanner(System.in); 可通过调用下列函数nextDouble()，nextFloat，nextInt()，nextLine()，nextLong()，nextShot()读取用户在命令行输入的各种数据类型　 next()与nextLine()区别：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-Scanner类">
 <meta property="og:url" content="http://example.com/2020/11/28/Java-Scanner%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="Java Scanner类 用于获取用户输入语法：   Scanner s &#x3D; new Scanner(System.in);  可通过调用下列函数nextDouble()，nextFloat，nextInt()，nextLine()，nextLong()，nextShot()读取用户在命令行输入的各种数据类型　  next()与nextLine()区别：">
+<meta property="og:description" content="Java Scanner类  用于获取用户输入 语法： Scanner s &#x3D; new Scanner(System.in); 可通过调用下列函数nextDouble()，nextFloat，nextInt()，nextLine()，nextLong()，nextShot()读取用户在命令行输入的各种数据类型　 next()与nextLine()区别：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201127160744149.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201127160901915.png">
@@ -100,7 +100,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -185,7 +189,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-Scanner%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">Java Scanner类</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java-scanner%E7%B1%BB"><span class="nav-text">Java Scanner类</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -201,7 +205,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -301,48 +305,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Java-Scanner类"><a href="#Java-Scanner类" class="headerlink" title="Java Scanner类"></a>Java Scanner类</h2><ul>
-<li><p>用于获取用户输入<br>语法：</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可通过调用下列函数<code>nextDouble()</code>，<code>nextFloat</code>，<code>nextInt()</code>，<code>nextLine()</code>，<code>nextLong()</code>，<code>nextShot()</code>读取用户在命令行输入的各种数据类型　</p>
-</li>
-<li><p>next()与nextLine()区别：</p>
-  <a id="more"></a>
-
+        <h2 id="java-scanner类">Java Scanner类</h2>
 <ul>
-<li>next() : </li>
+<li><p>用于获取用户输入 语法：</p>
+<p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure></p></li>
+<li><p>可通过调用下列函数<code>nextDouble()</code>，<code>nextFloat</code>，<code>nextInt()</code>，<code>nextLine()</code>，<code>nextLong()</code>，<code>nextShot()</code>读取用户在命令行输入的各种数据类型　</p></li>
+<li><p>next()与nextLine()区别：</p>
+<p><a id="more"></a></p>
+<ul>
+<li>next() :</li>
 </ul>
-<ol>
+<ol type="1">
 <li>一定要读到有效字符结束输入</li>
-<li>对输入有效字符之前遇到的空白，next() 方法会自动将其去掉。<ol start="3">
+<li>对输入有效字符之前遇到的空白，next() 方法会自动将其去掉。</li>
 <li>只有输入有效字符后才将其后面输入的空白作为分隔符或者结束符。</li>
-<li>next() 不能得到带有空格的字符串。<br>总之就是<strong>遇到空格停止扫描</strong></li>
+<li>next() 不能得到带有空格的字符串。 总之就是<strong>遇到空格停止扫描</strong></li>
 </ol>
 <ul>
 <li>nextLine()：</li>
 </ul>
-<ol>
+<ol type="1">
 <li>以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符。</li>
-<li>可以获得空白。<br>总之就是<strong>以回车为停止扫描</strong></li>
-</ol>
-</li>
-</ol>
-</li>
+<li>可以获得空白。 总之就是<strong>以回车为停止扫描</strong></li>
+</ol></li>
 </ul>
-<p>举例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">System.out.println(<span class="string">&quot;输入：&quot;</span>);</span><br><span class="line">String s = sc.next();<span class="comment">//Hello World!</span></span><br><span class="line">System.out.println(s);</span><br></pre></td></tr></table></figure>
-<p>  测试效果：<br><img src="https://img-blog.csdnimg.cn/20201127160744149.png" alt="在这里插入图片描述"></p>
+<p>举例： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">System.out.println(<span class="string">&quot;输入：&quot;</span>);</span><br><span class="line">String s = sc.next();<span class="comment">//Hello World!</span></span><br><span class="line">System.out.println(s);</span><br></pre></td></tr></table></figure> 测试效果： <img src="https://img-blog.csdnimg.cn/20201127160744149.png" alt="在这里插入图片描述" /></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">System.out.println(<span class="string">&quot;输入：&quot;</span>);</span><br><span class="line">String s = sc.nextLine();<span class="comment">//Hello World!</span></span><br><span class="line">System.out.println(s);</span><br></pre></td></tr></table></figure>
-<p>  测试效果：<br><img src="https://img-blog.csdnimg.cn/20201127160901915.png" alt="在这里插入图片描述"></p>
+<p>测试效果： <img src="https://img-blog.csdnimg.cn/20201127160901915.png" alt="在这里插入图片描述" /></p>
 <ul>
-<li><p>控制台输入一个可变长度数组</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">String[] strArray = <span class="keyword">null</span>;</span><br><span class="line">strArray = sc.nextLine().split(<span class="string">&quot;\\s*,\\s*&quot;</span>);  <span class="comment">// &#x27;,&#x27;分割，前后可以有空格</span></span><br><span class="line"><span class="keyword">int</span>[] intArray = <span class="keyword">new</span> <span class="keyword">int</span>[strArray.length];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; strArray.length; i++) &#123;</span><br><span class="line">    intArray[i] = Integer.parseInt(strArray[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>控制台输入一个二维数组</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"> System.out.print(<span class="string">&quot;二维数组的行数：&quot;</span>);</span><br><span class="line"> <span class="keyword">int</span> r = sc.nextInt();</span><br><span class="line"> System.out.println(<span class="string">&quot;二维数组的列数：&quot;</span>);</span><br><span class="line"> <span class="keyword">int</span> c = sc.nextInt();</span><br><span class="line"> <span class="keyword">int</span>[][]matrix = <span class="keyword">new</span> <span class="keyword">int</span>[r][c];</span><br><span class="line"> sc.nextLine();<span class="comment">//用来跳过行列后的回车符</span></span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r; i++)&#123;</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; c; j++)&#123;</span><br><span class="line">         matrix[i][j] = sc.nextInt();</span><br><span class="line">         System.out.print(matrix[i][j] + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">     &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;&quot;</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p> 测试效果：<br><img src="https://img-blog.csdnimg.cn/20201128205414284.PNG" alt="在这里插入图片描述"></p>
-</li>
+<li><p>控制台输入一个可变长度数组 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">String[] strArray = <span class="keyword">null</span>;</span><br><span class="line">strArray = sc.nextLine().split(<span class="string">&quot;\\s*,\\s*&quot;</span>);  <span class="comment">// &#x27;,&#x27;分割，前后可以有空格</span></span><br><span class="line"><span class="keyword">int</span>[] intArray = <span class="keyword">new</span> <span class="keyword">int</span>[strArray.length];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; strArray.length; i++) &#123;</span><br><span class="line">    intArray[i] = Integer.parseInt(strArray[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>控制台输入一个二维数组 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"> System.out.print(<span class="string">&quot;二维数组的行数：&quot;</span>);</span><br><span class="line"> <span class="keyword">int</span> r = sc.nextInt();</span><br><span class="line"> System.out.println(<span class="string">&quot;二维数组的列数：&quot;</span>);</span><br><span class="line"> <span class="keyword">int</span> c = sc.nextInt();</span><br><span class="line"> <span class="keyword">int</span>[][]matrix = <span class="keyword">new</span> <span class="keyword">int</span>[r][c];</span><br><span class="line"> sc.nextLine();<span class="comment">//用来跳过行列后的回车符</span></span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r; i++)&#123;</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; c; j++)&#123;</span><br><span class="line">         matrix[i][j] = sc.nextInt();</span><br><span class="line">         System.out.print(matrix[i][j] + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">     &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;&quot;</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure> 测试效果： <img src="https://img-blog.csdnimg.cn/20201128205414284.PNG" alt="在这里插入图片描述" /></p></li>
 </ul>
 
     </div>
@@ -479,6 +471,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

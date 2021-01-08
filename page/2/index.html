@@ -93,7 +93,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -193,7 +197,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -237,6 +241,92 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/21/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/21/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/" class="post-title-link" itemprop="url">LeetCode刷题—重建二叉树</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-21 14:39:20 / 修改时间：14:40:14" itemprop="dateCreated datePublished" datetime="2020-12-21T14:39:20+08:00">2020-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>LeetCode中有三道很类似的题，思路也大同小异，故作一总结。</p>
+<p><a href="#105，从前序与中序遍历序列构造二叉树，medium">105，从前序与中序遍历序列构造二叉树，medium</a> <a href="#106，根据中序和后序遍历构造二叉树，medium">106，根据中序和后序遍历构造二叉树，medium</a> <a href="#889，根据前序和后序遍历构造二叉树，medium">889，根据前序和后序遍历构造二叉树，medium</a></p>
+<p>这三道题都是给出两种遍历方式，由其遍历顺序可发现规律来重建此二叉树。下面详解105题，后两题思路稍作改变，比较好懂了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/21/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -293,8 +383,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="此篇用于梳理二叉树的遍历方式：深度优先遍历（前、中、后序遍历）和广度优先遍历，不仅能快速领会思想和总结规律，还可以顺便刷下这些题："><a href="#此篇用于梳理二叉树的遍历方式：深度优先遍历（前、中、后序遍历）和广度优先遍历，不仅能快速领会思想和总结规律，还可以顺便刷下这些题：" class="headerlink" title="此篇用于梳理二叉树的遍历方式：深度优先遍历（前、中、后序遍历）和广度优先遍历，不仅能快速领会思想和总结规律，还可以顺便刷下这些题："></a>此篇用于梳理二叉树的遍历方式：深度优先遍历（前、中、后序遍历）和广度优先遍历，不仅能快速领会思想和总结规律，还可以顺便刷下这些题：</h4><p><a href="#LeetCode%E7%9A%8494%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86">94，二叉树的中序遍历，medium</a><br><a href="#LeetCode%E7%9A%84102%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86">102，二叉树的层序遍历，easy</a><br><a href="#LeetCode%E7%9A%84230%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%AC%ACk%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0">230，二叉搜索树中第k小的元素，medium</a><br><a href="#LeetCode%E7%9A%84501%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0">501，二叉搜索树中的众数，easy</a><br><a href="#LeetCode%E7%9A%84530%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE">530，二叉树搜索树的最小绝对差，easy</a></p>
-<p><a href="#LeetCode%E7%9A%84530%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE">530，二叉树搜索树的最小绝对差，easy</a></p>
+          <h4 id="此篇用于梳理二叉树的遍历方式深度优先遍历前中后序遍历和广度优先遍历不仅能快速领会思想和总结规律还可以顺便刷下这些题">此篇用于梳理二叉树的遍历方式：深度优先遍历（前、中、后序遍历）和广度优先遍历，不仅能快速领会思想和总结规律，还可以顺便刷下这些题：</h4>
+<p><a href="#LeetCode的94题：二叉树的中序遍历">94，二叉树的中序遍历，medium</a> <a href="#LeetCode的102题：二叉树的层次遍历">102，二叉树的层序遍历，easy</a> <a href="#LeetCode的230题：二叉搜索树中第k小的元素">230，二叉搜索树中第k小的元素，medium</a> <a href="#LeetCode的501题：二叉搜索树中的众数">501，二叉搜索树中的众数，easy</a> <a href="#LeetCode的530题：二叉树搜索树的最小绝对差">530，二叉树搜索树的最小绝对差，easy</a></p>
+<p><a href="#LeetCode的530题：二叉树搜索树的最小绝对差">530，二叉树搜索树的最小绝对差，easy</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/20/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/#more" rel="contents">
@@ -378,7 +469,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>针对下面两题作出解答与总结：<br><a href="#235%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%EF%BC%8Ceasy">235，二叉搜索树的最近公共祖先，easy</a><br><a href="#236%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%EF%BC%8Cmedium">236，二叉树的最近公共祖先，medium</a></p>
+          <p>针对下面两题作出解答与总结： <a href="#235，二叉搜索树的最近公共祖先，easy">235，二叉搜索树的最近公共祖先，easy</a> <a href="#236，二叉树的最近公共祖先，medium">236，二叉树的最近公共祖先，medium</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/17/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/#more" rel="contents">
@@ -462,7 +553,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>本文针对BST 的基础操作：判断 BST 的合法性（<em>98</em>）、增（<em>701</em>）、删（<em>450</em>）、查（<em>700</em>）。以几道题来总结出套路模板，以一敌十！<br><a href="#98%EF%BC%8C%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%8Cmedium">98，验证二叉搜索树，medium</a><br><a href="#700%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2%EF%BC%8Ceasy">700，二叉搜索树中的搜索，easy</a><br><a href="#701%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C%EF%BC%8Cmedium">701，二叉搜索树中的插入操作，medium</a><br><a href="#450%EF%BC%8C%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Cmedium">450，删除二叉搜索树中的节点，medium</a></p>
+          <p>本文针对BST 的基础操作：判断 BST 的合法性（<em>98</em>）、增（<em>701</em>）、删（<em>450</em>）、查（<em>700</em>）。以几道题来总结出套路模板，以一敌十！ <a href="#98，验证二叉搜索树，medium">98，验证二叉搜索树，medium</a> <a href="#700，二叉搜索树中的搜索，easy">700，二叉搜索树中的搜索，easy</a> <a href="#701，二叉搜索树中的插入操作，medium">701，二叉搜索树中的插入操作，medium</a> <a href="#450，删除二叉搜索树中的节点，medium">450，删除二叉搜索树中的节点，medium</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94BST%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%A5%97%E8%B7%AF%E6%A8%A1%E6%9D%BF/#more" rel="contents">
@@ -546,110 +637,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题：<br><a href="#104%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6%EF%BC%8Ceasy">104，二叉树的最大深度，easy</a></p>
-<p><a href="#110%EF%BC%8C%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">110，平衡二叉树，easy</a></p>
-<p><a href="#543%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%EF%BC%8Ceasy">543，二叉树的直径，easy</a></p>
-<p><a href="#226%EF%BC%8C%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">226，翻转二叉树，easy</a></p>
-<p><a href="#617%EF%BC%8C%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">617，合并二叉树，easy</a></p>
-<p><a href="#112%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%EF%BC%8Ceasy">112，路径总和，easy</a></p>
-<p><a href="#113%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%E2%85%A1%EF%BC%8Cmidium">113，路径总和Ⅱ，midium</a></p>
-<p><a href="#572%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91%EF%BC%8Ceasy">572，另一个树的子树，easy</a></p>
-<p><a href="#101%EF%BC%8C%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Ceasy">101，对称二叉树，easy</a></p>
-<p><a href="#111%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6%EF%BC%8Ceasy">111，二叉树的最小深度，easy</a></p>
-<p><a href="#404%EF%BC%8C%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C%EF%BC%8Ceasy">404，左叶子之和，easy</a></p>
-<p><a href="#687%EF%BC%8C%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84%EF%BC%8Cmedium">687，最长同值路径，medium</a></p>
-<p><a href="#671%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Ceasy">671，二叉树中第二小的节点，easy</a></p>
+          <p>对于树，经常用的算法有递归，回溯，BFS，DFS等。下面是一些用递归算法来解的题： <a href="#104，二叉树的最大深度，easy">104，二叉树的最大深度，easy</a></p>
+<p><a href="#110，平衡二叉树，easy">110，平衡二叉树，easy</a></p>
+<p><a href="#543，二叉树的直径，easy">543，二叉树的直径，easy</a></p>
+<p><a href="#226，翻转二叉树，easy">226，翻转二叉树，easy</a></p>
+<p><a href="#617，合并二叉树，easy">617，合并二叉树，easy</a></p>
+<p><a href="#112，路径总和，easy">112，路径总和，easy</a></p>
+<p><a href="#113，路径总和Ⅱ，midium">113，路径总和Ⅱ，midium</a></p>
+<p><a href="#572，另一个树的子树，easy">572，另一个树的子树，easy</a></p>
+<p><a href="#101，对称二叉树，easy">101，对称二叉树，easy</a></p>
+<p><a href="#111，二叉树的最小深度，easy">111，二叉树的最小深度，easy</a></p>
+<p><a href="#404，左叶子之和，easy">404，左叶子之和，easy</a></p>
+<p><a href="#687，最长同值路径，medium">687，最长同值路径，medium</a></p>
+<p><a href="#671，二叉树中第二小的节点，easy">671，二叉树中第二小的节点，easy</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%80%92%E5%BD%92%E8%A7%A3%E5%86%B3%E6%A0%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
-      <meta itemprop="name" content="Rui Wang">
-      <meta itemprop="description" content="去摘遥不可及的星星">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rui">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">LeetCode刷题—链表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-12-08 17:12:00 / 修改时间：17:15:05" itemprop="dateCreated datePublished" datetime="2020-12-08T17:12:00+08:00">2020-12-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="LeetCode刷题"><a href="#LeetCode刷题" class="headerlink" title="LeetCode刷题"></a>LeetCode刷题</h1><h2 id="数据结构："><a href="#数据结构：" class="headerlink" title="数据结构："></a>数据结构：</h2><h3 id="一、链表"><a href="#一、链表" class="headerlink" title="一、链表"></a>一、链表</h3><p><a href="#160%EF%BC%8C%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8%EF%BC%8Ceasy">160，相交链表，easy</a></p>
-<p><a href="#206%EF%BC%8C%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%EF%BC%8Ceasy">206，反转链表，easy</a></p>
-<p><a href="#21%EF%BC%8C%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%EF%BC%8Ceasy">21，合并两个有序链表，easy</a></p>
-<p><a href="#83%EF%BC%8C%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%EF%BC%8Ceasy">83，删除排序链表中的重复元素，easy</a></p>
-<p><a href="#83-%E2%85%A1.%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%EF%BC%8Cmiddle">83-Ⅱ.删除排序链表中的重复元素，middle</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/08/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%93%BE%E8%A1%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -773,6 +776,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

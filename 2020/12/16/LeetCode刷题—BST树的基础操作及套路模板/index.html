@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="本文针对BST 的基础操作：判断 BST 的合法性（98）、增（701）、删（450）、查（700）。以几道题来总结出套路模板，以一敌十！98，验证二叉搜索树，medium700，二叉搜索树中的搜索，easy701，二叉搜索树中的插入操作，medium450，删除二叉搜索树中的节点，medium">
+  <meta name="description" content="本文针对BST 的基础操作：判断 BST 的合法性（98）、增（701）、删（450）、查（700）。以几道题来总结出套路模板，以一敌十！ 98，验证二叉搜索树，medium 700，二叉搜索树中的搜索，easy 701，二叉搜索树中的插入操作，medium 450，删除二叉搜索树中的节点，medium">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode刷题—BST树的基础操作及套路模板">
 <meta property="og:url" content="http://example.com/2020/12/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94BST%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%A5%97%E8%B7%AF%E6%A8%A1%E6%9D%BF/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="本文针对BST 的基础操作：判断 BST 的合法性（98）、增（701）、删（450）、查（700）。以几道题来总结出套路模板，以一敌十！98，验证二叉搜索树，medium700，二叉搜索树中的搜索，easy701，二叉搜索树中的插入操作，medium450，删除二叉搜索树中的节点，medium">
+<meta property="og:description" content="本文针对BST 的基础操作：判断 BST 的合法性（98）、增（701）、删（450）、查（700）。以几道题来总结出套路模板，以一敌十！ 98，验证二叉搜索树，medium 700，二叉搜索树中的搜索，easy 701，二叉搜索树中的插入操作，medium 450，删除二叉搜索树中的节点，medium">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/be940ab2e07119dcd45e5d58370fc5de.png">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/05/bst.jpg">
@@ -101,7 +101,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -186,7 +190,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#98%EF%BC%8C%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%8Cmedium"><span class="nav-number">1.</span> <span class="nav-text">98，验证二叉搜索树，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#700%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2%EF%BC%8Ceasy"><span class="nav-number">2.</span> <span class="nav-text">700，二叉搜索树中的搜索，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#701%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C%EF%BC%8Cmedium"><span class="nav-number">3.</span> <span class="nav-text">701，二叉搜索树中的插入操作，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#450%EF%BC%8C%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Cmedium"><span class="nav-number">4.</span> <span class="nav-text">450，删除二叉搜索树中的节点，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">总结：</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91medium"><span class="nav-text">98，验证二叉搜索树，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2easy"><span class="nav-text">700，二叉搜索树中的搜索，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9Cmedium"><span class="nav-text">701，二叉搜索树中的插入操作，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9medium"><span class="nav-text">450，删除二叉搜索树中的节点，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结：</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -202,7 +206,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -302,49 +306,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>本文针对BST 的基础操作：判断 BST 的合法性（<em>98</em>）、增（<em>701</em>）、删（<em>450</em>）、查（<em>700</em>）。以几道题来总结出套路模板，以一敌十！<br><a href="#98%EF%BC%8C%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%8Cmedium">98，验证二叉搜索树，medium</a><br><a href="#700%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2%EF%BC%8Ceasy">700，二叉搜索树中的搜索，easy</a><br><a href="#701%EF%BC%8C%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C%EF%BC%8Cmedium">701，二叉搜索树中的插入操作，medium</a><br><a href="#450%EF%BC%8C%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8Cmedium">450，删除二叉搜索树中的节点，medium</a></p>
+        <p>本文针对BST 的基础操作：判断 BST 的合法性（<em>98</em>）、增（<em>701</em>）、删（<em>450</em>）、查（<em>700</em>）。以几道题来总结出套路模板，以一敌十！ <a href="#98，验证二叉搜索树，medium">98，验证二叉搜索树，medium</a> <a href="#700，二叉搜索树中的搜索，easy">700，二叉搜索树中的搜索，easy</a> <a href="#701，二叉搜索树中的插入操作，medium">701，二叉搜索树中的插入操作，medium</a> <a href="#450，删除二叉搜索树中的节点，medium">450，删除二叉搜索树中的节点，medium</a></p>
 <a id="more"></a>
-
-<h5 id="98，验证二叉搜索树，medium"><a href="#98，验证二叉搜索树，medium" class="headerlink" title="98，验证二叉搜索树，medium"></a>98，验证二叉搜索树，medium</h5><p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。</p>
+<h5 id="验证二叉搜索树medium">98，验证二叉搜索树，medium</h5>
+<p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。</p>
 <p>示例 1:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">    2</span><br><span class="line">   &#x2F; \</span><br><span class="line">  1   3</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
-
-
 <p>示例 2:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">    5</span><br><span class="line">   &#x2F; \</span><br><span class="line">  1   4</span><br><span class="line">     &#x2F; \</span><br><span class="line">    3   6</span><br><span class="line">输出: false</span><br><span class="line">解释: 输入为: [5,1,4,null,null,3,6]。</span><br><span class="line">     根节点的值为 5 ，但是其右子节点值为 4 。</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>方法一：递归。</p>
 <ul>
 <li><p>思路：很容易想到对于节点root，采用递归判断左子节点的值比它小，右子节点的值比它大，但注意：对每个节点都满足也不一定是BST树，如：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  5</span><br><span class="line"> &#x2F; \</span><br><span class="line">1   6</span><br><span class="line">   &#x2F; \</span><br><span class="line">  4   7</span><br></pre></td></tr></table></figure>
-
 <p>没有满足右子树的节点都比root值大。</p>
-<p>建立辅助函数，增加最小节点min和最大节点max 作为辅助函数的参量。对于root，比较<code>root.val</code>与当前的<code>min.val</code> 和 <code>max.val</code>，再对<code>root.left</code> 和<code>root.right</code> 进行递归操作。</p>
-</li>
+<p>建立辅助函数，增加最小节点min和最大节点max 作为辅助函数的参量。对于root，比较<code>root.val</code>与当前的<code>min.val</code> 和 <code>max.val</code>，再对<code>root.left</code> 和<code>root.right</code> 进行递归操作。</p></li>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> healper(root, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//是BST树必须满足 min.val &lt; root.val &lt; max.val</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">healper</span><span class="params">(TreeNode root, TreeNode min, TreeNode max)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(min != <span class="keyword">null</span> &amp;&amp; min.val &gt;= root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(max != <span class="keyword">null</span> &amp;&amp; max.val &lt;= root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">//左子树范围的最小值是min.val，最大值是当前节点的值，也就是root的值，因为左子树的值要比当前节点小</span></span><br><span class="line">    <span class="comment">//右子数范围的最大值是max.val，最小值是当前节点的值，也就是root的值，因为右子树的值要比当前节点大</span></span><br><span class="line">        <span class="keyword">return</span> healper(root.left, min, root) &amp;&amp; healper(root.right, root, max);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> healper(root, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//是BST树必须满足 min.val &lt; root.val &lt; max.val</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">healper</span><span class="params">(TreeNode root, TreeNode min, TreeNode max)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(min != <span class="keyword">null</span> &amp;&amp; min.val &gt;= root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(max != <span class="keyword">null</span> &amp;&amp; max.val &lt;= root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">//左子树范围的最小值是min.val，最大值是当前节点的值，也就是root的值，因为左子树的值要比当前节点小</span></span><br><span class="line">    <span class="comment">//右子数范围的最大值是max.val，最小值是当前节点的值，也就是root的值，因为右子树的值要比当前节点大</span></span><br><span class="line">        <span class="keyword">return</span> healper(root.left, min, root) &amp;&amp; healper(root.right, root, max);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
 <li><p>方法二：中序遍历。</p>
 <ul>
 <li><p>思路：中序遍历的结果是从小到大排序的，建立一个全局遍历<code>pre</code>代表前一个节点，当前节点与前一个节点进行比较。</p>
 <ul>
 <li><p>递归：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//中序遍历，代表前一个节点</span></span><br><span class="line">    TreeNode pre;</span><br><span class="line"><span class="comment">//中序遍历，递归</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">// 访问左子树</span></span><br><span class="line">        <span class="keyword">if</span>(!isValidBST(root.left)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// 访问当前节点，如果不是按照从小到大的顺序，则返回false；否则pre右移，继续比较</span></span><br><span class="line">        <span class="keyword">if</span>(pre != <span class="keyword">null</span> &amp;&amp; pre.val &gt;= root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        pre = root;</span><br><span class="line">        <span class="comment">// 访问右子树</span></span><br><span class="line">        <span class="keyword">if</span>(!isValidBST(root.right)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//中序遍历，代表前一个节点</span></span><br><span class="line">    TreeNode pre;</span><br><span class="line"><span class="comment">//中序遍历，递归</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">// 访问左子树</span></span><br><span class="line">        <span class="keyword">if</span>(!isValidBST(root.left)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// 访问当前节点，如果不是按照从小到大的顺序，则返回false；否则pre右移，继续比较</span></span><br><span class="line">        <span class="keyword">if</span>(pre != <span class="keyword">null</span> &amp;&amp; pre.val &gt;= root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        pre = root;</span><br><span class="line">        <span class="comment">// 访问右子树</span></span><br><span class="line">        <span class="keyword">if</span>(!isValidBST(root.right)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>迭代：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//中序遍历，代表前一个节点</span></span><br><span class="line">    TreeNode pre;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty() || root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">while</span>(root != <span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(root);</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125;</span><br><span class="line">            root = stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(pre != <span class="keyword">null</span> &amp;&amp; pre.val &gt;= root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            pre = root;</span><br><span class="line">            root = root.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//中序遍历，代表前一个节点</span></span><br><span class="line">    TreeNode pre;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty() || root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">while</span>(root != <span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(root);</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125;</span><br><span class="line">            root = stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(pre != <span class="keyword">null</span> &amp;&amp; pre.val &gt;= root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            pre = root;</span><br><span class="line">            root = root.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul></li>
+<li><p>易错点：采用递归方法只与左右子节点比较，但没有保证整棵树是BST树。</p></li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>易错点：采用递归方法只与左右子节点比较，但没有保证整棵树是BST树。</p>
-</li>
-</ul>
-<h5 id="700，二叉搜索树中的搜索，easy"><a href="#700，二叉搜索树中的搜索，easy" class="headerlink" title="700，二叉搜索树中的搜索，easy"></a>700，二叉搜索树中的搜索，easy</h5><p>给定二叉搜索树（BST）的根节点和一个值。 你需要在BST中找到节点值等于给定值的节点。 返回以该节点为根的子树。 如果节点不存在，则返回 NULL。</p>
+<h5 id="二叉搜索树中的搜索easy">700，二叉搜索树中的搜索，easy</h5>
+<p>给定二叉搜索树（BST）的根节点和一个值。 你需要在BST中找到节点值等于给定值的节点。 返回以该节点为根的子树。 如果节点不存在，则返回 NULL。</p>
 <p>例如，</p>
 <p>给定二叉搜索树:</p>
 <pre><code>    4
@@ -352,7 +345,7 @@
   2   7
  / \
 1   3</code></pre>
-<p>和值: 2<br>你应该返回如下子树:</p>
+<p>和值: 2 你应该返回如下子树:</p>
 <pre><code>  2     
  / \   
 1   3</code></pre>
@@ -360,34 +353,27 @@
 <ul>
 <li><p>思路：对于普通二叉树，判断是否存在值为 <code>val</code> 的节点</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(root.val == val) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">return</span> search(root.left, val) || search(root.right, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于BST树，利用其左小右大的规律，不需要递归地搜索两边，类似二分查找思想，根据<code>val</code>和<code>root.val</code>的大小比较，就能排除一边。</p>
-</li>
+<p>对于BST树，利用其左小右大的规律，不需要递归地搜索两边，类似二分查找思想，根据<code>val</code>和<code>root.val</code>的大小比较，就能排除一边。</p></li>
 <li><p>代码：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">searchBST</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    	<span class="keyword">if</span>(root.val == val) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.val &lt; val) <span class="keyword">return</span> searchBST(root.right, val);</span><br><span class="line">         <span class="keyword">if</span>(root.val &gt; val) <span class="keyword">return</span> searchBST(root.left, val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>简化：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">searchBST</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="keyword">null</span> || root.val == val) <span class="keyword">return</span> root;</span><br><span class="line">    <span class="keyword">return</span> val &lt; root.val ? searchBST(root.left, val) : searchBST(root.right, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">searchBST</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="keyword">null</span> || root.val == val) <span class="keyword">return</span> root;</span><br><span class="line">    <span class="keyword">return</span> val &lt; root.val ? searchBST(root.left, val) : searchBST(root.right, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>总结</strong>：BST树遍历搜索的框架为</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BST</span><span class="params">(TreeNode root, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root.val == target)&#123;</span><br><span class="line">        <span class="comment">// 找到目标节点，进行具体操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//目标值target比当前节点值大，在右子树中找</span></span><br><span class="line">    <span class="keyword">if</span> (root.val &lt; target) </span><br><span class="line">        BST(root.right, target);</span><br><span class="line">    <span class="comment">//目标值target比当前节点值小，在左子树中找</span></span><br><span class="line">    <span class="keyword">if</span> (root.val &gt; target)</span><br><span class="line">        BST(root.left, target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BST</span><span class="params">(TreeNode root, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root.val == target)&#123;</span><br><span class="line">        <span class="comment">// 找到目标节点，进行具体操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//目标值target比当前节点值大，在右子树中找</span></span><br><span class="line">    <span class="keyword">if</span> (root.val &lt; target) </span><br><span class="line">        BST(root.right, target);</span><br><span class="line">    <span class="comment">//目标值target比当前节点值小，在左子树中找</span></span><br><span class="line">    <span class="keyword">if</span> (root.val &gt; target)</span><br><span class="line">        BST(root.left, target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="701，二叉搜索树中的插入操作，medium"><a href="#701，二叉搜索树中的插入操作，medium" class="headerlink" title="701，二叉搜索树中的插入操作，medium"></a>701，二叉搜索树中的插入操作，medium</h5><p>给定二叉搜索树（BST）的根节点和要插入树中的值，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。 输入数据 保证 ，新值和原始二叉搜索树中的任意节点值都不同。</p>
+<h5 id="二叉搜索树中的插入操作medium">701，二叉搜索树中的插入操作，medium</h5>
+<p>给定二叉搜索树（BST）的根节点和要插入树中的值，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。 输入数据 保证 ，新值和原始二叉搜索树中的任意节点值都不同。</p>
 <p>注意，可能存在多种有效的插入方式，只要树在插入后仍保持为二叉搜索树即可。 你可以返回 任意有效的结果 。</p>
 <p>示例 1：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/be940ab2e07119dcd45e5d58370fc5de.png" alt="img"></p>
-<p>输入：root = [4,2,7,1,3], val = 5<br>输出：[4,2,7,1,3,5]<br>解释：另一个满足题目要求可以通过的树是：</p>
-<img src="https://assets.leetcode.com/uploads/2020/10/05/bst.jpg" alt="img" style="zoom:80%;" />
-
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/be940ab2e07119dcd45e5d58370fc5de.png" alt="img" /><figcaption>img</figcaption>
+</figure>
+<p>输入：root = [4,2,7,1,3], val = 5 输出：[4,2,7,1,3,5] 解释：另一个满足题目要求可以通过的树是：</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/05/bst.jpg" alt="img" style="zoom:80%;" /></p>
 <p>示例 2：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; [40,20,60,10,30,50,70], val &#x3D; 25</span><br><span class="line">输出：[40,20,60,10,30,50,70,null,null,25]</span><br></pre></td></tr></table></figure>
-
-
 <p>示例 3：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：root &#x3D; [4,2,7,1,3,null,null,null,null,null,null], val &#x3D; 5</span><br><span class="line">输出：[4,2,7,1,3,5]</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>思路：</p>
 <p>对于函数<code>TreeNode insertIntoBST(TreeNode root, int val)</code>，表示插入值为 <code>val</code> 的节点后的BST树。由上面总结的查找的模板，再加入修改的操作即可。<strong>一旦涉及「改」，函数就要返回<code>TreeNode</code>类型，并且对递归调用的返回值进行接收。</strong></p>
@@ -395,15 +381,14 @@
 <li>方法：递归</li>
 <li>代码：</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//查找 + 修改</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">insertIntoBST</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(val);</span><br><span class="line">        <span class="comment">//val值比当前节点值大，将找个值插入右子树，且赋给root.right</span></span><br><span class="line">        <span class="keyword">if</span>(root.val &lt; val) root.right = insertIntoBST(root.right, val);</span><br><span class="line">        <span class="keyword">if</span>(root.val &gt; val) root.left = insertIntoBST(root.left, val);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//查找 + 修改</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">insertIntoBST</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(val);</span><br><span class="line">        <span class="comment">//val值比当前节点值大，将找个值插入右子树，且赋给root.right</span></span><br><span class="line">        <span class="keyword">if</span>(root.val &lt; val) root.right = insertIntoBST(root.right, val);</span><br><span class="line">        <span class="keyword">if</span>(root.val &gt; val) root.left = insertIntoBST(root.left, val);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="450，删除二叉搜索树中的节点，medium"><a href="#450，删除二叉搜索树中的节点，medium" class="headerlink" title="450，删除二叉搜索树中的节点，medium"></a>450，删除二叉搜索树中的节点，medium</h5><p>给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。</p>
+<h5 id="删除二叉搜索树中的节点medium">450，删除二叉搜索树中的节点，medium</h5>
+<p>给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。</p>
 <p>一般来说，删除节点可分为两个步骤：</p>
-<p>首先找到需要删除的节点；<br>如果找到了，删除它。<br>说明： 要求算法时间复杂度为 O(h)，h 为树的高度。</p>
+<p>首先找到需要删除的节点； 如果找到了，删除它。 说明： 要求算法时间复杂度为 O(h)，h 为树的高度。</p>
 <p>示例:</p>
-<p>root = [5,3,6,2,4,null,7]<br>key = 3</p>
+<p>root = [5,3,6,2,4,null,7] key = 3</p>
 <pre><code>    5
    / \
   3   6
@@ -425,36 +410,29 @@
 <ul>
 <li><p>思路：还是<strong>查找 + 修改</strong> 类型，按照上面的遍历框架，写出初步解答：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">TreeNode <span class="title">deleteNode</span><span class="params">(TreeNode root, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 找到啦，进行删除</span></span><br><span class="line">    <span class="keyword">if</span> (root.val == key) &#123;</span><br><span class="line">       <span class="comment">//一些删除操作</span></span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// key在左子树，对左子树进行删除操作并重新赋给root.left</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (root.val &gt; key) &#123;</span><br><span class="line">        root.left = deleteNode(root.left, key);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// key在右子树，对右子树进行删除操作并重新赋给root.right</span></span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        root.right = deleteNode(root.right, key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>找到要删除的节点后，删除操作有下面情况：</p>
-</li>
+<p>找到要删除的节点后，删除操作有下面情况：</p></li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20201216192138470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<ol>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20201216192138470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<ol type="1">
 <li><p>左右子节点有为空的（如12），返回非空的子节点</p>
 <p><em>（<code>deleteNode</code> 函数即返回删除值为key的节点后的树）</em></p>
 <p>如果左右子节点都为空，则返回null</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(root.left == <span class="keyword">null</span>) <span class="keyword">return</span> root.right;</span><br><span class="line"><span class="keyword">if</span>(root.right == <span class="keyword">null</span>) <span class="keyword">return</span> root.left;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(root.left == <span class="keyword">null</span>) <span class="keyword">return</span> root.right;</span><br><span class="line"><span class="keyword">if</span>(root.right == <span class="keyword">null</span>) <span class="keyword">return</span> root.left;</span><br></pre></td></tr></table></figure></li>
 <li><p>左右子节点都不为空，就要找到<strong>左子树的最大值或者右子树的最小值</strong>替换此root，并在左子树（或右子树）删除此节点。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">root.val = getMaxLeft(root.left).val;</span><br><span class="line">root.left = deleteNode(root.left, root.val);</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">root.val = getMaxLeft(root.left).val;</span><br><span class="line">root.left = deleteNode(root.left, root.val);</span><br></pre></td></tr></table></figure></li>
 </ol>
 <ul>
 <li><p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">deleteNode</span><span class="params">(TreeNode root, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//找到了要删除的节点</span></span><br><span class="line">        <span class="keyword">if</span>(root.val == key)&#123;</span><br><span class="line">            <span class="comment">//1.有子节点为空</span></span><br><span class="line">            <span class="keyword">if</span>(root.left == <span class="keyword">null</span>) <span class="keyword">return</span> root.right;</span><br><span class="line">            <span class="keyword">if</span>(root.right == <span class="keyword">null</span>) <span class="keyword">return</span> root.left;</span><br><span class="line">            <span class="comment">//2.子节点非空，则由左子树的最大值或者右子树的最小值替换此root，并在左子树（或右子树）删除此节点</span></span><br><span class="line">            root.val = getMaxLeft(root.left).val;</span><br><span class="line">            root.left = deleteNode(root.left, root.val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//key在右子树，对右子树进行删除操作，并把新的子树重新赋给root.right</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(root.val &lt; key)&#123;</span><br><span class="line">            root.right = deleteNode(root.right, key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            root.left = deleteNode(root.left, key);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//从root.left出发,找到root的左子树的最大值（向右找）</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">getMaxLeft</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span>(node.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">            node = node.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">deleteNode</span><span class="params">(TreeNode root, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//找到了要删除的节点</span></span><br><span class="line">        <span class="keyword">if</span>(root.val == key)&#123;</span><br><span class="line">            <span class="comment">//1.有子节点为空</span></span><br><span class="line">            <span class="keyword">if</span>(root.left == <span class="keyword">null</span>) <span class="keyword">return</span> root.right;</span><br><span class="line">            <span class="keyword">if</span>(root.right == <span class="keyword">null</span>) <span class="keyword">return</span> root.left;</span><br><span class="line">            <span class="comment">//2.子节点非空，则由左子树的最大值或者右子树的最小值替换此root，并在左子树（或右子树）删除此节点</span></span><br><span class="line">            root.val = getMaxLeft(root.left).val;</span><br><span class="line">            root.left = deleteNode(root.left, root.val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//key在右子树，对右子树进行删除操作，并把新的子树重新赋给root.right</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(root.val &lt; key)&#123;</span><br><span class="line">            root.right = deleteNode(root.right, key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            root.left = deleteNode(root.left, key);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//从root.left出发,找到root的左子树的最大值（向右找）</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">getMaxLeft</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span>(node.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">            node = node.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><ul>
+<h5 id="总结">总结：</h5>
+<ul>
 <li><p>由BST树的搜索框架，可以实现增（插）删改查，这几项的操作都是<strong>搜+改</strong>，做题可以先把框架写出来，再分析每步干什么。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BST</span><span class="params">(TreeNode root, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root.val == target)&#123;</span><br><span class="line">        <span class="comment">// 找到目标节点，进行具体操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//目标值target比当前节点值大，在右子树中找</span></span><br><span class="line">    <span class="keyword">if</span> (root.val &lt; target) </span><br><span class="line">        BST(root.right, target);</span><br><span class="line">    <span class="comment">//目标值target比当前节点值小，在左子树中找</span></span><br><span class="line">    <span class="keyword">if</span> (root.val &gt; target)</span><br><span class="line">        BST(root.left, target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对于BST树最大的特点就是左小右大，中序遍历的结果由小到大。</p>
-</li>
-<li><p>递归最重要的就是弄清函数的含义，如果有返回值代表什么。</p>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BST</span><span class="params">(TreeNode root, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root.val == target)&#123;</span><br><span class="line">        <span class="comment">// 找到目标节点，进行具体操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//目标值target比当前节点值大，在右子树中找</span></span><br><span class="line">    <span class="keyword">if</span> (root.val &lt; target) </span><br><span class="line">        BST(root.right, target);</span><br><span class="line">    <span class="comment">//目标值target比当前节点值小，在左子树中找</span></span><br><span class="line">    <span class="keyword">if</span> (root.val &gt; target)</span><br><span class="line">        BST(root.left, target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>对于BST树最大的特点就是左小右大，中序遍历的结果由小到大。</p></li>
+<li><p>递归最重要的就是弄清函数的含义，如果有返回值代表什么。</p></li>
 </ul>
 
     </div>
@@ -592,6 +570,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="几种经典的排序算法会慢慢总结，今天先总结一下快速排序算法。 【图文详解】快速排序算法及Java实现基本思想：采用“分治”的思想，对于一组数据，选择一个基准元素（base），通常选择第一个或最后一个元素，通过第一轮扫描，比base小的元素都在base左边，比base大的元素都在base右边，再有同样的方法递归排序这两部分，直到序列中所有数据均有序为止。 图文详解 :">
+  <meta name="description" content="几种经典的排序算法会慢慢总结，今天先总结一下快速排序算法。 【图文详解】快速排序算法及Java实现 基本思想： 采用“分治”的思想，对于一组数据，选择一个基准元素（base），通常选择第一个或最后一个元素，通过第一轮扫描，比base小的元素都在base左边，比base大的元素都在base右边，再有同样的方法递归排序这两部分，直到序列中所有数据均有序为止。 图文详解 :">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速排序算法">
 <meta property="og:url" content="http://example.com/2020/11/01/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="几种经典的排序算法会慢慢总结，今天先总结一下快速排序算法。 【图文详解】快速排序算法及Java实现基本思想：采用“分治”的思想，对于一组数据，选择一个基准元素（base），通常选择第一个或最后一个元素，通过第一轮扫描，比base小的元素都在base左边，比base大的元素都在base右边，再有同样的方法递归排序这两部分，直到序列中所有数据均有序为止。 图文详解 :">
+<meta property="og:description" content="几种经典的排序算法会慢慢总结，今天先总结一下快速排序算法。 【图文详解】快速排序算法及Java实现 基本思想： 采用“分治”的思想，对于一组数据，选择一个基准元素（base），通常选择第一个或最后一个元素，通过第一轮扫描，比base小的元素都在base左边，比base大的元素都在base右边，再有同样的方法递归排序这两部分，直到序列中所有数据均有序为止。 图文详解 :">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/qs1.jpg">
 <meta property="og:image" content="http://example.com/images/qs2.jpg">
@@ -109,7 +109,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -194,7 +198,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%90%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%8F%8AJava%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">【图文详解】快速排序算法及Java实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">基本思想：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">图文详解 :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">代码实现 :</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%8F%8Ajava%E5%AE%9E%E7%8E%B0"><span class="nav-text">【图文详解】快速排序算法及Java实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-text">基本思想：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3"><span class="nav-text">图文详解 :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">代码实现 :</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -210,7 +214,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -317,35 +321,39 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>几种经典的排序算法会慢慢总结，今天先总结一下快速排序算法。</p>
-<h2 id="【图文详解】快速排序算法及Java实现"><a href="#【图文详解】快速排序算法及Java实现" class="headerlink" title="【图文详解】快速排序算法及Java实现"></a>【图文详解】快速排序算法及Java实现</h2><h3 id="基本思想："><a href="#基本思想：" class="headerlink" title="基本思想："></a>基本思想：</h3><p>采用“分治”的思想，对于一组数据，选择一个基准元素（base），通常选择第一个或最后一个元素，通过第一轮扫描，比base小的元素都在base左边，比base大的元素都在base右边，再有同样的方法递归排序这两部分，直到序列中所有数据均有序为止。</p>
-<h3 id="图文详解"><a href="#图文详解" class="headerlink" title="图文详解 :"></a>图文详解 :</h3><a id="more"></a>
-
+<h2 id="图文详解快速排序算法及java实现">【图文详解】快速排序算法及Java实现</h2>
+<h3 id="基本思想">基本思想：</h3>
+<p>采用“分治”的思想，对于一组数据，选择一个基准元素（base），通常选择第一个或最后一个元素，通过第一轮扫描，比base小的元素都在base左边，比base大的元素都在base右边，再有同样的方法递归排序这两部分，直到序列中所有数据均有序为止。</p>
+<h3 id="图文详解">图文详解 :</h3>
+<a id="more"></a>
 <p>以 <strong>[3,4,6,1,2,4,7]</strong> 为例，以第一个元素<strong>3</strong>为base，定义左右两个指针（小熊<strong>l</strong>，小熊<strong>r</strong>），分别从两端开始扫描。从右向左找比<strong>3</strong>小的数，替换<strong>l</strong>所在位置的元素。再从左往右找比<strong>3</strong>大的数，然后替换r所在位置的元素。重复此过程直至两个小熊重合（两个指针指向同一元素），base替换此元素，此时第一轮结束。再递归排序base左右两部分的元素。</p>
 <p>刚开始的时候让🐻<strong>l</strong> 指向序列的最左边，指向数字<strong>3</strong>。让🐻<strong>r</strong> 指向序列的最右边，指向数字 <strong>7</strong>。</p>
-<p><img src="/images/qs1.jpg"></p>
+<p><img src="/images/qs1.jpg" /></p>
 <p>首先🐻<strong>r</strong>出动，一步步向左移，直到找到比base小的数停下来，替换此时🐻<strong>l</strong>所在位置的元素</p>
-<p><img src="/images/qs2.jpg"></p>
+<p><img src="/images/qs2.jpg" /></p>
 <p>替换后的序列为 <strong>[2,4,6,1,2,4,7]</strong></p>
-<p><img src="/images/qs3.jpg"></p>
+<p><img src="/images/qs3.jpg" /></p>
 <p>🐻<strong>l</strong>出动，向右移直到找到比base大的数停下来，替换此时🐻<strong>r</strong>所在位置的元素</p>
-<p><img src="/images/qs4.jpg"></p>
+<p><img src="/images/qs4.jpg" /></p>
 <p>替换后的序列为 [2,4,6,1,4,4,7]，🐻r再次出动，重复上述步骤</p>
-<p><img src="/images/qs5.jpg"></p>
+<p><img src="/images/qs5.jpg" /></p>
 <p>比base小，替换🐻<strong>l</strong>所在位置的元素</p>
-<p><img src="/images/qs6.jpg"></p>
+<p><img src="/images/qs6.jpg" /></p>
 <p>替换后的序列为[2,1,6,1,4,4,7]，🐻l再次出动</p>
-<p><img src="/images/qs7.jpg"></p>
+<p><img src="/images/qs7.jpg" /></p>
 <p>比base大，替换🐻<strong>r</strong>所在位置的元素</p>
-<p><img src="/images/qs8.jpg"></p>
+<p><img src="/images/qs8.jpg" /></p>
 <p>替换后的序列为[2,1,6,6,4,4,7]，🐻r再次出动</p>
-<p><img src="/images/qs9.jpg"></p>
+<p><img src="/images/qs9.jpg" /></p>
 <p>此时🐻<strong>l</strong>、🐻<strong>r</strong>指向同一元素</p>
-<p><img src="/images/qs10.jpg"></p>
+<p><img src="/images/qs10.jpg" /></p>
 <p>base替换此元素</p>
-<p><img src="/images/qs11.jpg"></p>
+<p><img src="/images/qs11.jpg" /></p>
 <p>第一轮扫描完成，序列为 [2,1,3,6,4,4,7]，此时base(3)左边的元素都比它小，右边的元素都比它大，再对这两部分进行上述操作。</p>
-<p><img src="/images/qs12.jpg"></p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现 :"></a>代码实现 :</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span> nums[], <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//数组有多个元素进行排序</span></span><br><span class="line">    <span class="keyword">if</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="keyword">int</span> base = nums[start];<span class="comment">//以要进行排序数组第0个元素为base</span></span><br><span class="line">        <span class="keyword">int</span> left = start;<span class="comment">//左指针</span></span><br><span class="line">        <span class="keyword">int</span> right = end;<span class="comment">//右指针</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="comment">//从右向左找，比base大，right--</span></span><br><span class="line">            <span class="keyword">while</span> (left&lt; right &amp;&amp; nums[right] &gt;= base) &#123;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//比base小，替换left所在位置的数字</span></span><br><span class="line">            nums[left] = nums[right];</span><br><span class="line">            <span class="comment">//从左向右找，比base小，left++</span></span><br><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] &lt;= base)&#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//比base大，替换right所在位置的数字</span></span><br><span class="line">            nums[right] = nums[left];</span><br><span class="line">        &#125;</span><br><span class="line">        nums[left] = base;<span class="comment">//此时left=right，用base替换这个位置的数字</span></span><br><span class="line">        <span class="comment">//排列比base小的数字的数组</span></span><br><span class="line">        quickSort(nums, start, left - <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//排列比base大的数字的数组</span></span><br><span class="line">        quickSort(nums, left + <span class="number">1</span>, end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/qs12.jpg" /></p>
+<h3 id="代码实现">代码实现 :</h3>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span> nums[], <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//数组有多个元素进行排序</span></span><br><span class="line">    <span class="keyword">if</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="keyword">int</span> base = nums[start];<span class="comment">//以要进行排序数组第0个元素为base</span></span><br><span class="line">        <span class="keyword">int</span> left = start;<span class="comment">//左指针</span></span><br><span class="line">        <span class="keyword">int</span> right = end;<span class="comment">//右指针</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="comment">//从右向左找，比base大，right--</span></span><br><span class="line">            <span class="keyword">while</span> (left&lt; right &amp;&amp; nums[right] &gt;= base) &#123;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//比base小，替换left所在位置的数字</span></span><br><span class="line">            nums[left] = nums[right];</span><br><span class="line">            <span class="comment">//从左向右找，比base小，left++</span></span><br><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] &lt;= base)&#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//比base大，替换right所在位置的数字</span></span><br><span class="line">            nums[right] = nums[left];</span><br><span class="line">        &#125;</span><br><span class="line">        nums[left] = base;<span class="comment">//此时left=right，用base替换这个位置的数字</span></span><br><span class="line">        <span class="comment">//排列比base小的数字的数组</span></span><br><span class="line">        quickSort(nums, start, left - <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//排列比base大的数字的数组</span></span><br><span class="line">        quickSort(nums, left + <span class="number">1</span>, end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -480,6 +488,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

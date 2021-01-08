@@ -93,7 +93,11 @@
 
   
   <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
-<link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -193,7 +197,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -237,6 +241,94 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/%E4%B8%80%E6%96%87%E7%9C%8B%E6%B8%85%E8%83%8C%E5%8C%85%E5%A5%97%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/08/%E4%B8%80%E6%96%87%E7%9C%8B%E6%B8%85%E8%83%8C%E5%8C%85%E5%A5%97%E8%B7%AF/" class="post-title-link" itemprop="url">一文看清背包套路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-08 20:44:55 / 修改时间：22:18:36" itemprop="dateCreated datePublished" datetime="2021-01-08T20:44:55+08:00">2021-01-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>刷了几道背包问题，用了一周时间，动态规划的难真的领会到了。但再难总有规律可循，总结中刷题，刷题中总结。</p>
+<h3 id="背包">0-1背包</h3>
+<p><a href="#0-1背包问题引入">引入</a> <a href="#416，分割等和子集，medium">416，分割等和子集，medium</a> <a href="#494，目标和，medium">494，目标和，medium</a> <a href="#474，一和零，medium">474，一和零，medium</a> <a href="#0-1背包问题总结">0-1背包问题总结</a></p>
+<h3 id="完全背包">完全背包</h3>
+<p><a href="#完全背包问题引入">引入</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/08/%E4%B8%80%E6%96%87%E7%9C%8B%E6%B8%85%E8%83%8C%E5%8C%85%E5%A5%97%E8%B7%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -293,9 +385,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在网上搜索了一圈没有特别简单直白的方法，把我的步骤贴在下面。</p>
-<h3 id="1-建立空文件夹"><a href="#1-建立空文件夹" class="headerlink" title="1. 建立空文件夹"></a>1. 建立空文件夹</h3><p>在任意位置新建文件夹即可。</p>
-<h3 id="2-使用Git-Bash命令拉取分支"><a href="#2-使用Git-Bash命令拉取分支" class="headerlink" title="2. 使用Git Bash命令拉取分支"></a>2. 使用Git Bash命令拉取分支</h3>
+          <p>在网上搜索了一圈没有特别简单直白的方法，把我的步骤贴在下面。 ### 1. 建立空文件夹 在任意位置新建文件夹即可。 ### 2. 使用Git Bash命令拉取分支</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/01/06/idea%E5%AF%BC%E5%85%A5Github%E5%88%86%E6%94%AF/#more" rel="contents">
@@ -355,10 +445,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-12-29 20:45:03 / 修改时间：20:48:13" itemprop="dateCreated datePublished" datetime="2020-12-29T20:45:03+08:00">2020-12-29</time>
+      <time title="创建时间：2020-12-29 20:45:03" itemprop="dateCreated datePublished" datetime="2020-12-29T20:45:03+08:00">2020-12-29</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-08 20:49:52" itemprop="dateModified" datetime="2021-01-08T20:49:52+08:00">2021-01-08</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -379,12 +475,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>跟着 labuladong 和 CS-Notes 对动态规划做题、总结，形成自己的模板。</p>
-<h2 id="引入动态规划"><a href="#引入动态规划" class="headerlink" title="引入动态规划"></a>引入动态规划</h2><p>动态规划问题的一般形式就是求最值。求解动态规划的核心问题是穷举。</p>
+          <p>跟着 labuladong 和 CS-Notes 对动态规划做题、总结，形成自己的模板。 ## 引入动态规划 动态规划问题的一般形式就是求最值。求解动态规划的核心问题是穷举。</p>
 <p>首先，动态规划的穷举有点特别，因为这类问题<strong>存在「重叠子问题」</strong>，如果暴力穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。</p>
 <p>而且，动态规划问题一定会<strong>具备「最优子结构」</strong>，才能通过子问题的最值得到原问题的最值。</p>
 <p>另外，虽然动态规划的核心思想就是穷举求最值，但是问题可以千变万化，穷举所有可行解其实并不是一件容易的事，只有列出<strong>正确的「状态转移方程」</strong>才能正确地穷举。</p>
-<h3 id="解题步骤："><a href="#解题步骤：" class="headerlink" title="解题步骤："></a>解题步骤：</h3>
+<h3 id="解题步骤">解题步骤：</h3>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/29/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/#more" rel="contents">
@@ -469,8 +564,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>刷了一系列这类的题，真的感受到dp 深深的套路，那就看看 什么套路来解此类题吧！</p>
-<p><a href="#300%EF%BC%8C%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%8Cmedium">300，最长递增子序列，medium</a><br><a href="#673%EF%BC%8C%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%8Cmedium">673，最长递增子序列的个数，medium</a><br><a href="#435%EF%BC%8C%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4%EF%BC%8Cmedium">435，无重叠区间，medium</a><br><a href="#646%EF%BC%8C%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE%EF%BC%8Cmedium">646，最长数对链，medium</a><br><a href="#452%EF%BC%8C%E7%94%A8%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E7%9A%84%E7%AE%AD%E5%BC%95%E7%88%86%E6%B0%94%E7%90%83%EF%BC%8Cmedium">452，用最少数量的箭引爆气球，medium</a></p>
-<h3 id="最长递增子序列"><a href="#最长递增子序列" class="headerlink" title="最长递增子序列"></a>最长递增子序列</h3><p>最长递增子序列（Longest Increasing Subsequence，简写 LIS）是比较经典的一个问题，比较容易想到的是动态规划解法，时间复杂度 **O(N^2)**。注意「子序列」和「子串」这两个名词的区别，子串一定是连续的，而子序列不一定是连续的。</p>
+<p><a href="#300，最长递增子序列，medium">300，最长递增子序列，medium</a> <a href="#673，最长递增子序列的个数，medium">673，最长递增子序列的个数，medium</a> <a href="#435，无重叠区间，medium">435，无重叠区间，medium</a> <a href="#646，最长数对链，medium">646，最长数对链，medium</a> <a href="#452，用最少数量的箭引爆气球，medium">452，用最少数量的箭引爆气球，medium</a></p>
+<h3 id="最长递增子序列">最长递增子序列</h3>
+<p>最长递增子序列（Longest Increasing Subsequence，简写 LIS）是比较经典的一个问题，比较容易想到的是动态规划解法，时间复杂度 <strong>O(N^2)</strong>。注意「子序列」和「子串」这两个名词的区别，子串一定是连续的，而子序列不一定是连续的。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/29/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
@@ -554,102 +650,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>最近在学习Spring Boot，在整合MyBatis进行数据访问，报过多次错，踩了很多坑，在此记录一下。</p>
+          <h2 id="引言">引言</h2>
+<p>最近在学习Spring Boot，在整合MyBatis进行数据访问，报过多次错，踩了很多坑，在此记录一下。</p>
 <blockquote>
 <p>MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML或注解来配置和映射原生信息，将接口和 Java 的POJOs(Plain Ordinary Java Object,普通的Java对象)映射成数据库中的记录。</p>
 </blockquote>
-<h2 id="整合过程"><a href="#整合过程" class="headerlink" title="整合过程"></a>整合过程</h2><ol>
-<li>导入依赖<br>pom.xml文件如下：</li>
+<h2 id="整合过程">整合过程</h2>
+<ol type="1">
+<li>导入依赖 pom.xml文件如下：</li>
 </ol>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/27/SpringBoot%E6%95%B4%E5%90%88MyBatis-%E8%BF%87%E7%A8%8B%E5%8F%8A%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/21/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
-      <meta itemprop="name" content="Rui Wang">
-      <meta itemprop="description" content="去摘遥不可及的星星">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rui">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/21/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/" class="post-title-link" itemprop="url">LeetCode刷题—重建二叉树</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-12-21 14:39:20 / 修改时间：14:40:14" itemprop="dateCreated datePublished" datetime="2020-12-21T14:39:20+08:00">2020-12-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>LeetCode中有三道很类似的题，思路也大同小异，故作一总结。</p>
-<p><a href="#105%EF%BC%8C%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Cmedium">105，从前序与中序遍历序列构造二叉树，medium</a><br><a href="#106%EF%BC%8C%E6%A0%B9%E6%8D%AE%E4%B8%AD%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Cmedium">106，根据中序和后序遍历构造二叉树，medium</a><br><a href="#889%EF%BC%8C%E6%A0%B9%E6%8D%AE%E5%89%8D%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Cmedium">889，根据前序和后序遍历构造二叉树，medium</a></p>
-<p>这三道题都是给出两种遍历方式，由其遍历顺序可发现规律来重建此二叉树。下面详解105题，后两题思路稍作改变，比较好懂了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/21/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -773,6 +785,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
