@@ -964,13 +964,27 @@
   <entry>
     <title>typora使用攻略</title>
     <url>/2020/12/01/typora%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5/</url>
-    <content><![CDATA[<p>一、内部跳转</p>
+    <content><![CDATA[<h3 id="一内部跳转">一、内部跳转</h3>
 <p>想在文章开头使用链接直接跳转到指定标题，可以使用快捷键 <code>Ctrl + K</code> 创建内部链接，并在<code>[]</code>中填写链接内容，<code>()</code>中的格式为 <code>#要跳转到的标题</code> 。</p>
 <p>效果如图：</p>
 <figure>
 <img src="https://img-blog.csdnimg.cn/20201201194926993.png" alt="img" /><figcaption>img</figcaption>
 </figure>
 <p>然后按住Ctrl，点击链接，即跳转到想看的标题了。</p>
+<h3 id="二更换-next主题">二、更换 next主题</h3>
+<p>Typora 自带的字体太丑了，忍了好久终于换了个主题。</p>
+<h5 id="下载喜欢的主题">1. 下载喜欢的主题</h5>
+<p><a href="https://theme.typora.io/theme/NexT/">官网网址</a> 点击 Download进入下面页面。<img src="https://img-blog.csdnimg.cn/20210111172457971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 点击第一个进行下载，解压之后可以看到如下文件。 <img src="https://img-blog.csdnimg.cn/20210111172627611.png" alt="在这里插入图片描述" /><img src="https://img-blog.csdnimg.cn/20210111172800217.png" alt="在这里插入图片描述" /></p>
+<h5 id="将下载好的文件移入themes文件夹">2. 将下载好的文件移入themes文件夹</h5>
+<p>找到 Typora/themes 目录，将上面的文件移入此文件夹中。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210111173949852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<h5 id="在typora-中选择next-主题">3. 在Typora 中选择next 主题</h5>
+<p>如图，选择 next 主题即可更换。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210111173825626.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
 ]]></content>
       <tags>
         <tag>一</tag>
@@ -2522,12 +2536,22 @@
     <title>一文看清背包套路</title>
     <url>/2021/01/08/%E4%B8%80%E6%96%87%E7%9C%8B%E6%B8%85%E8%83%8C%E5%8C%85%E5%A5%97%E8%B7%AF/</url>
     <content><![CDATA[<p>刷了几道背包问题，用了一周时间，动态规划的难真的领会到了。但再难总有规律可循，总结中刷题，刷题中总结。</p>
-<h3 id="背包">0-1背包</h3>
-<p><a href="#0-1背包问题引入">引入</a> <a href="#416，分割等和子集，medium">416，分割等和子集，medium</a> <a href="#494，目标和，medium">494，目标和，medium</a> <a href="#474，一和零，medium">474，一和零，medium</a> <a href="#0-1背包问题总结">0-1背包问题总结</a></p>
-<h3 id="完全背包">完全背包</h3>
-<p><a href="#完全背包问题引入">引入</a></p>
+<p>关于0-1背包的问题有：</p>
+<ul>
+<li><p>416，分割等和子集</p></li>
+<li><p>494，目标和</p></li>
+<li><p>474，一和零</p></li>
+</ul>
+<p>关于完全背包的问题有：</p>
+<ul>
+<li>322，零钱兑换</li>
+</ul>
 <a id="more"></a>
-<p><a href="#322，零钱兑换，medium">322，零钱兑换，medium</a> <a href="#518，零钱兑换Ⅱ，medium">518，零钱兑换Ⅱ，medium</a> <a href="#377，组合总和Ⅳ，medium">377，组合总和Ⅳ，medium</a> <a href="#139，单词拆分，medium">139，单词拆分，medium</a> <a href="#完全背包问题总结">完全背包问题总结</a></p>
+<ul>
+<li><p>518，零钱兑换Ⅱ</p></li>
+<li><p>377，组合总和Ⅳ</p></li>
+<li><p>139，单词拆分</p></li>
+</ul>
 <h2 id="一0-1背包问题">一、0-1背包问题</h2>
 <h5 id="引入">引入</h5>
 <p>一个可装载重量为<code>W</code>的背包和<code>N</code>个物品，每个物品有重量和价值两个属性。怎么装使这个背包装下物品的价值最大？</p>
@@ -2860,8 +2884,10 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
 <li><p>此题是否有<strong>特殊情况</strong></p></li>
 <li><p><strong>动态规划</strong>正常做法</p>
 <ol type="1">
-<li><p>子问题：确定背包和物品指代什么，<span class="math inline">\(dp[i]\)</span> 返回值是什么</p></li>
+<li><p>子问题：确定背包和物品指代什么，<span class="math inline">\(dp[i]\)</span> 返回值是什么</p>
+<ol start="2" type="1">
 <li>base case：通常为 <span class="math inline">\(dp[0]\)</span></li>
+</ol></li>
 <li><p>状态转移方程： <strong>先遍历背包，再遍历物品。</strong>这样才能保证放入顺序。</p></li>
 </ol>
 <p>组合问题公式 dp[i] += dp[i - num] True/False问题公式 dp[i] = dp[i] or dp[i - num] 最大最小问题公式 dp[i] = min(dp[i], dp[i - num]+1) 或 dp[i] = max(dp[i], dp[i - num]+1)</p></li>

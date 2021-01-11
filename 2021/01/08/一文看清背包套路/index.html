@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="刷了几道背包问题，用了一周时间，动态规划的难真的领会到了。但再难总有规律可循，总结中刷题，刷题中总结。 0-1背包 引入 416，分割等和子集，medium 494，目标和，medium 474，一和零，medium 0-1背包问题总结 完全背包 引入">
+  <meta name="description" content="刷了几道背包问题，用了一周时间，动态规划的难真的领会到了。但再难总有规律可循，总结中刷题，刷题中总结。 关于0-1背包的问题有：  416，分割等和子集 494，目标和 474，一和零  关于完全背包的问题有：  322，零钱兑换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一文看清背包套路">
 <meta property="og:url" content="http://example.com/2021/01/08/%E4%B8%80%E6%96%87%E7%9C%8B%E6%B8%85%E8%83%8C%E5%8C%85%E5%A5%97%E8%B7%AF/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="刷了几道背包问题，用了一周时间，动态规划的难真的领会到了。但再难总有规律可循，总结中刷题，刷题中总结。 0-1背包 引入 416，分割等和子集，medium 494，目标和，medium 474，一和零，medium 0-1背包问题总结 完全背包 引入">
+<meta property="og:description" content="刷了几道背包问题，用了一周时间，动态规划的难真的领会到了。但再难总有规律可循，总结中刷题，刷题中总结。 关于0-1背包的问题有：  416，分割等和子集 494，目标和 474，一和零  关于完全背包的问题有：  322，零钱兑换">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210107152332640.png#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210107155801985.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210108114808230.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210108114808238.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2021-01-08T12:44:55.000Z">
-<meta property="article:modified_time" content="2021-01-08T14:18:36.870Z">
+<meta property="article:modified_time" content="2021-01-11T09:57:40.930Z">
 <meta property="article:author" content="Rui Wang">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="LeetCode刷题">
@@ -193,7 +193,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E5%8C%85"><span class="nav-text">0-1背包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85"><span class="nav-text">完全背包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%800-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-text">一、0-1背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-text">引入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86medium"><span class="nav-text">416，分割等和子集，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%92%8Cmedium"><span class="nav-text">494，目标和，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E5%92%8C%E9%9B%B6medium"><span class="nav-text">474，一和零，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E6%80%BB%E7%BB%93"><span class="nav-text">0-1背包总结</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-text">二、完全背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E5%BC%95%E5%85%A5"><span class="nav-text">完全背包问题引入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2medium"><span class="nav-text">322，零钱兑换，medium</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80%E4%BA%8C%E7%BB%B4%E5%85%88%E9%81%8D%E5%8E%86%E7%89%A9%E5%93%81%E5%86%8D%E9%81%8D%E5%8E%86%E8%83%8C%E5%8C%85"><span class="nav-text">解法一：二维（先遍历物品，再遍历背包）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C%E4%B8%80%E7%BB%B4%E5%85%88%E9%81%8D%E5%8E%86%E8%83%8C%E5%8C%85%E5%86%8D%E9%81%8D%E5%8E%86%E7%89%A9%E5%93%81"><span class="nav-text">解法二：一维（先遍历背包，再遍历物品）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2medium-1"><span class="nav-text">518，零钱兑换Ⅱ，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cmedium"><span class="nav-text">377，组合总和Ⅳ，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86medium"><span class="nav-text">139，单词拆分，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93"><span class="nav-text">完全背包问题总结</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%800-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-text">一、0-1背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-text">引入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86medium"><span class="nav-text">416，分割等和子集，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%92%8Cmedium"><span class="nav-text">494，目标和，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E5%92%8C%E9%9B%B6medium"><span class="nav-text">474，一和零，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E6%80%BB%E7%BB%93"><span class="nav-text">0-1背包总结</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-text">二、完全背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E5%BC%95%E5%85%A5"><span class="nav-text">完全背包问题引入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2medium"><span class="nav-text">322，零钱兑换，medium</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80%E4%BA%8C%E7%BB%B4%E5%85%88%E9%81%8D%E5%8E%86%E7%89%A9%E5%93%81%E5%86%8D%E9%81%8D%E5%8E%86%E8%83%8C%E5%8C%85"><span class="nav-text">解法一：二维（先遍历物品，再遍历背包）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C%E4%B8%80%E7%BB%B4%E5%85%88%E9%81%8D%E5%8E%86%E8%83%8C%E5%8C%85%E5%86%8D%E9%81%8D%E5%8E%86%E7%89%A9%E5%93%81"><span class="nav-text">解法二：一维（先遍历背包，再遍历物品）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2medium-1"><span class="nav-text">518，零钱兑换Ⅱ，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cmedium"><span class="nav-text">377，组合总和Ⅳ，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86medium"><span class="nav-text">139，单词拆分，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93"><span class="nav-text">完全背包问题总结</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -285,10 +285,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-08 20:44:55 / 修改时间：22:18:36" itemprop="dateCreated datePublished" datetime="2021-01-08T20:44:55+08:00">2021-01-08</time>
+      <time title="创建时间：2021-01-08 20:44:55" itemprop="dateCreated datePublished" datetime="2021-01-08T20:44:55+08:00">2021-01-08</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-11 17:57:40" itemprop="dateModified" datetime="2021-01-11T17:57:40+08:00">2021-01-11</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -310,12 +316,22 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>刷了几道背包问题，用了一周时间，动态规划的难真的领会到了。但再难总有规律可循，总结中刷题，刷题中总结。</p>
-<h3 id="背包">0-1背包</h3>
-<p><a href="#0-1背包问题引入">引入</a> <a href="#416，分割等和子集，medium">416，分割等和子集，medium</a> <a href="#494，目标和，medium">494，目标和，medium</a> <a href="#474，一和零，medium">474，一和零，medium</a> <a href="#0-1背包问题总结">0-1背包问题总结</a></p>
-<h3 id="完全背包">完全背包</h3>
-<p><a href="#完全背包问题引入">引入</a></p>
+<p>关于0-1背包的问题有：</p>
+<ul>
+<li><p>416，分割等和子集</p></li>
+<li><p>494，目标和</p></li>
+<li><p>474，一和零</p></li>
+</ul>
+<p>关于完全背包的问题有：</p>
+<ul>
+<li>322，零钱兑换</li>
+</ul>
 <a id="more"></a>
-<p><a href="#322，零钱兑换，medium">322，零钱兑换，medium</a> <a href="#518，零钱兑换Ⅱ，medium">518，零钱兑换Ⅱ，medium</a> <a href="#377，组合总和Ⅳ，medium">377，组合总和Ⅳ，medium</a> <a href="#139，单词拆分，medium">139，单词拆分，medium</a> <a href="#完全背包问题总结">完全背包问题总结</a></p>
+<ul>
+<li><p>518，零钱兑换Ⅱ</p></li>
+<li><p>377，组合总和Ⅳ</p></li>
+<li><p>139，单词拆分</p></li>
+</ul>
 <h2 id="一0-1背包问题">一、0-1背包问题</h2>
 <h5 id="引入">引入</h5>
 <p>一个可装载重量为<code>W</code>的背包和<code>N</code>个物品，每个物品有重量和价值两个属性。怎么装使这个背包装下物品的价值最大？</p>
@@ -648,8 +664,10 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
 <li><p>此题是否有<strong>特殊情况</strong></p></li>
 <li><p><strong>动态规划</strong>正常做法</p>
 <ol type="1">
-<li><p>子问题：确定背包和物品指代什么，<span class="math inline">\(dp[i]\)</span> 返回值是什么</p></li>
+<li><p>子问题：确定背包和物品指代什么，<span class="math inline">\(dp[i]\)</span> 返回值是什么</p>
+<ol start="2" type="1">
 <li>base case：通常为 <span class="math inline">\(dp[0]\)</span></li>
+</ol></li>
 <li><p>状态转移方程： <strong>先遍历背包，再遍历物品。</strong>这样才能保证放入顺序。</p></li>
 </ol>
 <p>组合问题公式 dp[i] += dp[i - num] True/False问题公式 dp[i] = dp[i] or dp[i - num] 最大最小问题公式 dp[i] = min(dp[i], dp[i - num]+1) 或 dp[i] = max(dp[i], dp[i - num]+1)</p></li>
