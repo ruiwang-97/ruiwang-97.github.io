@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="数组题目中有两种双指针的应用：和快慢指针。 目录如下： 双指针（左右） 双指针（快慢） 相关题目有：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode刷题—数组（双指针）">
+<meta property="og:url" content="http://example.com/2021/01/19/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E6%95%B0%E7%BB%84%EF%BC%88%E5%8F%8C%E6%8C%87%E9%92%88%EF%BC%89/index.html">
+<meta property="og:site_name" content="Rui">
+<meta property="og:description" content="数组题目中有两种双指针的应用：和快慢指针。 目录如下： 双指针（左右） 双指针（快慢） 相关题目有：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.leetcode-cn.com/10ca012c2f0170afcac5e5996add20c32c36a82f4bb4a6187897bb948ace5fe2-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/2da8cf86a2a3df3c95ed7d95add574dca2d8bae8420addd0fa6b8c55fa3db081-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/ca74b1a2ad0eb5a4ebf8647a332161b140c8ebdd71cd5d19bef16e9bf0a43c95-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/72f39b5cd7eb5f866e24d0a31eb3eac7d57cf3ad202ad40d30f103833c1f5a69-image.png">
+<meta property="article:published_time" content="2021-01-19T11:33:18.000Z">
+<meta property="article:modified_time" content="2021-01-19T11:39:22.725Z">
+<meta property="article:author" content="Rui Wang">
+<meta property="article:tag" content="双指针">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/10ca012c2f0170afcac5e5996add20c32c36a82f4bb4a6187897bb948ace5fe2-image.png">
+
+
+<link rel="canonical" href="http://example.com/2021/01/19/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E6%95%B0%E7%BB%84%EF%BC%88%E5%8F%8C%E6%8C%87%E9%92%88%EF%BC%89/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LeetCode刷题—数组（双指针） | Rui</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+  
+  <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Rui</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E5%B7%A6%E5%8F%B3"><span class="nav-text">双指针（左右）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8Ceasy"><span class="nav-text">167，两数之和Ⅱ，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2easy"><span class="nav-text">344，反转字符串，easy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E5%BF%AB%E6%85%A2"><span class="nav-text">双指针（快慢）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6"><span class="nav-text">框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9easy"><span class="nav-text">26，删除排序数组中的重复项，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0easy"><span class="nav-text">27，移除元素，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E9%9B%B6easy"><span class="nav-text">283，移动零，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0easy"><span class="nav-text">485，最大连续1的个数，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%80%E5%85%83%E7%B4%A0medium"><span class="nav-text">540，有序数组中的单一元素，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84medium"><span class="nav-text">209，长度最小的子数组，medium</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rui Wang"
+      src="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+  <p class="site-author-name" itemprop="name">Rui Wang</p>
+  <div class="site-description" itemprop="description">去摘遥不可及的星星</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E6%95%B0%E7%BB%84%EF%BC%88%E5%8F%8C%E6%8C%87%E9%92%88%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode刷题—数组（双指针）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-19 19:33:18 / 修改时间：19:39:22" itemprop="dateCreated datePublished" datetime="2021-01-19T19:33:18+08:00">2021-01-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>数组题目中有两种双指针的应用：和<strong>快慢指针</strong>。 目录如下：</p>
+<p><a href="#双指针（左右）">双指针（左右）</a></p>
+<p><a href="#双指针（快慢）">双指针（快慢）</a></p>
+<p>相关题目有：</p>
+<a id="more"></a>
+<p><a href="#344，反转字符串，easy">344，反转字符串</a></p>
+<p><a href="#26，删除排序数组中的重复项，easy">26，删除排序数组中的重复项</a></p>
+<p><a href="#27，移除元素，easy">27，移除元素</a></p>
+<p><a href="#283，移动零，easy">283，移动零</a></p>
+<p><a href="#485，最大连续1的个数，easy">485，最大连续1的个数</a></p>
+<p><a href="#540，有序数组中的单一元素，medium">540，有序数组中的单一元素</a></p>
+<p><a href="#209，长度最小的子数组，medium">209，长度最小的子数组</a></p>
+<h3 id="双指针左右">双指针（左右）</h3>
+<p>左右指针在数组中实际是指两个索引值，一般初始化为<code>left = 0, right = nums.length - 1</code>。循环条件为 <code>while(left &lt; right)</code> 。</p>
+<p>在上篇文章<a href="#https://blog.csdn.net/qq_39181839/article/details/112847321">二分查找</a>中，凸出了双指针特性。在下面题目中体会。</p>
+<p>看到题目要求有【原地修改】的要求，一般都采用双指针。</p>
+<h5 id="两数之和easy">167，两数之和Ⅱ，easy</h5>
+<p>给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。</p>
+<p>函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。</p>
+<p>说明:</p>
+<p>返回的下标值（<code>index1</code> 和 <code>index2</code>）不是从零开始的。 你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。 示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: numbers &#x3D; [2, 7, 11, 15], target &#x3D; 9</span><br><span class="line">输出: [1,2]</span><br><span class="line">解释: 2 与 7 之和等于目标数 9 。因此 index1 &#x3D; 1, index2 &#x3D; 2 。</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>只要数组有序，就应该想到双指针技巧。这道题的解法有点类似二分查找，通过调节<code>left</code>和<code>right</code>可以调整<code>sum</code>的大小</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = numbers.length;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = n - <span class="number">1</span>;        </span><br><span class="line">		<span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(numbers[left] + numbers[right] == target)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;left + <span class="number">1</span>, right + <span class="number">1</span>&#125;;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(numbers[left] + numbers[right] &lt; target)</span><br><span class="line">                left++;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="反转字符串easy">344，反转字符串，easy</h5>
+<p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p>
+<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
+<p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]</span><br><span class="line">输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]</span><br><span class="line">输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]</span><br></pre></td></tr></table></figure>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = s.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">          <span class="keyword">char</span> temp = s[left];  </span><br><span class="line">          s[left] = s[right];</span><br><span class="line">          s[right] = temp;</span><br><span class="line">          left++;</span><br><span class="line">          right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双指针快慢">双指针（快慢）</h3>
+<p>快慢指针在数组中实际是指两个索引值，快指针始终在慢指针的前面，一般初始化为 <code>slow = 0, fast = 0 或 1</code>。循环条件为 <code>while(fast &lt; nums.length)</code> 。</p>
+<h4 id="框架">框架</h4>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> f&amp;s(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span> || nums == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">0</span> 或 <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(fast &lt; nums.length)&#123;</span><br><span class="line">            <span class="comment">//当前元素值不是所找的</span></span><br><span class="line">            <span class="keyword">if</span>(nums[fast] != ...)&#123;</span><br><span class="line">                <span class="comment">//看slow、fast具体含义</span></span><br><span class="line">                ...</span><br><span class="line">				slow = ...</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//否则，fast继续向前找</span></span><br><span class="line">            fast++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ...;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="删除排序数组中的重复项easy">26，删除排序数组中的重复项，easy</h5>
+<p>给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回<strong>移除后数组的新长度</strong>。</p>
+<p>不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">给定数组 nums &#x3D; [1,1,2], </span><br><span class="line"></span><br><span class="line">函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">给定 nums &#x3D; [0,0,1,1,1,2,2,3,3,4],</span><br><span class="line"></span><br><span class="line">函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>快慢指针初始指向索引0和1，用快指针探路，慢指针保存没有重复元素的数组。</p>
+<p>快指针向前，直到不和 当前慢指针指向元素 重复，慢指针索引+1，指向元素为新的数字。</p>
+<p><a target="_blank" rel="noopener" href="https://mmbiz.qpic.cn/sz_mmbiz_gif/gibkIz0MVqdFXdiaWmw4sp8GT0YI41Rk5muqNGreX2FbysTeUnlAWECO1eYWc5ZZDPMYCs7ViaHkEaOfK4lI9HD7A/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1">动画演示</a></p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(fast &lt; nums.length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[slow] != nums[fast])&#123;</span><br><span class="line">                slow++;</span><br><span class="line">                <span class="comment">// 维护 nums[0..slow] 无重复</span></span><br><span class="line">                nums[slow] = nums[fast];</span><br><span class="line">            &#125;</span><br><span class="line">            fast++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 数组长度为索引 + 1</span></span><br><span class="line">        <span class="keyword">return</span> slow + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>类似题目：83.删除排序链表中的重复元素</p>
+<h5 id="移除元素easy">27，移除元素，easy</h5>
+<p>你一个数组 <code>nums</code> 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回<strong>移除后数组的新长度</strong>。</p>
+<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">给定 nums &#x3D; [3,2,2,3], val &#x3D; 3,</span><br><span class="line"></span><br><span class="line">函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">给定 nums &#x3D; [0,1,2,2,3,0,4,2], val &#x3D; 2,</span><br><span class="line"></span><br><span class="line">函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</span><br><span class="line"></span><br><span class="line">注意这五个元素可为任意顺序。</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>快慢指针初始都指向首个元素，快指针用于探路，如果不等于 val，则可以进行覆盖；如果等于 val，继续向前。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span> || nums == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(fast &lt; nums.length)&#123;</span><br><span class="line">            <span class="comment">//当前元素值不等于val</span></span><br><span class="line">            <span class="keyword">if</span>(nums[fast] != val)&#123;</span><br><span class="line">                <span class="comment">//建立新数组（覆盖在原数组上）</span></span><br><span class="line">                nums[slow] = nums[fast];</span><br><span class="line">                slow++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//否则，fast继续向前找等于val的元素</span></span><br><span class="line">            fast++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>细节</strong></p>
+<p>上一题要求是删除重复元素，fast 移到下一个不重复元素时，索引<code>slow++</code>，并将fast 指向的值赋给 <code>nums[slow]</code>，最后得到数组长度为 索引数<code>slow</code> + 1。</p>
+<p>这里是先给<code>nums[slow]</code>赋值然后再给<code>slow++</code>，这样可以保证<code>nums[0..slow-1]</code>是不包含值为<code>val</code>的元素的，最后的结果数组长度就是<code>slow</code>。</p>
+<h5 id="移动零easy">283，移动零，easy</h5>
+<p>给定一个数组 <code>nums</code>，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [0,1,0,3,12]</span><br><span class="line">输出: [1,3,12,0,0]</span><br></pre></td></tr></table></figure>
+<p>说明:</p>
+<p>必须在原数组上操作，不能拷贝额外的数组。 尽量减少操作次数。</p>
+<p><strong>题解</strong></p>
+<p>与上一题类似，只是删除操作改成了移动操作。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">moveZeroes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span> || nums == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(fast &lt; nums.length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[fast] != <span class="number">0</span>)&#123;    </span><br><span class="line">                <span class="comment">//交换</span></span><br><span class="line">                <span class="keyword">int</span> temp = nums[fast];</span><br><span class="line">                nums[fast] = nums[slow];</span><br><span class="line">                nums[slow] = temp;</span><br><span class="line">                slow++;</span><br><span class="line">            &#125;</span><br><span class="line">            fast++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>另一种解法</strong></p>
+<p>遍历此数组，如果当前元素不为0，就赋给慢指针所在位置的元素，遍历结束再将慢指针之后的元素赋为 0。可以看成建立了新的数组，但是是在原数组上改变的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">moveZeroes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] != <span class="number">0</span>)</span><br><span class="line">                nums[index++] = nums[i];           </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; nums.length; i++)&#123;</span><br><span class="line">            nums[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="最大连续1的个数easy">485，最大连续1的个数，easy</h5>
+<p>给定一个二进制数组， 计算其中最大连续1的个数。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [1,1,0,1,1,1]</span><br><span class="line">输出: 3</span><br><span class="line">解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<p>输入的数组只包含 0 和1。</p>
+<p>输入数组的长度是正整数，且不超过 10,000。</p>
+<p><strong>题解</strong></p>
+<p>快慢指针初始都指向首个元素，快指针移至最后一个非 0 元素，<code>fast - slow</code> 即为当前连续1 的个数。当 <code>nums[fast] = 0</code> 时，<code>slow</code> 移至 <code>fast</code> 之后再开始统计。重复上述步骤直至 <code>fast</code> 遍历到最后一个元素。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span> || nums == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(fast &lt; nums.length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[fast] != <span class="number">1</span>)&#123;</span><br><span class="line">                res = Math.max(res, fast - slow);</span><br><span class="line">                slow = fast + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            fast++;  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//数组全1的情况</span></span><br><span class="line">        <span class="keyword">return</span> Math.max(res, fast - slow);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>细节</strong></p>
+<p>注意考虑数组全为 1 的情况，返回值为 <code>fast - slow</code> 。</p>
+<p><strong>另一种解法</strong></p>
+<p>一次遍历。两个计数器 <code>count</code>、<code>maxCount</code>作为计数指针 和 当前连续1 的最大个数。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span> || nums == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] != <span class="number">0</span>)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                maxCount = Math.max(count, maxCount);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                count = <span class="number">0</span>;</span><br><span class="line">            &#125;           </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxCount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面两题稍有不同，但总体思想大致一致。</p>
+<h5 id="有序数组中的单一元素medium">540，有序数组中的单一元素，medium</h5>
+<p>给定一个只包含整数的有序数组，每个元素都会出现两次，唯有一个数只会出现一次，找出这个数。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [1,1,2,3,3,4,4,8,8]</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,3,7,7,10,11,11]</span><br><span class="line">输出: 10</span><br></pre></td></tr></table></figure>
+<p><strong>代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNonDuplicate</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(fast &lt; nums.length)&#123;           </span><br><span class="line">            <span class="comment">//检查这一对数，如果不同返回第一个数</span></span><br><span class="line">            <span class="keyword">if</span>(nums[slow] &lt; nums[fast])</span><br><span class="line">                <span class="keyword">return</span> nums[slow];</span><br><span class="line">            <span class="comment">//否则，检查下一对数</span></span><br><span class="line">            <span class="keyword">if</span>(nums[slow] == nums[fast])&#123;</span><br><span class="line">                slow = slow + <span class="number">2</span>;</span><br><span class="line">                fast = fast + <span class="number">2</span>;               </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//nums仅有一个元素的特殊情况</span></span><br><span class="line">        <span class="keyword">return</span> nums[slow];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="长度最小的子数组medium">209，长度最小的子数组，medium</h5>
+<p>给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的 连续 子数组，并返回其长度。如果不存在符合条件的子数组，返回 0。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：s &#x3D; 7, nums &#x3D; [2,3,1,2,4,3]</span><br><span class="line">输出：2</span><br><span class="line">解释：子数组 [4,3] 是该条件下的长度最小的子数组。</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>快慢指针来维护一个滑动窗口，相当于数组元素入队出队。具体过程可以用队列来理解，但代码实现用快慢指针。</p>
+<p><img src="https://pic.leetcode-cn.com/10ca012c2f0170afcac5e5996add20c32c36a82f4bb4a6187897bb948ace5fe2-image.png" alt="image.png" style="zoom:80%;" /></p>
+<p><img src="https://pic.leetcode-cn.com/2da8cf86a2a3df3c95ed7d95add574dca2d8bae8420addd0fa6b8c55fa3db081-image.png" alt="image.png" style="zoom:80%;" /></p>
+<p><img src="https://pic.leetcode-cn.com/ca74b1a2ad0eb5a4ebf8647a332161b140c8ebdd71cd5d19bef16e9bf0a43c95-image.png" alt="image.png" style="zoom:80%;" /><img src="https://pic.leetcode-cn.com/72f39b5cd7eb5f866e24d0a31eb3eac7d57cf3ad202ad40d30f103833c1f5a69-image.png" alt="image.png" style="zoom:80%;" /></p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minSubArrayLen</span><span class="params">(<span class="keyword">int</span> s, <span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">while</span>(fast &lt; nums.length)&#123;</span><br><span class="line">            <span class="comment">//当前窗口中元素和 小于 s，加入元素</span></span><br><span class="line">            sum += nums[fast]; </span><br><span class="line">            fast++;      </span><br><span class="line">            <span class="comment">//窗口内的元素和 大于等于 s 时，更新最小长度，并缩短窗口</span></span><br><span class="line">            <span class="keyword">while</span>(sum &gt;= s)&#123;                </span><br><span class="line">                min = Math.min(min, fast - slow);</span><br><span class="line">                sum -= nums[slow];</span><br><span class="line">                slow++;                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> min == Integer.MAX_VALUE ? <span class="number">0</span> : min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+	
+	
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
+      </div>
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag"># 双指针</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/19/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E6%95%B0%E7%BB%84%EF%BC%88%E4%BA%8C%E5%88%86%E6%B3%95%EF%BC%89/" rel="prev" title="LeetCode刷题—数组（二分法）">
+                  <i class="fa fa-chevron-left"></i> LeetCode刷题—数组（二分法）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rui Wang</span>
+</div>
+
+<!---->
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i>
+  <span id="busuanzi_container_site_uv">
+    本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+  </span>
+  <span id="busuanzi_container_site_pv">
+      &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  </div>
+  </div>
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
