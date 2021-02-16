@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="思路 一个二维矩阵从某个点开始向四周扩展，直到无法再扩展为止。 矩阵，可以抽象为一幅「图」，这就是⼀个图的遍历问题，也就类似⼀个 N 叉树遍历的问题。几行代码就能解决，直接上框架吧：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode刷题—岛屿问题">
+<meta property="og:url" content="http://example.com/2021/02/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%B2%9B%E5%B1%BF%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Rui">
+<meta property="og:description" content="思路 一个二维矩阵从某个点开始向四周扩展，直到无法再扩展为止。 矩阵，可以抽象为一幅「图」，这就是⼀个图的遍历问题，也就类似⼀个 N 叉树遍历的问题。几行代码就能解决，直接上框架吧：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210216174746701.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/6fd1a8c57dc7f3800628577ad6fc650f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e84efa198ef108951ef340cc712e5aa0.png">
+<meta property="article:published_time" content="2021-02-16T09:48:47.000Z">
+<meta property="article:modified_time" content="2021-02-16T09:50:27.469Z">
+<meta property="article:author" content="Rui Wang">
+<meta property="article:tag" content="dfs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210216174746701.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center">
+
+
+<link rel="canonical" href="http://example.com/2021/02/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%B2%9B%E5%B1%BF%E9%97%AE%E9%A2%98/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LeetCode刷题—岛屿问题 | Rui</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+  
+  <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Rui</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E6%B8%B2%E6%9F%93easy"><span class="nav-text">733，图像渲染，easy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8Fmedium"><span class="nav-text">200，岛屿数量，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AFmedium"><span class="nav-text">695，岛屿的最大面积，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BFeasy"><span class="nav-text">463，岛屿的周长，easy</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rui Wang"
+      src="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+  <p class="site-author-name" itemprop="name">Rui Wang</p>
+  <div class="site-description" itemprop="description">去摘遥不可及的星星</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%B2%9B%E5%B1%BF%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode刷题—岛屿问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-16 17:48:47 / 修改时间：17:50:27" itemprop="dateCreated datePublished" datetime="2021-02-16T17:48:47+08:00">2021-02-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>思路</strong></p>
+<p>一个二维矩阵从某个点开始向四周扩展，直到无法再扩展为止。</p>
+<p>矩阵，可以抽象为一幅「图」，这就是⼀个图的遍历问题，也就类似⼀个 N 叉树遍历的问题。几行代码就能解决，直接上框架吧：</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// (x, y) 为坐标位置 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fill</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; </span><br><span class="line"></span><br><span class="line">fill(x - <span class="number">1</span>, y); <span class="comment">// 上 </span></span><br><span class="line"></span><br><span class="line">fill(x + <span class="number">1</span>, y); <span class="comment">// 下 </span></span><br><span class="line"></span><br><span class="line">fill(x, y - <span class="number">1</span>); <span class="comment">// 左 </span></span><br><span class="line"></span><br><span class="line">fill(x, y + <span class="number">1</span>); <span class="comment">// 右 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个框架可以解决所有在二维矩阵中遍历的问题，说得高端点，这就叫深度优先搜索（Depth First Search，简称 <strong>DFS</strong>），说得简单点，这就叫四叉树遍历框架。坐标 (x, y) 就是 root，四个方向就是 root 的四个子节点。</p>
+<p><strong>DFS模板</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(参数)</span></span>&#123;</span><br><span class="line"><span class="comment">//dfs出口，不满足条件就退出</span></span><br><span class="line">	<span class="keyword">if</span>(结束条件)&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;    </span><br><span class="line">    操作</span><br><span class="line"><span class="comment">//递归，接着进一步DFS</span></span><br><span class="line">    dfs(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="图像渲染easy">733，图像渲染，easy</h5>
+<p>有一幅以二维整数数组表示的图画，每一个整数表示该图画的像素值大小，数值在 0 到 65535 之间。</p>
+<p>给你一个坐标 <code>(sr, sc)</code> 表示图像渲染开始的像素值（行 ，列）和一个新的颜色值 <code>newColor</code>，让你重新上色这幅图像。</p>
+<p>从初始坐标开始，记录初始坐标的<u>上下左右</u>四个方向上像素值<u>与初始坐标相同</u>的相连像素点，接着再记录这四个方向上符合条件的像素点与他们对应四个方向上像素值与初始坐标相同的相连像素点，……，重复该过程。<u>将所有有记录的像素点的颜色值改为新的颜色值</u>。</p>
+<p>最后返回经过上色渲染后的图像。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">image &#x3D; [[1,1,1],[1,1,0],[1,0,1]]</span><br><span class="line">sr &#x3D; 1, sc &#x3D; 1, newColor &#x3D; 2</span><br><span class="line">输出: [[2,2,2],[2,2,0],[2,0,1]]</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210216174746701.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">解析: </span><br><span class="line">在图像的正中间，(坐标(sr,sc)&#x3D;(1,1)),</span><br><span class="line">在路径上所有符合条件的像素点的颜色都被更改成2。</span><br><span class="line">注意，右下角的像素没有更改为2，</span><br><span class="line">因为它不是在上下左右四个方向上与初始点相连的像素点。</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>从起始点开始，搜索四个方向</p>
+<ul>
+<li><p>如果这个方向越界且不需要渲染，结束搜索。</p></li>
+<li><p>否则，继续从这个方向搜索它的上下左右。</p></li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] floodFill(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc, <span class="keyword">int</span> newColor) &#123;      </span><br><span class="line">        <span class="comment">//如果新颜色与原来相同，不需更改</span></span><br><span class="line">        <span class="keyword">if</span>(image[sr][sc] == newColor) <span class="keyword">return</span> image;</span><br><span class="line">        </span><br><span class="line">        dfs(image, sr, sc, newColor, image[sr][sc]);</span><br><span class="line">        <span class="keyword">return</span> image;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc, <span class="keyword">int</span> newColor, <span class="keyword">int</span> oldColor)</span></span>&#123;</span><br><span class="line">        <span class="comment">//出口：不在合法范围内 或 此位置与初始颜色不同</span></span><br><span class="line">        <span class="keyword">if</span>(!isValidArea(image, sr, sc) || image[sr][sc] != oldColor) </span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">		<span class="comment">//操作</span></span><br><span class="line">        image[sr][sc] = newColor;</span><br><span class="line">        <span class="comment">//递归</span></span><br><span class="line">        dfs(image, sr - <span class="number">1</span>, sc, newColor, oldColor);</span><br><span class="line">        dfs(image, sr + <span class="number">1</span>, sc, newColor, oldColor);</span><br><span class="line">        dfs(image, sr, sc - <span class="number">1</span>, newColor, oldColor);</span><br><span class="line">        dfs(image, sr, sc + <span class="number">1</span>, newColor, oldColor);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//合法：不处于边界之外</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidArea</span><span class="params">(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sr &lt; <span class="number">0</span> || sr &gt;= image.length || sc &lt; <span class="number">0</span> || sc &gt;= image[<span class="number">0</span>].length)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="岛屿数量medium">200，岛屿数量，medium</h5>
+<p>给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
+<p>岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。</p>
+<p>此外，你可以假设该网格的四条边均被水包围。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：grid &#x3D; [</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;]</span><br><span class="line">]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：grid &#x3D; [</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;1&quot;]</span><br><span class="line">]</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>本题的目标是得到“岛屿数量”，上下左右相连的 <code>1</code> 都被认为是连续岛屿。</p>
+<p>总体思路：遍历地图，找到一个陆地（' 1 '），采用 dfs 向 上下左右 四个方向搜索，同时“岛屿数量” + 1。</p>
+<p>dfs 流程：</p>
+<ul>
+<li><p>结束条件：不在合法范围内 或 不是陆地</p></li>
+<li><p>操作：避免重复遍历，网格的dfs 会重复向四个方向找，可能重复遍历节点。</p>
+<pre><code>         将已遍历过的陆地标记为 &#39;2&#39;</code></pre></li>
+<li><p>递归：搜索上下左右的节点</p></li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numIslands</span><span class="params">(<span class="keyword">char</span>[][] grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[<span class="number">0</span>].length; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(grid[i][j] == <span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">                    dfs(grid, i, j);</span><br><span class="line">                    cnt++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//从 一个陆地 ‘1’向四个方向遍历</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] grid, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!isValidArea(grid, r, c) || grid[r][c] != <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//标记已遍历过的陆地</span></span><br><span class="line">        grid[r][c] = <span class="string">&#x27;2&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        dfs(grid, r - <span class="number">1</span>, c);</span><br><span class="line">        dfs(grid, r + <span class="number">1</span>, c);</span><br><span class="line">        dfs(grid, r, c - <span class="number">1</span>);</span><br><span class="line">        dfs(grid, r, c + <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidArea</span><span class="params">(<span class="keyword">char</span>[][] image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sr &lt; <span class="number">0</span> || sr &gt;= image.length || sc &lt; <span class="number">0</span> || sc &gt;= image[<span class="number">0</span>].length)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="岛屿的最大面积medium">695，岛屿的最大面积，medium</h5>
+<p>给定一个包含了一些 0 和 1 的非空二维数组 grid 。</p>
+<p>一个 岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在水平或者竖直方向上相邻。你可以假设 grid 的四个边缘都被 0（代表水）包围着。</p>
+<p>找到给定的二维数组中<strong>最大的岛屿面积</strong>。(如果没有岛屿，则返回面积为 0 。)</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[[0,0,1,0,0,0,0,1,0,0,0,0,0],</span><br><span class="line"> [0,0,0,0,0,0,0,1,1,1,0,0,0],</span><br><span class="line"> [0,1,1,0,1,0,0,0,0,0,0,0,0],</span><br><span class="line"> [0,1,0,0,1,1,0,0,1,0,1,0,0],</span><br><span class="line"> [0,1,0,0,1,1,0,0,1,1,1,0,0],</span><br><span class="line"> [0,0,0,0,0,0,0,0,0,0,1,0,0],</span><br><span class="line"> [0,0,0,0,0,0,0,1,1,1,0,0,0],</span><br><span class="line"> [0,0,0,0,0,0,0,1,1,0,0,0,0]]</span><br><span class="line">对于上面这个给定矩阵应返回 6。注意答案不应该是 11 ，因为岛屿只能包含水平或垂直的四个方向的 1 。</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>和上面思路一致，根据题目对结果进行修改。</p>
+<p>题目目标是得到最大岛屿面积，在 dfs 过程中求出每个岛屿的面积，在主函数中得到最大的一个。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxAreaOfIsland</span><span class="params">(<span class="keyword">int</span>[][] grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[<span class="number">0</span>].length; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(grid[i][j] == <span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="keyword">int</span> a = dfs(grid, i, j);</span><br><span class="line">                    res = Math.max(a, res);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] grid, <span class="keyword">int</span> r ,<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!isValidArea(grid, r, c) || grid[r][c] != <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//标记已遍历过的陆地</span></span><br><span class="line">        grid[r][c] = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + dfs(grid, r - <span class="number">1</span>, c) + dfs(grid, r + <span class="number">1</span>, c) + dfs(grid, r, c - <span class="number">1</span>) + dfs(grid, r, c + <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidArea</span><span class="params">(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sr &lt; <span class="number">0</span> || sr &gt;= image.length || sc &lt; <span class="number">0</span> || sc &gt;= image[<span class="number">0</span>].length)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="岛屿的周长easy">463，岛屿的周长，easy</h5>
+<p>给定一个 row x col 的二维网格地图 grid ，其中：grid[i][j] = 1 表示陆地， grid[i][j] = 0 表示水域。</p>
+<p>网格中的格子 水平和垂直 方向相连（对角线方向不相连）。整个网格被水完全包围，但其中恰好有一个岛屿（或者说，一个或多个表示陆地的格子相连组成的岛屿）。</p>
+<p>岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100 。计算这个岛屿的周长。</p>
+<p>示例 1：</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/6fd1a8c57dc7f3800628577ad6fc650f.png" alt="img" /><figcaption>img</figcaption>
+</figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：grid &#x3D; [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]</span><br><span class="line">输出：16</span><br><span class="line">解释：它的周长是上面图片中的 16 个黄色的边</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>岛屿的周长是计算岛屿全部的「边缘」，而这些边缘就是我们在 DFS 遍历中，dfs 函数返回的位置。</p>
+<p>可以将岛屿的周长中的边分为两类，如下图所示。黄色的边是与网格边界相邻的周长，而蓝色的边是与海洋格子相邻的周长。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/e84efa198ef108951ef340cc712e5aa0.png" alt="将岛屿周长中的边分为两类" /><figcaption>将岛屿周长中的边分为两类</figcaption>
+</figure>
+<p>dfs 函数直接返回有这几种情况：</p>
+<ul>
+<li><code>!inArea(grid, r, c)</code>，即坐标 (r, c) 超出了网格的范围，也就是「先污染后治理」的情况</li>
+<li><code>grid[r][c] != 1</code>，即当前格子不是岛屿格子，这又分为两种情况：
+<ul>
+<li><code>grid[r][c] == 0</code>，当前格子是海洋格子</li>
+<li><code>grid[r][c] == 2</code>，当前格子是已遍历的陆地格子</li>
+</ul></li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">islandPerimeter</span><span class="params">(<span class="keyword">int</span>[][] grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[<span class="number">0</span>].length; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(grid[i][j] == <span class="number">1</span>)&#123;</span><br><span class="line">                   <span class="keyword">return</span> dfs(grid, i, j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//从 一个陆地 ‘1’向四个方向遍历</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] grid, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">        <span class="comment">//蓝色边界</span></span><br><span class="line">        <span class="keyword">if</span>(!isValidArea(grid, r, c)) </span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//黄色边界</span></span><br><span class="line">        <span class="keyword">if</span>(grid[r][c] == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//当前格子是已遍历的陆地格子,和周长没关系</span></span><br><span class="line">        <span class="keyword">if</span>(grid[r][c] != <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//标记已遍历过的陆地</span></span><br><span class="line">        grid[r][c] = <span class="string">&#x27;2&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dfs(grid, r - <span class="number">1</span>, c) + dfs(grid, r + <span class="number">1</span>, c) + dfs(grid, r, c - <span class="number">1</span>) + dfs(grid, r, c + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidArea</span><span class="params">(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sr &lt; <span class="number">0</span> || sr &gt;= image.length || sc &lt; <span class="number">0</span> || sc &gt;= image[<span class="number">0</span>].length)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>更简单的写法：遍历每一个空格，遇到岛屿，计算其上下左右的情况，遇到水域或者出界的情况，就可以计算边了。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">islandPerimeter</span><span class="params">(<span class="keyword">int</span>[][] grid)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span>[][] directions = &#123;&#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,-<span class="number">1</span>&#125;,&#123;-<span class="number">1</span>,<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[<span class="number">0</span>].length; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(grid[i][j] == <span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="comment">//4个方向</span></span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">4</span>; k++)&#123;</span><br><span class="line">                        <span class="keyword">int</span> r = i + directions[k][<span class="number">0</span>];</span><br><span class="line">                        <span class="keyword">int</span> c = j + directions[k][<span class="number">1</span>];</span><br><span class="line">                        <span class="keyword">if</span>(r &lt; <span class="number">0</span> || r &gt;= grid.length || c &lt; <span class="number">0</span> || c &gt;= grid[<span class="number">0</span>].length || grid[r][c] == <span class="number">0</span>) res++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+	
+	
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
+      </div>
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dfs/" rel="tag"># dfs</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/15/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="prev" title="LeetCode刷题—回溯算法">
+                  <i class="fa fa-chevron-left"></i> LeetCode刷题—回溯算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rui Wang</span>
+</div>
+
+<!---->
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i>
+  <span id="busuanzi_container_site_uv">
+    本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+  </span>
+  <span id="busuanzi_container_site_pv">
+      &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  </div>
+  </div>
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
