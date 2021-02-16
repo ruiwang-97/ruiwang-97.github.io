@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="回溯算法 前言 「回溯是递归的副产品，只要有递归就会有回溯」，所以回溯法也经常和二叉树遍历，深度优先遍历（\(dfs\)）混在一起，因为这两种方式都是用了递归。 回溯法就是暴力搜索，优化回溯算法只有「剪枝」一种方法。 回溯算法能解决如下问题：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode刷题—回溯算法">
+<meta property="og:url" content="http://example.com/2021/02/15/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Rui">
+<meta property="og:description" content="回溯算法 前言 「回溯是递归的副产品，只要有递归就会有回溯」，所以回溯法也经常和二叉树遍历，深度优先遍历（\(dfs\)）混在一起，因为这两种方式都是用了递归。 回溯法就是暴力搜索，优化回溯算法只有「剪枝」一种方法。 回溯算法能解决如下问题：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b15fff1a94206fa74dfd68dba60da8b9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210215160501659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/3fb042b5dcc8a9f74b94662b441a4914.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/fe56789ddce344a4a4c330191f845290.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/7bed7dc8842cad57af368e34732c0b05.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/original_images/17_telephone_keypad.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b1b653f788c9024244727b6d2f8f6988.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/c6a0773ead22e31d8482e76a08275fa9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a388616952b76a18a2463b2dc667537a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/da35e130f6e7e7fc10ccbb196613288d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210214165327228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210215160540814.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/ciaqDnJprwv51h5BKbTHZUOibWKplkvJfSAfBfMiaRlo2Dpob0U8tABjUsSaMm20Z1NgdOpcb8D5ZuQjHHItRRewQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021021516071763.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210215160739252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-02-15T08:10:05.000Z">
+<meta property="article:modified_time" content="2021-02-15T08:12:41.669Z">
+<meta property="article:author" content="Rui Wang">
+<meta property="article:tag" content="回溯">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/b15fff1a94206fa74dfd68dba60da8b9.png">
+
+
+<link rel="canonical" href="http://example.com/2021/02/15/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LeetCode刷题—回溯算法 | Rui</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+  
+  <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Rui</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95"><span class="nav-text">回溯算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E9%97%AE%E9%A2%98"><span class="nav-text">组合问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88medium"><span class="nav-text">77，组合，medium</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C"><span class="nav-text">组合总和</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cmedium"><span class="nav-text">216，组合总和Ⅲ，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cmedium-1"><span class="nav-text">39，组合总和，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cmedium-2"><span class="nav-text">40，组合总和Ⅱ，medium</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E9%9B%86%E5%90%88%E6%B1%82%E7%BB%84%E5%90%88"><span class="nav-text">多个集合求组合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88medium"><span class="nav-text">17，电话号码的字母组合，medium</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E9%9B%86%E9%97%AE%E9%A2%98"><span class="nav-text">子集问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%90%E9%9B%86medium"><span class="nav-text">78，子集，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%90%E9%9B%86medium-1"><span class="nav-text">90，子集Ⅱ，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97medium"><span class="nav-text">491，递增子序列，medium</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="nav-text">小总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E5%89%B2%E9%97%AE%E9%A2%98"><span class="nav-text">切割问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2medium"><span class="nav-text">131，分割回文串，medium</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98"><span class="nav-text">排列问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%A8%E6%8E%92%E5%88%97medium"><span class="nav-text">46，全排列，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%A8%E6%8E%92%E5%88%97medium-1"><span class="nav-text">47，全排列Ⅱ，medium</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90medium"><span class="nav-text">22，括号生成，medium</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rui Wang"
+      src="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+  <p class="site-author-name" itemprop="name">Rui Wang</p>
+  <div class="site-description" itemprop="description">去摘遥不可及的星星</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/15/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode刷题—回溯算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-15 16:10:05 / 修改时间：16:12:41" itemprop="dateCreated datePublished" datetime="2021-02-15T16:10:05+08:00">2021-02-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="回溯算法">回溯算法</h2>
+<h3 id="前言">前言</h3>
+<p><strong>「回溯是递归的副产品，只要有递归就会有回溯」</strong>，所以回溯法也经常和二叉树遍历，深度优先遍历（<span class="math inline">\(dfs\)</span>）混在一起，因为这两种方式都是用了递归。</p>
+<p>回溯法就是暴力搜索，优化回溯算法只有<strong>「剪枝」</strong>一种方法。</p>
+<p>回溯算法能解决如下问题：</p>
+<a id="more"></a>
+<ul>
+<li>组合问题：N个数里面按一定规则找出k个数的集合</li>
+<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
+<li>切割问题：一个字符串按一定规则有几种切割方式</li>
+<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
+<li>棋盘问题：N皇后，解数独等等</li>
+</ul>
+<p><strong>解决一个回溯问题，实际上就是一个决策树的遍历过程</strong>。你只需要思考 3 个问题：</p>
+<p><strong>1、路径</strong>：也就是已经做出的选择。</p>
+<p><strong>2、选择列表</strong>：也就是你当前可以做的选择。</p>
+<p><strong>3、结束条件</strong>：也就是到达决策树底层，无法再做选择的条件。</p>
+<p>代码的框架：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">result = [];<span class="comment">//结果集</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(路径，选择列表)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (结束条件) &#123;</span><br><span class="line">        result.add(路径)；<span class="comment">//存放结果</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;</span><br><span class="line">        做选择;</span><br><span class="line">        backtracking(路径，选择列表); <span class="comment">// 递归</span></span><br><span class="line">        回溯，撤销选择</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」。</strong></p>
+<p>使用两个变量： res 和 path，res 表示<strong>最终的结果</strong>，path 保存<strong>已走过的路径</strong>。当满足结束条件，即<u>到达了决策树的底层</u>，就把 path 放到 res 中。</p>
+<p>此总结参考于 labuladong的算法小抄 和 代码随想录。</p>
+<h3 id="组合问题">组合问题</h3>
+<h5 id="组合medium">77，组合，medium</h5>
+<p>给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: n &#x3D; 4, k &#x3D; 2</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [2,4],</span><br><span class="line">  [3,4],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  [1,3],</span><br><span class="line">  [1,4],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>n 相当于 树的宽度， k 相当于 树的高度。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/b15fff1a94206fa74dfd68dba60da8b9.png" alt="Image" /><figcaption>Image</figcaption>
+</figure>
+<p>由上面框架，选择一个数就填入路径集<code>path</code>，结束条件：路径集<code>path</code>大小 = k。</p>
+<p>在每层递归如何选择数呢？需要变量 <code>index</code> 记录下一层递归的起始位置，<code>index + 1 ~ n</code>即为下层递归的选择列表。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combine(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        backtrack(n, k, <span class="number">1</span>, <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="keyword">int</span> index, List&lt;Integer&gt; path)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(path.size() == k)&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//横向遍历</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt;= n ; i++)&#123;</span><br><span class="line">            path.add(i);</span><br><span class="line">            backtrack(n, k, i + <span class="number">1</span>, path);</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里还可以进行优化，会将效率提高不少。若 <code>n = 5, k = 4</code>，现在 <code>path.size() = 1</code>，那还需 <code>k - path.size() = 3</code> 个数。若 <code>index = 4</code>，则只能选取 5，不满足，故 i 有限制条件。<code>i &lt;= n - (k - path.size()) + 1</code>，即在集合n中至多要从该起始位置 : <code>n - (k - path.size()) + 1</code>开始遍历。</p>
+<h4 id="组合总和"><strong>组合总和</strong></h4>
+<h5 id="组合总和medium">216，组合总和Ⅲ，medium</h5>
+<p>找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。</p>
+<p>说明：</p>
+<p>所有数字都是正整数。 解集不能包含重复的组合。 示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: k &#x3D; 3, n &#x3D; 7</span><br><span class="line">输出: [[1,2,4]]</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: k &#x3D; 3, n &#x3D; 9</span><br><span class="line">输出: [[1,2,6], [1,3,5], [2,3,4]]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>借鉴上一题的思路，组合中的数字为 1~9，则从1 开始分层遍历，结束条件即为 和为 n 且 <code>path.size() = k</code>。选择操作：将 i 添入路径，并加入和sum 中，撤销操作反之。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum3(<span class="keyword">int</span> k, <span class="keyword">int</span> n) &#123;</span><br><span class="line">        backtracking(n, k, <span class="keyword">new</span> ArrayList&lt;&gt;(), <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k, List&lt;Integer&gt; path, <span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sum == n &amp;&amp; path.size() == k)&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt;= <span class="number">9</span> ; i++)&#123;</span><br><span class="line">            path.add(i);</span><br><span class="line">            sum += i;</span><br><span class="line">            backtracking(n, k, path, i + <span class="number">1</span>);</span><br><span class="line">            sum -= i;</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="组合总和medium-1">39，组合总和，medium</h5>
+<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<p>说明：</p>
+<p>所有数字（包括 target）都是正整数。 解集不能包含重复的组合。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：candidates &#x3D; [2,3,6,7], target &#x3D; 7,</span><br><span class="line">所求解集为：</span><br><span class="line">[</span><br><span class="line">  [7],</span><br><span class="line">  [2,2,3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：candidates &#x3D; [2,3,5], target &#x3D; 8,</span><br><span class="line">所求解集为：</span><br><span class="line">[</span><br><span class="line">  [2,2,2,2],</span><br><span class="line">  [2,3,3],</span><br><span class="line">  [3,5]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>提示：</p>
+<p>1 &lt;= <code>candidates.length</code> &lt;= 30 1 &lt;= candidates[i] &lt;= 200 candidate 中的每个元素都是独一无二的。 1 &lt;= target &lt;= 500</p>
+<p><strong>题解</strong></p>
+<p>题意：在无重复元素的数组中可重复选取元素使其和为target，结果集中的数组不重复。</p>
+<p>此题的难点在于不产生重复组合。</p>
+<p>错误：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; candidates.length; i++)&#123;</span><br><span class="line">    ...</span><br><span class="line">    backtracking(i,...);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果不使用 <code>index</code>，最后结果会有重复数组，如 [[2,2,3],[2,3,2],[3,2,2],[7]] 。</p>
+<p>解决：仍需要 index，以使下一次选择的起点在当前选择的基础上，这样就不会选到本次选择同层左边的数。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210215160501659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<p>正确：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; candidates.length; i++)&#123;</span><br><span class="line">    ...</span><br><span class="line">    backtracking(index,...);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>规律</strong>：若只在一个集合中选取组合，需要开始索引 <code>index</code>，如此题和上面两题。</p>
+<p>如果是多个集合取组合，各个集合之间相互不影响，那么就不用 <code>index</code>，如 17。</p>
+<p>结束条件： <code>sum == target</code> 时填入路径，<code>sum &gt; target</code> 时舍弃。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/3fb042b5dcc8a9f74b94662b441a4914.png" alt="Image" /><figcaption>Image</figcaption>
+</figure>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        backtracking(candidates, target, <span class="number">0</span>, <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target, <span class="keyword">int</span> index, List&lt;Integer&gt; path)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sum &gt; target) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(sum == target)&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; candidates.length; i++)&#123;</span><br><span class="line">            path.add(candidates[i]);</span><br><span class="line">            sum += candidates[i];</span><br><span class="line">            backtracking(candidates, target, i, path);</span><br><span class="line">            sum -= candidates[i];</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="组合总和medium-2">40，组合总和Ⅱ，medium</h5>
+<p>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
+<p>说明：</p>
+<p>所有数字（包括目标数）都是正整数。 解集不能包含重复的组合。 示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: candidates &#x3D; [10,1,2,7,6,1,5], target &#x3D; 8,</span><br><span class="line">所求解集为:</span><br><span class="line">[</span><br><span class="line">  [1, 7],</span><br><span class="line">  [1, 2, 5],</span><br><span class="line">  [2, 6],</span><br><span class="line">  [1, 1, 6]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: candidates &#x3D; [2,5,2,1,2], target &#x3D; 5,</span><br><span class="line">所求解集为:</span><br><span class="line">[</span><br><span class="line">  [1,2,2],</span><br><span class="line">  [5]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>与39题比较：</p>
+<p>39题 数组元素无重复，可重复选取，解集无重复</p>
+<p>40题 数组元素有重复，不可重复选取，解集无重复</p>
+<p>关键在于<strong>「去重」</strong>，对此题构成的树，从上而下的同一树枝可以有重复元素，同一树层之间不可以有重复元素。如数组[1,1,2]（为方便理解已排序），target = 3 时构成的树如图</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/fe56789ddce344a4a4c330191f845290.png" alt="Image" /><figcaption>Image</figcaption>
+</figure>
+<p>那么怎么区分树层的重复元素和树枝的重复元素呢？</p>
+<p>使用boolean 数组 <code>used</code>，初始化为false，当选取元素改为true。</p>
+<p>首先对数组进行排序，若相邻元素相等且前一元素已被<strong>同一树层</strong>使用过，跳过。代码表示为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; candidates[i] == candidates[i - <span class="number">1</span>] &amp;&amp; used[i - <span class="number">1</span>] == <span class="keyword">false</span>)</span><br><span class="line">    <span class="keyword">continue</span>;  </span><br></pre></td></tr></table></figure>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/7bed7dc8842cad57af368e34732c0b05.png" alt="Image" /><figcaption>Image</figcaption>
+</figure>
+<p>在图中将used的变化用橘黄色标注上，可以看出在candidates[i] == candidates[i - 1]相同的情况下：</p>
+<ul>
+<li>used[i - 1] == true，说明同一<strong>树支</strong>candidates[i - 1]使用过</li>
+<li>used[i - 1] == false，说明同一<strong>树层</strong>candidates[i - 1]使用过</li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum2(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target) &#123;             <span class="keyword">boolean</span>[] used = <span class="keyword">new</span> <span class="keyword">boolean</span>[candidates.length];</span><br><span class="line">        Arrays.fill(used, <span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">//先排序使相同元素处于相邻位置</span></span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        backtracking(candidates, target, <span class="number">0</span>, <span class="keyword">new</span> ArrayList&lt;&gt;(), used);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target, <span class="keyword">int</span> index, List&lt;Integer&gt; path, <span class="keyword">boolean</span>[] used)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sum &gt; target) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(sum == target)&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; candidates.length ; i++)&#123;</span><br><span class="line">            <span class="comment">//同一树层不可以重复</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; candidates[i] == candidates[i - <span class="number">1</span>] &amp;&amp; used[i - <span class="number">1</span>] == <span class="keyword">false</span>)</span><br><span class="line">                <span class="keyword">continue</span>;   </span><br><span class="line">            </span><br><span class="line">            path.add(candidates[i]);</span><br><span class="line">            sum += candidates[i]; </span><br><span class="line">            used[i] = <span class="keyword">true</span>;</span><br><span class="line">            backtracking(candidates, target, i + <span class="number">1</span>, path, used);</span><br><span class="line">            used[i] = <span class="keyword">false</span>;</span><br><span class="line">            sum -= candidates[i];</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="多个集合求组合">多个集合求组合</h4>
+<h5 id="电话号码的字母组合medium">17，电话号码的字母组合，medium</h5>
+<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/original_images/17_telephone_keypad.png" alt="img" style="zoom:80%;" /></p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;23&quot;</span><br><span class="line">输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;&quot;</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
+<p>示例 3：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;2&quot;</span><br><span class="line">输出：[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>与上面题目不同，本题是在多个集合中找组合，不需要开始索引 index。</p>
+<p>此题需要注意的地方有很多：</p>
+<ul>
+<li><p>数字与字母的映射——可以用数组或Map</p></li>
+<li><p>结束条件怎么表示？用 <code>idx</code> 表示遍历到digits 的数字索引（即树的深度），当 <code>idx == digits.length()</code> 时，结束。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/b1b653f788c9024244727b6d2f8f6988.png" alt="Image" /><figcaption>Image</figcaption>
+</figure></li>
+<li><p>怎么选择？对 每个数字<code>digit</code> 对应的字母集<code>letter</code> 进行遍历，选择 <code>letter</code> 中的字母。</p></li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    String[] str = &#123;<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;abc&quot;</span>,<span class="string">&quot;def&quot;</span>,<span class="string">&quot;ghi&quot;</span>,<span class="string">&quot;jkl&quot;</span>,<span class="string">&quot;mno&quot;</span>,<span class="string">&quot;pqrs&quot;</span>,<span class="string">&quot;tuv&quot;</span>,<span class="string">&quot;wxyz&quot;</span>&#125;;<span class="comment">//0-9对应字母集</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">letterCombinations</span><span class="params">(String digits)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(digits.length() == <span class="number">0</span>) <span class="keyword">return</span> res;</span><br><span class="line">        backtracking(digits, <span class="keyword">new</span> StringBuffer(), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(String digits, StringBuffer path, <span class="keyword">int</span> idx)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == digits.length())&#123;</span><br><span class="line">            res.add(path.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> digit = digits.charAt(index) - <span class="string">&#x27;0&#x27;</span>;     <span class="comment">// 将index指向的&#x27;数字&#x27;转为int</span></span><br><span class="line">        String letter = str[digit]; 				<span class="comment">// 第 index 个数字对应的字母集</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; letter.length(); i++)&#123;</span><br><span class="line">            path.append(letter.charAt(i));			<span class="comment">//选择</span></span><br><span class="line">            backtracking(digits, path, idx + <span class="number">1</span>);  <span class="comment">//对下一层处理</span></span><br><span class="line">            path.deleteCharAt(path.length() - <span class="number">1</span>);   <span class="comment">//撤销选择</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>细节</strong></p>
+<ul>
+<li><code>StringBuffer</code> 与 String 加入字母的区别：</li>
+</ul>
+<p>因为<code>StringBuffer</code>传入的都是同一个对象，所以在递归完成之后必须撤回上一次的操作，需要删除上一次添加的字符。而String每次改变之后传入的都是不同的对象。故无需撤销操作。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; letters.length() ; i ++)&#123;</span><br><span class="line">	backtracking(digits, index + <span class="number">1</span>, s + letters.charAt(i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>int 与 char 类型的转换</p>
+<p>char 不能直接转为int，得到是‘3’的<code>Ascii</code>，如</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> numChar = <span class="string">&#x27;3&#x27;</span>;</span><br><span class="line">    <span class="keyword">int</span> intNum = (<span class="keyword">int</span>)numChar;</span><br><span class="line">    System.out.println(numChar + <span class="string">&quot;: &quot;</span> + intNum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3：51</span><br></pre></td></tr></table></figure>
+<p>char 转为 int 的正确方法是：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> numChar = <span class="string">&#x27;3&#x27;</span>;</span><br><span class="line">    <span class="keyword">int</span> intNum = numChar - ‘<span class="number">0</span>’;</span><br><span class="line">    System.out.println(numChar + <span class="string">&quot;: &quot;</span> + intNum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3：3</span><br></pre></td></tr></table></figure>
+<p>而 int 可以强转为 char</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">char</span> b = (<span class="keyword">char</span>)a; <span class="comment">//b = &#x27;9&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="子集问题">子集问题</h3>
+<h5 id="子集medium">78，子集，medium</h5>
+<p>给你一个整数数组 <code>nums</code> ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。</p>
+<p>解集 不能 包含重复的子集。你可以按 任意顺序 返回解集。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [1,2,3]</span><br><span class="line">输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[[],[0]]</span><br></pre></td></tr></table></figure>
+<p>提示：</p>
+<p>1 &lt;= <code>nums.length</code> &lt;= 10 -10 &lt;= <code>nums[i]</code> &lt;= 10 <code>nums</code> 中的所有元素 互不相同</p>
+<p><strong>题解</strong></p>
+<p>与上面组合问题不同在于<strong>「子集」</strong>是这棵树的所有节点，而不是只有叶子节点。</p>
+<p>解中不含重复子集，则<strong>取过的元素不会重复取</strong>，for 循环的开始索引 <code>index</code>，而不是 0。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/c6a0773ead22e31d8482e76a08275fa9.png" alt="Image" /><figcaption>Image</figcaption>
+</figure>
+<p>那结束条件是什么呢？可以不需要加终止条件，因为<code>index &gt;= nums.size()</code>，本层for循环本来也结束了。</p>
+<p><strong>「求取子集问题，不需要任何剪枝！因为子集就是要遍历整棵树」</strong>。</p>
+<p>根据上面的模板有</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; subsets(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        backtracking(nums, <span class="number">0</span>, <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> index, List&lt;Integer&gt; path)</span></span>&#123;</span><br><span class="line">        <span class="comment">//不需结束条件</span></span><br><span class="line">        res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; nums.length; i++)&#123;</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            backtracking(nums, i + <span class="number">1</span>, path);</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="子集medium-1">90，子集Ⅱ，medium</h5>
+<p>给定一个可能包含重复元素的整数数组 <code>nums</code>，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [1,2,2]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [2],</span><br><span class="line">  [1],</span><br><span class="line">  [1,2,2],</span><br><span class="line">  [2,2],</span><br><span class="line">  [1,2],</span><br><span class="line">  []</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>与 78 题的区别：</p>
+<ul>
+<li>78题 —— 数组不含重复元素，解不含重复子集。</li>
+<li>90题 —— 数组含重复元素，解不含重复子集。</li>
+</ul>
+<p>此题与 40题 类似，解题思路也一致。</p>
+<p>同一树层不能取相同元素（否则解中的子集会重复），而同一树枝可以有相同元素。</p>
+<p>使用boolean数组 <code>used</code> ，初始化为false，当选取元素改为true。</p>
+<p>首先对数组进行<strong>排序</strong>，若相邻元素相等且前一元素已被同一树层使用过，跳过。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/a388616952b76a18a2463b2dc667537a.png" alt="Image" /><figcaption>Image</figcaption>
+</figure>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; subsetsWithDup(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">boolean</span>[] used = <span class="keyword">new</span> <span class="keyword">boolean</span>[nums.length];</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        backtracking(nums, <span class="number">0</span>, used, <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> index, <span class="keyword">boolean</span>[] used, List&lt;Integer&gt; path)</span></span>&#123;</span><br><span class="line">        res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] &amp;&amp; used[i - <span class="number">1</span>] == <span class="keyword">false</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            used[i] = <span class="keyword">true</span>;</span><br><span class="line">            backtracking(nums, i + <span class="number">1</span>, used, path);</span><br><span class="line">            used[i] = <span class="keyword">false</span>;</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="递增子序列medium">491，递增子序列，medium</h5>
+<p>给定一个整型数组, 你的任务是找到所有该数组的递增子序列，递增子序列的长度至少是2。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [4, 6, 7, 7]</span><br><span class="line">输出: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7], [7,7], [4,7,7]]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>首先判断 此题的<strong>「去重」</strong>与 40、90题不同，上面的做法是将数组先排序再去重，防止同一层的相同元素重复使用，使解中出现重复子集。但此题要求递增子序列，不可打乱顺序。</p>
+<p>采用 <strong><code>HashSet</code></strong> 去重，记录同层使用过的元素。</p>
+<p>如果当前元素在 set 中有重复元素，则跳过。</p>
+<p>那怎么保证递增呢？</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/da35e130f6e7e7fc10ccbb196613288d.png" alt="Image" /><figcaption>Image</figcaption>
+</figure>
+<p>如果当前元素 小于 上一个选取的元素，则跳过。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; findSubsequences(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        backtracking(nums, <span class="number">0</span>, <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> idx, List&lt;Integer&gt; path)</span></span>&#123;</span><br><span class="line">        <span class="comment">//结束条件</span></span><br><span class="line">        <span class="keyword">if</span>(path.size() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="comment">//注意此处没有return</span></span><br><span class="line">        &#125;</span><br><span class="line">        Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = idx; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="comment">//当同层有相同元素已经在set中，或要加入的nums[i] &lt; 上一个加入的元素时</span></span><br><span class="line">            <span class="keyword">if</span>(!path.isEmpty() &amp;&amp; nums[i] &lt; path.get(path.size() - <span class="number">1</span>) || set.contains(nums[i]))</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">            </span><br><span class="line">            set.add(nums[i]);</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            backtracking(nums, i + <span class="number">1</span>, path);</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>细节</strong></p>
+<p>set 定义在递归函数上面，为了确保本层不选取重复元素。新的一层 set 都会重新定义（清空），所以要知道 set 只负责本层！</p>
+<p>因为递增序列中至少两个元素，所以 <code>path.size() &gt; 1</code> 才添加到 res 中，注意<strong>不能写 return</strong>，因为要记录树的所有节点。</p>
+<p>添加 return 返回的结果为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[[4,7],[4,6],[7,7],[6,7]]</span><br></pre></td></tr></table></figure>
+<h4 id="小总结">小总结</h4>
+<p>如果给定数组中包含重复元素 / 组合和子集问题中要求<strong>解中不含重复结果</strong> / 在一个集合中找组合，就需要开始索引 <code>idx</code> 对同层元素去重。（77，39，216，40）</p>
+<p>子集问题不需要剪枝，因为要返回所有可能集合。不需要return。</p>
+<h3 id="切割问题">切割问题</h3>
+<h5 id="分割回文串medium">131，分割回文串，medium</h5>
+<p>给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。</p>
+<p>返回 s 所有可能的分割方案。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;aab&quot;</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [&quot;aa&quot;,&quot;b&quot;],</span><br><span class="line">  [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>不能重复截取，所以仍需要 <code>idx</code>。</p>
+<ul>
+<li>结束条件：分割线到字符串末尾，将path填入 res 中。</li>
+<li>选择：如果当前形成的字符串<code>[idx,i]</code> 不是回文串，跳过。是则进行递归。 <img src="https://img-blog.csdnimg.cn/20210214165327228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;String&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        backtracking(<span class="keyword">new</span> ArrayList&lt;String&gt;(), s, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(List&lt;String&gt; path, String s, <span class="keyword">int</span> idx)</span></span>&#123;</span><br><span class="line">        <span class="comment">//遍历完成</span></span><br><span class="line">        <span class="keyword">if</span>(idx == s.length())&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;String&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = idx; i &lt; s.length(); i++)&#123;</span><br><span class="line">             <span class="comment">//子串 [idx,i]</span></span><br><span class="line">            String str = s.substring(idx, i + <span class="number">1</span>);</span><br><span class="line">            <span class="comment">//如果不是回文，跳过</span></span><br><span class="line">            <span class="keyword">if</span>(!isPalindrome(str))&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;         </span><br><span class="line">            path.add(str);</span><br><span class="line">            backtracking(path, s, i + <span class="number">1</span>);</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断是不是回文字符串</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = str.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(str.charAt(left) != str.charAt(right))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="排列问题">排列问题</h3>
+<h5 id="全排列medium">46，全排列，medium</h5>
+<p>给定一个 <strong>没有重复</strong> 数字的序列，返回其所有可能的全排列。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [1,3,2],</span><br><span class="line">  [2,1,3],</span><br><span class="line">  [2,3,1],</span><br><span class="line">  [3,1,2],</span><br><span class="line">  [3,2,1]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<ul>
+<li><p>不需要idx：解中的组合是有序的，例如：在同一树层已经选择了 1，下一次选择还可以选 1，即 [2,1] ≠[1,2]。所以不需要 <code>idx</code>。</p></li>
+<li><p>使用boolean 数组 used：全排列，组合中没有重复数字，同一树枝上不能重复选择。用used 数组记录当前元素是否已被选择。</p></li>
+</ul>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210215160540814.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="" /><figcaption><img src="https://mmbiz.qpic.cn/mmbiz_png/ciaqDnJprwv51h5BKbTHZUOibWKplkvJfSAfBfMiaRlo2Dpob0U8tABjUsSaMm20Z1NgdOpcb8D5ZuQjHHItRRewQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="Image" style="zoom:80%;" /></figcaption>
+</figure>
+<ul>
+<li>结束条件：当递归到树的叶子节点结束，path 添加到res 中。</li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permute(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">boolean</span>[] used = <span class="keyword">new</span> <span class="keyword">boolean</span>[nums.length];</span><br><span class="line">        backtracking(nums, used, <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">boolean</span>[] used, List&lt;Integer&gt; path)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.length;</span><br><span class="line">        <span class="comment">//结束条件</span></span><br><span class="line">        <span class="keyword">if</span>(path.size() == n)&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="comment">//如果一个树枝上的元素已被选择（path已有nums[i]），跳过</span></span><br><span class="line">            <span class="keyword">if</span>(used[i] == <span class="keyword">true</span>) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            used[i] = <span class="keyword">true</span>;</span><br><span class="line">            backtracking(nums, used, path);</span><br><span class="line">            used[i] = <span class="keyword">false</span>;</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>排列问题的不同：</strong></p>
+<ul>
+<li>因为解中的数组是有序的，每层都是从0开始搜索而不是startIndex</li>
+<li>需要used数组记录path里都放了哪些元素了</li>
+</ul>
+<h5 id="全排列medium-1">47，全排列Ⅱ，medium</h5>
+<p>给定一个<strong>可包含重复数字</strong>的序列 nums ，按任意顺序 返回所有<strong>不重复</strong>的全排列。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [1,1,2]</span><br><span class="line">输出：</span><br><span class="line">[[1,1,2],</span><br><span class="line"> [1,2,1],</span><br><span class="line"> [2,1,1]]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [1,2,3]</span><br><span class="line">输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>与46题的区别</p>
+<p>此题有 重复数字，则在同一层不能选取相同数字，否则会出现重复排列。类似 40题的思路来去重。</p>
+<p>在同一树枝中，同一个数字不能被重复选，需要通过 <code>used[i]</code> 判断是否已被选取过。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/2021021516071763.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permuteUnique(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">boolean</span>[] used = <span class="keyword">new</span> <span class="keyword">boolean</span>[nums.length];</span><br><span class="line">        <span class="comment">//先排序</span></span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        backtracking(nums, <span class="keyword">new</span> ArrayList&lt;&gt;(), used);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span>[] nums, List&lt;Integer&gt; path, <span class="keyword">boolean</span>[] used)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(path.size() == nums.length)&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="comment">//同一层相同元素已被选取，跳过</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; used[i - <span class="number">1</span>] == <span class="keyword">false</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//同一枝同一元素已被选取，跳过</span></span><br><span class="line">            <span class="keyword">if</span>(used[i] == <span class="keyword">true</span>) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            used[i] = <span class="keyword">true</span>;</span><br><span class="line">            backtracking(nums, path, used);</span><br><span class="line">            used[i] = <span class="keyword">false</span>;</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结">总结</h3>
+<p>注意解中<u>有序和无序</u>的区别：在 组合、子集、切割问题 中，<u>一个集合</u>的问题，需要开始索引 idx。排列问题从 0 开始遍历。</p>
+<p>注意<u>同一层</u>的重复元素和<u>同一树枝</u>的重复元素的区别：常借用 boolean数组 记录被选择的元素，进行 <strong>去重</strong>。</p>
+<p>注意结束条件：树的节点，所有节点 或 叶子节点 或满足题意的节点。</p>
+<h3 id="其他">其他</h3>
+<h5 id="括号生成medium">22，括号生成，medium</h5>
+<p>数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：n &#x3D; 3</span><br><span class="line">输出：[&quot;((()))&quot;,&quot;(()())&quot;,&quot;(())()&quot;,&quot;()(())&quot;,&quot;()()()&quot;]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：n &#x3D; 1</span><br><span class="line">输出：[&quot;()&quot;]</span><br></pre></td></tr></table></figure>
+<p>提示：</p>
+<p>1 &lt;= n &lt;= 8</p>
+<p><strong>题解</strong></p>
+<p>选择：将左括号 或 右括号 填入path。</p>
+<p>结束条件：当左括号 和 右括号都用完了，或 <code>path.length() == 2 * n</code> 就结束。</p>
+<p>遍历过程：</p>
+<ul>
+<li>剪枝：当选择的右括号数量 &gt; 左括号。</li>
+<li>选择：当选择的左括号数量 &lt; n，填入左括号；右括号同。 <img src="https://img-blog.csdnimg.cn/20210215160739252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">generateParenthesis</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        backtracking(n, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">new</span> StringBuilder());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//l 表示已填入path 的左括号数量，r 表示已填入path 的右括号数量</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> l, <span class="keyword">int</span> r, StringBuilder path)</span></span>&#123;</span><br><span class="line">        <span class="comment">//结束条件</span></span><br><span class="line">        <span class="comment">// if(path.length() == 2 * n)&#123;</span></span><br><span class="line">        <span class="keyword">if</span>(l == n &amp;&amp; r == n)&#123;</span><br><span class="line">            res.add(path.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//已选择的左括号数量 &lt; 右括号，剪枝</span></span><br><span class="line">        <span class="keyword">if</span>(l &lt; r) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(l &lt; n)&#123;</span><br><span class="line">            path.append(<span class="string">&quot;(&quot;</span>);</span><br><span class="line">            backtracking(n, l + <span class="number">1</span>, r, path);<span class="comment">//向下递归</span></span><br><span class="line">            path.deleteCharAt(path.length() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(r &lt; n)&#123;</span><br><span class="line">            path.append(<span class="string">&quot;)&quot;</span>);</span><br><span class="line">            backtracking(n, l, r + <span class="number">1</span>, path);</span><br><span class="line">            path.deleteCharAt(path.length() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+	
+	
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
+      </div>
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag"># 回溯</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/31/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="prev" title="LeetCode刷题—贪心算法">
+                  <i class="fa fa-chevron-left"></i> LeetCode刷题—贪心算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rui Wang</span>
+</div>
+
+<!---->
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i>
+  <span id="busuanzi_container_site_uv">
+    本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+  </span>
+  <span id="busuanzi_container_site_pv">
+      &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  </div>
+  </div>
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
