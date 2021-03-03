@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="一上午做了三道单调栈的问题，算是小摸了一下单调栈的套路，虽然很难想，掌握了规律还是很好做出来的！ 84，柱状图中最大的矩形，hard 739，每日温度，medium 42，接雨水，hard">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单调栈的三个问题">
+<meta property="og:url" content="http://example.com/2021/03/03/%E5%8D%95%E8%B0%83%E6%A0%88%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Rui">
+<meta property="og:description" content="一上午做了三道单调栈的问题，算是小摸了一下单调栈的套路，虽然很难想，掌握了规律还是很好做出来的！ 84，柱状图中最大的矩形，hard 739，每日温度，medium 42，接雨水，hard">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/histogram.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/histogram_area.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/7e876ae756613053b3432cebc9274e9dbdaafd2e6b8492d37fc34ee98f7655ea-%E5%9B%BE%E7%89%87.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1614494588-CkmPkk-%E6%A0%88739%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6%E6%AD%A3%E5%BA%8F%E5%8A%A8%E7%94%BB1.gif">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png">
+<meta property="article:published_time" content="2021-03-03T06:34:13.000Z">
+<meta property="article:modified_time" content="2021-03-03T07:22:08.284Z">
+<meta property="article:author" content="Rui Wang">
+<meta property="article:tag" content="单调栈">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/histogram.png">
+
+
+<link rel="canonical" href="http://example.com/2021/03/03/%E5%8D%95%E8%B0%83%E6%A0%88%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>单调栈的三个问题 | Rui</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+  
+  <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Rui</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2hard"><span class="nav-text">84，柱状图中最大的矩形，hard</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6medium"><span class="nav-text">739，每日温度，medium</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A5%E9%9B%A8%E6%B0%B4hard"><span class="nav-text">42，接雨水，hard</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rui Wang"
+      src="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+  <p class="site-author-name" itemprop="name">Rui Wang</p>
+  <div class="site-description" itemprop="description">去摘遥不可及的星星</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/03/%E5%8D%95%E8%B0%83%E6%A0%88%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单调栈的三个问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-03 14:34:13 / 修改时间：15:22:08" itemprop="dateCreated datePublished" datetime="2021-03-03T14:34:13+08:00">2021-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>一上午做了三道单调栈的问题，算是小摸了一下单调栈的套路，虽然很难想，掌握了规律还是很好做出来的！</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84，柱状图中最大的矩形，hard</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/daily-temperatures/">739，每日温度，medium</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/">42，接雨水，hard</a></p>
+<a id="more"></a>
+<h5 id="柱状图中最大的矩形hard">84，柱状图中最大的矩形，hard</h5>
+<p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。</p>
+<p>求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/histogram.png" /></p>
+<p>以上是柱状图的示例，其中每个柱子的宽度为 1，给定的高度为 [2,1,5,6,2,3]。</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/histogram_area.png" /></p>
+<p>图中阴影部分为所能勾勒出的最大矩形面积，其面积为 10 个单位。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [2,1,5,6,2,3]</span><br><span class="line">输出: 10</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>先考虑暴力解法，也就是对数组的每个高度来说，向左找、向右找到第一个比它小的高度，即可确定矩阵的宽，很容易就得到最大面积。</p>
+<p>但这样时间复杂度比较高，每个元素都要循环两遍，为<em>O</em>(N<sup>2</sup>)，考虑怎么优化呢？</p>
+<p>以空间换时间，对每个元素向后找比它小的，才能计算面积，符合【栈】先进后出的规则。用一个单调栈来记录<strong>下标</strong>（高度可以用下标来表示），这样就能很清楚的确定形成矩形的宽了。</p>
+<p>如果当前的高度比它之前的高度（栈顶元素的高度）严格小于的时候，就可以直接确定以栈顶元素为高的矩形的面积，向左回退的时候，其实就可以当中间这些柱形不存在一样。</p>
+<p>还有一个细节，为了确定数组两端元素的高为矩形的面积，在数组两端添加比 1 小的元素，这样就始终保证栈非空。</p>
+<p>下面图帮助理解</p>
+<p><img src="https://pic.leetcode-cn.com/7e876ae756613053b3432cebc9274e9dbdaafd2e6b8492d37fc34ee98f7655ea-%E5%9B%BE%E7%89%87.png" /></p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="keyword">int</span>[] heights)</span> </span>&#123;</span><br><span class="line"><span class="comment">// //暴力解</span></span><br><span class="line"><span class="comment">//         int res = 0;</span></span><br><span class="line"><span class="comment">//         for(int i = 0; i &lt; heights.length; i++)&#123;</span></span><br><span class="line"><span class="comment">//             int left = i;</span></span><br><span class="line"><span class="comment">//             int right = i;</span></span><br><span class="line"><span class="comment">//             //向左找可以构成矩形的</span></span><br><span class="line"><span class="comment">//             while(left &gt; 0 &amp;&amp; heights[left - 1] &gt;= heights[i])&#123;</span></span><br><span class="line"><span class="comment">//                 left--;</span></span><br><span class="line"><span class="comment">//             &#125;</span></span><br><span class="line"><span class="comment">//             //向右找可以构成矩形的</span></span><br><span class="line"><span class="comment">//             while(right &lt; heights.length - 1 &amp;&amp; heights[right + 1] &gt;= heights[i])&#123;</span></span><br><span class="line"><span class="comment">//                 right++;</span></span><br><span class="line"><span class="comment">//             &#125;</span></span><br><span class="line"><span class="comment">//             int width = right - left + 1;</span></span><br><span class="line"><span class="comment">//             res = Math.max(res, width * heights[i]);</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         return res;</span></span><br><span class="line"><span class="comment">//单调栈：将数组左右两侧各加 &lt; 1 的柱子，这样所有元素的左边都比当前柱子小，只需找到右边第一个比当前柱子小的，即可确定以当前高度为高的矩形面积（宽即为左右两边第一个比当前柱子小的两柱子之间距离，左边即为栈顶元素）</span></span><br><span class="line">        <span class="comment">//重构数组</span></span><br><span class="line">        <span class="keyword">int</span> len = heights.length;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[len + <span class="number">2</span>];</span><br><span class="line">        nums[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        nums[len + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len + <span class="number">1</span>; i++)&#123;</span><br><span class="line">            nums[i] = heights[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//单调栈中确定以数组每个元素的高度确定矩形的面积，并维护最大值res</span></span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        Deque&lt;Integer&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len + <span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="comment">//当前高度比栈顶高度小即可确定栈顶元素的高度为高的矩形面积</span></span><br><span class="line">            <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; nums[i] &lt; nums[stack.peekLast()])&#123;</span><br><span class="line">                <span class="comment">//栈顶元素出栈</span></span><br><span class="line">                <span class="keyword">int</span> h = nums[stack.removeLast()];</span><br><span class="line">                <span class="comment">//栈顶元素的高度为高的矩形面积</span></span><br><span class="line">                res = Math.max(res, h * (i - stack.peekLast() - <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            stack.addLast(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="每日温度medium">739，每日温度，medium</h5>
+<p>请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。如果气温在这之后都不会升高，请在该位置用 0 来代替。</p>
+<p>例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]。</p>
+<p>提示：气温 列表长度的范围是 [1, 30000]。每个气温的值的均为华氏度，都是在 [30, 100] 范围内的整数。</p>
+<p><strong>题解</strong></p>
+<p>首先想到暴力解法，两层for循环，搜索每个元素后面比它大的值，就得到每个元素需要等待的天数。</p>
+<p>此题目的是<u>向右</u>找到比当前索引对应的高度 高 的 第一个柱体，所以需要维护一个递减栈。</p>
+<p>遍历数组元素，当前索引对应的高度比栈顶元素对应高度 大，即弹出栈顶并将索引差记录到结果数组。</p>
+<figure>
+<img src="https://pic.leetcode-cn.com/1614494588-CkmPkk-%E6%A0%88739%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6%E6%AD%A3%E5%BA%8F%E5%8A%A8%E7%94%BB1.gif" alt="动画演示" /><figcaption>动画演示</figcaption>
+</figure>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] dailyTemperatures(<span class="keyword">int</span>[] T) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[T.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; T.length; i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; T[i] &gt; T[stack.peek()])&#123;</span><br><span class="line">                <span class="keyword">int</span> idx = stack.pop();</span><br><span class="line">                res[idx] = i - idx;</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="接雨水hard">42，接雨水，hard</h5>
+<p>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<p>示例 1：</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png" /></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：height &#x3D; [0,1,0,2,1,0,1,3,2,1,2,1]</span><br><span class="line">输出：6</span><br><span class="line">解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>依然是遍历到右面不比自己低的柱子时，会形成坑接住雨水。所以采用【单调栈】。</p>
+<p>维护一个递减的单调栈，仍记录下标，栈中每个元素表示接雨水的【左侧柱体】。</p>
+<p>遍历数组元素，当前元素对应高度大于栈顶元素对应高度，则能形成雨水，栈顶元素弹出，并记录其索引，去除栈中元素对应高度重复的元素（为了不重复计算）。计算雨水时，仍然采用高度*宽度，<code>宽度 = 当前遍历索引 - 栈顶索引 - 1</code>；<code>高度 = 两侧柱体取最矮的 - 上面记录的弹出栈的索引对应的高度</code>。因为以记录的柱体作为左侧柱体的雨水已经计算过了！</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/solution/dan-diao-zhan-jie-jue-jie-yu-shui-wen-ti-by-sweeti/">可以跟着甜姨的图解理解一下</a></p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;        </span><br><span class="line">		<span class="keyword">if</span>(height.length == <span class="number">0</span> || height == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = height.length;</span><br><span class="line">        Deque&lt;Integer&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; height[i] &gt; height[stack.peekLast()])&#123;</span><br><span class="line">                <span class="keyword">int</span> popIdx = stack.removeLast();</span><br><span class="line">                <span class="comment">//去除高度重复的栈顶</span></span><br><span class="line">                <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; height[stack.peekLast()] == height[popIdx])&#123;</span><br><span class="line">                    stack.removeLast();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//计算雨水面积</span></span><br><span class="line">                <span class="keyword">if</span>(!stack.isEmpty())&#123;</span><br><span class="line">                    <span class="keyword">int</span> idx = stack.peekLast();</span><br><span class="line">                    <span class="comment">//雨水面积为 宽*高，宽是当前元素与栈顶元素的距离，高取雨水两边的较矮高度-已经计算过的高度</span></span><br><span class="line">                    res += (i - idx - <span class="number">1</span>) * (Math.min(height[i], height[idx]) - height[popIdx]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            stack.addLast(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>总结</strong></p>
+<p>这三道题都可以用单调栈来解，各自也有不同的解法。总的来说，【单调栈】以空间换时间，使暴力解法的左右两次循环变为朝一个方向循环一次。在向左。</p>
+<p>还有一个细节，就是记录下标，而不是将元素值入栈，这是为了方便计算间隔来计算面积，写代码时要提醒自己。</p>
+
+    </div>
+
+    
+    
+    
+	
+	
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
+      </div>
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag"># 单调栈</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/02/%E7%8B%82%E7%A5%9EHTML%E7%AC%94%E8%AE%B0/" rel="prev" title="狂神HTML笔记">
+                  <i class="fa fa-chevron-left"></i> 狂神HTML笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rui Wang</span>
+</div>
+
+<!---->
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i>
+  <span id="busuanzi_container_site_uv">
+    本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+  </span>
+  <span id="busuanzi_container_site_pv">
+      &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  </div>
+  </div>
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
