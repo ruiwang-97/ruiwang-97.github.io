@@ -4428,4 +4428,189 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <tag>MyBatis</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode刷题—回文问题</title>
+    <url>/2021/03/09/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E5%9B%9E%E6%96%87%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>由一个整数问题引入。</p>
+<p>回文即 正序（从左向右）和倒序（从右向左）读都是一样的。常见的有整数、链表、字符串相关问题。</p>
+<p>先由整数问题引入。</p>
+<h2 id="回文数">回文数</h2>
+<a id="more"></a>
+<h4 id="整数反转easy">7，整数反转，easy</h4>
+<p>给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。</p>
+<p>如果反转后整数超过 32 位的有符号整数的范围 [−2<sup>31</sup>, 2<sup>31</sup> − 1] ，就返回 0。</p>
+<p>假设环境不允许存储 64 位整数（有符号或无符号）。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：x &#x3D; 123</span><br><span class="line">输出：321</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：x &#x3D; -123</span><br><span class="line">输出：-321</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>此题需要注意的是x的范围，x∈[-2147483648, 2147483647]</p>
+<p>考虑整数反转，只要不断取余并 / 10，即可取出末尾数字并构成新的反转数。如： <img src="https://img-blog.csdnimg.cn/20210309143302959.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /></p>
+<p>可见此方法适用于 x为正或为负，循环的判断条件为 <code>x != 0</code> 即可。</p>
+<p>但是需要注意的是 反转数 的范围，比如 x = 1147483619，反转后超过[−2<sup>31</sup>, 2<sup>31</sup> − 1]。则需要判断临界条件，<strong>判断第一次取余后的x</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/ee890586531264e25b92e600a50a7475.png" /></p>
+<p>如图，如果此时<code>x &gt; 214748364</code> 说明已经超过范围，返回 0；如果此时<code>x = 214748364</code>，需要比较刚取出的末位数字与 7 的关系</p>
+<p>负数同理</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/e6282f5825b0df1868913d58e929ae47.png" /></p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// x ≥ -2147483648 &amp;&amp; x ≤ 2147483647</span></span><br><span class="line">        <span class="comment">//将整数x不断取模，再x/10</span></span><br><span class="line">        <span class="comment">//x可正可负，判断条件为！= 0</span></span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = x % <span class="number">10</span>;<span class="comment">//取模结果可正可负</span></span><br><span class="line">            <span class="comment">//判断剩余值是否越界</span></span><br><span class="line">            <span class="keyword">if</span>(res &gt; <span class="number">214748364</span> || res == <span class="number">214847364</span> &amp;&amp; tmp &gt; <span class="number">7</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(res &lt; -<span class="number">214748364</span> || res == -<span class="number">214748364</span> &amp;&amp; tmp &lt; -<span class="number">8</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//新的结果</span></span><br><span class="line">            res = res * <span class="number">10</span> + tmp;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了这道题的思路，那么判断一个整数是否为回文数就很简单了，只需进行反转然后比较与原数字是否相等。</p>
+<h4 id="回文数easy">9，回文数，easy</h4>
+<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: 121</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: -121</span><br><span class="line">输出: false</span><br><span class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>代码</strong> <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> cur = x;</span><br><span class="line">        <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = x % <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span>(res &gt; <span class="number">214748364</span> || res == <span class="number">214748364</span> &amp;&amp; tmp &gt; <span class="number">7</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(res &lt; -<span class="number">214748364</span> || res == -<span class="number">214748364</span> &amp;&amp; tmp &lt; -<span class="number">8</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res = res * <span class="number">10</span> + tmp;</span><br><span class="line">            x /= <span class="number">10</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res == cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="回文串">回文串</h2>
+<p>有了上面判断整数是否回文，再看字符串的问题。</p>
+<h4 id="验证回文串easy">125，验证回文串，easy</h4>
+<p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。</p>
+<p>说明：本题中，我们将空字符串定义为有效的回文串。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;race a car&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>回文常用<strong>左右指针</strong>来判断</p>
+<p>此题难点在于只考虑字母和数字且忽略字母大小写，要进行合法字符的判断再用快慢指针比较字符是否相同。</p>
+<p><strong>代码</strong> <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(String s)</span> </span>&#123;     </span><br><span class="line">        <span class="comment">//首先将s转为没有空格全部小写的字符串</span></span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span><br><span class="line">            <span class="keyword">char</span> c = s.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27; &#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(c &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;Z&#x27;</span>)&#123;</span><br><span class="line">                sb.append(Character.toLowerCase(c));</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(c &gt;= <span class="string">&#x27;a&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;z&#x27;</span> || c &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">                sb.append(c);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = sb.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sb.charAt(left)==(sb.charAt(right)))&#123;</span><br><span class="line">                left++;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于回文串，也常用动态规划来求最XX个数。 如下两道题。 #### 647，回文子串，medium</p>
+<p>给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。</p>
+<p>具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：&quot;abc&quot;</span><br><span class="line">输出：3</span><br><span class="line">解释：三个回文子串: &quot;a&quot;, &quot;b&quot;, &quot;c&quot;</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：&quot;aaa&quot;</span><br><span class="line">输出：6</span><br><span class="line">解释：6个回文子串: &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;aa&quot;, &quot;aa&quot;, &quot;aaa&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>题目中要求回文子串个数，维护一个变量cnt，找到回文子串就将cnt+1</p>
+<ol type="1">
+<li><p>子问题</p>
+<p><span class="math inline">\(dp[i][j]\)</span> —— s[i]到s[j]形成的字符串是否是回文串</p></li>
+<li><p>base case</p>
+<p>单个字符一定为回文，返回TRUE</p>
+<p><span class="math inline">\(dp[i][i] = true;\)</span></p></li>
+<li><p>递推关系</p>
+<p>如果 <code>s[i]==s[j]</code>，则比较中间部分是否是一个回文字符串</p>
+<ul>
+<li>j - i &lt;= 2，中间不含或只含一个子串，<code>dp[i][j] = true</code></li>
+<li>否则，<span class="math inline">\(dp[i][j]\)</span> 取决于 <span class="math inline">\(dp[i+1][j - 1]\)</span>。注意遍历顺序！可以像如图 ：i 从下至上，j 从左至右遍历。 <img src="https://img-blog.csdnimg.cn/20210309144313182.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /></li>
+</ul>
+<ol start="4" type="1">
+<li><p>返回值</p>
+<p>上面得到的 <span class="math inline">\(dp[i][j]\)</span> 如果为 true，cnt++。最后返回cnt的值。</p></li>
+</ol></li>
+</ol>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countSubstrings</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span>(len == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[len][len];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            dp[i][i] = <span class="keyword">true</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="comment">//求dp[i][j]需要通过dp[i+1][j-1] 遍历顺序从下到上，从左到右</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; len; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(s.charAt(i) == s.charAt(j) &amp;&amp; (j - i &lt;= <span class="number">2</span> || dp[i + <span class="number">1</span>][j - <span class="number">1</span>]))&#123;</span><br><span class="line">                    cnt++;</span><br><span class="line">                    dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="最长回文子串medium">5，最长回文子串，medium</h4>
+<p>给你一个字符串 s，找到 s 中最长的回文子串。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：s &#x3D; &quot;babad&quot;</span><br><span class="line">输出：&quot;bab&quot;</span><br><span class="line">解释：&quot;aba&quot; 同样是符合题意的答案。</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：s &#x3D; &quot;cbbd&quot;</span><br><span class="line">输出：&quot;bb&quot;</span><br></pre></td></tr></table></figure>
+<p>示例 3：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：s &#x3D; &quot;a&quot;</span><br><span class="line">输出：&quot;a&quot;</span><br></pre></td></tr></table></figure>
+<p>示例 4：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：s &#x3D; &quot;ac&quot;</span><br><span class="line">输出：&quot;a&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p>看到最长联想到用动态规划解题。</p>
+<ol type="1">
+<li><p>子问题</p>
+<p><span class="math inline">\(dp[i][j]\)</span> ——子串<code>s[i...j]</code> （闭区间）是否为回文子串</p></li>
+<li><p>递推关系</p>
+<ol type="1">
+<li><p>base case</p>
+<p>单个字符一定为回文，返回TRUE</p>
+<p><span class="math inline">\(dp[i][i] = true;\)</span></p></li>
+<li><p>状态转移方程</p>
+<p>由题意，<code>s[i] == s[j]</code> 时子串<code>s[i...j]</code>为回文；去掉头尾后仍是回文时才有 <span class="math inline">\(dp[i][j] = true\)</span>。</p>
+<p>则 <span class="math inline">\(dp[i][j] = (s[i] == s[j]) 与 dp[i+1][j-1]\)</span>。</p>
+<p>边界条件： <code>i + 1 ≥ j - 1</code> =&gt; <code>j - i ≤ 2</code>，只需判断 <code>s[i] == s[j]</code>，不用参考以前的 <code>dp</code>值。</p>
+<p>当 <code>j - i &gt; 2</code> 时，需要考虑 <span class="math inline">\(dp[i+1][j-1]\)</span>，即“有后效性”。在二维表中表现为参考左下方结果才能得到当前的 <span class="math inline">\(dp\)</span> 值。</p></li>
+</ol></li>
+<li><p>返回值</p>
+<p>初始化变量 <code>maxLen</code> 记录最长回文子串长度， <code>start</code> 记录开始位置。</p></li>
+</ol>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.length() &lt; <span class="number">2</span>) <span class="keyword">return</span> s;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[len][len];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            dp[i][i] = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len; j++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(s.charAt(i) != s.charAt(j))&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">false</span>;</span><br><span class="line">                &#125; </span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(i - j &gt;= -<span class="number">2</span>)</span><br><span class="line">                        dp[i][j] = <span class="keyword">true</span>; </span><br><span class="line">                        <span class="comment">// dp[i][j] = s.charAt(i) == s.charAt(j);</span></span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        dp[i][j] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                        <span class="comment">// dp[i][j] = s.charAt(i) == s.charAt(j) &amp;&amp; dp[i + 1][j - 1];</span></span><br><span class="line">                &#125;</span><br><span class="line">           </span><br><span class="line">                <span class="comment">//此时dp[i][j]=true，是回文子串，还要更新开始位置和长度</span></span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &amp;&amp; j - i + <span class="number">1</span> &gt; maxLen)&#123;</span><br><span class="line">                    start = i;</span><br><span class="line">                    maxLen = j - i + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(start, start + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>细节</strong></p>
+<p>对于填表，由于构成子串，因此 <code>i</code> 和 <code>j</code> 的关系是 <code>i &lt;= j</code> ，因此只需要填这张表格对角线以上的部分。</p>
+<p>由于需要满足“无后效性”，填表顺序也需要注意。</p>
+<p><strong>说明：表格中的数字表示「填表顺序」，从 1 开始</strong>。表格外的箭头和数字也表示「填表顺序」，与表格中的数字含义一致。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/9e7b4a1321aa0c234a2418668127cf3b.png" /></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/80831a741823e2bcbbcd897382b39a69.png" /></p>
+<h2 id="回文链表">回文链表</h2>
+<p>回文也可以应用在链表中，思路较简单。 #### 234，回文链表，easy</p>
+<p>请判断一个链表是否为回文链表。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: 1-&gt;2</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;2-&gt;1</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
+<p>进阶： 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</p>
+<p><strong>题解</strong></p>
+<p>利用快慢指针（快速度为慢速度的2倍）找到中间节点，将后半段链表进行反转，再比较反转后的链表与原链表前半段是否相同。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        ListNode middle = getMiddle(head);<span class="comment">//链表中点</span></span><br><span class="line">        ListNode newHead = reverse(middle.next);<span class="comment">//反转后半部分链表</span></span><br><span class="line">        <span class="comment">//比较前半部分和后半部分链表的节点值</span></span><br><span class="line">        <span class="keyword">while</span>(newHead != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(head.val != newHead.val)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            head = head.next;</span><br><span class="line">            newHead = newHead.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; </span><br><span class="line">     <span class="comment">//返回链表的中间节点（如果链表长度为偶数，为左边的中间节点）</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getMiddle</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        <span class="keyword">while</span>(fast.next != <span class="keyword">null</span> &amp;&amp; fast.next.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverse</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode temp = reverse(head.next);</span><br><span class="line">        head.next.next = head;</span><br><span class="line">        head.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>扩展</strong></p>
+<p>此方法符合时间复杂度为 O(n)，空间复杂度为 O(1)。</p>
+<p>链表不支持随机访问，从头开始查找，时间复杂度为O(n)，没有用栈等存储，空间复杂度为 O(1)。</p>
+<p><strong>链表与数组进行对比：</strong></p>
+<p>数组的优点</p>
+<ul>
+<li>随机访问性强</li>
+<li>查找速度快</li>
+</ul>
+<p>数组的缺点</p>
+<ul>
+<li>插入和删除效率低</li>
+<li>可能浪费内存</li>
+<li>内存空间要求高，必须有足够的连续内存空间。</li>
+<li>数组大小固定，不能动态拓展</li>
+</ul>
+<p>链表的优点</p>
+<ul>
+<li>插入删除速度快</li>
+<li>内存利用率高，不会浪费内存</li>
+<li>大小没有固定，拓展很灵活。</li>
+</ul>
+<p>链表的缺点</p>
+<ul>
+<li>不能随机查找，必须从第一个开始遍历，查找效率低</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>时间复杂度</th>
+<th>数组</th>
+<th>链表</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>读取</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr class="even">
+<td>插入</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr class="odd">
+<td>删除</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      <categories>
+        <category>LeetCode刷题</category>
+      </categories>
+      <tags>
+        <tag>回文</tag>
+      </tags>
+  </entry>
 </search>
