@@ -24,23 +24,31 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="Hexo攻略—更改网页图标 Hexo next主题默认的网页图标长这个样子~  当然要和别人不一样！">
+  <meta name="description" content="（三）、文件备份和压缩命令 1、bzip2 将源文件file压缩为file.bz2，压缩后无源文件 bzip2 文件名称 解压：bunzip2 file.bz2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo攻略-更换网页图标">
-<meta property="og:url" content="http://example.com/2020/10/28/Hexo%E6%94%BB%E7%95%A5-%E6%9B%B4%E6%8D%A2%E7%BD%91%E9%A1%B5%E5%9B%BE%E6%A0%87/index.html">
+<meta property="og:title" content="Linux学习—文件备份、压缩、阅读、定位命令">
+<meta property="og:url" content="http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="Hexo攻略—更改网页图标 Hexo next主题默认的网页图标长这个样子~  当然要和别人不一样！">
+<meta property="og:description" content="（三）、文件备份和压缩命令 1、bzip2 将源文件file压缩为file.bz2，压缩后无源文件 bzip2 文件名称 解压：bunzip2 file.bz2">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/icon1.PNG">
-<meta property="og:image" content="http://example.com/images/icon2.PNG">
-<meta property="article:published_time" content="2020-10-28T12:23:22.000Z">
-<meta property="article:modified_time" content="2020-10-28T12:55:26.916Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210521091538915.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210521091815502.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021052109214663.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210521092340345.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210521092400793.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210521093020319.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202105210931181.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210521093212315.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021052109344331.png">
+<meta property="article:published_time" content="2021-05-21T01:37:16.000Z">
+<meta property="article:modified_time" content="2021-05-21T01:39:23.220Z">
 <meta property="article:author" content="Rui Wang">
+<meta property="article:tag" content="Linux命令">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/icon1.PNG">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210521091538915.png">
 
 
-<link rel="canonical" href="http://example.com/2020/10/28/Hexo%E6%94%BB%E7%95%A5-%E6%9B%B4%E6%8D%A2%E7%BD%91%E9%A1%B5%E5%9B%BE%E6%A0%87/">
+<link rel="canonical" href="http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/">
 
 
 <script class="page-configurations">
@@ -53,7 +61,7 @@
   };
 </script>
 
-  <title>Hexo攻略-更换网页图标 | Rui</title>
+  <title>Linux学习—文件备份、压缩、阅读、定位命令 | Rui</title>
   
 
 
@@ -187,7 +195,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo%E6%94%BB%E7%95%A5%E6%9B%B4%E6%94%B9%E7%BD%91%E9%A1%B5%E5%9B%BE%E6%A0%87"><span class="nav-text">Hexo攻略—更改网页图标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%9B%BE%E6%A0%87"><span class="nav-text">下载图标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-text">修改文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">修改主题配置文件</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E5%92%8C%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4"><span class="nav-text">（三）、文件备份和压缩命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#bzip2"><span class="nav-text">1、bzip2</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -256,7 +264,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/28/Hexo%E6%94%BB%E7%95%A5-%E6%9B%B4%E6%8D%A2%E7%BD%91%E9%A1%B5%E5%9B%BE%E6%A0%87/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
@@ -269,7 +277,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo攻略-更换网页图标
+          Linux学习—文件备份、压缩、阅读、定位命令
         </h1>
 
         <div class="post-meta-container">
@@ -281,7 +289,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-10-28 20:23:22 / 修改时间：20:55:26" itemprop="dateCreated datePublished" datetime="2020-10-28T20:23:22+08:00">2020-10-28</time>
+      <time title="创建时间：2021-05-21 09:37:16 / 修改时间：09:39:23" itemprop="dateCreated datePublished" datetime="2021-05-21T09:37:16+08:00">2021-05-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -289,7 +297,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Hexo%E6%94%BB%E7%95%A5/" itemprop="url" rel="index"><span itemprop="name">Hexo攻略</span></a>
+          <a href="/categories/Linux%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">Linux学习</span></a>
         </span>
     </span>
 
@@ -303,20 +311,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="hexo攻略更改网页图标">Hexo攻略—更改网页图标</h2>
-<p>Hexo next主题默认的网页图标长这个样子~</p>
-<p><img src="/images/icon1.PNG" /></p>
-<p>当然要和别人不一样！</p>
+        <h3 id="三文件备份和压缩命令">（三）、文件备份和压缩命令</h3>
+<h6 id="bzip2">1、bzip2</h6>
+<p>将源文件file压缩为file.bz2，压缩后无源文件</p>
+<p><code>bzip2 文件名称</code></p>
+<p>解压：<code>bunzip2 file.bz2</code></p>
 <a id="more"></a>
-<h4 id="下载图标">下载图标</h4>
-<p>自己也可以绘制，懒得话就去下载，到<a target="_blank" rel="noopener" href="https://www.easyicon.net/">这里</a>进行下载，<code>ico</code>文件和<code>png</code>都可以，我下载的是<code>ico</code></p>
-<h4 id="修改文件名">修改文件名</h4>
-<p>下载的图标重命名为<code>favicon.ico</code>，位置放在<code>/themes/next/source/images</code></p>
-<h4 id="修改主题配置文件">修改主题配置文件</h4>
-<p>在<code>/themes/next/_config.yml</code>中修改成自己的图标</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: &#x2F;images&#x2F;favicon.ico</span><br><span class="line">  #medium: &#x2F;images&#x2F;favicon-32x32-next.png</span><br><span class="line">  medium: &#x2F;images&#x2F;favicon.ico</span><br><span class="line">  apple_touch_icon: &#x2F;images&#x2F;apple-touch-icon-next.png</span><br><span class="line">  safari_pinned_tab: &#x2F;images&#x2F;logo.svg</span><br><span class="line">  #android_manifest: &#x2F;manifest.json</span><br></pre></td></tr></table></figure>
-<p>进入测试上传就好啦~</p>
-<p>效果图<img src="/images/icon2.PNG" /></p>
+<p>压缩文件 file.bz2 解压为 file，解压后无压缩文件</p>
+<p>可以同时压缩多个文件 <img src="https://img-blog.csdnimg.cn/20210521091538915.png" alt="在这里插入图片描述" /> ###### 2、gzip <code>gzip file</code> <code>gunzip file.gz</code> 与bzip2规则一样 <img src="https://img-blog.csdnimg.cn/20210521091815502.png" alt="在这里插入图片描述" /> ###### 3、tar 将文件或目录进行打包或解压缩 <code>tar [参数] [打包后的文件名] [需要打包的文件或目录]</code> 参数包括： <img src="https://img-blog.csdnimg.cn/2021052109214663.png" alt="在这里插入图片描述" /> 常用参数： - 打包：cvf - 解压缩：xvf</p>
+<p>打包后的文件名：file.tar</p>
+<p>举例： <img src="https://img-blog.csdnimg.cn/20210521092340345.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210521092400793.png" alt="在这里插入图片描述" /> 与bzip2、gzip的区别： 打包后不会删除源文件，解压后也不会删除压缩文件 ### （四）文件阅读和定位命令 ###### 1、head 默认查看文件开头的10行，通过设置可查看前xx行。 <code>head 文件名称</code> <code>head -20 file</code> 查看file的前20行 ###### 2、tail 默认查看文件结尾的10行，通过设置可查看结尾的最后xx行。 <code>tail 文件名称</code> <code>tail -20 file</code> 查看file的后20行 有助于查看日志文件的最后10行来阅读重要的系统信息。 ###### 3、more 按页查看文件内容 <code>more [选项] [文件名称]</code> <img src="https://img-blog.csdnimg.cn/20210521093020319.png" alt="在这里插入图片描述" /> 使用more在文本文件中搜索关键字 <img src="https://img-blog.csdnimg.cn/202105210931181.png" alt="在这里插入图片描述" /> 当一个目录下的文件内容太多，用more来分页显示。与管道 | 结合起来。 <img src="https://img-blog.csdnimg.cn/20210521093212315.png" alt="在这里插入图片描述" /> ###### 4、which 依序从path环境变量所列的目录中找出命令的位置，并显示完整路径的名称。在找到第一个符合条件的程序文件时，就立刻停止搜索。 <code>which 命令</code> ###### 5、whereis 查找符合条件的文件，定位一些文件在文件系统中的位置。一般用于程序名的搜索。 <img src="https://img-blog.csdnimg.cn/2021052109344331.png" alt="在这里插入图片描述" /></p>
 
     </div>
 
@@ -334,19 +338,19 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux%E5%91%BD%E4%BB%A4/" rel="tag"># Linux命令</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/10/28/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86/" rel="prev" title="深度优先遍历">
-                  <i class="fa fa-chevron-left"></i> 深度优先遍历
+                <a href="/2021/05/20/%E8%A7%A3%E9%94%81%E4%B8%80%E9%81%93%E4%BC%9A%E5%91%98%E9%A2%98%E2%80%94LeetCode1245/" rel="prev" title="解锁一道会员题—LeetCode1245">
+                  <i class="fa fa-chevron-left"></i> 解锁一道会员题—LeetCode1245
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/10/29/Java%E5%AE%9E%E7%8E%B0%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%8E%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" rel="next" title="Java实现单链表与循环链表">
-                  Java实现单链表与循环链表 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

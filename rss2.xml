@@ -9,8 +9,35 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Thu, 20 May 2021 09:13:23 GMT</pubDate>
+    <pubDate>Fri, 21 May 2021 01:39:23 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Linux学习—文件备份、压缩、阅读、定位命令</title>
+      <link>http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/</link>
+      <guid>http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/</guid>
+      <pubDate>Fri, 21 May 2021 01:37:16 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;三文件备份和压缩命令&quot;&gt;（三）、文件备份和压缩命令&lt;/h3&gt;
+&lt;h6 id=&quot;bzip2&quot;&gt;1、bzip2&lt;/h6&gt;
+&lt;p&gt;将源文件file压缩为file.bz2，压缩后无源文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bzip2 文件名称&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;解压：&lt;code&gt;bunzip2 file.bz2&lt;/code&gt;&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h3 id="三文件备份和压缩命令">（三）、文件备份和压缩命令</h3><h6 id="bzip2">1、bzip2</h6><p>将源文件file压缩为file.bz2，压缩后无源文件</p><p><code>bzip2 文件名称</code></p><p>解压：<code>bunzip2 file.bz2</code></p><a id="more"></a><p>压缩文件 file.bz2 解压为 file，解压后无压缩文件</p><p>可以同时压缩多个文件 <img src="https://img-blog.csdnimg.cn/20210521091538915.png" alt="在这里插入图片描述" /> ###### 2、gzip <code>gzip file</code> <code>gunzip file.gz</code> 与bzip2规则一样 <img src="https://img-blog.csdnimg.cn/20210521091815502.png" alt="在这里插入图片描述" /> ###### 3、tar 将文件或目录进行打包或解压缩 <code>tar [参数] [打包后的文件名] [需要打包的文件或目录]</code> 参数包括： <img src="https://img-blog.csdnimg.cn/2021052109214663.png" alt="在这里插入图片描述" /> 常用参数： - 打包：cvf - 解压缩：xvf</p><p>打包后的文件名：file.tar</p><p>举例： <img src="https://img-blog.csdnimg.cn/20210521092340345.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210521092400793.png" alt="在这里插入图片描述" /> 与bzip2、gzip的区别： 打包后不会删除源文件，解压后也不会删除压缩文件 ### （四）文件阅读和定位命令 ###### 1、head 默认查看文件开头的10行，通过设置可查看前xx行。 <code>head 文件名称</code> <code>head -20 file</code> 查看file的前20行 ###### 2、tail 默认查看文件结尾的10行，通过设置可查看结尾的最后xx行。 <code>tail 文件名称</code> <code>tail -20 file</code> 查看file的后20行 有助于查看日志文件的最后10行来阅读重要的系统信息。 ###### 3、more 按页查看文件内容 <code>more [选项] [文件名称]</code> <img src="https://img-blog.csdnimg.cn/20210521093020319.png" alt="在这里插入图片描述" /> 使用more在文本文件中搜索关键字 <img src="https://img-blog.csdnimg.cn/202105210931181.png" alt="在这里插入图片描述" /> 当一个目录下的文件内容太多，用more来分页显示。与管道 | 结合起来。 <img src="https://img-blog.csdnimg.cn/20210521093212315.png" alt="在这里插入图片描述" /> ###### 4、which 依序从path环境变量所列的目录中找出命令的位置，并显示完整路径的名称。在找到第一个符合条件的程序文件时，就立刻停止搜索。 <code>which 命令</code> ###### 5、whereis 查找符合条件的文件，定位一些文件在文件系统中的位置。一般用于程序名的搜索。 <img src="https://img-blog.csdnimg.cn/2021052109344331.png" alt="在这里插入图片描述" /></p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/Linux%E5%AD%A6%E4%B9%A0/">Linux学习</category>
+      
+      
+      <category domain="http://example.com/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</category>
+      
+      
+      <comments>http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>解锁一道会员题—LeetCode1245</title>
@@ -228,28 +255,6 @@
       
       
       <comments>http://example.com/2021/03/17/%E7%8B%82%E7%A5%9EJava%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>上传本地项目到Github</title>
-      <link>http://example.com/2021/03/15/%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E5%88%B0Github/</link>
-      <guid>http://example.com/2021/03/15/%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E5%88%B0Github/</guid>
-      <pubDate>Mon, 15 Mar 2021 14:36:06 GMT</pubDate>
-      
-      <description>&lt;p&gt;本文默认已安装Git，还没安装需要先搜索教程安装哦。&lt;/p&gt;
-&lt;h3 id=&quot;在github新建仓库&quot;&gt;1. 在Github新建仓库&lt;/h3&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>本文默认已安装Git，还没安装需要先搜索教程安装哦。</p><h3 id="在github新建仓库">1. 在Github新建仓库</h3><a id="more"></a><p><img src="https://img-blog.csdnimg.cn/20210315220417851.png" /> 右上角选中第一项，新建仓库，进入下面页面。 <img src="https://img-blog.csdnimg.cn/20210315220753330.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 填好之后即可创建。</p><h3 id="右键使用git-bash">2. 右键使用Git Bash</h3><p>在需要上传的项目文件夹右键，点击Git Bash Here。 第一步：键入<code>git init</code> 命令。 <img src="https://img-blog.csdnimg.cn/20210315221016992.png" /> 自动在此文件夹下新建了.git 文件夹。 <img src="https://img-blog.csdnimg.cn/2021031522104839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 第二步：将此文件夹下的原有文件全部复制到 .git 中。 <img src="https://img-blog.csdnimg.cn/20210315221145782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 第三步：在Git Bash 中键入 <code>git add .</code> add后面的<code>.</code> 的意思是将项目下的所有文件都添加到仓库中。 <img src="https://img-blog.csdnimg.cn/20210315221226670.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 后面显示一大串是没有成功的！ 再次键入，没有任何反应才是成功的标志。 <img src="https://img-blog.csdnimg.cn/20210315221314212.png" /> 第四步：用git commit命令告诉Git，把文件提交到仓库 <img src="https://img-blog.csdnimg.cn/20210315221448521.png" /> 第五步：输入<code>git remote add origin 自己仓库地址</code> 将本地仓库关联到GitHub上，然后输入<code>git push -u origin master</code> 将代码上传到GitHub上。 <img src="https://img-blog.csdnimg.cn/20210315221538417.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 此时即添加成功！ 打开Github 看到项目已上传。 <img src="https://img-blog.csdnimg.cn/20210315221617229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /></p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Git/">Git</category>
-      
-      
-      
-      <comments>http://example.com/2021/03/15/%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E5%88%B0Github/#disqus_thread</comments>
       
     </item>
     

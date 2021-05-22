@@ -5339,4 +5339,25 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <tag>图</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux学习—文件备份、压缩、阅读、定位命令</title>
+    <url>/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h3 id="三文件备份和压缩命令">（三）、文件备份和压缩命令</h3>
+<h6 id="bzip2">1、bzip2</h6>
+<p>将源文件file压缩为file.bz2，压缩后无源文件</p>
+<p><code>bzip2 文件名称</code></p>
+<p>解压：<code>bunzip2 file.bz2</code></p>
+<a id="more"></a>
+<p>压缩文件 file.bz2 解压为 file，解压后无压缩文件</p>
+<p>可以同时压缩多个文件 <img src="https://img-blog.csdnimg.cn/20210521091538915.png" alt="在这里插入图片描述" /> ###### 2、gzip <code>gzip file</code> <code>gunzip file.gz</code> 与bzip2规则一样 <img src="https://img-blog.csdnimg.cn/20210521091815502.png" alt="在这里插入图片描述" /> ###### 3、tar 将文件或目录进行打包或解压缩 <code>tar [参数] [打包后的文件名] [需要打包的文件或目录]</code> 参数包括： <img src="https://img-blog.csdnimg.cn/2021052109214663.png" alt="在这里插入图片描述" /> 常用参数： - 打包：cvf - 解压缩：xvf</p>
+<p>打包后的文件名：file.tar</p>
+<p>举例： <img src="https://img-blog.csdnimg.cn/20210521092340345.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210521092400793.png" alt="在这里插入图片描述" /> 与bzip2、gzip的区别： 打包后不会删除源文件，解压后也不会删除压缩文件 ### （四）文件阅读和定位命令 ###### 1、head 默认查看文件开头的10行，通过设置可查看前xx行。 <code>head 文件名称</code> <code>head -20 file</code> 查看file的前20行 ###### 2、tail 默认查看文件结尾的10行，通过设置可查看结尾的最后xx行。 <code>tail 文件名称</code> <code>tail -20 file</code> 查看file的后20行 有助于查看日志文件的最后10行来阅读重要的系统信息。 ###### 3、more 按页查看文件内容 <code>more [选项] [文件名称]</code> <img src="https://img-blog.csdnimg.cn/20210521093020319.png" alt="在这里插入图片描述" /> 使用more在文本文件中搜索关键字 <img src="https://img-blog.csdnimg.cn/202105210931181.png" alt="在这里插入图片描述" /> 当一个目录下的文件内容太多，用more来分页显示。与管道 | 结合起来。 <img src="https://img-blog.csdnimg.cn/20210521093212315.png" alt="在这里插入图片描述" /> ###### 4、which 依序从path环境变量所列的目录中找出命令的位置，并显示完整路径的名称。在找到第一个符合条件的程序文件时，就立刻停止搜索。 <code>which 命令</code> ###### 5、whereis 查找符合条件的文件，定位一些文件在文件系统中的位置。一般用于程序名的搜索。 <img src="https://img-blog.csdnimg.cn/2021052109344331.png" alt="在这里插入图片描述" /></p>
+]]></content>
+      <categories>
+        <category>Linux学习</category>
+      </categories>
+      <tags>
+        <tag>Linux命令</tag>
+      </tags>
+  </entry>
 </search>
