@@ -5294,18 +5294,33 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
 <h2 id="二目录结构和vi编辑器">二、目录结构和vi编辑器</h2>
 <a id="more"></a>
 <h3 id="一目录结构">（一）目录结构</h3>
-<p>/etc：配置文件存放地 /home：用户的目录 /bin：可执行文件和常用的Linux命令 /root：root账户的home目录 ### （二）vi编辑器 格式：<code>vi file_name</code> 功能：生成新文件或编辑、查看文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;etc：配置文件存放地</span><br><span class="line">&#x2F;home：用户的目录</span><br><span class="line">&#x2F;bin：可执行文件和常用的Linux命令</span><br><span class="line">&#x2F;root：root账户的home目录</span><br></pre></td></tr></table></figure>
+<h3 id="二vi编辑器">（二）vi编辑器</h3>
+<p>格式：<code>vi file_name</code> 功能：生成新文件或编辑、查看文件</p>
 <p>由命令模式进入编辑模式 1）按 i 键，插入文本 2）按 a 键，追加文本</p>
 <p>由编辑模式进入命令模式 按ETC键</p>
 <p>可执行的操作： 1）:w 保存文件 2）:wq 保存并退出 3）:wq! 保存并强制退出</p>
 <h2 id="三linux命令">三、Linux命令</h2>
 <h3 id="一管理文件和目录">（一）管理文件和目录</h3>
 <h6 id="pwd">1、pwd</h6>
-<p>打印用户当前所处路径 <code>[root@localhost~]# pwd</code> ###### 2、cd 改变用户所在目录 <code>[root@localhost~]# cd &lt;目录名&gt;</code> <img src="https://img-blog.csdnimg.cn/2021052016503643.png" alt="在这里插入图片描述" /> ###### 3、ls 显示指定目录下的内容 <code>ls [参数] [目录或文件]</code> <img src="https://img-blog.csdnimg.cn/20210520165140826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> ###### 4、cat 显示文本内容 <code>cat 文本文件名字</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520165308670.png" alt="在这里插入图片描述" /> ###### 5、touch 创建文本 <code>touch 文本文件名字</code></p>
+<p>打印用户当前所处路径 <code>[root@localhost~]# pwd</code></p>
+<h6 id="cd">2、cd</h6>
+<p>改变用户所在目录 <code>[root@localhost~]# cd &lt;目录名&gt;</code> <img src="https://img-blog.csdnimg.cn/2021052016503643.png" alt="在这里插入图片描述" /></p>
+<h6 id="ls">3、ls</h6>
+<p>显示指定目录下的内容 <code>ls [参数] [目录或文件]</code> <img src="https://img-blog.csdnimg.cn/20210520165140826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h6 id="cat">4、cat</h6>
+<p>显示文本内容 <code>cat 文本文件名字</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520165308670.png" alt="在这里插入图片描述" /></p>
+<h6 id="touch">5、touch</h6>
+<p>创建文本 <code>touch 文本文件名字</code></p>
 <h6 id="grep">6、grep</h6>
 <p>在一堆文件中查找一个特定的字符串 <code>grep 字符串 文件名</code></p>
 <h6 id="cp">7、cp</h6>
-<p>复制文件，可以目标文件的指定位置 <code>cp 源文件 目标文件</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520165542906.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210520165644469.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> ### （二）对文件和目录的操作 ###### 1、mv 对文件或目录进行移动，还可以进行重命名 <code>mv 源对象 目的对象</code> <img src="https://img-blog.csdnimg.cn/20210520165806502.png" alt="在这里插入图片描述" /> 举例： <img src="https://img-blog.csdnimg.cn/2021052016585269.png" alt="在这里插入图片描述" /><img src="https://img-blog.csdnimg.cn/20210520165904766.png" alt="在这里插入图片描述" /> ###### 2、mkdir 创建目录 <code>mkdir [目录名1] [目录名2] [目录名3] ...</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520170235301.png" alt="在这里插入图片描述" /></p>
+<p>复制文件，可以目标文件的指定位置 <code>cp 源文件 目标文件</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520165542906.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210520165644469.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h3 id="二对文件和目录的操作">（二）对文件和目录的操作</h3>
+<h6 id="mv">1、mv</h6>
+<p>对文件或目录进行移动，还可以进行重命名 <code>mv 源对象 目的对象</code> <img src="https://img-blog.csdnimg.cn/20210520165806502.png" alt="在这里插入图片描述" /> 举例： <img src="https://img-blog.csdnimg.cn/2021052016585269.png" alt="在这里插入图片描述" /><img src="https://img-blog.csdnimg.cn/20210520165904766.png" alt="在这里插入图片描述" /></p>
+<h6 id="mkdir">2、mkdir</h6>
+<p>创建目录 <code>mkdir [目录名1] [目录名2] [目录名3] ...</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520170235301.png" alt="在这里插入图片描述" /></p>
 <p>可以创建嵌套的目录，但只能嵌套一个 <code>mkdir -p aa/bb</code></p>
 <h6 id="rmdir">3、rmdir</h6>
 <p>删除目录 <code>rmdir [参数] [目录名1] [目录名2] ...</code> 可以删除多个嵌套目录 <code>rmdir -p aa/bb/cc</code></p>
@@ -5349,9 +5364,24 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
 <p>解压：<code>bunzip2 file.bz2</code></p>
 <a id="more"></a>
 <p>压缩文件 file.bz2 解压为 file，解压后无压缩文件</p>
-<p>可以同时压缩多个文件 <img src="https://img-blog.csdnimg.cn/20210521091538915.png" alt="在这里插入图片描述" /> ###### 2、gzip <code>gzip file</code> <code>gunzip file.gz</code> 与bzip2规则一样 <img src="https://img-blog.csdnimg.cn/20210521091815502.png" alt="在这里插入图片描述" /> ###### 3、tar 将文件或目录进行打包或解压缩 <code>tar [参数] [打包后的文件名] [需要打包的文件或目录]</code> 参数包括： <img src="https://img-blog.csdnimg.cn/2021052109214663.png" alt="在这里插入图片描述" /> 常用参数： - 打包：cvf - 解压缩：xvf</p>
+<p>可以同时压缩多个文件 <img src="https://img-blog.csdnimg.cn/20210521091538915.png" alt="在这里插入图片描述" /></p>
+<h6 id="gzip">2、gzip</h6>
+<p><code>gzip file</code> <code>gunzip file.gz</code> 与bzip2规则一样 <img src="https://img-blog.csdnimg.cn/20210521091815502.png" alt="在这里插入图片描述" /></p>
+<h6 id="tar">3、tar</h6>
+<p>将文件或目录进行打包或解压缩 <code>tar [参数] [打包后的文件名] [需要打包的文件或目录]</code> 参数包括： <img src="https://img-blog.csdnimg.cn/2021052109214663.png" alt="在这里插入图片描述" /> 常用参数： - 打包：cvf - 解压缩：xvf</p>
 <p>打包后的文件名：file.tar</p>
-<p>举例： <img src="https://img-blog.csdnimg.cn/20210521092340345.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210521092400793.png" alt="在这里插入图片描述" /> 与bzip2、gzip的区别： 打包后不会删除源文件，解压后也不会删除压缩文件 ### （四）文件阅读和定位命令 ###### 1、head 默认查看文件开头的10行，通过设置可查看前xx行。 <code>head 文件名称</code> <code>head -20 file</code> 查看file的前20行 ###### 2、tail 默认查看文件结尾的10行，通过设置可查看结尾的最后xx行。 <code>tail 文件名称</code> <code>tail -20 file</code> 查看file的后20行 有助于查看日志文件的最后10行来阅读重要的系统信息。 ###### 3、more 按页查看文件内容 <code>more [选项] [文件名称]</code> <img src="https://img-blog.csdnimg.cn/20210521093020319.png" alt="在这里插入图片描述" /> 使用more在文本文件中搜索关键字 <img src="https://img-blog.csdnimg.cn/202105210931181.png" alt="在这里插入图片描述" /> 当一个目录下的文件内容太多，用more来分页显示。与管道 | 结合起来。 <img src="https://img-blog.csdnimg.cn/20210521093212315.png" alt="在这里插入图片描述" /> ###### 4、which 依序从path环境变量所列的目录中找出命令的位置，并显示完整路径的名称。在找到第一个符合条件的程序文件时，就立刻停止搜索。 <code>which 命令</code> ###### 5、whereis 查找符合条件的文件，定位一些文件在文件系统中的位置。一般用于程序名的搜索。 <img src="https://img-blog.csdnimg.cn/2021052109344331.png" alt="在这里插入图片描述" /></p>
+<p>举例： <img src="https://img-blog.csdnimg.cn/20210521092340345.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210521092400793.png" alt="在这里插入图片描述" /> 与bzip2、gzip的区别： 打包后不会删除源文件，解压后也不会删除压缩文件</p>
+<h3 id="四文件阅读和定位命令">（四）文件阅读和定位命令</h3>
+<h6 id="head">1、head</h6>
+<p>默认查看文件开头的10行，通过设置可查看前xx行。 <code>head 文件名称</code> <code>head -20 file</code> 查看file的前20行</p>
+<h6 id="tail">2、tail</h6>
+<p>默认查看文件结尾的10行，通过设置可查看结尾的最后xx行。 <code>tail 文件名称</code> <code>tail -20 file</code> 查看file的后20行 有助于查看日志文件的最后10行来阅读重要的系统信息。</p>
+<h6 id="more">3、more</h6>
+<p>按页查看文件内容 <code>more [选项] [文件名称]</code> <img src="https://img-blog.csdnimg.cn/20210521093020319.png" alt="在这里插入图片描述" /> 使用more在文本文件中搜索关键字 <img src="https://img-blog.csdnimg.cn/202105210931181.png" alt="在这里插入图片描述" /> 当一个目录下的文件内容太多，用more来分页显示。与管道 | 结合起来。 <img src="https://img-blog.csdnimg.cn/20210521093212315.png" alt="在这里插入图片描述" /></p>
+<h6 id="which">4、which</h6>
+<p>依序从path环境变量所列的目录中找出命令的位置，并显示完整路径的名称。在找到第一个符合条件的程序文件时，就立刻停止搜索。 <code>which 命令</code></p>
+<h6 id="whereis">5、whereis</h6>
+<p>查找符合条件的文件，定位一些文件在文件系统中的位置。一般用于程序名的搜索。 <img src="https://img-blog.csdnimg.cn/2021052109344331.png" alt="在这里插入图片描述" /></p>
 ]]></content>
       <categories>
         <category>Linux学习</category>
@@ -5359,5 +5389,63 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
       <tags>
         <tag>Linux命令</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Linux学习—权限、用户、系统指令</title>
+    <url>/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h3 id="五管理使用者和设立权限的命令">（五）管理使用者和设立权限的命令</h3>
+<p>执行命令<code>ls -l</code> 的结果如下： <img src="https://img-blog.csdnimg.cn/20210522092951254.png" alt="在这里插入图片描述" /></p>
+<ul>
+<li><p>第一列 10位代表文件类型和权限 第一位 如果是‘d’，代表目录；如果是‘-’，代表文件</p>
+<a id="more"></a>
+<p>后9位每三个一组，第一组表示文件主人的权限；第二组表示文件主人同组成员的权限；第三组表示其他人的权限</p></li>
+<li><p>第三列 代表文件拥有者</p></li>
+<li><p>第四列 代表所属群组</p></li>
+</ul>
+<h6 id="chmod命令">1、chmod命令</h6>
+<ul>
+<li>改变许可权限 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">x—文件可以被执行</span><br><span class="line">w—文件可以被写入</span><br><span class="line">r—文件可以被读取</span><br></pre></td></tr></table></figure></li>
+<li>设定文件权限 <code>chmod 文件使用者(u/g/o) 增减(+/-) 权限(x/w/r) 文件</code> u—拥有文件的用户 g—用户所在群组 o—其他人 a—所有 举例： <img src="https://img-blog.csdnimg.cn/20210522095356850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 还可以用数字代替权限，4—w，2—r，1—x 下面两个命令等价： <code>chmod 751 a</code> <code>chmod u=rwx,g=rx,o=x a</code></li>
+</ul>
+<h6 id="useradd与userdel">2、useradd与userdel</h6>
+<p>添加用户、删除用户 <code>useradd [用户名]</code> <code>userdel [参数] [用户名]</code> 参数：-r，删除用户及相关目录，彻底删除</p>
+<h3 id="六用户设置命令">（六）用户设置命令</h3>
+<h6 id="chgrp">1、chgrp</h6>
+<p>用于变更文件或目录的所属群组 <code>chgrp 群组名称 文件名称</code> <img src="https://img-blog.csdnimg.cn/20210522192047136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h6 id="chown">2、chown</h6>
+<p>将文件的拥有者改为指定的用户或组。 <img src="https://img-blog.csdnimg.cn/20210522192254672.png" alt="在这里插入图片描述" /> 举例： <img src="https://img-blog.csdnimg.cn/20210522192315372.png" alt="在这里插入图片描述" /></p>
+<h6 id="su">3、su</h6>
+<p>修改用户。</p>
+<p><code>su 用户名</code> <img src="https://img-blog.csdnimg.cn/20210522192432941.png" alt="在这里插入图片描述" /></p>
+<h3 id="七系统查看指令">（七）系统查看指令</h3>
+<h6 id="exit">1、exit</h6>
+<p>退出。文本模式下使用ctrl+D。</p>
+<h6 id="reboot">2、reboot</h6>
+<p>重新启动。 <img src="https://img-blog.csdnimg.cn/2021052219261529.png" alt="在这里插入图片描述" /></p>
+<h6 id="halt和shutdown">3、halt和shutdown</h6>
+<p>关机。 <img src="https://img-blog.csdnimg.cn/20210522192653797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h6 id="ps">4、ps</h6>
+<p>查看在系统中哪些程序在执行及其执行的情况。（静态查看） <img src="https://img-blog.csdnimg.cn/20210522192806192.png" alt="在这里插入图片描述" /></p>
+<h6 id="top">5、top</h6>
+<p>查看目前程序的执行情景和内存使用。（动态查看） 几秒钟就更新一次系统状态，方便跟踪。</p>
+<h6 id="kill">6、kill</h6>
+<p>终止一个正在执行中的进程。 <code>kill 进程号</code></p>
+<h6 id="date在这里插入图片描述">7.date<img src="https://img-blog.csdnimg.cn/20210522193059760.png" alt="在这里插入图片描述" /></h6>
+<h6 id="cal">8.cal</h6>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210522193126666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<h6 id="df">9.df</h6>
+<p>检查硬盘的使用量</p>
+<h6 id="du">10.du</h6>
+<p>显示文件目录的大小 <code>du 参数 文件名</code></p>
+<h3 id="九网络操作命令">（九）网络操作命令</h3>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210522193311519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+]]></content>
+      <categories>
+        <category>Linux学习</category>
+      </categories>
   </entry>
 </search>

@@ -24,31 +24,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="本文默认已安装Git，还没安装需要先搜索教程安装哦。 1. 在Github新建仓库">
+  <meta name="description" content="（五）管理使用者和设立权限的命令 执行命令ls -l 的结果如下：   第一列 10位代表文件类型和权限 第一位 如果是‘d’，代表目录；如果是‘-’，代表文件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="上传本地项目到Github">
-<meta property="og:url" content="http://example.com/2021/03/15/%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E5%88%B0Github/index.html">
+<meta property="og:title" content="Linux学习—权限、用户、系统指令">
+<meta property="og:url" content="http://example.com/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="本文默认已安装Git，还没安装需要先搜索教程安装哦。 1. 在Github新建仓库">
+<meta property="og:description" content="（五）管理使用者和设立权限的命令 执行命令ls -l 的结果如下：   第一列 10位代表文件类型和权限 第一位 如果是‘d’，代表目录；如果是‘-’，代表文件">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315220417851.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315220753330.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315221016992.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2021031522104839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315221145782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315221226670.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315221314212.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315221448521.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315221538417.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315221617229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-03-15T14:36:06.000Z">
-<meta property="article:modified_time" content="2021-03-15T14:38:24.169Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522092951254.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522095356850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522192047136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522192254672.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522192315372.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522192432941.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021052219261529.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522192653797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522192806192.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522193059760.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522193126666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210522193311519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-05-22T11:34:12.000Z">
+<meta property="article:modified_time" content="2021-05-22T11:37:54.652Z">
 <meta property="article:author" content="Rui Wang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210315220417851.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210522092951254.png">
 
 
-<link rel="canonical" href="http://example.com/2021/03/15/%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E5%88%B0Github/">
+<link rel="canonical" href="http://example.com/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/">
 
 
 <script class="page-configurations">
@@ -61,7 +63,7 @@
   };
 </script>
 
-  <title>上传本地项目到Github | Rui</title>
+  <title>Linux学习—权限、用户、系统指令 | Rui</title>
   
 
 
@@ -195,7 +197,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8github%E6%96%B0%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="nav-text">1. 在Github新建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E9%94%AE%E4%BD%BF%E7%94%A8git-bash"><span class="nav-text">2. 右键使用Git Bash</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E7%AE%A1%E7%90%86%E4%BD%BF%E7%94%A8%E8%80%85%E5%92%8C%E8%AE%BE%E7%AB%8B%E6%9D%83%E9%99%90%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-text">（五）管理使用者和设立权限的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#chmod%E5%91%BD%E4%BB%A4"><span class="nav-text">1、chmod命令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#useradd%E4%B8%8Euserdel"><span class="nav-text">2、useradd与userdel</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E7%94%A8%E6%88%B7%E8%AE%BE%E7%BD%AE%E5%91%BD%E4%BB%A4"><span class="nav-text">（六）用户设置命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#chgrp"><span class="nav-text">1、chgrp</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#chown"><span class="nav-text">2、chown</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#su"><span class="nav-text">3、su</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E6%8C%87%E4%BB%A4"><span class="nav-text">（七）系统查看指令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#exit"><span class="nav-text">1、exit</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#reboot"><span class="nav-text">2、reboot</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#halt%E5%92%8Cshutdown"><span class="nav-text">3、halt和shutdown</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ps"><span class="nav-text">4、ps</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#top"><span class="nav-text">5、top</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#kill"><span class="nav-text">6、kill</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#date%E5%9C%A8%E8%BF%99%E9%87%8C%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0"><span class="nav-text">7.date</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#cal"><span class="nav-text">8.cal</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#df"><span class="nav-text">9.df</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#du"><span class="nav-text">10.du</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%9D%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-text">（九）网络操作命令</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -264,7 +266,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/15/%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E5%88%B0Github/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
@@ -277,7 +279,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          上传本地项目到Github
+          Linux学习—权限、用户、系统指令
         </h1>
 
         <div class="post-meta-container">
@@ -289,7 +291,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-03-15 22:36:06 / 修改时间：22:38:24" itemprop="dateCreated datePublished" datetime="2021-03-15T22:36:06+08:00">2021-03-15</time>
+      <time title="创建时间：2021-05-22 19:34:12 / 修改时间：19:37:54" itemprop="dateCreated datePublished" datetime="2021-05-22T19:34:12+08:00">2021-05-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -297,7 +299,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+          <a href="/categories/Linux%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">Linux学习</span></a>
         </span>
     </span>
 
@@ -311,12 +313,56 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>本文默认已安装Git，还没安装需要先搜索教程安装哦。</p>
-<h3 id="在github新建仓库">1. 在Github新建仓库</h3>
+        <h3 id="五管理使用者和设立权限的命令">（五）管理使用者和设立权限的命令</h3>
+<p>执行命令<code>ls -l</code> 的结果如下： <img src="https://img-blog.csdnimg.cn/20210522092951254.png" alt="在这里插入图片描述" /></p>
+<ul>
+<li><p>第一列 10位代表文件类型和权限 第一位 如果是‘d’，代表目录；如果是‘-’，代表文件</p>
 <a id="more"></a>
-<p><img src="https://img-blog.csdnimg.cn/20210315220417851.png" /> 右上角选中第一项，新建仓库，进入下面页面。 <img src="https://img-blog.csdnimg.cn/20210315220753330.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 填好之后即可创建。</p>
-<h3 id="右键使用git-bash">2. 右键使用Git Bash</h3>
-<p>在需要上传的项目文件夹右键，点击Git Bash Here。 第一步：键入<code>git init</code> 命令。 <img src="https://img-blog.csdnimg.cn/20210315221016992.png" /> 自动在此文件夹下新建了.git 文件夹。 <img src="https://img-blog.csdnimg.cn/2021031522104839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 第二步：将此文件夹下的原有文件全部复制到 .git 中。 <img src="https://img-blog.csdnimg.cn/20210315221145782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 第三步：在Git Bash 中键入 <code>git add .</code> add后面的<code>.</code> 的意思是将项目下的所有文件都添加到仓库中。 <img src="https://img-blog.csdnimg.cn/20210315221226670.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 后面显示一大串是没有成功的！ 再次键入，没有任何反应才是成功的标志。 <img src="https://img-blog.csdnimg.cn/20210315221314212.png" /> 第四步：用git commit命令告诉Git，把文件提交到仓库 <img src="https://img-blog.csdnimg.cn/20210315221448521.png" /> 第五步：输入<code>git remote add origin 自己仓库地址</code> 将本地仓库关联到GitHub上，然后输入<code>git push -u origin master</code> 将代码上传到GitHub上。 <img src="https://img-blog.csdnimg.cn/20210315221538417.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 此时即添加成功！ 打开Github 看到项目已上传。 <img src="https://img-blog.csdnimg.cn/20210315221617229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /></p>
+<p>后9位每三个一组，第一组表示文件主人的权限；第二组表示文件主人同组成员的权限；第三组表示其他人的权限</p></li>
+<li><p>第三列 代表文件拥有者</p></li>
+<li><p>第四列 代表所属群组</p></li>
+</ul>
+<h6 id="chmod命令">1、chmod命令</h6>
+<ul>
+<li>改变许可权限 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">x—文件可以被执行</span><br><span class="line">w—文件可以被写入</span><br><span class="line">r—文件可以被读取</span><br></pre></td></tr></table></figure></li>
+<li>设定文件权限 <code>chmod 文件使用者(u/g/o) 增减(+/-) 权限(x/w/r) 文件</code> u—拥有文件的用户 g—用户所在群组 o—其他人 a—所有 举例： <img src="https://img-blog.csdnimg.cn/20210522095356850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 还可以用数字代替权限，4—w，2—r，1—x 下面两个命令等价： <code>chmod 751 a</code> <code>chmod u=rwx,g=rx,o=x a</code></li>
+</ul>
+<h6 id="useradd与userdel">2、useradd与userdel</h6>
+<p>添加用户、删除用户 <code>useradd [用户名]</code> <code>userdel [参数] [用户名]</code> 参数：-r，删除用户及相关目录，彻底删除</p>
+<h3 id="六用户设置命令">（六）用户设置命令</h3>
+<h6 id="chgrp">1、chgrp</h6>
+<p>用于变更文件或目录的所属群组 <code>chgrp 群组名称 文件名称</code> <img src="https://img-blog.csdnimg.cn/20210522192047136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h6 id="chown">2、chown</h6>
+<p>将文件的拥有者改为指定的用户或组。 <img src="https://img-blog.csdnimg.cn/20210522192254672.png" alt="在这里插入图片描述" /> 举例： <img src="https://img-blog.csdnimg.cn/20210522192315372.png" alt="在这里插入图片描述" /></p>
+<h6 id="su">3、su</h6>
+<p>修改用户。</p>
+<p><code>su 用户名</code> <img src="https://img-blog.csdnimg.cn/20210522192432941.png" alt="在这里插入图片描述" /></p>
+<h3 id="七系统查看指令">（七）系统查看指令</h3>
+<h6 id="exit">1、exit</h6>
+<p>退出。文本模式下使用ctrl+D。</p>
+<h6 id="reboot">2、reboot</h6>
+<p>重新启动。 <img src="https://img-blog.csdnimg.cn/2021052219261529.png" alt="在这里插入图片描述" /></p>
+<h6 id="halt和shutdown">3、halt和shutdown</h6>
+<p>关机。 <img src="https://img-blog.csdnimg.cn/20210522192653797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h6 id="ps">4、ps</h6>
+<p>查看在系统中哪些程序在执行及其执行的情况。（静态查看） <img src="https://img-blog.csdnimg.cn/20210522192806192.png" alt="在这里插入图片描述" /></p>
+<h6 id="top">5、top</h6>
+<p>查看目前程序的执行情景和内存使用。（动态查看） 几秒钟就更新一次系统状态，方便跟踪。</p>
+<h6 id="kill">6、kill</h6>
+<p>终止一个正在执行中的进程。 <code>kill 进程号</code></p>
+<h6 id="date在这里插入图片描述">7.date<img src="https://img-blog.csdnimg.cn/20210522193059760.png" alt="在这里插入图片描述" /></h6>
+<h6 id="cal">8.cal</h6>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210522193126666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<h6 id="df">9.df</h6>
+<p>检查硬盘的使用量</p>
+<h6 id="du">10.du</h6>
+<p>显示文件目录的大小 <code>du 参数 文件名</code></p>
+<h3 id="九网络操作命令">（九）网络操作命令</h3>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210522193311519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
 
     </div>
 
@@ -339,14 +385,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/03/11/LeetCode%E5%88%B7%E9%A2%98%E2%80%94%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93%E9%97%AE%E9%A2%98/" rel="prev" title="LeetCode刷题—股票交易问题">
-                  <i class="fa fa-chevron-left"></i> LeetCode刷题—股票交易问题
+                <a href="/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/" rel="prev" title="Linux学习—文件备份、压缩、阅读、定位命令">
+                  <i class="fa fa-chevron-left"></i> Linux学习—文件备份、压缩、阅读、定位命令
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/03/17/%E7%8B%82%E7%A5%9EJava%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/" rel="next" title="狂神Java并发笔记">
-                  狂神Java并发笔记 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
