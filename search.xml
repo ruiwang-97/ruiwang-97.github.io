@@ -5495,4 +5495,66 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <tag>索引</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySQL存储引擎及其索引实现</title>
+    <url>/2021/05/23/MySQL%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E5%8F%8A%E5%85%B6%E7%B4%A2%E5%BC%95%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>存储引擎指<strong>表</strong>的类型及表在计算机上的存储方式。</p>
+<p>主要的存储引擎有InnoDB、MyISAM、Memory等。</p>
+<h4 id="myiasm">MyIASM</h4>
+<a id="more"></a>
+<h5 id="使用这个存储引擎每个myisam在磁盘上存储三个文件">1、使用这个存储引擎，每个MyISAM在磁盘上存储三个文件。</h5>
+<p>• frm文件：存储表的定义数据</p>
+<p>• MYD文件：存放<strong>表具体记录的数据</strong></p>
+<p>• MYI文件：存储<strong>索引</strong></p>
+<h5 id="特点">2、特点：</h5>
+<ul>
+<li><p>不支持事务，每次查询具有原子性</p></li>
+<li><p>支持表级锁，每次操作对整个表加锁</p></li>
+<li><p>采用<strong>非聚簇索引</strong>，索引文件与数据文件分离。<strong>索引文件的数据域存储指向数据记录的地址</strong>。辅助索引与主键索引基本一致，只是主索引要求key是唯一的，<strong>辅索引的key不用保证唯一性</strong>。</p></li>
+</ul>
+<h5 id="主键索引与辅助索引">3、主键索引与辅助索引</h5>
+<h6 id="主索引">1）主索引</h6>
+<p>先加载MYI文件，其中存放索引，找到对应地址之后，将MYD文件加载到内存，根据刚才得到的地址找到对应行数据，返回给用户。 <img src="https://img-blog.csdnimg.cn/2021052311210883.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 上图是MyISAM主键索引，设表一共有三列，假设我们以Col1为主键。</p>
+<h6 id="辅索引">2）辅索引</h6>
+<p>如果在Col2上建立一个辅助索引，如图 <img src="https://img-blog.csdnimg.cn/2021052315003242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 同样data域存放数据记录的地址，但辅助索引的key可以重复。</p>
+<h5 id="总结">总结</h5>
+<p>因此，MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。 MyISAM的索引方式也叫做“非聚集”的，之所以这么称呼是为了与InnoDB的聚集索引区分。</p>
+<h4 id="memory">Memory</h4>
+<p>将数据存在内存 - 表级锁</p>
+<ul>
+<li><p>由于数据存在内存中，一旦服务器出现故障，数据都会丢失</p></li>
+<li><p>默认使用hash索引</p></li>
+</ul>
+<h4 id="innodb">InnoDB</h4>
+<p>默认的数据库存储引擎。</p>
+<h5 id="特点-1">1、特点：</h5>
+<ul>
+<li><p>支持事务。默认事务隔离级别为可重复读（RR），通过MVCC实现。</p></li>
+<li><p>支持行级锁，可以支持更高的并发。</p></li>
+<li><p>支持外键约束；外键约束降低了表的查询速度，但增加了表之间的耦合度。</p></li>
+<li><p>存在缓冲管理。通过缓冲池，将索引和数据全部缓存起来，加快查询速度。</p></li>
+<li><p>采用聚簇索引（索引的数据域存储数据文件本身）</p></li>
+</ul>
+<h5 id="主键索引与辅助索引-1">2、主键索引与辅助索引</h5>
+<p>InnoDB也使用B+树作为索引结构，但区别在于<strong>InnoDB的数据文件本身就是索引文件，InnoDB辅助索引的data域存储相应记录主键的值而不是地址。</strong></p>
+<h6 id="主索引-1">1）主索引</h6>
+<p>InnoDB的表数据文件本身就是按B+树组织的一个数据结构，<strong>树节点data域保存完整的数据记录</strong>。这个<strong>索引的key是数据表的主键</strong>，因此InnoDB表数据文件本身就是主索引。 <img src="https://img-blog.csdnimg.cn/20210523150921401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h6 id="辅索引-1">2）辅索引</h6>
+<p>InnoDB的<strong>所有辅助索引都引用主键作为data域</strong>。例如，下图为定义在Col3上的一个辅助索引：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210523151044146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 辅助索引搜索需要检索两遍索引：首先检索<strong>辅助索引获得主键</strong>，然后用主键到<strong>主索引中检索获得数据记录</strong>。</p>
+<h4 id="总结-1">总结</h4>
+<p>InnoDB索引和MyISAM索引的区别：</p>
+<ul>
+<li><p>主索引的区别：InnoDB的数据文件本身就是索引文件。而MyISAM的索引和数据是分开的。</p></li>
+<li><p>辅助索引的区别：InnoDB的辅助索引data域存储相应记录主键的值而不是地址。而MyISAM的辅助索引和主索引没有多大区别。</p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>存储引擎</tag>
+        <tag>聚簇索引</tag>
+      </tags>
+  </entry>
 </search>
