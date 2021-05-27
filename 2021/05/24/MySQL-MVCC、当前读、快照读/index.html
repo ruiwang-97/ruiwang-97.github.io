@@ -34,8 +34,11 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210524122455323.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2021052412263796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210524122720935.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210524212217638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210524212316380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021052421240962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2021-05-24T04:38:40.000Z">
-<meta property="article:modified_time" content="2021-05-24T04:41:51.068Z">
+<meta property="article:modified_time" content="2021-05-24T13:24:55.592Z">
 <meta property="article:author" content="Rui Wang">
 <meta property="article:tag" content="MVCC">
 <meta name="twitter:card" content="summary">
@@ -205,7 +208,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -218,7 +221,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -283,7 +286,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-05-24 12:38:40 / 修改时间：12:41:51" itemprop="dateCreated datePublished" datetime="2021-05-24T12:38:40+08:00">2021-05-24</time>
+      <time title="创建时间：2021-05-24 12:38:40 / 修改时间：21:24:55" itemprop="dateCreated datePublished" datetime="2021-05-24T12:38:40+08:00">2021-05-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -331,9 +334,9 @@
 <p><code>select...lock in share mode (共享读锁)</code> <code>select...for update</code> <code>update , delete , insert</code></p>
 <p>上面形式都属于当前读。</p>
 <h4 id="当前读的实现方式">当前读的实现方式</h4>
-<p>使用next-key锁(行记录锁+Gap间隙锁)实现</p>
+<p>使用next-key锁(行记录锁+Gap间隙锁)实现 <img src="https://img-blog.csdnimg.cn/20210524212217638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /></p>
 <h4 id="rr级别怎样防止幻读">RR级别怎样防止幻读？</h4>
-<p>RR级别下只要对 SELECT 操作也手动加行（X）锁即可类似 SERIALIZABLE 级别（它会对 SELECT 隐式加锁） <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">这里需要用 X锁， 用 LOCK IN SHARE MODE 拿到 S锁 后我们没办法做 写操作</span><br><span class="line">SELECT &#96;id&#96; FROM &#96;users&#96; WHERE &#96;id&#96; &#x3D; 1 FOR UPDATE;</span><br></pre></td></tr></table></figure> 如果 id = 1 的记录存在则会被加行（X）锁；如果不存在，则会加 next-lock key / gap 锁（范围行锁），即记录存在与否，mysql 都会对记录对应的索引加锁，其他事务是无法操作的。</p>
+<p>RR级别下只要对 SELECT 操作也手动加行（X）锁即可类似 SERIALIZABLE 级别（它会对 SELECT 隐式加锁） <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">这里需要用 X锁， 用 LOCK IN SHARE MODE 拿到 S锁 后我们没办法做 写操作</span><br><span class="line">SELECT &#96;id&#96; FROM &#96;users&#96; WHERE &#96;id&#96; &#x3D; 1 FOR UPDATE;</span><br></pre></td></tr></table></figure> 如果 id = 1 的记录存在则会被加行（X）锁；如果不存在，则会加 next-key lock/ gap 锁（范围行锁），即记录存在与否，mysql 都会对记录对应的索引加锁，其他事务是无法操作的。 <img src="https://img-blog.csdnimg.cn/20210524212316380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 如图，表t2有主键，score字段有索引idc_scaore，在事务中查询t2表score&lt;80的记录，加了一个S锁（lock in share mode）。 在另一个事务中插入score=74，无法插入成功，因为有gap锁；插入score=90成功，因为不在此区间内。 <img src="https://img-blog.csdnimg.cn/2021052421240962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
 
     </div>
 
@@ -364,6 +367,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/05/26/Java%E5%A4%9A%E6%80%81%E4%B9%8B%E5%B7%A6%E5%8F%B3/" rel="next" title="Java多态之左右">
+                  Java多态之左右 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
