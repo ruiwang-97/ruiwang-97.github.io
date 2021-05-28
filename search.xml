@@ -5633,4 +5633,19 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <tag>多态</tag>
       </tags>
   </entry>
+  <entry>
+    <title>招银提前批SQL题</title>
+    <url>/2021/05/27/%E6%8B%9B%E9%93%B6%E6%8F%90%E5%89%8D%E6%89%B9SQL%E9%A2%98/</url>
+    <content><![CDATA[<p>面试馆出的题很简单，奈何平时练的都是select，好久没用过update和delete了。</p>
+<p>以面养面，继续总结！</p>
+<p>题目：</p>
+<a id="more"></a>
+<p><img src="https://img-blog.csdnimg.cn/20210527211246813.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /></p>
+<p>建表： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> employees;  </span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> employees (  </span><br><span class="line">     <span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">4</span>) primary <span class="keyword">key</span> <span class="keyword">not</span> <span class="literal">null</span> auto_increment,</span><br><span class="line">     <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">     s_x <span class="built_in">int</span>(<span class="number">4</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">     s_y <span class="built_in">int</span>(<span class="number">4</span>) <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">   ) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;   </span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> employees <span class="keyword">VALUES</span> (<span class="number">1001</span>,<span class="string">&#x27;张三&#x27;</span>, <span class="number">3000</span>, <span class="number">5000</span>); </span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> employees <span class="keyword">VALUES</span> (<span class="number">1002</span>,<span class="string">&#x27;李四&#x27;</span>, <span class="number">2000</span>, <span class="number">1000</span>); </span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> employees <span class="keyword">VALUES</span> (<span class="number">1003</span>,<span class="string">&#x27;张五&#x27;</span>, <span class="number">4000</span>, <span class="number">1000</span>); </span><br></pre></td></tr></table></figure></p>
+<p>更新语句：<code>update 表名 set 字段 = 新值 where 条件;</code> <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> employees <span class="keyword">set</span> salary_x = <span class="number">9000</span></span><br><span class="line"><span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">&#x27;李四&#x27;</span>;</span><br></pre></td></tr></table></figure> 查询 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">min</span>(s_x + s_y) <span class="keyword">from</span> employees;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>MySQl</category>
+      </categories>
+  </entry>
 </search>
