@@ -9,8 +9,33 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Thu, 27 May 2021 13:25:30 GMT</pubDate>
+    <pubDate>Fri, 28 May 2021 04:56:07 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>二叉树的镜像—输入输出处理</title>
+      <link>http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/</link>
+      <guid>http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/</guid>
+      <pubDate>Fri, 28 May 2021 04:54:38 GMT</pubDate>
+      
+      <description>&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/&quot;&gt;剑指 Offer 27. 二叉树的镜像&lt;/a&gt;&lt;br&gt;比较简单，可以采用递归也可以借助栈操作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在处理输入时，建立一个TreeNode类，并生成树，镜像之后比较层序遍历结果。&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p><a href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/">剑指 Offer 27. 二叉树的镜像</a><br>比较简单，可以采用递归也可以借助栈操作。</p><p><strong>思路</strong></p><p>在处理输入时，建立一个TreeNode类，并生成树，镜像之后比较层序遍历结果。</p><a id="more"></a><p><strong>代码</strong></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span></span>&#123;</span><br><span class="line">    TreeNode left;</span><br><span class="line">    TreeNode right;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;<span class="keyword">this</span>.val = val;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main0528</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//递归 此函数的作用是返回以root为根节点的镜像树</span></span><br><span class="line">        <span class="comment">//对于左右子节点，递归调用此函数，再对结果进行交换</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        TreeNode l = mirrorTree(root.right);</span><br><span class="line">        TreeNode r = mirrorTree(root.left);</span><br><span class="line">        root.left = l;</span><br><span class="line">        root.right = r;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//层序遍历打印树</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bfs</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span> size = queue.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)&#123;</span><br><span class="line">                TreeNode node = queue.poll();</span><br><span class="line">                System.out.print(node.val + <span class="string">&quot; &quot;</span>);</span><br><span class="line">                <span class="keyword">if</span>(node.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    queue.add(node.left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(node.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    queue.add(node.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">build</span><span class="params">()</span></span>&#123;</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(<span class="number">4</span>);</span><br><span class="line">        TreeNode left = <span class="keyword">new</span> TreeNode(<span class="number">2</span>);</span><br><span class="line">        TreeNode left1 = <span class="keyword">new</span> TreeNode(<span class="number">1</span>);</span><br><span class="line">        TreeNode right1 = <span class="keyword">new</span> TreeNode(<span class="number">3</span>);</span><br><span class="line">        TreeNode right = <span class="keyword">new</span> TreeNode(<span class="number">7</span>);</span><br><span class="line">        TreeNode left2 = <span class="keyword">new</span> TreeNode(<span class="number">6</span>);</span><br><span class="line">        TreeNode right2 = <span class="keyword">new</span> TreeNode(<span class="number">9</span>);</span><br><span class="line">        root.left = left;</span><br><span class="line">        root.right = right;</span><br><span class="line">        left.left = left1;</span><br><span class="line">        left.right = right1;</span><br><span class="line">        right.left = left2;</span><br><span class="line">        right.right = right2;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TreeNode root = build();</span><br><span class="line">        bfs(root);</span><br><span class="line">        mirrorTree(root);</span><br><span class="line">        System.out.println();</span><br><span class="line">        bfs(root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/LeetCode%E5%88%B7%E9%A2%98/">LeetCode刷题</category>
+      
+      
+      <category domain="http://example.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</category>
+      
+      
+      <comments>http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>招银提前批SQL题</title>
@@ -233,30 +258,6 @@
       
       
       <comments>http://example.com/2021/05/20/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%AF%B9%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%9A%84%E6%93%8D%E4%BD%9C/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>数据结构面试题</title>
-      <link>http://example.com/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
-      <guid>http://example.com/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
-      <pubDate>Thu, 29 Apr 2021 13:54:05 GMT</pubDate>
-      
-      <description>&lt;p&gt;数据结构是计算机存储、组织数据的方式。对于特定的数据结构(比如数组)，有些操作效率很高(读某个数组元素)，有些操作的效率很低(删除某个数组元素)。程序员的目标是为当前的问题选择最优的数据结构。&lt;/p&gt;
-&lt;p&gt;八种常用数据结构：&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>数据结构是计算机存储、组织数据的方式。对于特定的数据结构(比如数组)，有些操作效率很高(读某个数组元素)，有些操作的效率很低(删除某个数组元素)。程序员的目标是为当前的问题选择最优的数据结构。</p><p>八种常用数据结构：</p><a id="more"></a><p>一、数组 分为一维数组和多维数组。 优点：查询某个元素比较方便，时间复杂度为O(1)。 缺点：构建时必须分配一段连续的空间，添加和删除元素时间复杂度为O(n)</p><p>二、链表 也是线性结构，是由一系列节点组成的链，每一个节点保存了数据及指向下一节点的指针。 优点：灵活分配内存空间，在O(1)时间内删除或添加元素。 缺点： 查询第k个元素需要O(k)时间。 三、栈 栈中元素采用先进后出，常用操作包括push()、pop()、isEmpty()、peek()。 对于栈中数据来说，所有操作在栈顶完成，只能查看栈顶部的数据，向栈顶压入数据，也只能从栈顶弹出数据。 四、队列 与栈类似，都采用线性结构存储数据。队列采用先进先出。 对于队列的数据来说，只允许在队尾查看和添加数据，在队头查看和删除数据。双端队列的头尾都能在O(1)的时间内进行数据的查看、添加和删除。 五、图 由多个节点组成，节点间可以互相连接组成一个网络。图分为有向图和无向图。 六、树 分层的数据结构，由节点和连接节点的边组成。树是一种特殊的图，与图的区别在于没有循环。 树的节点可以分为根节点、子节点，子节点又包括非叶子节点和叶子节点。 二叉树和二叉查找树是最常用的树。 七、前缀树 与树类似，处理字符串问题非常高效。 八、哈希表</p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/">面试问题</category>
-      
-      
-      <category domain="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</category>
-      
-      
-      <comments>http://example.com/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%9D%A2%E8%AF%95%E9%A2%98/#disqus_thread</comments>
       
     </item>
     

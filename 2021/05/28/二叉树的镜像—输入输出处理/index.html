@@ -24,18 +24,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="去摘遥不可及的星星">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rui">
-<meta property="og:url" content="http://example.com/archives/2021/05/page/2/index.html">
+  <meta name="description" content="剑指 Offer 27. 二叉树的镜像比较简单，可以采用递归也可以借助栈操作。 思路 在处理输入时，建立一个TreeNode类，并生成树，镜像之后比较层序遍历结果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树的镜像—输入输出处理">
+<meta property="og:url" content="http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="Rui">
-<meta property="og:description" content="去摘遥不可及的星星">
+<meta property="og:description" content="剑指 Offer 27. 二叉树的镜像比较简单，可以采用递归也可以借助栈操作。 思路 在处理输入时，建立一个TreeNode类，并生成树，镜像之后比较层序遍历结果。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-28T04:54:38.000Z">
+<meta property="article:modified_time" content="2021-05-28T04:56:07.612Z">
 <meta property="article:author" content="Rui Wang">
+<meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/archives/2021/05/page/2/">
+<link rel="canonical" href="http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/">
 
 
 <script class="page-configurations">
@@ -43,12 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Rui</title>
+  <title>二叉树的镜像—输入输出处理 | Rui</title>
   
 
 
@@ -237,137 +240,109 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
       
 
       
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二叉树的镜像—输入输出处理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-05-28 12:54:38 / 修改时间：12:56:07" itemprop="dateCreated datePublished" datetime="2021-05-28T12:54:38+08:00">2021-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">LeetCode刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/">剑指 Offer 27. 二叉树的镜像</a><br>比较简单，可以采用递归也可以借助栈操作。</p>
+<p><strong>思路</strong></p>
+<p>在处理输入时，建立一个TreeNode类，并生成树，镜像之后比较层序遍历结果。</p>
+<a id="more"></a>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span></span>&#123;</span><br><span class="line">    TreeNode left;</span><br><span class="line">    TreeNode right;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;<span class="keyword">this</span>.val = val;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main0528</span> </span>&#123;</span><br><span class="line">	 <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//递归 此函数的作用是返回以root为根节点的镜像树</span></span><br><span class="line">        <span class="comment">//对于左右子节点，递归调用此函数，再对结果进行交换</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        TreeNode l = mirrorTree(root.right);</span><br><span class="line">        TreeNode r = mirrorTree(root.left);</span><br><span class="line">        root.left = l;</span><br><span class="line">        root.right = r;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//层序遍历打印树</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bfs</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span> size = queue.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)&#123;</span><br><span class="line">                TreeNode node = queue.poll();</span><br><span class="line">                System.out.print(node.val + <span class="string">&quot; &quot;</span>);</span><br><span class="line">                <span class="keyword">if</span>(node.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    queue.add(node.left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(node.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    queue.add(node.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">build</span><span class="params">()</span></span>&#123;</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(<span class="number">4</span>);</span><br><span class="line">        TreeNode left = <span class="keyword">new</span> TreeNode(<span class="number">2</span>);</span><br><span class="line">        TreeNode left1 = <span class="keyword">new</span> TreeNode(<span class="number">1</span>);</span><br><span class="line">        TreeNode right1 = <span class="keyword">new</span> TreeNode(<span class="number">3</span>);</span><br><span class="line">        TreeNode right = <span class="keyword">new</span> TreeNode(<span class="number">7</span>);</span><br><span class="line">        TreeNode left2 = <span class="keyword">new</span> TreeNode(<span class="number">6</span>);</span><br><span class="line">        TreeNode right2 = <span class="keyword">new</span> TreeNode(<span class="number">9</span>);</span><br><span class="line">        root.left = left;</span><br><span class="line">        root.right = right;</span><br><span class="line">        left.left = left1;</span><br><span class="line">        left.right = right1;</span><br><span class="line">        right.left = left2;</span><br><span class="line">        right.right = right2;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TreeNode root = build();</span><br><span class="line">        bfs(root);</span><br><span class="line">        mirrorTree(root);</span><br><span class="line">        System.out.println();</span><br><span class="line">        bfs(root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+	
+	
+      <div>
         
-        <span class="collection-header">不错! 目前共计 65 篇日志。 继续努力。</span>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
       </div>
+    
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
+          </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-05-23T09:14:45+08:00"
-              content="2021-05-23">
-          05-23
-        </time>
-      </div>
+        
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/23/MySQL%E7%B4%A2%E5%BC%95%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/" itemprop="url">
-            <span itemprop="name">MySQL索引底层实现</span>
-          </a>
-      </div>
-
-      
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/27/%E6%8B%9B%E9%93%B6%E6%8F%90%E5%89%8D%E6%89%B9SQL%E9%A2%98/" rel="prev" title="招银提前批SQL题">
+                  <i class="fa fa-chevron-left"></i> 招银提前批SQL题
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-05-22T19:34:12+08:00"
-              content="2021-05-22">
-          05-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/" itemprop="url">
-            <span itemprop="name">Linux学习—权限、用户、系统指令</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-05-21T09:37:16+08:00"
-              content="2021-05-21">
-          05-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/" itemprop="url">
-            <span itemprop="name">Linux学习—文件备份、压缩、阅读、定位命令</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-05-20T17:12:01+08:00"
-              content="2021-05-20">
-          05-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/20/%E8%A7%A3%E9%94%81%E4%B8%80%E9%81%93%E4%BC%9A%E5%91%98%E9%A2%98%E2%80%94LeetCode1245/" itemprop="url">
-            <span itemprop="name">解锁一道会员题—LeetCode1245</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-05-20T17:08:35+08:00"
-              content="2021-05-20">
-          05-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/20/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%AF%B9%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%9A%84%E6%93%8D%E4%BD%9C/" itemprop="url">
-            <span itemprop="name">Linux学习—概述及对文件目录的操作</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2021/05/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2021/05/">1</a><span class="page-number current">2</span>
-  </nav>
 
 
 
