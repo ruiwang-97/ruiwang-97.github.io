@@ -9,8 +9,31 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Fri, 28 May 2021 04:56:07 GMT</pubDate>
+    <pubDate>Tue, 01 Jun 2021 08:35:19 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>MyBatis防止SQL注入</title>
+      <link>http://example.com/2021/06/01/MyBatis%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5/</link>
+      <guid>http://example.com/2021/06/01/MyBatis%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5/</guid>
+      <pubDate>Tue, 01 Jun 2021 08:29:53 GMT</pubDate>
+      
+      <description>&lt;p&gt;MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。&lt;/p&gt;
+&lt;p&gt;动态 sql 是 mybatis 的主要特性之一，在mybatis中我们可以把参数传到xml文件，由mybatis对sql及其语法进行解析，mybatis支持使用${}和#{}。&lt;/p&gt;
+&lt;p&gt;那么&lt;code&gt;$&amp;#123;&amp;#125;&lt;/code&gt;和&lt;code&gt;#&amp;#123;&amp;#125;&lt;/code&gt;有什么区别呢？&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</p><p>动态 sql 是 mybatis 的主要特性之一，在mybatis中我们可以把参数传到xml文件，由mybatis对sql及其语法进行解析，mybatis支持使用${}和#{}。</p><p>那么<code>$&#123;&#125;</code>和<code>#&#123;&#125;</code>有什么区别呢？</p><a id="more"></a><p>mybatis 在<strong>对 sql 语句进行预编译之前，会对 sql 进行动态解析</strong>。</p><h3 id="一">一、<code>#&#123;&#125;</code></h3><p><code>#&#123;&#125;</code>是sql的参数占位符。<code>#&#123;&#125;</code>相当于JDBC中的PreparedStatement，对于传入的参数，在预处理阶段使用 <code>?</code> 代替，真正查询的时候即在数据库管理系统中（DBMS）才代入参数。</p><p>例如：</p><p>mapper.xml中的sql语句: <code>select * from user where name = #&#123;name&#125;;</code> 解析为： <code>select * from user where name = ?;</code> 一个<code>#&#123;&#125;</code>被解析为一个参数占位符 <code>?</code>，不管传入什么参数，打印的sql都是这样的。</p><p>执行时，直接使用编译好的SQL，替换占位符<code>?</code>就可以了。因为<em>SQL注入只能对编译过程起作用</em>，所以这样的方式就很好地避免了SQL注入的问题。</p><h3 id="二">二、<code>$&#123;&#125;</code></h3><p><code>$&#123;&#125;</code>是properties文件中的变量占位符，仅仅为一个纯粹的String替换。</p><p>上面的例子传递参数为 &quot;admin&quot; 时，sql解析为 <code>select * from user where name = &quot;admin&quot;;</code> 预编译之前的 SQL 语句已经不包含变量 name 了。</p><p>如果传递参数为 user;delet user;--，那么sql动态解析阶段之后，预编译之前的sql将变为 <code>select * from user;delete user; -- where name = ?;</code></p><p><code>--</code>之后的语句将作为注释，不起作用，因此本来的一条查询语句偷偷的包含了一个删除表数据的 SQL！</p><h3 id="三总结">三、总结</h3><p>#{}是经过预编译的，是安全的；${}是未经过预编译的，仅仅是取变量的值，是非安全的，存在SQL注入。</p><h3 id="四sql预编译">四、sql预编译</h3><ol type="1"><li>定义</li></ol><p>sql 预编译指的是数据库驱动在发送 sql 语句和参数给 DBMS 之前对 sql 语句进行编译，这样 DBMS 执行 sql 时，就不需要重新编译。</p><ol start="2" type="1"><li>为什么需要预编译</li></ol><p>JDBC 中使用对象 PreparedStatement 来抽象预编译语句，使用预编译。</p><p>1）预编译阶段可以优化 sql 的执行。</p><p>预编译之后的 sql 多数情况下可以直接执行，DBMS 不需要再次编译，越复杂的sql，编译的复杂度将越大，预编译阶段可以合并多次操作为一个操作。</p><p>2）预编译语句对象可以重复利用。</p><p>把一个 sql 预编译后产生的 PreparedStatement 对象缓存下来，下次对于同一个sql，可以直接使用这个缓存的 PreparedState 对象。</p><p>mybatis 默认情况下，将对所有的 sql 进行预编译。</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/MyBatis/">MyBatis</category>
+      
+      
+      
+      <comments>http://example.com/2021/06/01/MyBatis%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>二叉树的镜像—输入输出处理</title>
@@ -233,31 +256,6 @@
       
       
       <comments>http://example.com/2021/05/20/%E8%A7%A3%E9%94%81%E4%B8%80%E9%81%93%E4%BC%9A%E5%91%98%E9%A2%98%E2%80%94LeetCode1245/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Linux学习—概述及对文件目录的操作</title>
-      <link>http://example.com/2021/05/20/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%AF%B9%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%9A%84%E6%93%8D%E4%BD%9C/</link>
-      <guid>http://example.com/2021/05/20/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%AF%B9%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%9A%84%E6%93%8D%E4%BD%9C/</guid>
-      <pubDate>Thu, 20 May 2021 09:08:35 GMT</pubDate>
-      
-      <description>&lt;h2 id=&quot;一概述&quot;&gt;一、概述&lt;/h2&gt;
-&lt;p&gt;Linux的基本思想： 第一，一切都是文件；第二，每个软件都有确定的用途。其中一条详细讲就是系统的所有都可以归结为一个文件，包括命令、硬件和软件设备、操作系统等。 Linux支持多用户，各个用户之间互不影响。Linux可以使多个程序同时并独立地运行。&lt;/p&gt;
-&lt;h2 id=&quot;二目录结构和vi编辑器&quot;&gt;二、目录结构和vi编辑器&lt;/h2&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="一概述">一、概述</h2><p>Linux的基本思想： 第一，一切都是文件；第二，每个软件都有确定的用途。其中一条详细讲就是系统的所有都可以归结为一个文件，包括命令、硬件和软件设备、操作系统等。 Linux支持多用户，各个用户之间互不影响。Linux可以使多个程序同时并独立地运行。</p><h2 id="二目录结构和vi编辑器">二、目录结构和vi编辑器</h2><a id="more"></a><h3 id="一目录结构">（一）目录结构</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;etc：配置文件存放地</span><br><span class="line">&#x2F;home：用户的目录</span><br><span class="line">&#x2F;bin：可执行文件和常用的Linux命令</span><br><span class="line">&#x2F;root：root账户的home目录</span><br></pre></td></tr></table></figure><h3 id="二vi编辑器">（二）vi编辑器</h3><p>格式：<code>vi file_name</code> 功能：生成新文件或编辑、查看文件</p><p>由命令模式进入编辑模式 1）按 i 键，插入文本 2）按 a 键，追加文本</p><p>由编辑模式进入命令模式 按ETC键</p><p>可执行的操作： 1）:w 保存文件 2）:wq 保存并退出 3）:wq! 保存并强制退出</p><h2 id="三linux命令">三、Linux命令</h2><h3 id="一管理文件和目录">（一）管理文件和目录</h3><h6 id="pwd">1、pwd</h6><p>打印用户当前所处路径 <code>[root@localhost~]# pwd</code></p><h6 id="cd">2、cd</h6><p>改变用户所在目录 <code>[root@localhost~]# cd &lt;目录名&gt;</code> <img src="https://img-blog.csdnimg.cn/2021052016503643.png" alt="在这里插入图片描述" /></p><h6 id="ls">3、ls</h6><p>显示指定目录下的内容 <code>ls [参数] [目录或文件]</code> <img src="https://img-blog.csdnimg.cn/20210520165140826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p><h6 id="cat">4、cat</h6><p>显示文本内容 <code>cat 文本文件名字</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520165308670.png" alt="在这里插入图片描述" /></p><h6 id="touch">5、touch</h6><p>创建文本 <code>touch 文本文件名字</code></p><h6 id="grep">6、grep</h6><p>在一堆文件中查找一个特定的字符串 <code>grep 字符串 文件名</code></p><h6 id="cp">7、cp</h6><p>复制文件，可以目标文件的指定位置 <code>cp 源文件 目标文件</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520165542906.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210520165644469.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p><h3 id="二对文件和目录的操作">（二）对文件和目录的操作</h3><h6 id="mv">1、mv</h6><p>对文件或目录进行移动，还可以进行重命名 <code>mv 源对象 目的对象</code> <img src="https://img-blog.csdnimg.cn/20210520165806502.png" alt="在这里插入图片描述" /> 举例： <img src="https://img-blog.csdnimg.cn/2021052016585269.png" alt="在这里插入图片描述" /><img src="https://img-blog.csdnimg.cn/20210520165904766.png" alt="在这里插入图片描述" /></p><h6 id="mkdir">2、mkdir</h6><p>创建目录 <code>mkdir [目录名1] [目录名2] [目录名3] ...</code> 举例： <img src="https://img-blog.csdnimg.cn/20210520170235301.png" alt="在这里插入图片描述" /></p><p>可以创建嵌套的目录，但只能嵌套一个 <code>mkdir -p aa/bb</code></p><h6 id="rmdir">3、rmdir</h6><p>删除目录 <code>rmdir [参数] [目录名1] [目录名2] ...</code> 可以删除多个嵌套目录 <code>rmdir -p aa/bb/cc</code></p><h6 id="rm">4、rm</h6><p>删除文件 <code>rm [参数] [文件]</code> <img src="https://img-blog.csdnimg.cn/20210520170411209.png" alt="在这里插入图片描述" /> 举例： <img src="https://img-blog.csdnimg.cn/20210520170524601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Linux%E5%AD%A6%E4%B9%A0/">Linux学习</category>
-      
-      
-      <category domain="http://example.com/tags/Linux/">Linux</category>
-      
-      
-      <comments>http://example.com/2021/05/20/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%AF%B9%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%9A%84%E6%93%8D%E4%BD%9C/#disqus_thread</comments>
       
     </item>
     
