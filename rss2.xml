@@ -9,8 +9,29 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Thu, 03 Jun 2021 08:54:49 GMT</pubDate>
+    <pubDate>Sun, 06 Jun 2021 08:57:34 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>旋转数组（0°-360°）</title>
+      <link>http://example.com/2021/06/06/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%EF%BC%880%C2%B0-360%C2%B0%EF%BC%89/</link>
+      <guid>http://example.com/2021/06/06/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%EF%BC%880%C2%B0-360%C2%B0%EF%BC%89/</guid>
+      <pubDate>Sun, 06 Jun 2021 08:55:54 GMT</pubDate>
+      
+      <description>&lt;p&gt;6.6的LeetCode周赛&lt;a href=&quot;https://leetcode-cn.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/&quot;&gt;第一题&lt;/a&gt;为旋转数组，与&lt;a href=&quot;https://leetcode-cn.com/problems/rotate-image/&quot;&gt;48题&lt;/a&gt;有些类似。&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>6.6的LeetCode周赛<a href="https://leetcode-cn.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/">第一题</a>为旋转数组，与<a href="https://leetcode-cn.com/problems/rotate-image/">48题</a>有些类似。</p><a id="more"></a><h4 id="顺时针旋转90">顺时针旋转90°</h4><p>顺时针转90°，可以通过一行来找规律。 <img src="https://img-blog.csdnimg.cn/20210606163658824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 90度旋转后行转为列，第 i 行变为 第 n - 1 - i 列，则<code>mat[i][j] ——&gt; mat[j][n-1-i]</code></p><h4 id="顺时针旋转180">顺时针旋转180°</h4><p>旋转180°后，第 i 行转到了 第 n - 1 - i 行，同时对应的列也发生了变化，第 j 列转到了 第 n - 1 - j 列。 <img src="https://img-blog.csdnimg.cn/20210606164728125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 则<code>mat[i][j] ——&gt; mat[n-1-i][n-1-j]</code></p><h4 id="顺时针旋转360">顺时针旋转360°</h4><p>旋转360°后，第 i 行转到了 第 i 列，同时对应的列也发生了变化，第 j 列转到了 第 n - 1 - j 行。 <img src="https://img-blog.csdnimg.cn/202106061651270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 则<code>mat[i][j] ——&gt; mat[n-1-j][i]</code></p><p>题意中旋转若干次，则可能旋转0°、90°、180°、360°，如果有旋转结果能使mat与target一致，则返回true。</p><h4 id="代码">代码</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">findRotation</span><span class="params">(<span class="keyword">int</span>[][] mat, <span class="keyword">int</span>[][] target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = mat.length;</span><br><span class="line">        <span class="keyword">boolean</span> a = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> b = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> c = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> d = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(mat[j][n - i - <span class="number">1</span>] != target[i][j])&#123;</span><br><span class="line">                    a = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                 <span class="keyword">if</span>(mat[n - i - <span class="number">1</span>][n - j - <span class="number">1</span>] != target[i][j])&#123;</span><br><span class="line">                    b = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                 <span class="keyword">if</span>(mat[n - j - <span class="number">1</span>][i] != target[i][j])&#123;</span><br><span class="line">                    c = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(mat[i][j] != target[i][j])&#123;</span><br><span class="line">                    d = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a || b || c || d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/LeetCode%E5%88%B7%E9%A2%98/">LeetCode刷题</category>
+      
+      
+      
+      <comments>http://example.com/2021/06/06/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%EF%BC%880%C2%B0-360%C2%B0%EF%BC%89/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>try-catch-finally执行顺序</title>
@@ -229,33 +250,6 @@
       
       
       <comments>http://example.com/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Linux学习—文件备份、压缩、阅读、定位命令</title>
-      <link>http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/</link>
-      <guid>http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/</guid>
-      <pubDate>Fri, 21 May 2021 01:37:16 GMT</pubDate>
-      
-      <description>&lt;h3 id=&quot;三文件备份和压缩命令&quot;&gt;（三）、文件备份和压缩命令&lt;/h3&gt;
-&lt;h6 id=&quot;bzip2&quot;&gt;1、bzip2&lt;/h6&gt;
-&lt;p&gt;将源文件file压缩为file.bz2，压缩后无源文件&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;bzip2 文件名称&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;解压：&lt;code&gt;bunzip2 file.bz2&lt;/code&gt;&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h3 id="三文件备份和压缩命令">（三）、文件备份和压缩命令</h3><h6 id="bzip2">1、bzip2</h6><p>将源文件file压缩为file.bz2，压缩后无源文件</p><p><code>bzip2 文件名称</code></p><p>解压：<code>bunzip2 file.bz2</code></p><a id="more"></a><p>压缩文件 file.bz2 解压为 file，解压后无压缩文件</p><p>可以同时压缩多个文件 <img src="https://img-blog.csdnimg.cn/20210521091538915.png" alt="在这里插入图片描述" /></p><h6 id="gzip">2、gzip</h6><p><code>gzip file</code> <code>gunzip file.gz</code> 与bzip2规则一样 <img src="https://img-blog.csdnimg.cn/20210521091815502.png" alt="在这里插入图片描述" /></p><h6 id="tar">3、tar</h6><p>将文件或目录进行打包或解压缩 <code>tar [参数] [打包后的文件名] [需要打包的文件或目录]</code> 参数包括： <img src="https://img-blog.csdnimg.cn/2021052109214663.png" alt="在这里插入图片描述" /> 常用参数： - 打包：cvf - 解压缩：xvf</p><p>打包后的文件名：file.tar</p><p>举例： <img src="https://img-blog.csdnimg.cn/20210521092340345.png" alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20210521092400793.png" alt="在这里插入图片描述" /> 与bzip2、gzip的区别： 打包后不会删除源文件，解压后也不会删除压缩文件</p><h3 id="四文件阅读和定位命令">（四）文件阅读和定位命令</h3><h6 id="head">1、head</h6><p>默认查看文件开头的10行，通过设置可查看前xx行。 <code>head 文件名称</code> <code>head -20 file</code> 查看file的前20行</p><h6 id="tail">2、tail</h6><p>默认查看文件结尾的10行，通过设置可查看结尾的最后xx行。 <code>tail 文件名称</code> <code>tail -20 file</code> 查看file的后20行 有助于查看日志文件的最后10行来阅读重要的系统信息。</p><h6 id="more">3、more</h6><p>按页查看文件内容 <code>more [选项] [文件名称]</code> <img src="https://img-blog.csdnimg.cn/20210521093020319.png" alt="在这里插入图片描述" /> 使用more在文本文件中搜索关键字 <img src="https://img-blog.csdnimg.cn/202105210931181.png" alt="在这里插入图片描述" /> 当一个目录下的文件内容太多，用more来分页显示。与管道 | 结合起来。 <img src="https://img-blog.csdnimg.cn/20210521093212315.png" alt="在这里插入图片描述" /></p><h6 id="which">4、which</h6><p>依序从path环境变量所列的目录中找出命令的位置，并显示完整路径的名称。在找到第一个符合条件的程序文件时，就立刻停止搜索。 <code>which 命令</code></p><h6 id="whereis">5、whereis</h6><p>查找符合条件的文件，定位一些文件在文件系统中的位置。一般用于程序名的搜索。 <img src="https://img-blog.csdnimg.cn/2021052109344331.png" alt="在这里插入图片描述" /></p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Linux%E5%AD%A6%E4%B9%A0/">Linux学习</category>
-      
-      
-      <category domain="http://example.com/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</category>
-      
-      
-      <comments>http://example.com/2021/05/21/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E3%80%81%E5%8E%8B%E7%BC%A9%E3%80%81%E9%98%85%E8%AF%BB%E3%80%81%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4/#disqus_thread</comments>
       
     </item>
     

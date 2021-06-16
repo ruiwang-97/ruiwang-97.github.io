@@ -5743,4 +5743,23 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <tag>异常</tag>
       </tags>
   </entry>
+  <entry>
+    <title>旋转数组（0°-360°）</title>
+    <url>/2021/06/06/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%EF%BC%880%C2%B0-360%C2%B0%EF%BC%89/</url>
+    <content><![CDATA[<p>6.6的LeetCode周赛<a href="https://leetcode-cn.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/">第一题</a>为旋转数组，与<a href="https://leetcode-cn.com/problems/rotate-image/">48题</a>有些类似。</p>
+<a id="more"></a>
+<h4 id="顺时针旋转90">顺时针旋转90°</h4>
+<p>顺时针转90°，可以通过一行来找规律。 <img src="https://img-blog.csdnimg.cn/20210606163658824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 90度旋转后行转为列，第 i 行变为 第 n - 1 - i 列，则<code>mat[i][j] ——&gt; mat[j][n-1-i]</code></p>
+<h4 id="顺时针旋转180">顺时针旋转180°</h4>
+<p>旋转180°后，第 i 行转到了 第 n - 1 - i 行，同时对应的列也发生了变化，第 j 列转到了 第 n - 1 - j 列。 <img src="https://img-blog.csdnimg.cn/20210606164728125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 则<code>mat[i][j] ——&gt; mat[n-1-i][n-1-j]</code></p>
+<h4 id="顺时针旋转360">顺时针旋转360°</h4>
+<p>旋转360°后，第 i 行转到了 第 i 列，同时对应的列也发生了变化，第 j 列转到了 第 n - 1 - j 行。 <img src="https://img-blog.csdnimg.cn/202106061651270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 则<code>mat[i][j] ——&gt; mat[n-1-j][i]</code></p>
+<p>题意中旋转若干次，则可能旋转0°、90°、180°、360°，如果有旋转结果能使mat与target一致，则返回true。</p>
+<h4 id="代码">代码</h4>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">findRotation</span><span class="params">(<span class="keyword">int</span>[][] mat, <span class="keyword">int</span>[][] target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = mat.length;</span><br><span class="line">        <span class="keyword">boolean</span> a = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> b = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> c = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> d = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(mat[j][n - i - <span class="number">1</span>] != target[i][j])&#123;</span><br><span class="line">                    a = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                 <span class="keyword">if</span>(mat[n - i - <span class="number">1</span>][n - j - <span class="number">1</span>] != target[i][j])&#123;</span><br><span class="line">                    b = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                 <span class="keyword">if</span>(mat[n - j - <span class="number">1</span>][i] != target[i][j])&#123;</span><br><span class="line">                    c = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(mat[i][j] != target[i][j])&#123;</span><br><span class="line">                    d = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a || b || c || d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode刷题</category>
+      </categories>
+  </entry>
 </search>
