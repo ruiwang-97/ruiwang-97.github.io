@@ -9,8 +9,33 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Sun, 06 Jun 2021 08:57:34 GMT</pubDate>
+    <pubDate>Wed, 16 Jun 2021 08:11:36 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Java类的初始化顺序（代码测试）</title>
+      <link>http://example.com/2021/06/16/Java%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%88%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%89/</link>
+      <guid>http://example.com/2021/06/16/Java%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%88%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%89/</guid>
+      <pubDate>Wed, 16 Jun 2021 08:09:01 GMT</pubDate>
+      
+      <description>&lt;p&gt;Java类的初始化顺序为&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;静态变量/静态代码块—main()方法—非静态变量/代码块—构造器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;代码验证：&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>Java类的初始化顺序为</p><p><strong>静态变量/静态代码块—main()方法—非静态变量/代码块—构造器</strong></p><p>代码验证：</p><a id="more"></a><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadClassTest</span> </span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">1</span>;<span class="comment">//静态变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> b = <span class="number">2</span>;<span class="comment">//成员变量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;静态变量a=&quot;</span> + a);</span><br><span class="line">        System.out.println(<span class="string">&quot;我在静态代码块里&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我在代码块里&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;成员变量b=&quot;</span> + b);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我在main方法里&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">        <span class="keyword">new</span> LoadClassTest();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoadClassTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我在构造器里&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>测试结果：</p><p><img src="https://img-blog.csdnimg.cn/20210616155820829.png" /></p><p>注：关于成员变量和类变量的区别可以看<a href="https://blog.csdn.net/qq_39181839/article/details/114264566?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162383035716780264094464%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=162383035716780264094464&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_v29-1-114264566.nonecase&amp;utm_term=%E5%8F%98%E9%87%8F&amp;spm=1018.2226.3001.4450">这一篇</a></p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/Java-SE/">Java SE</category>
+      
+      
+      <category domain="http://example.com/tags/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97/">静态代码块</category>
+      
+      
+      <comments>http://example.com/2021/06/16/Java%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%88%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%89/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>旋转数组（0°-360°）</title>
@@ -226,30 +251,6 @@
       
       
       <comments>http://example.com/2021/05/23/MySQL%E7%B4%A2%E5%BC%95%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Linux学习—权限、用户、系统指令</title>
-      <link>http://example.com/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/</link>
-      <guid>http://example.com/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/</guid>
-      <pubDate>Sat, 22 May 2021 11:34:12 GMT</pubDate>
-      
-      <description>&lt;h3 id=&quot;五管理使用者和设立权限的命令&quot;&gt;（五）管理使用者和设立权限的命令&lt;/h3&gt;
-&lt;p&gt;执行命令&lt;code&gt;ls -l&lt;/code&gt; 的结果如下： &lt;img src=&quot;https://img-blog.csdnimg.cn/20210522092951254.png&quot; alt=&quot;在这里插入图片描述&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;第一列 10位代表文件类型和权限 第一位 如果是‘d’，代表目录；如果是‘-’，代表文件&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h3 id="五管理使用者和设立权限的命令">（五）管理使用者和设立权限的命令</h3><p>执行命令<code>ls -l</code> 的结果如下： <img src="https://img-blog.csdnimg.cn/20210522092951254.png" alt="在这里插入图片描述" /></p><ul><li><p>第一列 10位代表文件类型和权限 第一位 如果是‘d’，代表目录；如果是‘-’，代表文件</p><a id="more"></a><p>后9位每三个一组，第一组表示文件主人的权限；第二组表示文件主人同组成员的权限；第三组表示其他人的权限</p></li><li><p>第三列 代表文件拥有者</p></li><li><p>第四列 代表所属群组</p></li></ul><h6 id="chmod命令">1、chmod命令</h6><ul><li>改变许可权限 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">x—文件可以被执行</span><br><span class="line">w—文件可以被写入</span><br><span class="line">r—文件可以被读取</span><br></pre></td></tr></table></figure></li><li>设定文件权限 <code>chmod 文件使用者(u/g/o) 增减(+/-) 权限(x/w/r) 文件</code> u—拥有文件的用户 g—用户所在群组 o—其他人 a—所有 举例： <img src="https://img-blog.csdnimg.cn/20210522095356850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 还可以用数字代替权限，4—w，2—r，1—x 下面两个命令等价： <code>chmod 751 a</code> <code>chmod u=rwx,g=rx,o=x a</code></li></ul><h6 id="useradd与userdel">2、useradd与userdel</h6><p>添加用户、删除用户 <code>useradd [用户名]</code> <code>userdel [参数] [用户名]</code> 参数：-r，删除用户及相关目录，彻底删除</p><h3 id="六用户设置命令">（六）用户设置命令</h3><h6 id="chgrp">1、chgrp</h6><p>用于变更文件或目录的所属群组 <code>chgrp 群组名称 文件名称</code> <img src="https://img-blog.csdnimg.cn/20210522192047136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p><h6 id="chown">2、chown</h6><p>将文件的拥有者改为指定的用户或组。 <img src="https://img-blog.csdnimg.cn/20210522192254672.png" alt="在这里插入图片描述" /> 举例： <img src="https://img-blog.csdnimg.cn/20210522192315372.png" alt="在这里插入图片描述" /></p><h6 id="su">3、su</h6><p>修改用户。</p><p><code>su 用户名</code> <img src="https://img-blog.csdnimg.cn/20210522192432941.png" alt="在这里插入图片描述" /></p><h3 id="七系统查看指令">（七）系统查看指令</h3><h6 id="exit">1、exit</h6><p>退出。文本模式下使用ctrl+D。</p><h6 id="reboot">2、reboot</h6><p>重新启动。 <img src="https://img-blog.csdnimg.cn/2021052219261529.png" alt="在这里插入图片描述" /></p><h6 id="halt和shutdown">3、halt和shutdown</h6><p>关机。 <img src="https://img-blog.csdnimg.cn/20210522192653797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p><h6 id="ps">4、ps</h6><p>查看在系统中哪些程序在执行及其执行的情况。（静态查看） <img src="https://img-blog.csdnimg.cn/20210522192806192.png" alt="在这里插入图片描述" /></p><h6 id="top">5、top</h6><p>查看目前程序的执行情景和内存使用。（动态查看） 几秒钟就更新一次系统状态，方便跟踪。</p><h6 id="kill">6、kill</h6><p>终止一个正在执行中的进程。 <code>kill 进程号</code></p><h6 id="date在这里插入图片描述">7.date<img src="https://img-blog.csdnimg.cn/20210522193059760.png" alt="在这里插入图片描述" /></h6><h6 id="cal">8.cal</h6><figure><img src="https://img-blog.csdnimg.cn/20210522193126666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption></figure><h6 id="df">9.df</h6><p>检查硬盘的使用量</p><h6 id="du">10.du</h6><p>显示文件目录的大小 <code>du 参数 文件名</code></p><h3 id="九网络操作命令">（九）网络操作命令</h3><figure><img src="https://img-blog.csdnimg.cn/20210522193311519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption></figure>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Linux%E5%AD%A6%E4%B9%A0/">Linux学习</category>
-      
-      
-      
-      <comments>http://example.com/2021/05/22/Linux%E5%AD%A6%E4%B9%A0%E2%80%94%E6%9D%83%E9%99%90%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/#disqus_thread</comments>
       
     </item>
     

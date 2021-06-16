@@ -1245,7 +1245,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>JavaSE</category>
+        <category>Java SE</category>
       </categories>
       <tags>
         <tag>二维数组</tag>
@@ -1390,7 +1390,7 @@
 <p>（5）枚举：线程安全</p>
 ]]></content>
       <categories>
-        <category>JavaSE</category>
+        <category>Java SE</category>
       </categories>
       <tags>
         <tag>Java设计模式</tag>
@@ -5761,5 +5761,24 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
       <categories>
         <category>LeetCode刷题</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Java类的初始化顺序（代码测试）</title>
+    <url>/2021/06/16/Java%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%88%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%89/</url>
+    <content><![CDATA[<p>Java类的初始化顺序为</p>
+<p><strong>静态变量/静态代码块—main()方法—非静态变量/代码块—构造器</strong></p>
+<p>代码验证：</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadClassTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">1</span>;<span class="comment">//静态变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> b = <span class="number">2</span>;<span class="comment">//成员变量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;静态变量a=&quot;</span> + a);</span><br><span class="line">        System.out.println(<span class="string">&quot;我在静态代码块里&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我在代码块里&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;成员变量b=&quot;</span> + b);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我在main方法里&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">        <span class="keyword">new</span> LoadClassTest();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoadClassTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我在构造器里&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试结果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210616155820829.png" /></p>
+<p>注：关于成员变量和类变量的区别可以看<a href="https://blog.csdn.net/qq_39181839/article/details/114264566?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162383035716780264094464%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=162383035716780264094464&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_v29-1-114264566.nonecase&amp;utm_term=%E5%8F%98%E9%87%8F&amp;spm=1018.2226.3001.4450">这一篇</a></p>
+]]></content>
+      <categories>
+        <category>Java SE</category>
+      </categories>
+      <tags>
+        <tag>静态代码块</tag>
+      </tags>
   </entry>
 </search>
