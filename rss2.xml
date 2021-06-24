@@ -9,8 +9,31 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Tue, 22 Jun 2021 07:21:22 GMT</pubDate>
+    <pubDate>Wed, 23 Jun 2021 14:34:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>微信红包怎么测试</title>
+      <link>http://example.com/2021/06/23/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%80%8E%E4%B9%88%E6%B5%8B%E8%AF%95/</link>
+      <guid>http://example.com/2021/06/23/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%80%8E%E4%B9%88%E6%B5%8B%E8%AF%95/</guid>
+      <pubDate>Wed, 23 Jun 2021 14:29:58 GMT</pubDate>
+      
+      <description>&lt;p&gt;分为功能测试、性能测试、兼容性测试、界面测试、安全测试、中断测试几大方面。&lt;/p&gt;
+&lt;h2 id=&quot;功能测试&quot;&gt;功能测试&lt;/h2&gt;
+&lt;h4 id=&quot;发送给单个好友&quot;&gt;1）发送给单个好友&lt;/h4&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>分为功能测试、性能测试、兼容性测试、界面测试、安全测试、中断测试几大方面。</p><h2 id="功能测试">功能测试</h2><h4 id="发送给单个好友">1）发送给单个好友</h4><a id="more"></a><p>①发送金额，留言，表情</p><blockquote><p>正确的金额+无留言+无表情 　</p><p>错误的金额+无留言+无表情 　</p><p>正确的金额+有留言+无表情 　</p><p>错误的金额+有留言+无表情</p><p>正确的金额+无留言+有表情 　</p><p>错误的金额+无留言+有表情 　</p><p>正确的金额+有留言+有表情 　</p><p>错误的金额+有留言+有表情</p></blockquote><p>②金额为0.01~200，需要测试0，0.01，1，199.99，200，200.01这些边界值。</p><p>③留言是否可以输入数字，汉字，英文，特殊字符或它们的组合</p><p>④输入超长文本是是否有限制或提示</p><p>⑤添加表情时选择收藏的表情（动图/静图）</p><p>⑥是否可以录制表情</p><p>⑦表情添加后是否可删除</p><p><strong>付款</strong></p><p>①可以使用零钱/银行卡/添加新卡，需要考虑</p><p>金额＞零钱/银行卡余额，金额＜零钱/银行卡余额，金额=零钱/银行卡余额 三种情况</p><p>②使用指纹确认付款</p><p>③使用密码确认付款</p><p>④发送成功后，账户减少对应金额，退回原界面</p><p>⑤24小时后若没有领取，将退回原账户，此时原付款方式增加发出的金额</p><p><strong>好友</strong></p><p>① 金额、留言、表情可以正常显示</p><p>② 点击领取红包，零钱中增加相应的金额，再次点击只能看到信息不能领取</p><p>③ 24小时之内没有领取的红包将无法领取，显示已过期，并无法查看到金额</p><h4 id="发送群红包">2）发送群红包</h4><p>（部分相似）</p><p>①选择为普通红包，每个人领取的金额相同；拼手气红包，每个人收到的金额随机</p><p>②红包个数（1-100）：0，1，2，大于群成员人数，小于群成员人数，等于群成员人数，99，100，101，小数，中文、英文、特殊字符、表情或者他们的组合</p><p>③群里的人都可以抢一次，且最多一次</p><h2 id="性能测试">性能测试</h2><p>①打开和发送红包的响应时间不能超过2s，高并发场景下不能超过3s</p><p>②耗电量</p><p>③占内存大小</p><p>④消耗流量</p><h2 id="兼容性测试">兼容性测试</h2><p>①苹果手机和安卓手机</p><p>②ios不同版本</p><p>③安卓不同机型</p><p>④微信电脑端可以抢红包</p><h2 id="界面测试">界面测试</h2><p>①设计风格是否一致</p><p>②排版是否合理</p><p>③界面没有错别字</p><p>④易学、易理解</p><h2 id="中断测试">中断测试</h2><p>前后台切换，网络异常，低电量，断电，来电，短信等</p><h2 id="安全测试">安全测试</h2><p>①给好友发红包，是否会显示异地登录提醒</p><p>②红包发送失败，余额和银行卡的钱是否退回</p><p>③红包发送成功，是否会收到微信支付的通知</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/">测试用例设计</category>
+      
+      
+      
+      <comments>http://example.com/2021/06/23/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%80%8E%E4%B9%88%E6%B5%8B%E8%AF%95/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Java中的锁机制—synchronized关键字</title>
@@ -226,33 +249,6 @@
       
       
       <comments>http://example.com/2021/05/24/MySQL-MVCC%E3%80%81%E5%BD%93%E5%89%8D%E8%AF%BB%E3%80%81%E5%BF%AB%E7%85%A7%E8%AF%BB/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>MySQL存储引擎及其索引实现</title>
-      <link>http://example.com/2021/05/23/MySQL%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E5%8F%8A%E5%85%B6%E7%B4%A2%E5%BC%95%E5%AE%9E%E7%8E%B0/</link>
-      <guid>http://example.com/2021/05/23/MySQL%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E5%8F%8A%E5%85%B6%E7%B4%A2%E5%BC%95%E5%AE%9E%E7%8E%B0/</guid>
-      <pubDate>Sun, 23 May 2021 07:17:15 GMT</pubDate>
-      
-      <description>&lt;p&gt;存储引擎指&lt;strong&gt;表&lt;/strong&gt;的类型及表在计算机上的存储方式。&lt;/p&gt;
-&lt;p&gt;主要的存储引擎有InnoDB、MyISAM、Memory等。&lt;/p&gt;
-&lt;h4 id=&quot;myiasm&quot;&gt;MyIASM&lt;/h4&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>存储引擎指<strong>表</strong>的类型及表在计算机上的存储方式。</p><p>主要的存储引擎有InnoDB、MyISAM、Memory等。</p><h4 id="myiasm">MyIASM</h4><a id="more"></a><h5 id="使用这个存储引擎每个myisam在磁盘上存储三个文件">1、使用这个存储引擎，每个MyISAM在磁盘上存储三个文件。</h5><p>• frm文件：存储表的定义数据</p><p>• MYD文件：存放<strong>表具体记录的数据</strong></p><p>• MYI文件：存储<strong>索引</strong></p><h5 id="特点">2、特点：</h5><ul><li><p>不支持事务，每次查询具有原子性</p></li><li><p>支持表级锁，每次操作对整个表加锁</p></li><li><p>采用<strong>非聚簇索引</strong>，索引文件与数据文件分离。<strong>索引文件的数据域存储指向数据记录的地址</strong>。辅助索引与主键索引基本一致，只是主索引要求key是唯一的，<strong>辅索引的key不用保证唯一性</strong>。</p></li></ul><h5 id="主键索引与辅助索引">3、主键索引与辅助索引</h5><h6 id="主索引">1）主索引</h6><p>先加载MYI文件，其中存放索引，找到对应地址之后，将MYD文件加载到内存，根据刚才得到的地址找到对应行数据，返回给用户。 <img src="https://img-blog.csdnimg.cn/2021052311210883.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 上图是MyISAM主键索引，设表一共有三列，假设我们以Col1为主键。</p><h6 id="辅索引">2）辅索引</h6><p>如果在Col2上建立一个辅助索引，如图 <img src="https://img-blog.csdnimg.cn/2021052315003242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 同样data域存放数据记录的地址，但辅助索引的key可以重复。</p><h5 id="总结">总结</h5><p>因此，MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。 MyISAM的索引方式也叫做“非聚集”的，之所以这么称呼是为了与InnoDB的聚集索引区分。</p><h4 id="memory">Memory</h4><p>将数据存在内存 - 表级锁</p><ul><li><p>由于数据存在内存中，一旦服务器出现故障，数据都会丢失</p></li><li><p>默认使用hash索引</p></li></ul><h4 id="innodb">InnoDB</h4><p>默认的数据库存储引擎。</p><h5 id="特点-1">1、特点：</h5><ul><li><p>支持事务。默认事务隔离级别为可重复读（RR），通过MVCC实现。</p></li><li><p>支持行级锁，可以支持更高的并发。</p></li><li><p>支持外键约束；外键约束降低了表的查询速度，但增加了表之间的耦合度。</p></li><li><p>存在缓冲管理。通过缓冲池，将索引和数据全部缓存起来，加快查询速度。</p></li><li><p>采用聚簇索引（索引的数据域存储数据文件本身）</p></li></ul><h5 id="主键索引与辅助索引-1">2、主键索引与辅助索引</h5><p>InnoDB也使用B+树作为索引结构，但区别在于<strong>InnoDB的数据文件本身就是索引文件，InnoDB辅助索引的data域存储相应记录主键的值而不是地址。</strong></p><h6 id="主索引-1">1）主索引</h6><p>InnoDB的表数据文件本身就是按B+树组织的一个数据结构，<strong>树节点data域保存完整的数据记录</strong>。这个<strong>索引的key是数据表的主键</strong>，因此InnoDB表数据文件本身就是主索引。 <img src="https://img-blog.csdnimg.cn/20210523150921401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p><h6 id="辅索引-1">2）辅索引</h6><p>InnoDB的<strong>所有辅助索引都引用主键作为data域</strong>。例如，下图为定义在Col3上的一个辅助索引：</p><p><img src="https://img-blog.csdnimg.cn/20210523151044146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 辅助索引搜索需要检索两遍索引：首先检索<strong>辅助索引获得主键</strong>，然后用主键到<strong>主索引中检索获得数据记录</strong>。</p><h4 id="总结-1">总结</h4><p>InnoDB索引和MyISAM索引的区别：</p><ul><li><p>主索引的区别：InnoDB的数据文件本身就是索引文件。而MyISAM的索引和数据是分开的。</p></li><li><p>辅助索引的区别：InnoDB的辅助索引data域存储相应记录主键的值而不是地址。而MyISAM的辅助索引和主索引没有多大区别。</p></li></ul>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/MySQL/">MySQL</category>
-      
-      
-      <category domain="http://example.com/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">存储引擎</category>
-      
-      <category domain="http://example.com/tags/%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95/">聚簇索引</category>
-      
-      
-      <comments>http://example.com/2021/05/23/MySQL%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E5%8F%8A%E5%85%B6%E7%B4%A2%E5%BC%95%E5%AE%9E%E7%8E%B0/#disqus_thread</comments>
       
     </item>
     
