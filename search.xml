@@ -5938,4 +5938,48 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <tag>双指针</tag>
       </tags>
   </entry>
+  <entry>
+    <title>登录测试用例</title>
+    <url>/2021/06/24/%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</url>
+    <content><![CDATA[<h2 id="需求">需求</h2>
+<p>有一个登陆页面， 上面有2个textbox, 一个提交按钮。</p>
+<h2 id="功能测试">功能测试</h2>
+<a id="more"></a>
+<ol type="1">
+<li>输入正确的用户名和密码，点击提交按钮，验证是否能正确登录。</li>
+<li>输入错误的用户名或密码，验证登录失败，并且会有相应提示。</li>
+<li>登录成功后会跳转到正确页面</li>
+<li>用户名和密码是否含有特殊字符</li>
+<li>用户名和密码长度是否符合要求</li>
+<li>输入用户名和密码后能否通过点击回车键跳转</li>
+</ol>
+<h2 id="界面测试">界面测试</h2>
+<ol type="1">
+<li>布局是否合理，两个输入框和一个按钮是否对齐</li>
+<li>两个输入框及提交按钮的高度和宽度是否符合要求</li>
+<li>图片、文字是否显示正确 ## 性能测试</li>
+<li>输入网址打开登录页面需要几秒</li>
+<li>登录成功后跳转需要几秒</li>
+<li>支持多少个用户登录 ## 兼容性测试</li>
+<li>在不同浏览器下功能是否正常</li>
+<li>在不同平台（Windows、Mac）下功能是否正常</li>
+<li>在安卓和ios系统是否正常</li>
+</ol>
+<h2 id="安全性测试">安全性测试</h2>
+<ol type="1">
+<li>登录成功生成的Cookie是否是httponly</li>
+</ol>
+<blockquote>
+<p>如果在cookie中设置了HttpOnly属性，那么通过js脚本将无法读取到cookie信息，这样能有效的防止XSS攻击。XSS攻击通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。</p>
+</blockquote>
+<ol start="2" type="1">
+<li><p>用户名和密码输入防止sql注入</p></li>
+<li><p>错误登陆的次数限制（防止暴力破解）</p></li>
+<li><p>密码是否以星号显示</p></li>
+</ol>
+]]></content>
+      <categories>
+        <category>测试用例设计</category>
+      </categories>
+  </entry>
 </search>

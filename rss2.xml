@@ -9,8 +9,31 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Thu, 24 Jun 2021 07:05:26 GMT</pubDate>
+    <pubDate>Thu, 24 Jun 2021 14:21:09 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>登录测试用例</title>
+      <link>http://example.com/2021/06/24/%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</link>
+      <guid>http://example.com/2021/06/24/%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</guid>
+      <pubDate>Thu, 24 Jun 2021 14:06:12 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;需求&quot;&gt;需求&lt;/h2&gt;
+&lt;p&gt;有一个登陆页面， 上面有2个textbox, 一个提交按钮。&lt;/p&gt;
+&lt;h2 id=&quot;功能测试&quot;&gt;功能测试&lt;/h2&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="需求">需求</h2><p>有一个登陆页面， 上面有2个textbox, 一个提交按钮。</p><h2 id="功能测试">功能测试</h2><a id="more"></a><ol type="1"><li>输入正确的用户名和密码，点击提交按钮，验证是否能正确登录。</li><li>输入错误的用户名或密码，验证登录失败，并且会有相应提示。</li><li>登录成功后会跳转到正确页面</li><li>用户名和密码是否含有特殊字符</li><li>用户名和密码长度是否符合要求</li><li>输入用户名和密码后能否通过点击回车键跳转</li></ol><h2 id="界面测试">界面测试</h2><ol type="1"><li>布局是否合理，两个输入框和一个按钮是否对齐</li><li>两个输入框及提交按钮的高度和宽度是否符合要求</li><li>图片、文字是否显示正确 ## 性能测试</li><li>输入网址打开登录页面需要几秒</li><li>登录成功后跳转需要几秒</li><li>支持多少个用户登录 ## 兼容性测试</li><li>在不同浏览器下功能是否正常</li><li>在不同平台（Windows、Mac）下功能是否正常</li><li>在安卓和ios系统是否正常</li></ol><h2 id="安全性测试">安全性测试</h2><ol type="1"><li>登录成功生成的Cookie是否是httponly</li></ol><blockquote><p>如果在cookie中设置了HttpOnly属性，那么通过js脚本将无法读取到cookie信息，这样能有效的防止XSS攻击。XSS攻击通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。</p></blockquote><ol start="2" type="1"><li><p>用户名和密码输入防止sql注入</p></li><li><p>错误登陆的次数限制（防止暴力破解）</p></li><li><p>密码是否以星号显示</p></li></ol>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/">测试用例设计</category>
+      
+      
+      
+      <comments>http://example.com/2021/06/24/%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>LeetCode刷题-重叠区间问题</title>
@@ -224,31 +247,6 @@
       
       
       <comments>http://example.com/2021/05/27/%E6%8B%9B%E9%93%B6%E6%8F%90%E5%89%8D%E6%89%B9SQL%E9%A2%98/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Java多态之左右</title>
-      <link>http://example.com/2021/05/26/Java%E5%A4%9A%E6%80%81%E4%B9%8B%E5%B7%A6%E5%8F%B3/</link>
-      <guid>http://example.com/2021/05/26/Java%E5%A4%9A%E6%80%81%E4%B9%8B%E5%B7%A6%E5%8F%B3/</guid>
-      <pubDate>Wed, 26 May 2021 07:44:30 GMT</pubDate>
-      
-      <description>&lt;p&gt;学习Java的人都很熟悉多态。&lt;/p&gt;
-&lt;p&gt;多态即事物的多种状态，比如人，分男人女人，也可以分学生老师等。&lt;/p&gt;
-&lt;p&gt;多态的实现：&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>学习Java的人都很熟悉多态。</p><p>多态即事物的多种状态，比如人，分男人女人，也可以分学生老师等。</p><p>多态的实现：</p><a id="more"></a><ul><li>继承（类 / 实现接口）</li><li>重写</li><li>向上转型 所谓向上转型即由子到父。父类引用指向子类对象。<code>Person p = new Student();</code></li></ul><p>那么Person类和Student类有自己的变量和方法，如果子类有重写的方法，或子类没有父类的方法，或父类的方法私有，在编译和运行时都会出现什么情况呢？</p><p>以下面代码为例： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person p = <span class="keyword">new</span> Student();</span><br><span class="line">        p.age = <span class="number">14</span>;</span><br><span class="line">        <span class="comment">//p.stuNumber=1;编译不通过</span></span><br><span class="line">        p.eat();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//p.study();编译不通过</span></span><br><span class="line">        p.talk();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//p.test();//编译不通过</span></span><br><span class="line">        p.test2();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> stuNumber;<span class="comment">//子类有的属性，父类没有</span></span><br><span class="line">    <span class="keyword">int</span> gender;<span class="comment">//0-男</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生也要吃饭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生要学习&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">talk</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生也要讲话&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> gender;<span class="comment">//0-男</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;人要吃饭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">talk</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;人要讲话&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;私有方法不能被重写&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我只有父类有哦！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 运行之后的结果：</p><p><img src="https://img-blog.csdnimg.cn/20210526153641647.png" /></p><p>可以总结规律：</p><ol type="1"><li><p>对于成员变量：编译看左边，运行看左边 也就是如果父类中没有子类的变量，编译不通过；子类中也有父类的变量，运行父类的。</p></li><li><p>对于成员方法：编译看左边，运行看右边 父类中没有子类的方法，编译不通过；子类重写了父类的成员方法，运行子类的。</p></li><li><p>对于静态方法：编译看左边，运行看左边 子类重写了父类的静态方法，但还是运行父类的。</p></li></ol><p>再来个例子思考一下： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main0520</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        A a = <span class="keyword">new</span> B();</span><br><span class="line">        a.show();</span><br><span class="line">        B b = <span class="keyword">new</span> C();</span><br><span class="line">        b.show();</span><br><span class="line">        <span class="comment">//成员方法编译看左运行看右</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        show2();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;爱&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.show();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;你&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 结果是什么呢？</p><p>点个赞再往下拉吧~</p><p>· · ·</p><p>· · ·</p><p>· · ·</p><p>· · ·</p><p>· · · <img src="https://img-blog.csdnimg.cn/20210526154215304.png" alt="在这里插入图片描述" /></p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Java-SE/">Java SE</category>
-      
-      
-      <category domain="http://example.com/tags/%E5%A4%9A%E6%80%81/">多态</category>
-      
-      
-      <comments>http://example.com/2021/05/26/Java%E5%A4%9A%E6%80%81%E4%B9%8B%E5%B7%A6%E5%8F%B3/#disqus_thread</comments>
       
     </item>
     
