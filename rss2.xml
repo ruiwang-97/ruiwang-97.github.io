@@ -9,8 +9,32 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Fri, 25 Jun 2021 07:48:47 GMT</pubDate>
+    <pubDate>Fri, 25 Jun 2021 13:38:21 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>微信评论测试用例</title>
+      <link>http://example.com/2021/06/25/%E5%BE%AE%E4%BF%A1%E8%AF%84%E8%AE%BA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</link>
+      <guid>http://example.com/2021/06/25/%E5%BE%AE%E4%BF%A1%E8%AF%84%E8%AE%BA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</guid>
+      <pubDate>Fri, 25 Jun 2021 13:35:50 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;功能测试&quot;&gt;功能测试&lt;/h2&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;评论是否能够成功&lt;/li&gt;
+&lt;/ol&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="功能测试">功能测试</h2><ol type="1"><li>评论是否能够成功</li></ol><a id="more"></a><ol type="1"><li><p>评论类型：文字、表情和图片</p></li><li><p>文字的长度限制，表情和图片的大小限制</p></li><li><p>是否支持复制粘贴评论</p></li><li><p>能否删除评论</p></li><li><p>评论之后共同好友是否可以看到</p></li><li><p>是否可以看到其他共同好友的评论</p></li><li><p>共同好友的评论显示备注</p></li><li><p>是否可以回复其他共同好友的评论</p></li><li><p>其他共同好友评论后是否有提醒</p></li><li><p>和其他共同好友评论显示的顺序是否按照时间顺序</p></li><li><p>评论提醒是否正常显示头像昵称</p></li><li><p>退出之后，评论是否还存在</p></li></ol><h2 id="性能测试">性能测试</h2><ol type="1"><li><p>评论之后多久能显示</p></li><li><p>共同好友评论之后多久能提醒</p></li><li><p>多用户评论的反应时间</p></li><li><p>评论时打电话、收到短信能否评论成功</p></li></ol><h2 id="界面测试">界面测试</h2><ol type="1"><li><p>评论是否正常显示头像昵称</p></li><li><p>全部评论是否都正常显示</p></li></ol><h2 id="兼容性测试">兼容性测试</h2><ol type="1"><li>电脑端能否评论</li><li>安卓、苹果手机不同系统下功能是否正常</li></ol>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/">测试用例设计</category>
+      
+      
+      
+      <comments>http://example.com/2021/06/25/%E5%BE%AE%E4%BF%A1%E8%AF%84%E8%AE%BA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>【LeetCode刷题】旋转数组</title>
@@ -221,31 +245,6 @@
       
       
       <comments>http://example.com/2021/06/01/MyBatis%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>二叉树的镜像—输入输出处理</title>
-      <link>http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/</link>
-      <guid>http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/</guid>
-      <pubDate>Fri, 28 May 2021 04:54:38 GMT</pubDate>
-      
-      <description>&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/&quot;&gt;剑指 Offer 27. 二叉树的镜像&lt;/a&gt;&lt;br&gt;比较简单，可以采用递归也可以借助栈操作。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在处理输入时，建立一个TreeNode类，并生成树，镜像之后比较层序遍历结果。&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p><a href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/">剑指 Offer 27. 二叉树的镜像</a><br>比较简单，可以采用递归也可以借助栈操作。</p><p><strong>思路</strong></p><p>在处理输入时，建立一个TreeNode类，并生成树，镜像之后比较层序遍历结果。</p><a id="more"></a><p><strong>代码</strong></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span></span>&#123;</span><br><span class="line">    TreeNode left;</span><br><span class="line">    TreeNode right;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;<span class="keyword">this</span>.val = val;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main0528</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//递归 此函数的作用是返回以root为根节点的镜像树</span></span><br><span class="line">        <span class="comment">//对于左右子节点，递归调用此函数，再对结果进行交换</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        TreeNode l = mirrorTree(root.right);</span><br><span class="line">        TreeNode r = mirrorTree(root.left);</span><br><span class="line">        root.left = l;</span><br><span class="line">        root.right = r;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//层序遍历打印树</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bfs</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span> size = queue.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)&#123;</span><br><span class="line">                TreeNode node = queue.poll();</span><br><span class="line">                System.out.print(node.val + <span class="string">&quot; &quot;</span>);</span><br><span class="line">                <span class="keyword">if</span>(node.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    queue.add(node.left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(node.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    queue.add(node.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">build</span><span class="params">()</span></span>&#123;</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(<span class="number">4</span>);</span><br><span class="line">        TreeNode left = <span class="keyword">new</span> TreeNode(<span class="number">2</span>);</span><br><span class="line">        TreeNode left1 = <span class="keyword">new</span> TreeNode(<span class="number">1</span>);</span><br><span class="line">        TreeNode right1 = <span class="keyword">new</span> TreeNode(<span class="number">3</span>);</span><br><span class="line">        TreeNode right = <span class="keyword">new</span> TreeNode(<span class="number">7</span>);</span><br><span class="line">        TreeNode left2 = <span class="keyword">new</span> TreeNode(<span class="number">6</span>);</span><br><span class="line">        TreeNode right2 = <span class="keyword">new</span> TreeNode(<span class="number">9</span>);</span><br><span class="line">        root.left = left;</span><br><span class="line">        root.right = right;</span><br><span class="line">        left.left = left1;</span><br><span class="line">        left.right = right1;</span><br><span class="line">        right.left = left2;</span><br><span class="line">        right.right = right2;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TreeNode root = build();</span><br><span class="line">        bfs(root);</span><br><span class="line">        mirrorTree(root);</span><br><span class="line">        System.out.println();</span><br><span class="line">        bfs(root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/LeetCode%E5%88%B7%E9%A2%98/">LeetCode刷题</category>
-      
-      
-      <category domain="http://example.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</category>
-      
-      
-      <comments>http://example.com/2021/05/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86/#disqus_thread</comments>
       
     </item>
     
