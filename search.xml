@@ -6078,4 +6078,57 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <category>测试用例设计</category>
       </categories>
   </entry>
+  <entry>
+    <title>自动售货机测试用例</title>
+    <url>/2021/06/26/%E8%87%AA%E5%8A%A8%E5%94%AE%E8%B4%A7%E6%9C%BA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</url>
+    <content><![CDATA[<h2 id="功能测试">功能测试</h2>
+<p>​ 1. 货物能否正常放置</p>
+<a id="more"></a>
+<ol start="2" type="1">
+<li><p>点击货物选择按钮是否能进入支付页面</p></li>
+<li><p>是否支持选择多个货物</p></li>
+</ol>
+<p>支付</p>
+<ol start="4" type="1">
+<li><p>是否支持硬币、纸币、扫码支付</p></li>
+<li><p>是否支持找零</p></li>
+<li><p>货物是否能正常取出</p></li>
+<li><p>出现故障时能否自动退款</p></li>
+</ol>
+<p>屏幕显示</p>
+<ol start="8" type="1">
+<li>屏幕是否正常播放广告</li>
+<li>屏幕是否显示二维码</li>
+</ol>
+<h2 id="性能测试">性能测试</h2>
+<ol type="1">
+<li><p>选择商品后跳转到支付页面的时间</p></li>
+<li><p>支付成功后商品掉落时间</p></li>
+<li><p>是否支持多个用户同时扫码支付</p></li>
+<li><p>能否制热</p></li>
+<li><p>能否制冷</p></li>
+</ol>
+<h2 id="界面测试">界面测试</h2>
+<ol type="1">
+<li><p>图案是否鲜明亮丽</p></li>
+<li><p>投币口是否明显</p></li>
+<li><p>取物口是否明显</p></li>
+</ol>
+<h2 id="安全性测试">安全性测试</h2>
+<ol type="1">
+<li><p>是否容易发生漏电</p></li>
+<li><p>受到外力撞击是否容易倾倒</p></li>
+<li><p>玻璃是否易被敲碎</p></li>
+</ol>
+<h2 id="兼容性测试">兼容性测试</h2>
+<ol type="1">
+<li>是否能在室外工作</li>
+<li>是否能在高温下工作</li>
+<li>是否能在低温下工作</li>
+</ol>
+]]></content>
+      <categories>
+        <category>测试用例设计</category>
+      </categories>
+  </entry>
 </search>

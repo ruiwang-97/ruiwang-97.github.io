@@ -9,8 +9,30 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Fri, 25 Jun 2021 13:38:21 GMT</pubDate>
+    <pubDate>Sat, 26 Jun 2021 13:34:06 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>自动售货机测试用例</title>
+      <link>http://example.com/2021/06/26/%E8%87%AA%E5%8A%A8%E5%94%AE%E8%B4%A7%E6%9C%BA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</link>
+      <guid>http://example.com/2021/06/26/%E8%87%AA%E5%8A%A8%E5%94%AE%E8%B4%A7%E6%9C%BA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</guid>
+      <pubDate>Sat, 26 Jun 2021 13:31:29 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;功能测试&quot;&gt;功能测试&lt;/h2&gt;
+&lt;p&gt;​ 1. 货物能否正常放置&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="功能测试">功能测试</h2><p>​ 1. 货物能否正常放置</p><a id="more"></a><ol start="2" type="1"><li><p>点击货物选择按钮是否能进入支付页面</p></li><li><p>是否支持选择多个货物</p></li></ol><p>支付</p><ol start="4" type="1"><li><p>是否支持硬币、纸币、扫码支付</p></li><li><p>是否支持找零</p></li><li><p>货物是否能正常取出</p></li><li><p>出现故障时能否自动退款</p></li></ol><p>屏幕显示</p><ol start="8" type="1"><li>屏幕是否正常播放广告</li><li>屏幕是否显示二维码</li></ol><h2 id="性能测试">性能测试</h2><ol type="1"><li><p>选择商品后跳转到支付页面的时间</p></li><li><p>支付成功后商品掉落时间</p></li><li><p>是否支持多个用户同时扫码支付</p></li><li><p>能否制热</p></li><li><p>能否制冷</p></li></ol><h2 id="界面测试">界面测试</h2><ol type="1"><li><p>图案是否鲜明亮丽</p></li><li><p>投币口是否明显</p></li><li><p>取物口是否明显</p></li></ol><h2 id="安全性测试">安全性测试</h2><ol type="1"><li><p>是否容易发生漏电</p></li><li><p>受到外力撞击是否容易倾倒</p></li><li><p>玻璃是否易被敲碎</p></li></ol><h2 id="兼容性测试">兼容性测试</h2><ol type="1"><li>是否能在室外工作</li><li>是否能在高温下工作</li><li>是否能在低温下工作</li></ol>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/">测试用例设计</category>
+      
+      
+      
+      <comments>http://example.com/2021/06/26/%E8%87%AA%E5%8A%A8%E5%94%AE%E8%B4%A7%E6%9C%BA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>微信评论测试用例</title>
@@ -222,29 +244,6 @@
       
       
       <comments>http://example.com/2021/06/03/try-catch-finally%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>MyBatis防止SQL注入</title>
-      <link>http://example.com/2021/06/01/MyBatis%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5/</link>
-      <guid>http://example.com/2021/06/01/MyBatis%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5/</guid>
-      <pubDate>Tue, 01 Jun 2021 08:29:53 GMT</pubDate>
-      
-      <description>&lt;p&gt;MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。&lt;/p&gt;
-&lt;p&gt;动态 sql 是 mybatis 的主要特性之一，在mybatis中我们可以把参数传到xml文件，由mybatis对sql及其语法进行解析，mybatis支持使用${}和#{}。&lt;/p&gt;
-&lt;p&gt;那么&lt;code&gt;$&amp;#123;&amp;#125;&lt;/code&gt;和&lt;code&gt;#&amp;#123;&amp;#125;&lt;/code&gt;有什么区别呢？&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</p><p>动态 sql 是 mybatis 的主要特性之一，在mybatis中我们可以把参数传到xml文件，由mybatis对sql及其语法进行解析，mybatis支持使用${}和#{}。</p><p>那么<code>$&#123;&#125;</code>和<code>#&#123;&#125;</code>有什么区别呢？</p><a id="more"></a><p>mybatis 在<strong>对 sql 语句进行预编译之前，会对 sql 进行动态解析</strong>。</p><h3 id="一">一、<code>#&#123;&#125;</code></h3><p><code>#&#123;&#125;</code>是sql的参数占位符。<code>#&#123;&#125;</code>相当于JDBC中的PreparedStatement，对于传入的参数，在预处理阶段使用 <code>?</code> 代替，真正查询的时候即在数据库管理系统中（DBMS）才代入参数。</p><p>例如：</p><p>mapper.xml中的sql语句: <code>select * from user where name = #&#123;name&#125;;</code> 解析为： <code>select * from user where name = ?;</code> 一个<code>#&#123;&#125;</code>被解析为一个参数占位符 <code>?</code>，不管传入什么参数，打印的sql都是这样的。</p><p>执行时，直接使用编译好的SQL，替换占位符<code>?</code>就可以了。因为<em>SQL注入只能对编译过程起作用</em>，所以这样的方式就很好地避免了SQL注入的问题。</p><h3 id="二">二、<code>$&#123;&#125;</code></h3><p><code>$&#123;&#125;</code>是properties文件中的变量占位符，仅仅为一个纯粹的String替换。</p><p>上面的例子传递参数为 &quot;admin&quot; 时，sql解析为 <code>select * from user where name = &quot;admin&quot;;</code> 预编译之前的 SQL 语句已经不包含变量 name 了。</p><p>如果传递参数为 user;delet user;--，那么sql动态解析阶段之后，预编译之前的sql将变为 <code>select * from user;delete user; -- where name = ?;</code></p><p><code>--</code>之后的语句将作为注释，不起作用，因此本来的一条查询语句偷偷的包含了一个删除表数据的 SQL！</p><h3 id="三总结">三、总结</h3><p>#{}是经过预编译的，是安全的；${}是未经过预编译的，仅仅是取变量的值，是非安全的，存在SQL注入。</p><h3 id="四sql预编译">四、sql预编译</h3><ol type="1"><li>定义</li></ol><p>sql 预编译指的是数据库驱动在发送 sql 语句和参数给 DBMS 之前对 sql 语句进行编译，这样 DBMS 执行 sql 时，就不需要重新编译。</p><ol start="2" type="1"><li>为什么需要预编译</li></ol><p>JDBC 中使用对象 PreparedStatement 来抽象预编译语句，使用预编译。</p><p>1）预编译阶段可以优化 sql 的执行。</p><p>预编译之后的 sql 多数情况下可以直接执行，DBMS 不需要再次编译，越复杂的sql，编译的复杂度将越大，预编译阶段可以合并多次操作为一个操作。</p><p>2）预编译语句对象可以重复利用。</p><p>把一个 sql 预编译后产生的 PreparedStatement 对象缓存下来，下次对于同一个sql，可以直接使用这个缓存的 PreparedState 对象。</p><p>mybatis 默认情况下，将对所有的 sql 进行预编译。</p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/MyBatis/">MyBatis</category>
-      
-      
-      
-      <comments>http://example.com/2021/06/01/MyBatis%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5/#disqus_thread</comments>
       
     </item>
     
