@@ -6131,4 +6131,39 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <category>测试用例设计</category>
       </categories>
   </entry>
+  <entry>
+    <title>MySQL数据库主键与外键</title>
+    <url>/2021/06/28/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E9%94%AE%E4%B8%8E%E5%A4%96%E9%94%AE/</url>
+    <content><![CDATA[<p>主键和外键都是约束。主键用于保持数据完整性，外键作用于两个表建立连接。下面分别介绍主键、外键及其区别。</p>
+<h2 id="主键">主键</h2>
+<p>表中经常有多个列，主键是唯一标识表中每行的列。一个表只能有一个主键，主键列不能包含null值。</p>
+<p>例如：</p>
+<a id="more"></a>
+<p><code>学生表(学号，姓名，性别，班级)</code> 其中每个学生的学号是唯一的，学号就是一个主键；</p>
+<p><code>课程表(课程编号，课程名，学分)</code> 其中课程编号是唯一的，课程编号就是一个主键</p>
+<h4 id="联合主键">联合主键</h4>
+<p>当某一列不能唯一识别每行，使用联合主键，将两列看为一个整体。非空、唯一、不重复。</p>
+<p>例如： <code>成绩表(学号，课程号，成绩)</code></p>
+<p>成绩表中单一一个属性无法唯一标识一条记录，学号和课程编号的组合才可以唯一标识一条记录，所以学号和课程编号的属性组是一个主键。</p>
+<h2 id="外键">外键</h2>
+<p>外键用于与另一张表相关联。以另一个表的外键作主关键字的表被称为主表，具有此外键的表被称为主表的从表。 表的外键值必须在主表中能找到。 当主表的记录被从表参照时，主表的记录不允许删除。</p>
+<p>例如： <img src="https://img-blog.csdnimg.cn/img_convert/b41ff90900c71fc998df6b76df8b2fcd.png#pic_center" alt="在这里插入图片描述" /></p>
+<p>class表与Student表通过class_id 关联，实现一对多的关系。class_id作为Student表的外键，Student表为从表，在class表中为主键，class表为主表。</p>
+<h2 id="主键外键和索引的区别">主键、外键和索引的区别：</h2>
+<h4 id="a.定义">a.定义</h4>
+<p>主键：唯一标识一条记录，不能有重复，不允许为空。 外键：表的外键是另一表的主键，外键是可以有重复的，可以是空值。 索引：该字段没有重复值，但可以有一个空值。</p>
+<h4 id="b.作用">b.作用</h4>
+<p>主键：用来保证数据完整性 外键：用来和其他表建立联系用 索引：用来提高查询排序的速度</p>
+<h4 id="c.个数">c.个数</h4>
+<p>主键：主键只能有一个。 外键：一个表可以有多个外键。 索引：一个表可以有多个唯一索引。</p>
+<h2 id="添加主键外键约束">添加主键、外键约束</h2>
+<p>主键约束 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">  列名<span class="number">1</span> 数据类型 primary <span class="keyword">key</span>,</span><br><span class="line">	列名<span class="number">2</span> 数据类型</span><br><span class="line">);</span><br><span class="line"><span class="comment">--------或------------</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">  列名<span class="number">1</span> 数据类型,</span><br><span class="line">	列名<span class="number">2</span> 数据类型,</span><br><span class="line">  primary <span class="keyword">key</span>(列名<span class="number">1</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">------已经存在的表-----</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> primary <span class="keyword">key</span>(列名);</span><br></pre></td></tr></table></figure> 外键约束 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">---------主表------</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表<span class="number">1</span>(</span><br><span class="line">		列名<span class="number">1</span> 数据类型 primary <span class="keyword">key</span>,</span><br><span class="line">		列名<span class="number">2</span> 数据类型  </span><br><span class="line">);</span><br><span class="line"><span class="comment">----从表（外键约束所在的表）------</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表<span class="number">2</span>(</span><br><span class="line">	FK_列名<span class="number">1</span> 数据类型,</span><br><span class="line">  列名<span class="number">2</span> 数据类型,</span><br><span class="line">  <span class="keyword">constraint</span> 外键约束的名字 <span class="keyword">foreign</span> <span class="keyword">key</span>(从表的列名<span class="number">1</span>) <span class="keyword">references</span> 主表表名(主表的列名<span class="number">1</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>MySQL数据库</category>
+      </categories>
+      <tags>
+        <tag>主键外键</tag>
+      </tags>
+  </entry>
 </search>
