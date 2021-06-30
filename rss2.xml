@@ -9,8 +9,31 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Mon, 28 Jun 2021 08:39:38 GMT</pubDate>
+    <pubDate>Mon, 28 Jun 2021 12:34:37 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>怎样测试一个杯子</title>
+      <link>http://example.com/2021/06/28/%E6%80%8E%E6%A0%B7%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E6%9D%AF%E5%AD%90/</link>
+      <guid>http://example.com/2021/06/28/%E6%80%8E%E6%A0%B7%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E6%9D%AF%E5%AD%90/</guid>
+      <pubDate>Mon, 28 Jun 2021 12:33:15 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;界面测试&quot;&gt;界面测试&lt;/h2&gt;
+&lt;p&gt;对于不同的用户，对外观的需求也不一样。比如这款杯子的主要用户是儿童，那就要看杯子是不是可爱有趣；对于男性，杯子是否简约大方。&lt;/p&gt;
+&lt;h2 id=&quot;功能测试&quot;&gt;功能测试&lt;/h2&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="界面测试">界面测试</h2><p>对于不同的用户，对外观的需求也不一样。比如这款杯子的主要用户是儿童，那就要看杯子是不是可爱有趣；对于男性，杯子是否简约大方。</p><h2 id="功能测试">功能测试</h2><a id="more"></a><ol type="1"><li><p>杯子是否能装水</p></li><li><p>杯子是否漏水</p></li><li><p>（如果是保温杯）是否保温</p></li></ol><h2 id="性能测试">性能测试</h2><ol type="1"><li><p>杯子是否易碎</p></li><li><p>杯子从多高的地方跌落会破损</p></li><li><p>带有保护套时，从多高的地方跌落会破损</p></li></ol><h2 id="易用性">易用性</h2><ol type="1"><li><p>水是否容易喝到</p></li><li><p>是否方便携带</p></li><li><p>是否好拿</p></li><li><p>在不同温度下杯子是否耐受</p></li></ol><h2 id="安全性测试">安全性测试</h2><p>杯子的材料是否对人体有害</p><h2 id="兼容性测试">兼容性测试</h2><p>杯子是否能装不同的液体：水、饮料、汽油、药液等</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/">测试用例设计</category>
+      
+      
+      
+      <comments>http://example.com/2021/06/28/%E6%80%8E%E6%A0%B7%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E6%9D%AF%E5%AD%90/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>MySQL数据库主键与外键</title>
@@ -226,27 +249,6 @@
       
       
       <comments>http://example.com/2021/06/16/Java%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%88%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%89/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>旋转数组（0°-360°）</title>
-      <link>http://example.com/2021/06/06/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%EF%BC%880%C2%B0-360%C2%B0%EF%BC%89/</link>
-      <guid>http://example.com/2021/06/06/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%EF%BC%880%C2%B0-360%C2%B0%EF%BC%89/</guid>
-      <pubDate>Sun, 06 Jun 2021 08:55:54 GMT</pubDate>
-      
-      <description>&lt;p&gt;6.6的LeetCode周赛&lt;a href=&quot;https://leetcode-cn.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/&quot;&gt;第一题&lt;/a&gt;为旋转数组，与&lt;a href=&quot;https://leetcode-cn.com/problems/rotate-image/&quot;&gt;48题&lt;/a&gt;有些类似。&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>6.6的LeetCode周赛<a href="https://leetcode-cn.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/">第一题</a>为旋转数组，与<a href="https://leetcode-cn.com/problems/rotate-image/">48题</a>有些类似。</p><a id="more"></a><h4 id="顺时针旋转90">顺时针旋转90°</h4><p>顺时针转90°，可以通过一行来找规律。 <img src="https://img-blog.csdnimg.cn/20210606163658824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 90度旋转后行转为列，第 i 行变为 第 n - 1 - i 列，则<code>mat[i][j] ——&gt; mat[j][n-1-i]</code></p><h4 id="顺时针旋转180">顺时针旋转180°</h4><p>旋转180°后，第 i 行转到了 第 n - 1 - i 行，同时对应的列也发生了变化，第 j 列转到了 第 n - 1 - j 列。 <img src="https://img-blog.csdnimg.cn/20210606164728125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 则<code>mat[i][j] ——&gt; mat[n-1-i][n-1-j]</code></p><h4 id="顺时针旋转360">顺时针旋转360°</h4><p>旋转360°后，第 i 行转到了 第 i 列，同时对应的列也发生了变化，第 j 列转到了 第 n - 1 - j 行。 <img src="https://img-blog.csdnimg.cn/202106061651270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" /> 则<code>mat[i][j] ——&gt; mat[n-1-j][i]</code></p><p>题意中旋转若干次，则可能旋转0°、90°、180°、360°，如果有旋转结果能使mat与target一致，则返回true。</p><h4 id="代码">代码</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">findRotation</span><span class="params">(<span class="keyword">int</span>[][] mat, <span class="keyword">int</span>[][] target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = mat.length;</span><br><span class="line">        <span class="keyword">boolean</span> a = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> b = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> c = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> d = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(mat[j][n - i - <span class="number">1</span>] != target[i][j])&#123;</span><br><span class="line">                    a = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                 <span class="keyword">if</span>(mat[n - i - <span class="number">1</span>][n - j - <span class="number">1</span>] != target[i][j])&#123;</span><br><span class="line">                    b = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                 <span class="keyword">if</span>(mat[n - j - <span class="number">1</span>][i] != target[i][j])&#123;</span><br><span class="line">                    c = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(mat[i][j] != target[i][j])&#123;</span><br><span class="line">                    d = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a || b || c || d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/LeetCode%E5%88%B7%E9%A2%98/">LeetCode刷题</category>
-      
-      
-      
-      <comments>http://example.com/2021/06/06/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%EF%BC%880%C2%B0-360%C2%B0%EF%BC%89/#disqus_thread</comments>
       
     </item>
     
