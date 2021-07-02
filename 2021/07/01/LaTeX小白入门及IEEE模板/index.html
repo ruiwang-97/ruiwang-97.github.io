@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="老师要求用LaTeX写一版，故此开始学习LaTeX。 IEEE模板因为发表IEEE论文，将模板附在此，使用overLeaf更方便。 排版代码块一个文档基本由这样的结构构成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTeX小白入门及IEEE模板">
+<meta property="og:url" content="http://example.com/2021/07/01/LaTeX%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E5%8F%8AIEEE%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:site_name" content="Rui">
+<meta property="og:description" content="老师要求用LaTeX写一版，故此开始学习LaTeX。 IEEE模板因为发表IEEE论文，将模板附在此，使用overLeaf更方便。 排版代码块一个文档基本由这样的结构构成">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701152339617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701152907101.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701152929905.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701153122335.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701154657285.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701155029811.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021070115540449.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701155138808.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701155819989.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701155929539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701160200469.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210701160514144.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021070116061957.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021070116124794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-07-01T08:15:38.000Z">
+<meta property="article:modified_time" content="2021-07-01T08:22:23.913Z">
+<meta property="article:author" content="Rui Wang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210701152339617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70">
+
+
+<link rel="canonical" href="http://example.com/2021/07/01/LaTeX%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E5%8F%8AIEEE%E6%A8%A1%E6%9D%BF/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LaTeX小白入门及IEEE模板 | Rui</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+  
+  <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="Rui" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Rui</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IEEE%E6%A8%A1%E6%9D%BF"><span class="nav-text">IEEE模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E7%89%88%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-text">排版代码块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AE%B5%E8%90%BD"><span class="nav-text">段落</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-text">关键词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%A0%87%E9%A2%98"><span class="nav-text">小标题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-text">附录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8"><span class="nav-text">表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E5%BA%8F%E5%8F%B7%E5%88%97%E8%A1%A8"><span class="nav-text">无序号列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E5%8F%B7%E5%88%97%E8%A1%A8"><span class="nav-text">有序号列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC"><span class="nav-text">表格</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E7%BA%BF%E8%A1%A8%E6%A0%BC"><span class="nav-text">三线表格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E8%A1%A8%E6%A0%BC"><span class="nav-text">网格表格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E9%A2%98%E5%8F%8A%E6%A0%87%E7%AD%BE"><span class="nav-text">标题及标签</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87"><span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%B3%A8"><span class="nav-text">脚注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F"><span class="nav-text">公式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E5%85%AC%E5%BC%8F"><span class="nav-text">行内公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E9%97%B4%E5%85%AC%E5%BC%8F"><span class="nav-text">行间公式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="nav-text">其他命令</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rui Wang"
+      src="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+  <p class="site-author-name" itemprop="name">Rui Wang</p>
+  <div class="site-description" itemprop="description">去摘遥不可及的星星</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/01/LaTeX%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E5%8F%8AIEEE%E6%A8%A1%E6%9D%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/525624/28c068b9-5f2b-4ff8-bc40-3a9e53773228.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp">
+      <meta itemprop="name" content="Rui Wang">
+      <meta itemprop="description" content="去摘遥不可及的星星">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LaTeX小白入门及IEEE模板
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-01 16:15:38 / 修改时间：16:22:23" itemprop="dateCreated datePublished" datetime="2021-07-01T16:15:38+08:00">2021-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LaTeX/" itemprop="url" rel="index"><span itemprop="name">LaTeX</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>老师要求用LaTeX写一版，故此开始学习LaTeX。</p>
+<h2 id="IEEE模板"><a href="#IEEE模板" class="headerlink" title="IEEE模板"></a>IEEE模板</h2><p>因为发表IEEE论文，将<a target="_blank" rel="noopener" href="https://www.ieee.org/conferences/publishing/templates.html"><strong>模板</strong></a>附在此，使用<a target="_blank" rel="noopener" href="https://www.overleaf.com/gallery/tagged/ieee-official/page/2"><strong>overLeaf</strong></a>更方便。</p>
+<h2 id="排版代码块"><a href="#排版代码块" class="headerlink" title="排版代码块"></a>排版代码块</h2><p>一个文档基本由这样的结构构成</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;article&#125;                %文件类型</span><br><span class="line">\title&#123;Title&#125;                          %文件标题</span><br><span class="line">\begin&#123;document&#125;                       %文档从此开始</span><br><span class="line">	\maketitle                          %构建标题命令</span><br><span class="line">	Hello world!, Let&#39;s start \LaTeX    %普通文本</span><br><span class="line">\end&#123;document&#125;                         %文件结束</span><br></pre></td></tr></table></figure>
+<p>作者</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\renewcommand\Affilfont&#123;\itshape\small&#125;</span><br><span class="line">\author[1]&#123;Hao~Wang, Sherleen~Zhu \thanks&#123;Happy everyday&#125;&#125;%</span><br><span class="line">\author[2]&#123;Turling Burling&#125;</span><br><span class="line">\affil[1]&#123;Hefei University of Technology&#125;</span><br><span class="line">\affil[2]&#123;University of Pittsburgh&#125;	</span><br><span class="line">\maketitle</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701152339617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt=""></p>
+<h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;abstract&#125;</span><br><span class="line">I am abstract</span><br><span class="line">\end&#123;abstract&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;IEEEkeywords&#125;</span><br><span class="line">I am keywords</span><br><span class="line">\end&#123;IEEEkeywords&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="小标题"><a href="#小标题" class="headerlink" title="小标题"></a>小标题</h4><p>小标题有依据的层级不同，包<code>\section&#123;&#125;</code>,<code>\subsection&#123;&#125;</code>,<code>\subssubection&#123;&#125;</code>等：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\section&#123;Introduction&#125;</span><br><span class="line">\subsection&#123;Overview of the proposed method&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\section*&#123;Acknowledgement&#125;</span><br><span class="line">\section*&#123;Appendix&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><p>分为列表和表格。</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>包括无序号列表和有序号列表。</p>
+<h4 id="无序号列表"><a href="#无序号列表" class="headerlink" title="无序号列表"></a>无序号列表</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;itemize&#125;</span><br><span class="line">    \item item 1</span><br><span class="line">    \item item 2</span><br><span class="line">\end&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701152907101.png" alt=""></p>
+<h4 id="有序号列表"><a href="#有序号列表" class="headerlink" title="有序号列表"></a>有序号列表</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;enumerate&#125;</span><br><span class="line">   \item item 1</span><br><span class="line">   \item item 2</span><br><span class="line">\end&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701152929905.png" alt=""></p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><h4 id="三线表格"><a href="#三线表格" class="headerlink" title="三线表格"></a>三线表格</h4><p>使用<code>\hline</code>命令来增加横线：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;table&#125;[]</span><br><span class="line">   \begin&#123;tabular&#125;&#123; c c c &#125;</span><br><span class="line">      \hline</span><br><span class="line">      cell1 &amp; cell2 &amp; cell3 \\ </span><br><span class="line">      \hline</span><br><span class="line">      cell4 &amp; cell5 &amp; cell6 \\  </span><br><span class="line">      cell7 &amp; cell8 &amp; cell9 \\ </span><br><span class="line">      \hline</span><br><span class="line">   \end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701153122335.png" alt=""></p>
+<h4 id="网格表格"><a href="#网格表格" class="headerlink" title="网格表格"></a>网格表格</h4><p>只需要增加竖向内容控制符即可。<br>当还需要合并表格单元格时，使用<code>\multicolumn</code>或者<code>\multirow</code>来控制单元格，后接需要合并的行或者列数（如这里的{2}），之后再跟上控制内容（如这里的{|c|}和{*}），最后紧接着单元格内容。<br>注意，当使用了列合并时，一定要使用\usepackage{multirow}包，并控制合并行的线条，否则会出现渲染错误的问题。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;table&#125;[]</span><br><span class="line">    \begin&#123;tabular&#125;&#123;|c|c|c|&#125;                 %控制表格对其方式</span><br><span class="line">    \hline                                   %划线</span><br><span class="line">    \multicolumn&#123;2&#125;&#123;|c|&#125;&#123;cell1&#125; &amp; cell3    \\ \hline     %合并行</span><br><span class="line">    cell4 &amp; cell5 &amp; \multirow&#123;2&#125;&#123;*&#125;&#123;cell6&#125; \\ \cline&#123;1-2&#125;   %合并列，注意使用了\cline来控制合并后的线条</span><br><span class="line">    cell7 &amp; cell8 &amp;                        \\ \hline</span><br><span class="line">    \end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701154657285.png" alt=""></p>
+<h4 id="标题及标签"><a href="#标题及标签" class="headerlink" title="标题及标签"></a>标题及标签</h4><p>对于表格而言，我们还需要的是标题和标签，以在正文中引用，我们使用<code>\caption&#123;&#125;</code>和<code>\lable&#123;&#125;</code>来控制内容，注意只能将<code>caption</code>和<code>label</code>标签放置于<code>tabular</code>结构体外部。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;table&#125;[]</span><br><span class="line">	\caption&#123;I am sample table&#125; %显示在表格上的标记</span><br><span class="line">	\label&#123;tab1sample&#125;          %用于正文引用的标签</span><br><span class="line">	\begin&#123;tabular&#125;&#123;|c|c|c|&#125;</span><br><span class="line">		\hline</span><br><span class="line">		\multicolumn&#123;2&#125;&#123;|c|&#125;&#123;cell1&#125; &amp; cell3    \\ \hline</span><br><span class="line">		cell4 &amp; cell5 &amp; \multirow&#123;2&#125;&#123;*&#125;&#123;cell6&#125; \\ \cline&#123;1-2&#125;</span><br><span class="line">		cell7 &amp; cell8 &amp;                        \\ \hline</span><br><span class="line">	\end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701155029811.png" alt=""></p>
+<p>调整表格和标题居中，可以使用<code>\centering</code>命令开控制<code>&#123;tabular&#125;</code>结构体：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;table&#125;[]</span><br><span class="line">	\caption&#123;I am sample table&#125;</span><br><span class="line">	\label&#123;tab1sample&#125;</span><br><span class="line">	\centering</span><br><span class="line">	\begin&#123;tabular&#125;&#123;|c|c|c|&#125;</span><br><span class="line">		\hline</span><br><span class="line">		\multicolumn&#123;2&#125;&#123;|c|&#125;&#123;cell1&#125; &amp; cell3    \\ \hline</span><br><span class="line">		cell4 &amp; cell5 &amp; \multirow&#123;2&#125;&#123;*&#125;&#123;cell6&#125; \\ \cline&#123;1-2&#125;</span><br><span class="line">		cell7 &amp; cell8 &amp;                        \\ \hline</span><br><span class="line">	\end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/2021070115540449.png" alt=""></p>
+<p>如果在正文中使用了表格，就以<code>~\ref&#123;label&#125;</code>方式来实现引用，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I will ref the table here~\ref&#123;tab1sample&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701155138808.png" alt="在这里插入图片描述"></p>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>将所有的图都放到一个位置（如:pic文件夹），同时我们仍然可以使用<code>\centering</code>控制居中。当我们加载一个图片时，可以使用<code>\includegraphics[大小控制]&#123;图片源&#125;</code>来控制显示图片。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;figure&#125;[!t]</span><br><span class="line">	\centering</span><br><span class="line">	\includegraphics[width&#x3D;1.13in]&#123;pic&#x2F;1-1&#125;</span><br><span class="line">	\caption&#123;I am sample figure.&#125;</span><br><span class="line">	\label&#123;fig1sample&#125;</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><p>可以使用\footnote命令来实现，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\footnote&#123;Hope must come true&#125;.</span><br></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701155819989.png" alt=""></p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>以algorithmic为例，注意包需要首先使用<code>\usepackage&#123;algorithm&#125;</code>包：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;algorithm&#125;</span><br><span class="line">	\caption&#123;How to write algorithms&#125;</span><br><span class="line">	\label&#123;algo2&#125;</span><br><span class="line">		\begin&#123;algorithmic&#125;[H]</span><br><span class="line">      \REQUIRE	this text</span><br><span class="line">		\ENSURE  how to write algorithm with \LaTeX</span><br><span class="line">		\WHILE&#123;not at end of this document&#125;</span><br><span class="line">		\STATE	read current</span><br><span class="line">		\IF &#123;understand&#125;</span><br><span class="line">		\STATE	go to next section</span><br><span class="line">		\STATE current section becomes this one</span><br><span class="line">		\ELSE</span><br><span class="line">		\STATE go back to the beginning of current section</span><br><span class="line">		\ENDIF</span><br><span class="line">		\ENDWHILE</span><br><span class="line">		\label&#123;Algorithmsample&#125;</span><br><span class="line">	\end&#123;algorithmic&#125;</span><br><span class="line">\end&#123;algorith</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701155929539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt=""></p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><h4 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h4><p>定义行内公式，使用$$即可如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I am a inline equation $a&#x3D;b+c$</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701160200469.png" alt=""></p>
+<h4 id="行间公式"><a href="#行间公式" class="headerlink" title="行间公式"></a>行间公式</h4><p>对于多行公式则可以考虑使用<code>equation</code>环境来实现,同样可以使用<code>label</code>标签来实现引用<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I am a inline equation $a&#x3D;b+c$, and I am display equation: </span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">   \label&#123;eq1&#125;</span><br><span class="line">   a^2&#x3D;b^2+c^2</span><br><span class="line">\end&#123;equation&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210701160514144.png" alt=""></p>
+<p>带序号公式使用<code>\( \)</code>，不带序号公式使用<code>\[ \]</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">we can get a no number display equation:</span><br><span class="line">\[ a^2&#x3D;b^2+c^2\] I am an equation.</span><br><span class="line">\(a^3&#x3D;b^3+c^3\) ,Wow, me too</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/2021070116061957.png" alt=""></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>在文件头部添加<code>\usepackage&#123;cite&#125;</code>后，使用bbl形式构建参考文献。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;thebibliography&#125;&#123;1&#125;</span><br><span class="line">   \bibitem&#123;citekey&#125;</span><br><span class="line">   H.~Kopka and P.~W. Daly, \emph&#123;A Guide to \LaTeX&#125;, 3rd~ed.\hskip 1em plus</span><br><span class="line">   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.</span><br><span class="line">\end&#123;thebibliography&#125;</span><br></pre></td></tr></table></figure>
+<p>使用时，可以在正文如此引用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Here, we will cite a reference~\cite&#123;citekey&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：<br><img src="https://img-blog.csdnimg.cn/2021070116124794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt=""></p>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><ol>
+<li>换行：<code>\\</code></li>
+</ol>
+<ol>
+<li><p>另起一段：<code>\par</code></p>
+</li>
+<li><p>块内公式：$$$…$$$</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+	
+	
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+    
+      </div>
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/30/%E6%B7%98%E5%AE%9D%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%80%8E%E4%B9%88%E6%B5%8B/" rel="prev" title="淘宝购物车怎么测">
+                  <i class="fa fa-chevron-left"></i> 淘宝购物车怎么测
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rui Wang</span>
+</div>
+
+<!---->
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i>
+  <span id="busuanzi_container_site_uv">
+    本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+  </span>
+  <span id="busuanzi_container_site_pv">
+      &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  </div>
+  </div>
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
