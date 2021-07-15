@@ -9,8 +9,31 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>去摘遥不可及的星星</description>
-    <pubDate>Mon, 12 Jul 2021 01:53:44 GMT</pubDate>
+    <pubDate>Mon, 12 Jul 2021 13:42:54 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>短信验证码怎么测</title>
+      <link>http://example.com/2021/07/12/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%80%8E%E4%B9%88%E6%B5%8B/</link>
+      <guid>http://example.com/2021/07/12/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%80%8E%E4%B9%88%E6%B5%8B/</guid>
+      <pubDate>Mon, 12 Jul 2021 13:38:16 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;流程&quot;&gt;流程：&lt;/h2&gt;
+&lt;p&gt;输入手机号-&amp;gt;收到短信-&amp;gt;输入验证码-&amp;gt;注册/登录&lt;/p&gt;
+&lt;h2 id=&quot;功能测试&quot;&gt;功能测试&lt;/h2&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="流程">流程：</h2><p>输入手机号-&gt;收到短信-&gt;输入验证码-&gt;注册/登录</p><h2 id="功能测试">功能测试</h2><a id="more"></a><p>正确手机号：由11位数字组成，且13，14，15，17，18为开头</p><ol type="1"><li><p>输入正确手机号，点击获取验证码，收到短信，输入正确验证码，注册/登录成功，跳转页面</p></li><li><p>输入正确手机号，点击获取验证码，收到短信，输入错误验证码，提示验证码无效</p></li><li><p>手机号为空，验证码为空，点击注册/登录，提醒需要填写手机号和验证码</p></li><li><p>输入正确手机号，验证码为空，点击注册/登录，提醒需要填写验证码</p></li><li><p>输入小数、符号等在手机号码文本框，提示手机号码不正确</p></li><li><p>输入10位、12位数字在手机号码文本框，提示手机号码不正确</p></li><li><p>输入11位非手机号码数字在手机号码文本框，提示手机号码不正确</p></li><li><p>明确验证码的失效时长后，在时长之后输入验证码，提示该验证码已失效，请重新获取验证码</p></li></ol><h2 id="界面测试">界面测试</h2><p>是否美观、排版、错别字等</p><h2 id="兼容性测试">兼容性测试</h2><p>移动端：</p><p>考虑不同手机型号</p><p>安卓系统、ios系统，主流的系统版本需要测试覆盖</p><p>不同屏幕大小及分辨率</p><p>Web端：</p><p>不同内核版本的浏览器</p><p>从同一内核版本的浏览器中选择主流的浏览器进行测试</p><h2 id="性能测试">性能测试</h2><p>页面跳转时间</p><p>移动端考虑中断测试，包括电话中断、网络中断等</p><h2 id="安全性测试">安全性测试</h2><p>验证敏感信息是否加密，是否可以篡改</p><p>通过一些工具进行安全扫描，检查是否有安全漏洞</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/">测试用例设计</category>
+      
+      
+      
+      <comments>http://example.com/2021/07/12/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%80%8E%E4%B9%88%E6%B5%8B/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>cookie和session的区别</title>
@@ -229,29 +252,6 @@
       
       
       <comments>http://example.com/2021/06/25/%E3%80%90LeetCode%E5%88%B7%E9%A2%98%E3%80%91%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>登录测试用例</title>
-      <link>http://example.com/2021/06/24/%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</link>
-      <guid>http://example.com/2021/06/24/%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/</guid>
-      <pubDate>Thu, 24 Jun 2021 14:06:12 GMT</pubDate>
-      
-      <description>&lt;h2 id=&quot;需求&quot;&gt;需求&lt;/h2&gt;
-&lt;p&gt;有一个登陆页面， 上面有2个textbox, 一个提交按钮。&lt;/p&gt;
-&lt;h2 id=&quot;功能测试&quot;&gt;功能测试&lt;/h2&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="需求">需求</h2><p>有一个登陆页面， 上面有2个textbox, 一个提交按钮。</p><h2 id="功能测试">功能测试</h2><a id="more"></a><ol type="1"><li>输入正确的用户名和密码，点击提交按钮，验证是否能正确登录。</li><li>输入错误的用户名或密码，验证登录失败，并且会有相应提示。</li><li>登录成功后会跳转到正确页面</li><li>用户名和密码是否含有特殊字符</li><li>用户名和密码长度是否符合要求</li><li>输入用户名和密码后能否通过点击回车键跳转</li></ol><h2 id="界面测试">界面测试</h2><ol type="1"><li>布局是否合理，两个输入框和一个按钮是否对齐</li><li>两个输入框及提交按钮的高度和宽度是否符合要求</li><li>图片、文字是否显示正确 ## 性能测试</li><li>输入网址打开登录页面需要几秒</li><li>登录成功后跳转需要几秒</li><li>支持多少个用户登录 ## 兼容性测试</li><li>在不同浏览器下功能是否正常</li><li>在不同平台（Windows、Mac）下功能是否正常</li><li>在安卓和ios系统是否正常</li></ol><h2 id="安全性测试">安全性测试</h2><ol type="1"><li>登录成功生成的Cookie是否是httponly</li></ol><blockquote><p>如果在cookie中设置了HttpOnly属性，那么通过js脚本将无法读取到cookie信息，这样能有效的防止XSS攻击。XSS攻击通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。</p></blockquote><ol start="2" type="1"><li><p>用户名和密码输入防止sql注入</p></li><li><p>错误登陆的次数限制（防止暴力破解）</p></li><li><p>密码是否以星号显示</p></li></ol>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/">测试用例设计</category>
-      
-      
-      
-      <comments>http://example.com/2021/06/24/%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/#disqus_thread</comments>
       
     </item>
     
