@@ -6482,4 +6482,63 @@ True、False问题公式    dp[i] = dp[i] or dp[i - num]
         <category>测试用例设计</category>
       </categories>
   </entry>
+  <entry>
+    <title>HTTPS加密过程详解</title>
+    <url>/2021/07/15/HTTPS%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="密码学基础">密码学基础</h2>
+<p>首先介绍公钥、私钥、对称加密和非对称加密都是什么。</p>
+<h4 id="为什么需要加密">为什么需要加密？</h4>
+<p>http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。</p>
+<h4 id="对称加密">1. 对称加密</h4>
+<a id="more"></a>
+<p>简单说，发送方使用密钥加密，接收方使用这一密钥解密，双方持有相同的密钥进行通信，加密速度快。</p>
+<p>出现问题：无法保证安全，传输过程中此密钥可能被别人知道来解密，获取信息。</p>
+<h4 id="公钥与私钥">2. 公钥与私钥</h4>
+<p>公钥是对外开放的，私钥是自己拥有的。</p>
+<h4 id="非对称加密">3. 非对称加密</h4>
+<p>用公钥加密的数据，只能用私钥解密。 用私钥加密的数据，只能用公钥解密。</p>
+<p>出现问题：</p>
+<p>服务器将公钥以明文形式发送给浏览器，浏览器向服务器传输数据时使用公钥加密传输，在服务器端用私钥解密。此过程可以做到安全传输。</p>
+<p>但是服务器向浏览器的传输安全无法保证，如果服务器以私钥加密数据传输，那么浏览器用公钥可以解密，但此公钥一开始以明文形式发送，其他人也可以获取。</p>
+<h2 id="https加密">HTTPS加密</h2>
+<p>HTTPS在传统的HTTP和TCP之间加了一层用于加密解密的SSL/TLS层（安全套接层Secure Sockets Layer/安全传输层Transport Layer Security）层。</p>
+<h4 id="非对称加密对称加密">非对称加密+对称加密</h4>
+<p>过程： - 服务器有用于非对称加密的公钥A和私有A‘；</p>
+<ul>
+<li><p>浏览器向服务器发出请求，服务器将公钥A以明文形式发送给浏览器；</p></li>
+<li><p>浏览器随机生成一个用于对称加密的密钥K，用公钥A加密后发给服务器；</p></li>
+<li><p>服务器用私钥A' 解密，得到密钥K；</p></li>
+<li><p>这样就确保双方都有密钥K，且别人没有。之后双方所有数据的发送都通过密钥K加密解密即可。</p></li>
+</ul>
+<p>出现问题：</p>
+<p>中间人攻击可能调换公钥A，而浏览器无法确认收到的公钥是否是网站服务器自己的。这样就使中间人得到了密钥K。 <img src="https://img-blog.csdnimg.cn/20210715214552642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h4 id="ca证书">CA证书</h4>
+<p>CA机构颁发的“身份证”就是数字证书。</p>
+<p>网站在使用HTTPS前，需要向CA机构申领一份数字证书，数字证书里含有<strong>证书持有者信息、公钥信息</strong>等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
+<p><strong>如何保证此证书不被篡改呢？</strong></p>
+<ul>
+<li><p>证书中含有三个部分:&quot;证书内容，散列算法，加密密文&quot;。</p></li>
+<li><p>证书内容会被散列算法hash()计算出hash值，然后使用CA机构提供的私钥进行RSA加密。</p></li>
+<li><p>当浏览器发起请求时，服务器将该数字证书发送给浏览器，浏览器通过CA机构提供的公钥对加密密文进行解密获得散列值（数字签名），同时将证书内容使用相同的散列算法进行Hash得到另一个散列值，比对两个散列值，如果两者相等则说明证书没问题。</p></li>
+</ul>
+<h4 id="https加密过程">HTTPS加密过程：</h4>
+<ol type="1">
+<li>客户端请求服务器获取证书公钥</li>
+<li>客户端(SSL/TLS)解析证书（无效会弹出警告）</li>
+<li>生成随机值</li>
+<li>用公钥加密随机值生成密钥</li>
+<li>客户端将秘钥发送给服务器</li>
+<li>服务端用私钥解密秘钥得到随机值 （4.5.6 非对称加密过程）</li>
+<li>将信息和随机值混合在一起进行对称加密</li>
+<li>将加密的内容发送给客户端</li>
+<li>客户端用密钥解密信息 <img src="https://img-blog.csdnimg.cn/20210715220241939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTgxODM5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></li>
+</ol>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>HTTPS</tag>
+      </tags>
+  </entry>
 </search>
